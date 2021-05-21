@@ -1,0 +1,103 @@
+header nav .menu-button {
+  width: 30px;
+
+  display: none;
+
+  background-color: transparent;
+  border: none;
+
+  transition: 0.2s all;
+}
+
+header nav .menu-icon {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  display: block;
+  position: relative;
+  border-radius: 30px;
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background-color: #fff;
+  position: absolute;
+  right: 0;
+  transition: 0.2s all;
+  border-radius: 30px;
+}
+
+.menu-icon::before {
+  margin-top: -8px;
+  width: 30px;
+}
+
+.menu-icon::after {
+  margin-top: 8px;
+  width: 30px;
+}
+
+.menu-opened .menu-icon {
+  height: 0;
+  width: 30px;
+}
+.menu-opened .menu-icon::after {
+  width: 30px;
+  transform: rotate(45deg);
+  margin-top: 0;
+}
+.menu-opened .menu-icon::before {
+  transform: rotate(-45deg);
+  margin-top: 0;
+}
+
+@media (max-width: 600px) {
+  header nav {
+    display: flex;
+    align-items: center;
+    height: 55px;
+  }
+
+  header nav .menu-button {
+    display: block;
+    z-index: 101;
+  }
+
+  header nav .menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    margin: 0;
+    padding: 100px 20px;
+
+    width: 100%;
+    max-width: 250px;
+    height: 100vh;
+
+    background: var(--azul);
+
+    flex-direction: column;
+    justify-content: flex-start;
+
+    transition: 0.5s ease;
+
+    z-index: 100;
+  }
+
+  header nav .menu li:nth-child(2),
+  header nav .menu li:nth-child(3) {
+    margin-top: 50px;
+    margin-left: 0;
+  }
+
+  header nav .menu.active {
+    right: 0;
+  }
+
+  header nav .menu.active a {
+    font-size: 1.6rem;
+  }
+}

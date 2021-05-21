@@ -1,0 +1,82 @@
+header {
+  background: var(--azul);
+}
+
+header nav .menu li:last-child {
+  margin-left: 50px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+  min-height: calc(100vh - 110px);
+}
+
+main .section-title .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+main .section-cta button {
+  background: var(--laranja);
+  padding: 15px 35px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin: 50px 0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+main .section-cta button:hover {
+  transform: scale(1.1);
+  transition: all 0.2s;
+}
+
+main .section-description .description-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main .section-description .description-title p {
+  margin-left: 10px;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+main .section-description .description-content {
+  margin-top: -15px;
+  font-size: 1.1rem;
+}
+
+/* Responsividade */
+
+/* @media (max-width: 600px) {
+  main {
+    height: 100%;
+  }
+}
+
+@media (min-height: 650px) {
+  main {
+    height: calc(100vh - 110px);
+  }
+} */
+
+@media (max-width: 300px) {
+  main {
+    transform: scale(0.9);
+  }
+}
