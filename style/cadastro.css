@@ -62,6 +62,22 @@ main .form .erro_senha, .erro_email, .erro_nome{
   margin: 10px;
 }
 
+main .form .campo_senha {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+main .form .campo_senha img{
+  position: absolute;
+  right: 0;
+  margin: 10px 20px;
+  z-index: 100;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
 main .form .register-btn {
   background: var(--azul);
 

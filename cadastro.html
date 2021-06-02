@@ -36,7 +36,11 @@
             <div id="erro_nome"></div>
             <input type="email" name="email" id="email" placeholder="E-mail" required />
             <div id="erro_email"></div>
-            <input type="password" name="senha" id="senha" placeholder="Senha" required />
+            <div id="campo_senha" class="campo_senha">
+                <input type="password" name="senha" id="senha" placeholder="Senha" required />
+                <img src="./assets/eye.svg" alt="" id="mostrar_senha">
+            </div>
+            
             <input type="password" name="confirma_senha" id="confirma_senha" placeholder="Confirme a Senha" required />
             <div id="erro_senha"></div>
             <button id="cadastro_usuario" class="register-btn">Cadastrar</button>
@@ -49,50 +53,68 @@
 
     <script>
         $(document).ready(function(){
-        $("#cadastro_usuario").click(function(){
-            var nome_completo = $("#nome_completo").val();
-            var nome_usuario = $("#nome_usuario").val();
-            var email = $("#email").val();
-            var senha = $("#senha").val();
-            var confirma_senha = $("#confirma_senha").val();
-            if((nome_usuario === '') || (nome_completo === '') || (email === '') || (senha === '')){
-                alert("Preencha todos os campos");
-            }
-            else{
-                if(senha === confirma_senha){
-                    var senha = $.md5(senha);
-                    $.post("insere_usuario.php",{"nome_completo":nome_completo,"nome_usuario":nome_usuario, "email":email,"senha":senha},function(m){
-
-                        $("#erro_senha").removeClass("erro_senha");
-                        $("#erro_senha").html("");
-                        
-                        $("#erro_email").removeClass("erro_email");
-                        $("#erro_email").html("");
-
-                        $("#erro_nome").removeClass("erro_nome");
-                        $("#erro_nome").html("");
-
-                        console.log(m);
-                        if(m == '1'){
-                            location.href="home.php";
-                        }
-                        else if(m == '2') {
-                            $("#erro_email").addClass("erro_email");
-                            $("#erro_email").html("E-mail já cadastrado");
-                        }
-                        else if(m == '3'){
-                            $("#erro_nome").addClass("erro_nome");
-                            $("#erro_nome").html("Nome de Usuário já existe");
-                        }
-                    });
+            $("#cadastro_usuario").click(function(){
+                var nome_completo = $("#nome_completo").val();
+                var nome_usuario = $("#nome_usuario").val();
+                var email = $("#email").val();
+                var senha = $("#senha").val();
+                var confirma_senha = $("#confirma_senha").val();
+                if((nome_usuario === '') || (nome_completo === '') || (email === '') || (senha === '')){
+                    alert("Preencha todos os campos");
                 }
                 else{
-                    $("#erro_senha").addClass("erro_senha");
-                    $("#erro_senha").html("As senhas não conferem");
+                    if(senha === confirma_senha){
+                        var senha = $.md5(senha);
+                        $.post("insere_usuario.php",{"nome_completo":nome_completo,"nome_usuario":nome_usuario, "email":email,"senha":senha},function(m){
+
+                            $("#erro_senha").removeClass("erro_senha");
+                            $("#erro_senha").html("");
+                            
+                            $("#erro_email").removeClass("erro_email");
+                            $("#erro_email").html("");
+
+                            $("#erro_nome").removeClass("erro_nome");
+                            $("#erro_nome").html("");
+
+                            console.log(m);
+                            if(m == '1'){
+                                location.href="home.php";
+                            }
+                            else if(m == '2') {
+                                $("#erro_email").addClass("erro_email");
+                                $("#erro_email").html("E-mail já cadastrado");
+                            }
+                            else if(m == '3'){
+                                $("#erro_nome").addClass("erro_nome");
+                                $("#erro_nome").html("Nome de Usuário já existe");
+                            }
+                        });
+                    }
+                    else{
+                        $("#erro_senha").addClass("erro_senha");
+                        $("#erro_senha").html("As senhas não conferem");
+                    }
                 }
-            }
+            });
+
+            $('#mostrar_senha').click(function(){
+                if($('#senha').attr('type') == 'password'){
+                    $('#senha').attr('type', 'text');
+                    $('#mostrar_senha').attr('src', './assets/eye-off.svg');
+                    
+                    console.log($('#mostrar_senha').attr('class'));
+                }
+                else{
+                    $('#senha').attr('type', 'password');
+                    $('#mostrar_senha').attr('src', './assets/eye.svg');
+                }
+            });
+
+            
         });
-    });
+
+            
+
     </script>
 </body>
 </html>

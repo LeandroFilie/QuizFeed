@@ -31,7 +31,10 @@
                 <h1>Login</h1>   
                 <div id="erro_aut"></div>
                 <input type="text" name="email" id="email" placeholder="E-mail" />
-                <input type="password" name="senha" id="senha" placeholder="Senha" />
+                <div id="campo_senha" class="campo_senha">
+                    <input type="password" name="senha" id="senha" placeholder="Senha" required />
+                    <img src="./assets/eye.svg" alt="" id="mostrar_senha">
+                </div>
                 <button id="autenticar">Entrar</button>
                 <span class="recovey">Recuperar Senha</span>
             </div>
@@ -98,6 +101,19 @@
                     $("#erro_aut").html("Erro na autentificação");
                 }
             });
+        });
+
+        $('#mostrar_senha').click(function(){
+            if($('#senha').attr('type') == 'password'){
+                $('#senha').attr('type', 'text');
+                $('#mostrar_senha').attr('src', './assets/eye-off.svg');
+                
+                console.log($('#mostrar_senha').attr('class'));
+            }
+            else{
+                $('#senha').attr('type', 'password');
+                $('#mostrar_senha').attr('src', './assets/eye.svg');
+            }
         });
     });
     </script>

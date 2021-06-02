@@ -55,7 +55,7 @@
     </footer>
 
     <script>
-        feather.replace()
+        feather.replace();
     </script>
 </body>
 </html>
