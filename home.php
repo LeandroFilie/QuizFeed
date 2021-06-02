@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -21,14 +25,14 @@
             </button>
             <ul class="menu">
                 <li><a href="dados.html">Meus Dados</a></li>
-                <li><a href="#">Sair</a></li>
+                <li><a href="logout.php">Sair</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <div class="section-title">
-            <h1 class="title">Faça o Teste Vocacional e descubra sua área de maior compatibilidade</h1>
+            <h1 class="title">Sejá bem-vindo, <?php echo $_SESSION["nome_usuario"]; ?></h1>
         </div>
         <div class="section-cta">
             <a href="teste.html"><button>Iniciar Teste</button></a>

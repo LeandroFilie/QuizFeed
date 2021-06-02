@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="./style/menu_mobile.css">
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/main.js"></script>
+    <script src='js/moment.js'></script>
+    <script src='js/md5.js'></script>
     <title>Home | TesteFeed</title>
 </head>
 <body>
@@ -23,12 +25,14 @@
                 <li><a href="#about" class="go-about">Sobre</a></li>
             </ul>
         </nav>
+        
         <div class="header-content">
             <div class="card-login">
-                <h1>Login</h1>
+                <h1>Login</h1>   
+                <div id="erro_aut"></div>
                 <input type="text" name="email" id="email" placeholder="E-mail" />
                 <input type="password" name="senha" id="senha" placeholder="Senha" />
-                <a href="home.html"><button>Entrar</button></a>
+                <button id="autenticar">Entrar</button>
                 <span class="recovey">Recuperar Senha</span>
             </div>
         </div>
@@ -63,7 +67,6 @@
             </div>
         </div>
     </section>
-    
 
     <footer>
             <span> Site desenvolvido por: Carol, Julia Costa e Leandro</span>
@@ -79,6 +82,24 @@
                 });
             });
         });
+
+        $(function(){
+        $("#autenticar").click(function(){
+            var email = $("#email").val();
+            var senha_md5 = $.md5($("#senha").val());
+
+            $.post("autenticacao.php",{"email":email,"senha":senha_md5},function(m){
+                console.log(m);
+                if(m == 1){
+                    location.href="home.php";
+                }
+                else if(m == 2){
+                    $("#erro_aut").addClass("erro_aut");
+                    $("#erro_aut").html("Erro na autentificação");
+                }
+            });
+        });
+    });
     </script>
 </body>
 </html>

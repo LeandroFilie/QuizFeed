@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 29-Maio-2021 às 17:04
+-- Tempo de geração: 02-Jun-2021 às 01:07
 -- Versão do servidor: 5.6.34
 -- versão do PHP: 7.4.3
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
+  `nome_usuario` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `senha` varchar(50) NOT NULL,
   `permissao` int(1) NOT NULL
@@ -44,7 +45,8 @@ CREATE TABLE `usuario` (
 -- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -54,7 +56,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

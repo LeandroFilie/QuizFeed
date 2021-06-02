@@ -10,6 +10,8 @@
     <title>Cadastro | TesteFeed</title>
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script src="./js/main.js"></script>
+    <script src='js/moment.js'></script>
+    <script src='js/md5.js'></script>
 </head>
 <body>
     <header>
@@ -29,12 +31,15 @@
             <h3>Crie sua Conta</h3>
         </div>
         <div class="form">
-            <input type="text" name="nome_completo" placeholder="Nome Completo" />
-            <input type="text" name="nome_usuario" placeholder="Nome de Usuário" />
-            <input type="text" name="email" placeholder="E-mail" />
-            <input type="password" name="senha" placeholder="Senha" />
-            <input type="password" name="confirma_senha" placeholder="Confirme a Senha" />
-            <button class="register-btn"><a href="./home.html">Cadastrar</a></button>
+            <input type="text" name="nome_completo" id="nome_completo" placeholder="Nome Completo" required />
+            <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" required />
+            <div id="erro_nome"></div>
+            <input type="email" name="email" id="email" placeholder="E-mail" required />
+            <div id="erro_email"></div>
+            <input type="password" name="senha" id="senha" placeholder="Senha" required />
+            <input type="password" name="confirma_senha" id="confirma_senha" placeholder="Confirme a Senha" required />
+            <div id="erro_senha"></div>
+            <button id="cadastro_usuario" class="register-btn">Cadastrar</button>
         </div>
     </main>
 
@@ -42,5 +47,52 @@
         <span> Site desenvolvido por: Carol, Julia Costa e Leandro</span>
     </footer>
 
+    <script>
+        $(document).ready(function(){
+        $("#cadastro_usuario").click(function(){
+            var nome_completo = $("#nome_completo").val();
+            var nome_usuario = $("#nome_usuario").val();
+            var email = $("#email").val();
+            var senha = $("#senha").val();
+            var confirma_senha = $("#confirma_senha").val();
+            if((nome_usuario === '') || (nome_completo === '') || (email === '') || (senha === '')){
+                alert("Preencha todos os campos");
+            }
+            else{
+                if(senha === confirma_senha){
+                    var senha = $.md5(senha);
+                    $.post("insere_usuario.php",{"nome_completo":nome_completo,"nome_usuario":nome_usuario, "email":email,"senha":senha},function(m){
+
+                        $("#erro_senha").removeClass("erro_senha");
+                        $("#erro_senha").html("");
+                        
+                        $("#erro_email").removeClass("erro_email");
+                        $("#erro_email").html("");
+
+                        $("#erro_nome").removeClass("erro_nome");
+                        $("#erro_nome").html("");
+
+                        console.log(m);
+                        if(m == '1'){
+                            location.href="home.php";
+                        }
+                        else if(m == '2') {
+                            $("#erro_email").addClass("erro_email");
+                            $("#erro_email").html("E-mail já cadastrado");
+                        }
+                        else if(m == '3'){
+                            $("#erro_nome").addClass("erro_nome");
+                            $("#erro_nome").html("Nome de Usuário já existe");
+                        }
+                    });
+                }
+                else{
+                    $("#erro_senha").addClass("erro_senha");
+                    $("#erro_senha").html("As senhas não conferem");
+                }
+            }
+        });
+    });
+    </script>
 </body>
 </html>

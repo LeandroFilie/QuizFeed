@@ -51,6 +51,17 @@ main .form input {
   line-height: 1.5;
 }
 
+main .form .erro_senha, .erro_email, .erro_nome{
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
+
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  margin: 10px;
+}
+
 main .form .register-btn {
   background: var(--azul);
 

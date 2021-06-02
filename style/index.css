@@ -75,6 +75,16 @@ header nav {
   margin-top: 0;
 }
 
+header .erro_aut {
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
+
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
 header nav .menu {
   display: flex;
   align-items: center;
