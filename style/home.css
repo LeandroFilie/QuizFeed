@@ -26,15 +26,68 @@ main .section-title .title {
   font-weight: bold;
 }
 
+main .tab-links button {
+
+  border: none;
+  background: transparent;
+
+  font-size: 1.5rem;
+
+  padding: 16px;
+
+  outline: none;
+
+  position: relative;
+}
+
+
+main .tab-links button::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  content: "";
+  height: 2px;
+  width: 0%;
+
+  background-color: var(--laranja);
+
+  transition: .4s;
+}
+
+.tab-links button:hover::after,
+.tab-links button.active::after {
+  width: 100%;
+}
+
+main #tabs .tab-content {
+  margin-top: 5rem;
+}
+
+main #tabs .tab-content>section {
+  animation: up 1s;
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 main .section-cta button {
   background: var(--laranja);
-  padding: 15px 35px;
+  padding: 10px 30px;
   border-radius: 10px;
   border: none;
   color: white;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: 50px 0;
+  margin: 20px 0;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -48,6 +101,7 @@ main .section-description .description-title {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 50px;
 }
 
 main .section-description .description-title p {
@@ -59,6 +113,22 @@ main .section-description .description-title p {
 main .section-description .description-content {
   margin-top: -15px;
   font-size: 1.1rem;
+}
+
+main .section-description-question, .tab-content  {
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+main .section-description-question .section-description-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+main .section-description-question .section-description-options input {
+  height: 100px;
+  width: 100px;
 }
 
 /* Responsividade */

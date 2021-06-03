@@ -8,6 +8,7 @@
     $_SESSION["nome_usuario"] = $nome_usuario;
     $email = $_POST["email"];
     $senha = $_POST["senha"];
+    $_SESSION["permissao"] = 2;
 
     $select = "SELECT nome_usuario FROM usuario WHERE nome_usuario = '$nome_usuario'";
     $resultado = mysqli_query($conexao,$select);

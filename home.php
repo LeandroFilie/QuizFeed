@@ -17,45 +17,82 @@
     <script src="./js/main.js"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <div><a href="index.html"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
-            <button id="js-open-menu" class="menu-button">
-                <i class="menu-icon"></i>
-            </button>
-            <ul class="menu">
-                <li><a href="dados.html">Meus Dados</a></li>
-                <li><a href="logout.php">Sair</a></li>
-            </ul>
-        </nav>
-    </header>
+    
+    <?php 
+    
+        include 'menu.inc'; 
 
-    <main>
-        <div class="section-title">
-            <h1 class="title">Sejá bem-vindo, <?php echo $_SESSION["nome_usuario"]; ?></h1>
-        </div>
-        <div class="section-cta">
-            <a href="teste.html"><button>Iniciar Teste</button></a>
-        </div>
-        <div class="section-description">
-            <div class="description-title">
-                <i data-feather="help-circle"></i>
-                <p>
-                    Como Funciona o Teste
-                </p>
-            </div>
-            <p class="description-content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            </p>
-        </div>
-    </main>
+        echo '
+            <main>
+                <div class="section-title">
+                    <h1 class="title">Sejá bem-vindo, '.$_SESSION["nome_usuario"].'</h1>
+                </div>
+        ';
+    
+        if($_SESSION["permissao"] == 1){
+            //painel do adm
+        }
+        else{
+            echo '
 
+                <div class="section-description-question">
+                    <p>Me fala, você já fez alguma orientação vocacional com algum especialista?</p>
+                </div>
+                <div id="tabs">
+                    <div class="tab-links">
+                        <button id="sim_button">Sim, já fiz</button>
+                        <button id="nao_button">Não, nunca fiz</button>
+                    </div>
+
+                    <div class="tab-content">
+                        <section id="sim_content">
+                            <p>Então escolha a sua área de maior afinidade</p>
+                        </section>
+                        <section id="nao_content">
+                            <p>Então bora fazer um quiz?</p>
+                            <div class="section-cta">
+                                <a href="teste.html"><button>Iniciar Quiz</button></a>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                
+                
+               
+            ';
+        }
+    
+    ?>
+
+        </main>
     <footer>
         <span> Site desenvolvido por: Carol, Julia Costa e Leandro</span>
     </footer>
 
     <script>
         feather.replace();
+
+        $(document).ready(function(){
+            $('#sim_content').hide();
+            $('#nao_content').hide();
+
+            $('#sim_button').click(function(){
+                $('#nao_content').hide();
+                $('#sim_content').show();
+
+                $('#nao_button').removeClass('active');
+                $('#sim_button').toggleClass('active');
+            });
+
+            $('#nao_button').click(function(){
+                $('#sim_content').hide();
+                $('#nao_content').show();
+
+                $('#sim_button').removeClass('active');
+                $('#nao_button').toggleClass('active');
+            });
+        });
+
     </script>
 </body>
 </html>
