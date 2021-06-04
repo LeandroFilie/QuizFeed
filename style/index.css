@@ -99,6 +99,7 @@ header .header-content .card-login .campo_senha img{
   cursor: pointer;
   height: 20px;
   width: 20px;
+  z-index: 1;
 }
 
 header nav .menu {

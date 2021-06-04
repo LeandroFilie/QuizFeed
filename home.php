@@ -44,7 +44,7 @@
                         <section id="option-1-content">
                             <div class="card">
                                 <p>Usuários Cadastrados</p>
-                                <button>Ver todos</button>
+                                <a href="./lista_usuarios.php"><button>Ver todos</button></a>
                             </div>
                             <div class="card">
                                 <p>Redes Colaborativas</p>

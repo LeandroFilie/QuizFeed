@@ -2,7 +2,7 @@
     echo '
         <header>
             <nav>
-                <div><a href="index.html"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
+                <div><a href="home.php"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
                 <button id="js-open-menu" class="menu-button">
                     <i class="menu-icon"></i>
                 </button>
