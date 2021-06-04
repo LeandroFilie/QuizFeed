@@ -48,7 +48,7 @@
                 $resultado = mysqli_query($conexao,$select);
                 
                 while($linha = mysqli_fetch_assoc($resultado)){
-                  if($linha["nome_usuario"] != 'administrador'){
+                  if($linha["id_usuario"] != 0){
                     echo '
                         <div class="data-user-details-adm">
                         <div class="data-user-details-items-adm">
