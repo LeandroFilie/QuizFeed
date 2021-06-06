@@ -38,11 +38,13 @@
             <div id="erro_email"></div>
             <div id="campo_senha" class="campo_senha">
                 <input type="password" name="senha" id="senha" placeholder="Senha" required />
-                <img src="./assets/eye.svg" alt="" id="mostrar_senha">
+                <img src="./assets/eye.svg" alt="" id="mostrar_senha" class="button_mostrar_senha">
             </div>
-            
-            <input type="password" name="confirma_senha" id="confirma_senha" placeholder="Confirme a Senha" required />
-            <div id="erro_senha"></div>
+            <div id="campo_confirma_senha" class="campo_senha">
+                <input type="password" name="confirma_senha" id="confirma_senha" placeholder="Confirme a Senha" required />
+                <img src="./assets/eye.svg" alt="" id="mostrar_confirma_senha" class="button_mostrar_senha">
+            </div>
+                <div id="erro_senha"></div>
             <button id="cadastro_usuario" class="register-btn">Cadastrar</button>
         </div>
     </main>
@@ -59,34 +61,29 @@
                 var email = $("#email").val();
                 var senha = $("#senha").val();
                 var confirma_senha = $("#confirma_senha").val();
+
                 if((nome_usuario === '') || (nome_completo === '') || (email === '') || (senha === '')){
                     alert("Preencha todos os campos");
                 }
                 else{
                     if(senha === confirma_senha){
                         var senha = $.md5(senha);
-                        $.post("insere_usuario.php",{"nome_completo":nome_completo,"nome_usuario":nome_usuario, "email":email,"senha":senha},function(m){
+                        $.post("insere_usuario.php",{"nome_completo":nome_completo,"nome_usuario":nome_usuario, "email":email,"senha":senha},function(r){
 
-                            $("#erro_senha").removeClass("erro_senha");
-                            $("#erro_senha").html("");
-                            
-                            $("#erro_email").removeClass("erro_email");
-                            $("#erro_email").html("");
+                            limparMensagensErro();
 
-                            $("#erro_nome").removeClass("erro_nome");
-                            $("#erro_nome").html("");
-
-                            console.log(m);
-                            if(m == '1'){
+                            if(r == 0){
                                 location.href="home.php";
                             }
-                            else if(m == '2') {
-                                $("#erro_email").addClass("erro_email");
-                                $("#erro_email").html("E-mail já cadastrado");
+                            else if(r == 1){
+                                mensagemErroEmail();
                             }
-                            else if(m == '3'){
-                                $("#erro_nome").addClass("erro_nome");
-                                $("#erro_nome").html("Nome de Usuário já existe");
+                            else if(r == 2){
+                                mensagemErroNomeUsuario();
+                            }
+                            else if(r == 3){
+                                mensagemErroEmail();
+                                mensagemErroNomeUsuario();
                             }
                         });
                     }
@@ -97,16 +94,46 @@
                 }
             });
 
+            function limparMensagensErro(){
+                $("#erro_senha").removeClass("erro_senha");
+                $("#erro_senha").html("");
+                
+                $("#erro_email").removeClass("erro_email");
+                $("#erro_email").html("");
+
+                $("#erro_nome").removeClass("erro_nome");
+                $("#erro_nome").html("");
+            }
+
+            function mensagemErroEmail(){
+                $("#erro_email").addClass("erro_email");
+                $("#erro_email").html("E-mail já cadastrado");
+            }
+
+            function mensagemErroNomeUsuario(){
+                $("#erro_nome").addClass("erro_nome");
+                $("#erro_nome").html("Nome de Usuário já existe");
+            }
+
             $('#mostrar_senha').click(function(){
                 if($('#senha').attr('type') == 'password'){
                     $('#senha').attr('type', 'text');
                     $('#mostrar_senha').attr('src', './assets/eye-off.svg');
-                    
-                    console.log($('#mostrar_senha').attr('class'));
                 }
                 else{
                     $('#senha').attr('type', 'password');
                     $('#mostrar_senha').attr('src', './assets/eye.svg');
+                }
+            });
+
+            $('#mostrar_confirma_senha').click(function(){
+                if($('#confirma_senha').attr('type') == 'password'){
+                    $('#confirma_senha').attr('type', 'text');
+                    $('#mostrar_confirma_senha').attr('src', './assets/eye-off.svg');
+                }
+                else{
+                    $('#confirma_senha').attr('type', 'password');
+                    $('#mostrar_confirma_senha').attr('src', './assets/eye.svg');
                 }
             });
 

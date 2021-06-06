@@ -68,7 +68,7 @@ main .form .campo_senha {
   position: relative;
 }
 
-main .form .campo_senha img{
+main .form .campo_senha .button_mostrar_senha{
   position: absolute;
   right: 0;
   margin: 10px 20px;
