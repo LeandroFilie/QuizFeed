@@ -27,11 +27,9 @@
     if((mysqli_num_rows($confereNomeusuario) > 0) || (mysqli_num_rows($confereEmail) > 0)){
         if(mysqli_num_rows($confereNomeusuario) > 0){
             $error += 2; 
-            session_unset();
         }
         if(mysqli_num_rows($confereEmail) > 0){
             $error++; 
-            session_unset();
         }
     }
     else{

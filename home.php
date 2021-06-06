@@ -26,7 +26,7 @@
     ?>
     <main>
         <div class="section-title">
-            <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
+            <h1 class="title">Seja bem-vindo, @<?php echo $_SESSION["nome_usuario"] ?></h1>
         </div>
         <?php
             if($_SESSION["permissao"] == 1){
