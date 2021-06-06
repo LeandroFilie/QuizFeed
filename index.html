@@ -76,6 +76,37 @@
     </footer>
 
     <script>
+        $(document).ready(function(){
+            $("#autenticar").click(function(){
+                var email = $("#email").val();
+                var senha_md5 = $.md5($("#senha").val());
+
+                $.post("autenticacao.php",{"email":email,"senha":senha_md5},function(r){
+                    if(r == 1){
+                        location.href="home.php";
+                    }
+                    else if(r == 2){
+                        $("#erro_aut").addClass("erro_aut");
+                        $("#erro_aut").html("Erro na autentificação");
+                    }
+                });
+            });
+
+            $('#mostrar_senha').click(function(){
+                if($('#senha').attr('type') == 'password'){
+                    $('#senha').attr('type', 'text');
+                    $('#mostrar_senha').attr('src', './assets/eye-off.svg');
+                    
+                    console.log($('#mostrar_senha').attr('class'));
+                }
+                else{
+                    $('#senha').attr('type', 'password');
+                    $('#mostrar_senha').attr('src', './assets/eye.svg');
+                }
+            });
+        });
+    </script>
+    <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -85,37 +116,6 @@
                 });
             });
         });
-
-        $(function(){
-        $("#autenticar").click(function(){
-            var email = $("#email").val();
-            var senha_md5 = $.md5($("#senha").val());
-
-            $.post("autenticacao.php",{"email":email,"senha":senha_md5},function(m){
-                console.log(m);
-                if(m == 1){
-                    location.href="home.php";
-                }
-                else if(m == 2){
-                    $("#erro_aut").addClass("erro_aut");
-                    $("#erro_aut").html("Erro na autentificação");
-                }
-            });
-        });
-
-        $('#mostrar_senha').click(function(){
-            if($('#senha').attr('type') == 'password'){
-                $('#senha').attr('type', 'text');
-                $('#mostrar_senha').attr('src', './assets/eye-off.svg');
-                
-                console.log($('#mostrar_senha').attr('class'));
-            }
-            else{
-                $('#senha').attr('type', 'password');
-                $('#mostrar_senha').attr('src', './assets/eye.svg');
-            }
-        });
-    });
     </script>
 </body>
 </html>

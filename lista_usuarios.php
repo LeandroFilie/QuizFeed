@@ -20,101 +20,102 @@
   <?php
     include 'conexao.php';
     include 'menu.inc';
+  ?>
+  <main>
+    <?php
+      $select = 'SELECT * FROM usuario';
 
-    echo '<main>';
-              $select = 'SELECT * FROM usuario';
+      if($_SESSION["permissao"] == 1){
+        echo '
+          <div class="filtro">
+            <h3>Filtrar usuários</h3>
+            <form method="POST" action="lista_usuarios.php">
+              <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" />
+              <button>Pesquisar Usuário</button>
+            </form>
+          </div>
+        ';
 
-              if($_SESSION["permissao"] == 1){
-                echo '
-                  <div class="filtro">
-                    <h3>Filtrar usuários</h3>
-                    <form method="POST" action="lista_usuarios.php">
-                      <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" />
-                      <button>Pesquisar Usuário</button>
-                    </form>
-                  </div>
-                ';
+        if(!empty($_POST)){
+          $select .= " WHERE(1=1)";
+          if($_POST["nome_usuario"] != ""){
+              $nome_usuario = $_POST["nome_usuario"];
+              $select .= " AND nome_usuario like '$nome_usuario'";
+          }
+        }
 
-                if(!empty($_POST)){
-                  $select .= " WHERE(1=1)";
-                  if($_POST["nome_usuario"] != ""){
-                      $nome_usuario = $_POST["nome_usuario"];
-                      $select .= " AND nome_usuario like '$nome_usuario'";
-                  }
-                }
+        echo '<span id="msg"></span>';
 
-                echo '<span id="msg"></span>';
-
-                $resultado = mysqli_query($conexao,$select);
+        $resultado = mysqli_query($conexao,$select);
                 
-                while($linha = mysqli_fetch_assoc($resultado)){
-                  if($linha["id_usuario"] != 0){
-                    echo '
-                        <div class="data-user-details-adm">
-                        <div class="data-user-details-items-adm">
-                          <h3>Nome</h3>
-                          <p>'.$linha["nome"].' </p>
-                        </div>
+        while($linha = mysqli_fetch_assoc($resultado)){
+          if($linha["id_usuario"] != 0){
+            echo '
+                <div class="data-user-details-adm">
+                <div class="data-user-details-items-adm">
+                  <h3>Nome</h3>
+                  <p>'.$linha["nome"].' </p>
+                </div>
 
-                        <div class="data-user-details-items-adm">
-                          <h3>Nome de Usuário</h3>
-                          <p>'.$linha["nome_usuario"].' </p>
-                        </div>
+                <div class="data-user-details-items-adm">
+                  <h3>Nome de Usuário</h3>
+                  <p>'.$linha["nome_usuario"].' </p>
+                </div>
 
-                        <div class="data-user-details-items-adm">
-                          <h3>Endereço de E-mail</h3>
-                          <p>'.$linha["email"].'</p>
-                        </div>
-                        <div class="data-user-details-items-adm">
-                          <h3>Ação</h3>
-                          <button class="data-user-delete-adm" id="user-delete" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
-                        </div>
-                      </div>  
-                      ';
-                  }
-                }
-              }
-              else{
-                $select .= " WHERE nome_usuario='".$_SESSION["nome_usuario"]."'";
+                <div class="data-user-details-items-adm">
+                  <h3>Endereço de E-mail</h3>
+                  <p>'.$linha["email"].'</p>
+                </div>
+                <div class="data-user-details-items-adm">
+                  <h3>Ação</h3>
+                  <button class="data-user-delete-adm" id="user-delete" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                </div>
+              </div>  
+              ';
+          }
+        }
+      }
+      else{
+        $select .= " WHERE nome_usuario='".$_SESSION["nome_usuario"]."'";
 
-                $resultado = mysqli_query($conexao,$select);
+        $resultado = mysqli_query($conexao,$select);
 
-                echo '
-                    <div class="data-user-title">
-                      <img src="assets/dados.svg" Alt="user" class="icon-user"/>
-                      <h1>Dados Pessoais</h1>
-                    </div>
-                    <div class="data-user-details">
-                      <div class="data-user-details-items">
-                        <h3>Nome</h3>
-                ';
-                while($linha = mysqli_fetch_assoc($resultado)){
-                  echo '
-                        <p>'.$linha["nome"].' </p>
-                      </div>
+        echo '
+            <div class="data-user-title">
+              <img src="assets/dados.svg" Alt="user" class="icon-user"/>
+              <h1>Dados Pessoais</h1>
+            </div>
+            <div class="data-user-details">
+              <div class="data-user-details-items">
+                <h3>Nome</h3>
+        ';
+        while($linha = mysqli_fetch_assoc($resultado)){
+          echo '
+                <p>'.$linha["nome"].' </p>
+              </div>
 
-                      <div class="data-user-details-items">
-                        <h3>Nome de Usuário</h3>
-                        <p>'.$linha["nome_usuario"].' </p>
-                      </div>
+              <div class="data-user-details-items">
+                <h3>Nome de Usuário</h3>
+                <p>'.$linha["nome_usuario"].' </p>
+              </div>
 
-                      <div class="data-user-details-items">
-                        <h3>Endereço de E-mail</h3>
-                        <p>'.$linha["email"].'</p>
-                      </div>
-                    </div>  
-                    <div class="buttons-action">
-                        <button class="data-user-action" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
-                        <button class="data-user-delete" id="user-delete" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
-                    </div>
-                  ';
-                }
-              } 
-            ?>
-    </main>
-    <footer>
-        <span> Site desenvolvido por: Carol, Julia Costa e Leandro</span>
-    </footer>
+              <div class="data-user-details-items">
+                <h3>Endereço de E-mail</h3>
+                <p>'.$linha["email"].'</p>
+              </div>
+            </div>  
+            <div class="buttons-action">
+                <button class="data-user-action" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
+                <button class="data-user-delete" id="user-delete" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+            </div>
+          ';
+        }
+      } 
+    ?>
+  </main>
+  <footer>
+      <span> Site desenvolvido por: Carol, Julia Costa e Leandro</span>
+  </footer>
 
     <!-- Modal Alterar Dados -->
     <div class="modal fade " id="alterarDados" tabindex="-1" role="dialog" aria-labelledby="important-msg-label" aria-hidden="true">
