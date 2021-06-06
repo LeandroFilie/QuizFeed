@@ -51,23 +51,12 @@
         while($linha = mysqli_fetch_assoc($resultado)){
           if($linha["id_usuario"] != 0){
             echo '
-                <div class="data-user-details-adm">
+              <div class="data-user-details-adm">
                 <div class="data-user-details-items-adm">
-                  <h3>Nome</h3>
-                  <p>'.$linha["nome"].' </p>
-                </div>
-
-                <div class="data-user-details-items-adm">
-                  <h3>Nome de Usuário</h3>
-                  <p>'.$linha["nome_usuario"].' </p>
-                </div>
-
-                <div class="data-user-details-items-adm">
-                  <h3>Endereço de E-mail</h3>
-                  <p>'.$linha["email"].'</p>
+                  <p>@'.$linha["nome_usuario"].' </p>
                 </div>
                 <div class="data-user-details-items-adm">
-                  <h3>Ação</h3>
+                  <button class="data-user-adm">Ver mais</button>
                   <button class="data-user-delete-adm" id="user-delete" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
                 </div>
               </div>  
