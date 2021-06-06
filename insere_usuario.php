@@ -1,5 +1,4 @@
 <?php
-
     session_start();
 
     include "conexao.php";
@@ -17,9 +16,26 @@
     //erro = 1 ==> email já cadastrado
     //erro = 2 ==> nome de usuário já cadastrado
     //erro = 3 ==> email e nome de usuário já cadastrados
+    //erro = 4 ==> erro no cadastro
 
-    
-   
+    $select = "SELECT nome_usuario FROM usuario WHERE nome_usuario = '$nome_usuario'";
+    $confereNomeusuario = mysqli_query($conexao,$select);
+
+    $select = "SELECT email FROM usuario WHERE email = '$email'";
+    $confereEmail = mysqli_query($conexao,$select);
+
+    if((mysqli_num_rows($confereNomeusuario) > 0) || (mysqli_num_rows($confereEmail) > 0)){
+        if(mysqli_num_rows($confereNomeusuario) > 0){
+            $error += 2; 
+            session_unset();
+        }
+        if(mysqli_num_rows($confereEmail) > 0){
+            $error++; 
+            session_unset();
+        }
+    }
+    else{
+
         $insert = "INSERT INTO usuario(
             nome,
             nome_usuario,
@@ -29,22 +45,17 @@
             )
             VALUES('$nome','$nome_usuario','$email','$senha','2')
         ";
-    
+
         if(mysqli_query($conexao,$insert)){
             $error = 0;
         }
         else{
-            $error+=1;
+            $error = 4;
+            session_unset();
         }
-        
-        $select = "SELECT nome_usuario FROM usuario WHERE nome_usuario = '$nome_usuario'";
-        $resultado = mysqli_query($conexao,$select);
-
-        if(mysqli_num_rows($resultado) > 0){
-            $error += 2; 
-        }
-
-    
+    }
 
     echo $error;
+
+    mysqli_close($conexao);
 ?>

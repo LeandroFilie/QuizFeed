@@ -31,6 +31,7 @@
             <h3>Crie sua Conta</h3>
         </div>
         <div class="form">
+            <div id="erro_cadastro"></div>
             <input type="text" name="nome_completo" id="nome_completo" placeholder="Nome Completo" required />
             <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" required />
             <div id="erro_nome"></div>
@@ -72,6 +73,8 @@
 
                             limparMensagensErro();
 
+                            console.log(r);
+
                             if(r == 0){
                                 location.href="home.php";
                             }
@@ -85,34 +88,42 @@
                                 mensagemErroEmail();
                                 mensagemErroNomeUsuario();
                             }
+                            else {
+                                mensagemErroCadastro();
+                            }
                         });
                     }
                     else{
-                        $("#erro_senha").addClass("erro_senha");
+                        $("#erro_senha").addClass("erro");
                         $("#erro_senha").html("As senhas não conferem");
                     }
                 }
             });
 
             function limparMensagensErro(){
-                $("#erro_senha").removeClass("erro_senha");
+                $("#erro_senha").removeClass("erro");
                 $("#erro_senha").html("");
                 
-                $("#erro_email").removeClass("erro_email");
+                $("#erro_email").removeClass("erro");
                 $("#erro_email").html("");
 
-                $("#erro_nome").removeClass("erro_nome");
+                $("#erro_nome").removeClass("erro");
                 $("#erro_nome").html("");
             }
 
             function mensagemErroEmail(){
-                $("#erro_email").addClass("erro_email");
+                $("#erro_email").addClass("erro");
                 $("#erro_email").html("E-mail já cadastrado");
             }
 
             function mensagemErroNomeUsuario(){
-                $("#erro_nome").addClass("erro_nome");
+                $("#erro_nome").addClass("erro");
                 $("#erro_nome").html("Nome de Usuário já existe");
+            }
+
+            function mensagemErroCadastro(){
+                $("#erro_cadastro").addClass("erro");
+                $("#erro_cadastro").html("Erro no Cadastro");
             }
 
             $('#mostrar_senha').click(function(){

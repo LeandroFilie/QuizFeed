@@ -35,8 +35,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(100) NOT NULL,
   `senha` varchar(50) NOT NULL,
   `permissao` int(1) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `email` (`email`)
+  PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
