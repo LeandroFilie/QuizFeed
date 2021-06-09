@@ -13,7 +13,7 @@
 <body>
   <?php
     include 'conexao.php';
-    include 'menu.inc';
+    include './inc/menu.inc';
   ?>
   <main>
     <?php
@@ -103,7 +103,7 @@
     include './inc/modal_editar.inc';
     include './inc/modal_excluir.inc';
 
-    include './inc/scripts_usuario.php'; 
+    include 'scripts_usuario.php'; 
     echo '<input type="hidden" value="'.$_SESSION["permissao"].'" id="permissao">';
   ?>
 </body>
