@@ -83,6 +83,51 @@ main #tabs .tab-content>section,  main #tabs .tab-content-adm>section{
   }
 }
 
+#tabs .tab-content-adm #option-1-content,  #tabs .tab-content-adm #option-2-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+main .tab-content-adm .card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  max-width: 350px;
+  
+  padding: 10px;
+  margin: 20px;
+
+  background: #ffffff;
+
+  border-radius: 10px;
+  border: none;
+
+  transition: all 0.2s;
+}
+
+main .tab-content-adm .card p {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--azul);
+}
+
+main .tab-content-adm .card button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 20px 0;
+  cursor: pointer;
+  background: var(--laranja);
+  transition: all 0.2s;
+  will-change: transform;
+}
+
 main .section-cta button {
   background: var(--laranja);
   padding: 10px 30px;
@@ -134,51 +179,6 @@ main .section-description-question .section-description-options {
 main .section-description-question .section-description-options input {
   height: 100px;
   width: 100px;
-}
-
-#tabs .tab-content-adm #option-1-content,  #tabs .tab-content-adm #option-2-content{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-main .tab-content-adm .card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  max-width: 350px;
-  
-  padding: 10px;
-  margin: 20px;
-
-  background: #ffffff;
-
-  border-radius: 10px;
-  border: none;
-
-  transition: all 0.2s;
-}
-
-main .tab-content-adm .card p {
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: var(--azul);
-}
-
-main .tab-content-adm .card button {
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 20px 0;
-  cursor: pointer;
-  background: var(--laranja);
-  transition: all 0.2s;
-  will-change: transform;
 }
 
 @media (max-width: 300px) {

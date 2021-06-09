@@ -5,24 +5,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="./assets/favicon.png" type="image/png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/main.css">
-    <link rel="stylesheet" href="./style/home.css">
-    <link rel="stylesheet" href="./style/menu_mobile.css">
+    <?php include './inc/head.inc' ?>
     <title>Home | TesteFeed</title>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="./js/jquery-3.6.0.min.js"></script>
-    <script src="./js/main.js"></script>
+    <link rel="stylesheet" href="./style/home.css">
 </head>
 <body>
-
-    
-    
     <?php 
-    
-        include 'menu.inc'; 
+        include './inc/menu.inc'; 
     ?>
     <main>
         <div class="section-title">
@@ -95,34 +84,30 @@
     </footer>
 
     <script>
-        feather.replace();
-
-        $(document).ready(function(){
-
+        $(function(){
             ocultarOptions();
-            
+
             $('#option-1').click(function(){
                 $('#option-2-content').hide();
                 $('#option-1-content').show();
-
+        
                 $('#option-2').removeClass('active');
                 $('#option-1').toggleClass('active');
             });
-
+        
             $('#option-2').click(function(){
                 $('#option-1-content').hide();
                 $('#option-2-content').show();
-
+        
                 $('#option-1').removeClass('active');
                 $('#option-2').toggleClass('active');
             });
-
+        
             function ocultarOptions(){
                 $('#option-1-content').hide();
                 $('#option-2-content').hide();
             }
         });
-
     </script>
 </body>
 </html>

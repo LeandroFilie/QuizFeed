@@ -1,27 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="./assets/favicon.png" type="image/png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style/main.css">
+    <?php include './inc/head.inc' ?>
     <link rel="stylesheet" href="./style/index.css">
-    <link rel="stylesheet" href="./style/menu_mobile.css">
-    <script src="./js/jquery-3.6.0.min.js"></script>
-    <script src="./js/main.js"></script>
-    <script src='js/moment.js'></script>
-    <script src='js/md5.js'></script>
     <title>Home | TesteFeed</title>
 </head>
 <body>
     <header>
         <nav class="nav-index">
-            <div><a href="index.html"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
+            <div><a href="#"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
             <button id="js-open-menu" class="menu-button">
                 <i class="menu-icon"></i>
             </button>
             <ul class="menu">
-                <li><a href="cadastro.html">Cadastre-se</a></li>
+                <li><a href="cadastro.php">Cadastre-se</a></li>
                 <li><a href="#about" class="go-about">Sobre</a></li>
             </ul>
         </nav>
@@ -71,9 +63,7 @@
         </div>
     </section>
 
-    <footer>
-            <span> Site desenvolvido por: Carol, Julia Costa e Leandro</span>
-    </footer>
+    <?php include './inc/footer.inc' ?>
 
     <script>
         $(document).ready(function(){
@@ -102,16 +92,6 @@
                     $('#senha').attr('type', 'password');
                     $('#mostrar_senha').attr('src', './assets/eye.svg');
                 }
-            });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
             });
         });
     </script>
