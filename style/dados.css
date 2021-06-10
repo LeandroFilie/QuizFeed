@@ -105,6 +105,28 @@ main .data-user-details-adm .data-user-details-items-adm button {
   cursor: pointer;
 }
 
+.erro{
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  margin: 20px 0 0 -50px;
+}
+
+.sucesso{
+  background-color: #d4edda;
+  border: 1px #c3e6cb;
+  color: #155724;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  margin: 20px 0 0 -50px;
+}
+
 main .data-user-title {
   display: flex;
   justify-content: center;
@@ -130,6 +152,13 @@ main .data-user-title h1 {
 main .data-user-title .icon-user {
   height: 6rem;
   width: 6rem;
+}
+
+main #data-user {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 main .data-user-details{

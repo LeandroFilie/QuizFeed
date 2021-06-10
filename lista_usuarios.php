@@ -23,10 +23,10 @@
         echo '
           <div class="filtro">
             <h3>Filtrar usuários</h3>
-            <div id="msg"></div>
             <form method="POST" action="lista_usuarios.php">
               <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" />
               <button>Pesquisar Usuário</button>
+              <div id="msg"></div>
             </form>
           </div>
         ';
@@ -70,31 +70,33 @@
               <h1>Dados Pessoais</h1>
             </div>
             <div id="msg"></div>
+            <div id="data-user">
         ';
-        while($linha = mysqli_fetch_assoc($resultado)){
-          echo '
-            <div class="data-user-details">
-              <div class="data-user-details-items">
-                <h3>Nome</h3>
-                  <p>'.$linha["nome"].' </p>
-              </div>
+              while($linha = mysqli_fetch_assoc($resultado)){
+                echo '
+                  <div class="data-user-details">
+                    <div class="data-user-details-items">
+                      <h3>Nome</h3>
+                        <p>'.$linha["nome"].' </p>
+                    </div>
 
-              <div class="data-user-details-items">
-                <h3>Nome de Usuário</h3>
-                <p>'.$linha["nome_usuario"].' </p>
-              </div>
+                    <div class="data-user-details-items">
+                      <h3>Nome de Usuário</h3>
+                      <p>'.$linha["nome_usuario"].' </p>
+                    </div>
 
-              <div class="data-user-details-items">
-                <h3>Endereço de E-mail</h3>
-                <p>'.$linha["email"].'</p>
-              </div>
-            </div>  
-            <div class="buttons-action">
-                <button class="data-user-action alterar" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
-                <button class="data-user-delete" id="user-delete" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
-            </div>
-          ';
-        }
+                    <div class="data-user-details-items">
+                      <h3>Endereço de E-mail</h3>
+                      <p>'.$linha["email"].'</p>
+                    </div>
+                  </div>  
+                  <div class="buttons-action">
+                      <button class="data-user-action alterar" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
+                      <button class="data-user-delete" id="user-delete" value="'.$linha["id_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                  </div>
+                ';
+              }
+        echo '</div>';
       } 
     ?>
   </main>

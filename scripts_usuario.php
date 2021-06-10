@@ -1,5 +1,33 @@
 <script>
 $(function(){
+    define_alterar_remover();
+
+    $('.salvar').click(function(){
+        p = {
+            nome:$("#nome_completo_modal").val(),
+            nome_usuario:$("#nome_usuario_modal").val(),
+            email:$("#email_modal").val(),
+            id_usuario: $(".alterar").val()
+        };    
+        
+        $.post("atualizar.php",p,function(r){
+            $("#msg").removeClass("erro");
+            $("#msg").removeClass("sucesso");
+            $("#data-user-details").removeClass("sem-margin");
+            if(r=='1'){
+                $("#msg").addClass("sucesso");
+                $("#msg").html("Dados alterados com sucesso.");
+                $(".close").click();
+                atualizarDados();            
+            }else{
+                $("#msg").addClass("erro"); 
+                $("#msg").html("Falha ao atualizar os dados.");
+                $(".close").click();
+                atualizarDados();  
+            }
+        });
+    });
+
     function define_alterar_remover(){ 
         $(".alterar").click(function(){
             i = $(this).val();
@@ -23,7 +51,6 @@ $(function(){
             c = "id_usuario";
             t = "usuario";
             p = {tabela:t,id:i,coluna:c}
-            console.log(p);
             $.post("remover.php",p,function(r){
                 if(permissao == 1){
                     $("#msg").removeClass("error");
@@ -41,44 +68,20 @@ $(function(){
                     }
                 }
                 else{
-                    location.href="index.html";
+                    location.href="index.php";
                 }
                     
             });
         });
     }
 
-    define_alterar_remover();
-
-    $('.salvar').click(function(){
-        p = {
-            nome:$("#nome_completo_modal").val(),
-            nome_usuario:$("#nome_usuario_modal").val(),
-            email:$("#email_modal").val(),
-            id_usuario: $(".alterar").val()
-        };    
-        
-        $.post("atualizar.php",p,function(r){
-            console.log(r);
-            $("#msg").removeClass("erro");
-            $("#msg").removeClass("sucesso");
-            if(r=='1'){
-                $("#msg").addClass("sucesso");
-                $("#msg").html("Dados alterados com sucesso.");
-                $(".close").click();
-                atualizarDados();            
-            }else{
-                $("#msg").addClass("erro"); 
-                $("#msg").html("Falha ao atualizar os dados.");
-            }
-        });
-    });
-
     function atualizarDados(){
         id = $(".alterar").val();
         $.get("seleciona.php?id="+id,function(d){
             t = '';
+            
             $.each(d,function(i,u){
+                console.log(u.id_usuario);
                 t += '<div class="data-user-details">';
                 t +=     '<div class="data-user-details-items">';
                 t +=         '<h3>Nome</h3>';
@@ -95,10 +98,13 @@ $(function(){
                 t +=         `<p>${u.email} </p>`;
                 t +=     '</div>';
                 t += '</div>';
+                t += '<div class="buttons-action">';
+                t +=       `<button class="data-user-action alterar" value="${u.id_usuario}" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>`;
+                t +=       `<button class="data-user-delete" id="user-delete" value="${u.id_usuario}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
+                t +=   '</div>';
             });
-            $(".data-user-details").html(t);
+            $("#data-user").html(t);
         })  
     }
-
 });
 </script>
