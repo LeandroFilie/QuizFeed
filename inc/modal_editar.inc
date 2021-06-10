@@ -6,13 +6,17 @@
             <h4 class="modal-title">Alterar Dados</h4>
         </div>
         <div class="modal-body modal-form">
-            <input type="text" name="nome" placeholder="Nome Completo" />
-            <input type="text" name="nome" placeholder="Nome Completo" />
-            <input type="text" name="nome" placeholder="Nome Completo" />
+            <input type="text" name="nome_completo_modal" id="nome_completo_modal" placeholder="Nome Completo" />
+            <input type="text" name="nome_usuario_modal" id="nome_usuario_modal" placeholder="Nome de Usuário" />
+            <input type="text" name="email_modal" id="email_modal" placeholder="E-mail" />
         </div>
         <div class="modal-footer">
             <button class="data-user-action-cancel" data-dismiss="modal">Cancelar</button>
-            <button class="data-user-action-save">Salvar</button>
+            <?php
+                if($_SESSION["permissao"] == 2){
+                    echo '<button class="data-user-action-save salvar">Salvar</button>';
+                }   
+            ?>
         </div>
         </div>
     </div>
