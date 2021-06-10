@@ -84,6 +84,7 @@ main .data-user-details-adm .data-user-details-items-adm {
 
   margin: 0 20px;
 
+  min-width: 213px;
 }
 
 main .data-user-details-adm .data-user-details-items-adm p{

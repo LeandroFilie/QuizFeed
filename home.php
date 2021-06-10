@@ -22,28 +22,28 @@
                 echo '
                     <section id="tabs">
                         <div class="tab-links">
-                            <button id="option-1">Gerenciar Rede Colaborativa</button>
-                            <button id="option-2">Gerenciar Quiz</button>
+                            <button id="option-1">Gerenciar Usuários</button>
+                            <button id="option-2">Gerenciar Quiz e Redes</button>
                         </div>
 
                         <div class="tab-content-adm">
                             <section id="option-1-content">
                                 <div class="card">
-                                    <p>Usuários Cadastrados</p>
+                                    <p>Usuários</p>
                                     <a href="./lista_usuarios.php"><button>Ver todos</button></a>
                                 </div>
                                 <div class="card">
-                                    <p>Redes Colaborativas</p>
+                                    <p>Psicólogos</p>
                                     <button>Ver todas</button>
                                 </div>
                             </section>
                             <section id="option-2-content">
                                 <div class="card">
-                                    <p>Perguntas do Quiz</p>
+                                    <p>Sites dos Testes</p>
                                     <button>Cadastrar</button>
                                 </div>
                                 <div class="card">
-                                    <p>Perguntas do Quiz</p>
+                                    <p>Redes Colaborativas</p>
                                     <button>Listar</button>
                                 </div>
                             </section>
