@@ -13,17 +13,32 @@ $(function(){
         $.post("atualizar.php",p,function(r){
             $("#msg").removeClass("erro");
             $("#msg").removeClass("sucesso");
-            $("#data-user-details").removeClass("sem-margin");
-            if(r=='1'){
+
+            console.log(r);
+
+            limparMensagensErro();
+
+            if(r == 0){
                 $("#msg").addClass("sucesso");
                 $("#msg").html("Dados alterados com sucesso.");
                 $(".close").click();
-                atualizarDados();            
-            }else{
-                $("#msg").addClass("erro"); 
-                $("#msg").html("Falha ao atualizar os dados.");
+                atualizarDados();     
+            }
+            else if(r == 1){
+                mensagemErroEmail();
                 $(".close").click();
-                atualizarDados();  
+                define_alterar_remover();
+            }
+            else if(r == 2){
+                mensagemErroNomeUsuario();
+                $(".close").click();
+                define_alterar_remover();
+            }
+            else if(r == 3){
+                mensagemErroEmail();
+                mensagemErroNomeUsuario();
+                $(".close").click();
+                define_alterar_remover();
             }
         });
     });
@@ -81,7 +96,6 @@ $(function(){
             t = '';
             
             $.each(d,function(i,u){
-                console.log(u.id_usuario);
                 t += '<div class="data-user-details">';
                 t +=     '<div class="data-user-details-items">';
                 t +=         '<h3>Nome</h3>';
@@ -91,11 +105,13 @@ $(function(){
                 t +=     '<div class="data-user-details-items">';
                 t +=         '<h3>Nome de Usuário</h3>';
                 t +=         `<p>${u.nome_usuario} </p>`;
+                t +=          '<div id="erro_nome"></div>';
                 t +=     '</div>';
 
                 t +=     '<div class="data-user-details-items">';
                 t +=         '<h3>Endereço de E-mail</h3>';
                 t +=         `<p>${u.email} </p>`;
+                t +=           '<div id="erro_email"></div>';
                 t +=     '</div>';
                 t += '</div>';
                 t += '<div class="buttons-action">';
@@ -105,6 +121,26 @@ $(function(){
             });
             $("#data-user").html(t);
         })  
+    }
+
+    function limparMensagensErro(){        
+        $("#erro_email").removeClass("erro");
+        $("#erro_email").html("");
+
+        $("#erro_nome").removeClass("erro");
+        $("#erro_nome").html("");
+
+        $("#msg").html("");
+    }
+
+    function mensagemErroEmail(){
+        $("#erro_email").addClass("erro");
+        $("#erro_email").html("E-mail já cadastrado");
+    }
+
+    function mensagemErroNomeUsuario(){
+        $("#erro_nome").addClass("erro");
+        $("#erro_nome").html("Nome de Usuário já existe");
     }
 });
 </script>

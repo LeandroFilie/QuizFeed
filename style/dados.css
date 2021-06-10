@@ -113,7 +113,8 @@ main .data-user-details-adm .data-user-details-items-adm button {
 
   padding: 0.5rem 0.5rem;
   border-radius: 0.25rem;
-  margin: 20px 0 0 -50px;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .sucesso{
@@ -124,7 +125,8 @@ main .data-user-details-adm .data-user-details-items-adm button {
 
   padding: 0.5rem 0.5rem;
   border-radius: 0.25rem;
-  margin: 20px 0 0 -50px;
+  margin-top: 20px;
+  margin-bottom: -50px;
 }
 
 main .data-user-title {

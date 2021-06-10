@@ -77,17 +77,19 @@
                   <div class="data-user-details">
                     <div class="data-user-details-items">
                       <h3>Nome</h3>
-                        <p>'.$linha["nome"].' </p>
+                      <p>'.$linha["nome"].' </p>
                     </div>
 
                     <div class="data-user-details-items">
                       <h3>Nome de Usuário</h3>
                       <p>'.$linha["nome_usuario"].' </p>
+                      <div id="erro_nome"></div>
                     </div>
 
                     <div class="data-user-details-items">
                       <h3>Endereço de E-mail</h3>
                       <p>'.$linha["email"].'</p>
+                      <div id="erro_email"></div>
                     </div>
                   </div>  
                   <div class="buttons-action">

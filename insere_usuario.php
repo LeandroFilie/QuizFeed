@@ -10,6 +10,7 @@
 
     $_SESSION["nome_usuario"] = $nome_usuario;
     $_SESSION["permissao"] = 2;
+    $_SESSION["email"] = email;
 
     $error = 0;
     //erro = 0 ==> sucesso
