@@ -73,11 +73,7 @@
                         </div>
 
                         <div>
-                            <input type="text" name="telefone_psi" id="telefone_psi" placeholder="Telefone" required />
-                        </div>
-
-                        <div>
-                            <input type="text" name="endereco_psi" id="endereco_psi" placeholder="Endereço" required />
+                            <input type="number" name="crp" id="crp" placeholder="CRP" required />
                         </div>
                         
                         <div id="campo_senha_psi" class="campo_senha">
