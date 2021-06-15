@@ -86,9 +86,9 @@
                             <img src="./assets/eye.svg" alt="" id="mostrar_confirma_senha_psi" class="button_mostrar_senha">
                         </div>
 
-                        <div id="erro_senha"></div>
+                        <div id="erro_senha_psi"></div>
 
-                        <button id="cadastro_usuario" class="register-btn">Cadastrar</button>
+                        <button id="cadastro_usuario_psi" class="register-btn">Cadastrar</button>
                     </section>
 
                 </div>
