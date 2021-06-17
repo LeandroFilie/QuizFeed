@@ -14,12 +14,12 @@
         include './inc/menu.inc'; 
     ?>
     <main>
-        <div class="section-title">
-            <h1 class="title">Seja bem-vindo, @<?php echo $_SESSION["nome_usuario"] ?></h1>
-        </div>
         <?php
             if($_SESSION["permissao"] == 1){
                 echo '
+                    <div class="section-title">
+                        <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
+                     </div>
                     <section id="tabs">
                         <div class="tab-links">
                             <button id="option-1">Gerenciar Usuários</button>
@@ -52,8 +52,11 @@
 
                 ';
             }
-            else{
+            else if($_SESSION["permissao"] == 2){
                 echo '
+                    <div class="section-title">
+                        <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
+                     </div>
                     <section class="section-description-question">
                         <p>Me fala, você já fez alguma orientação vocacional com algum especialista?</p>
                     </section>
@@ -76,6 +79,15 @@
                         </div>
                     </section>
                 ';
+            }
+            else if($_SESSION["permissao"] == 3){
+                if($_SESSION["situacao"] == 1){
+                    echo '
+                        <div class="section-title">
+                            <h1 class="title">Seja bem-vindo!<br/> Aguarde o administrador aprovar o seu cadastro</h1>
+                        </div>
+                    ';
+                }
             }
         ?>
     </main>

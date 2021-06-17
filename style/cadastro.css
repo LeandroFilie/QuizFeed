@@ -155,9 +155,49 @@ main .form .register-btn {
   cursor: pointer;
 }
 
+main .form .select-estados-cidades {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main .form .select-estados-cidades select {
+  width: 14.3rem;
+  height: 3rem;
+
+  margin: 10px;
+  padding: 0.375rem 0.75rem;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  background-color: #f8fafc;
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+main .form .select-estados-cidades select option {
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 /* Responsividade */
-@media (max-width: 450px) {
-  main .form input {
-    max-width: 17rem;
+@media (max-width: 480px) {
+  main .form input,  main .form .select-estados-cidades select{
+    width: 17rem;
+  }
+
+  main .form .select-estados-cidades {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }

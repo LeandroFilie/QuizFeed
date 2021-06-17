@@ -4,6 +4,7 @@
     <?php include './inc/head.inc' ?>
     <link rel="stylesheet" href="./style/cadastro.css">
     <script src="./js/cadastro.js"></script>
+    <script src="./js/select_estados.js"></script>
     <title>Cadastro | TesteFeed</title>
 </head>
 <body>
@@ -24,8 +25,6 @@
             <h3>Crie sua Conta</h3>
         </div>
         <div class="form">
-            <div id="erro_cadastro"></div>  
-
             <section id="tabs">
                 <div class="tab-links">
                     <button id="option-1">Sou um usuário</button>
@@ -33,6 +32,7 @@
                 </div>
                 <div class="tab-content-user">
                     <section id="option-1-content">
+                        <div id="erro_cadastro"></div>  
                         <div>   
                             <input type="text" name="nome_completo" id="nome_completo" placeholder="Nome Completo" required />
                         </div>
@@ -69,11 +69,22 @@
 
                         <div>
                             <input type="email" name="email_psi" id="email_psi" placeholder="E-mail" required />
-                            <div id="erro_email"></div>
+                            <div id="erro_email_psi"></div>
+                        </div>
+
+                        <div class="select-estados-cidades">
+                            <select id="estado" name="estado">
+                                <option value="0" label="Estado"></option>
+                                <?php include './inc/select_estados.inc' ?>
+                            </select>
+                            <select id="cidade" disabled>
+                                <option value="" label="Cidade"></option>
+                            </select>
                         </div>
 
                         <div>
                             <input type="number" name="crp" id="crp" placeholder="CRP" required />
+                            <div id="erro_crp"></div>
                         </div>
                         
                         <div id="campo_senha_psi" class="campo_senha">
