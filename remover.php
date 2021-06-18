@@ -3,12 +3,12 @@
 
     $tabela = $_POST["tabela"];
     $coluna = $_POST["coluna"];
-    $id = $_POST["id"];
+    $email = $_POST["email"];
 
-    $delete = "DELETE FROM $tabela WHERE $coluna='$id'";
+    $delete = "DELETE FROM $tabela WHERE $coluna='$email'";
 
     mysqli_query($conexao,$delete)
         or die("Erro: ".mysqli_error($conexao));
 
-    echo "1";
+    echo '1';
 ?>

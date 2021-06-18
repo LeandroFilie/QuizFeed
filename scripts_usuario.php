@@ -1,20 +1,18 @@
 <script>
 $(function(){
-    define_alterar_remover();
-
     $('.salvar').click(function(){
         p = {
             nome:$("#nome_completo_modal").val(),
             nome_usuario:$("#nome_usuario_modal").val(),
-            email:$("#email_modal").val(),
-            id_usuario: $(".alterar").val()
+            email:$("#email_modal").val()
         };    
+
+        console.log(p);
         
         $.post("atualizar.php",p,function(r){
+            console.log(`R: ${r}`);
             $("#msg").removeClass("erro");
             $("#msg").removeClass("sucesso");
-
-            console.log(r);
 
             limparMensagensErro();
 
@@ -22,7 +20,7 @@ $(function(){
                 $("#msg").addClass("sucesso");
                 $("#msg").html("Dados alterados com sucesso.");
                 $(".close").click();
-                atualizarDados();     
+                atualizarDados(p.email);
             }
             else if(r == 1){
                 mensagemErroEmail();
@@ -43,6 +41,8 @@ $(function(){
         });
     });
 
+    define_alterar_remover();
+
     function define_alterar_remover(){ 
         $(".alterar").click(function(){
             i = $(this).val();
@@ -52,7 +52,7 @@ $(function(){
                 $("#nome_usuario_modal").attr("disabled", "disabled");
                 $("#email_modal").attr("disabled", "disabled");
             }
-            $.get("seleciona.php?id="+i,function(r){
+            $.get("seleciona.php?email="+i,function(r){
                 u = r[0];
                 $("#nome_completo_modal").val(u.nome);
                 $("#nome_usuario_modal").val(u.nome_usuario);
@@ -63,9 +63,9 @@ $(function(){
         $(".remover").click(function(){
             permissao = $("#permissao").val();
             i = $("#user-delete").val();
-            c = "id_usuario";
+            c = "email";
             t = "usuario";
-            p = {tabela:t,id:i,coluna:c}
+            p = {tabela:t,email:i,coluna:c}
             $.post("remover.php",p,function(r){
                 if(permissao == 1){
                     $("#msg").removeClass("error");
@@ -90,13 +90,16 @@ $(function(){
         });
     }
 
-    function atualizarDados(){
-        id = $(".alterar").val();
-        $.get("seleciona.php?id="+id,function(d){
+    function atualizarDados(novo_email){
+        $.get("seleciona.php?email="+novo_email,function(d){
             t = '';
-            
             $.each(d,function(i,u){
-                t += '<div class="data-user-details">';
+                console.log(`Nome ${u.nome}`);
+                console.log(`Nome ${u.nome_usuario}`);
+                console.log(`Nome ${u.email}`);
+                trocarCampos(u.nome, u.nome_usuario, u.email);
+                
+                /* t += '<div class="data-user-details">';
                 t +=     '<div class="data-user-details-items">';
                 t +=         '<h3>Nome</h3>';
                 t +=         `<p>${u.nome} </p>`;
@@ -115,12 +118,17 @@ $(function(){
                 t +=     '</div>';
                 t += '</div>';
                 t += '<div class="buttons-action">';
-                t +=       `<button class="data-user-action alterar" value="${u.id_usuario}" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>`;
-                t +=       `<button class="data-user-delete" id="user-delete" value="${u.id_usuario}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
-                t +=   '</div>';
+                t +=       `<button class="data-user-action alterar" value="${u.email}" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>`;
+                t +=       `<button class="data-user-delete" id="user-delete" value="${u.email}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
+                t +=   '</div>'; */
             });
-            $("#data-user").html(t);
-        })  
+        })    
+    }
+
+    function trocarCampos(nome, nome_usuario, email){
+        $("#nome-user").html(nome);
+        $("#nome-usuario-user").html(nome_usuario);
+        $("#email-user").html(email);
     }
 
     function limparMensagensErro(){        

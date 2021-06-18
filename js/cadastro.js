@@ -65,6 +65,8 @@ $(document).ready(function(){
     
         $.post("insere_usuario.php",dados,function(r){
 
+            console.log(r);
+
             limparMensagensErro();
 
             if(r == 0){
@@ -77,7 +79,7 @@ $(document).ready(function(){
                 mensagemErroDois(dados.identificador);
             }
             else if(r == 3){
-                mensagemErroEmail();
+                mensagemErroEmail(dados.identificador);
                 mensagemErroDois(dados.identificador);
             }
             else {

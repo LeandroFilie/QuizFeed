@@ -57,9 +57,10 @@
             ";
 
             $insert2 = "INSERT INTO usuariocomum(
-                nome_usuario
+                nome_usuario,
+                email_usuario
                 )
-                VALUES('$nome_usuario')";
+                VALUES('$nome_usuario', '$email')";
 
             if(mysqli_query($conexao,$insert) && mysqli_query($conexao,$insert2)){
                 $error = 0;
@@ -91,7 +92,7 @@
             }
         }
         else{
-            $insert = "INSERT INTO usuario(
+            $insert3 = "INSERT INTO usuario(
                 nome,
                 email,
                 senha,
@@ -100,14 +101,15 @@
                 VALUES('$nome','$email','$senha','3')
             ";
 
-            $insert2 = "INSERT INTO usuariopsicologo(
+            $insert4 = "INSERT INTO usuariopsicologo(
                 crp,
                 cidade,
-                situacao
+                situacao,
+                email_usuario
                 )
-                VALUES('$crp', '$cidade', '1')";
+                VALUES('$crp', '$cidade', '1', '$email')";
 
-            if(mysqli_query($conexao,$insert) && mysqli_query($conexao,$insert2)){
+            if(mysqli_query($conexao,$insert3) && mysqli_query($conexao,$insert4)){
                 $error = 0;
             }
             else{
@@ -117,9 +119,5 @@
         }
         
     }
-    
-    
     echo $error;
-    
-
 ?>

@@ -3,11 +3,11 @@
 
     include "conexao.php";
 
-    $select = "SELECT * FROM usuario";
+    $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuariocomum ON usuario.email = usuariocomum.email_usuario";
 
-    if(isset($_GET["id"])){
-        $id_usuario = $_GET["id"];
-        $select .= " WHERE id_usuario='$id_usuario'";
+    if(isset($_GET["email"])){
+        $email = $_GET["email"];
+        $select .= " WHERE usuario.email='$email'";
     }
 
     $resultado = mysqli_query($conexao,$select)
