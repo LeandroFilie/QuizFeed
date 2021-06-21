@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 18-Jun-2021 às 06:02
--- Versão do servidor: 5.6.34
--- versão do PHP: 7.4.3
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 21-Jun-2021 às 23:46
+-- Versão do servidor: 5.7.31
+-- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,11 +27,13 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `usuario` (
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
   `nome` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `senha` varchar(50) NOT NULL,
-  `permissao` int(1) NOT NULL
+  `permissao` int(1) NOT NULL,
+  PRIMARY KEY (`email`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -41,9 +42,11 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`nome`, `email`, `senha`, `permissao`) VALUES
 ('admin', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 1),
-('Caroline da Silva Motta', 'carol@email.com', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('Caroline Motta', 'carol@email.com', '827ccb0eea8a706c4c34a16891f84e7b', 2),
 ('Julia Maria Costa', 'julia@email.com', '827ccb0eea8a706c4c34a16891f84e7b', 3),
-('Leandro Gomes', 'leandro@email.com.br', '827ccb0eea8a706c4c34a16891f84e7b', 2);
+('Leandro Gomes Filié', 'leandro.gf03@gmail.com', 'c20ad4d76fe97759aa27a0c99bff6710', 3),
+('Leandro Gomes', 'leandro@email.com', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('Marcela Bombarba', 'marcela@email.com', 'c20ad4d76fe97759aa27a0c99bff6710', 3);
 
 -- --------------------------------------------------------
 
@@ -51,9 +54,11 @@ INSERT INTO `usuario` (`nome`, `email`, `senha`, `permissao`) VALUES
 -- Estrutura da tabela `usuariocomum`
 --
 
-CREATE TABLE `usuariocomum` (
+DROP TABLE IF EXISTS `usuariocomum`;
+CREATE TABLE IF NOT EXISTS `usuariocomum` (
   `email_usuario` varchar(50) NOT NULL,
-  `nome_usuario` varchar(50) NOT NULL
+  `nome_usuario` varchar(50) NOT NULL,
+  PRIMARY KEY (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -63,7 +68,7 @@ CREATE TABLE `usuariocomum` (
 INSERT INTO `usuariocomum` (`email_usuario`, `nome_usuario`) VALUES
 ('admin', 'admin'),
 ('carol@email.com', 'CarolMotta'),
-('leandro@email.com.br', 'LeandroFilie');
+('leandro@email.com', 'LeandroFilie');
 
 -- --------------------------------------------------------
 
@@ -71,11 +76,13 @@ INSERT INTO `usuariocomum` (`email_usuario`, `nome_usuario`) VALUES
 -- Estrutura da tabela `usuariopsicologo`
 --
 
-CREATE TABLE `usuariopsicologo` (
+DROP TABLE IF EXISTS `usuariopsicologo`;
+CREATE TABLE IF NOT EXISTS `usuariopsicologo` (
   `email_usuario` varchar(50) NOT NULL,
-  `crp` int(11) NOT NULL,
+  `crp` varchar(11) NOT NULL,
   `cidade` varchar(100) NOT NULL,
-  `situacao` int(1) NOT NULL
+  `situacao` int(1) NOT NULL,
+  PRIMARY KEY (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -83,29 +90,7 @@ CREATE TABLE `usuariopsicologo` (
 --
 
 INSERT INTO `usuariopsicologo` (`email_usuario`, `crp`, `cidade`, `situacao`) VALUES
-('julia@email.com', 123456789, 'Araraquara', 1);
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`email`) USING BTREE;
-
---
--- Índices para tabela `usuariocomum`
---
-ALTER TABLE `usuariocomum`
-  ADD PRIMARY KEY (`email_usuario`);
-
---
--- Índices para tabela `usuariopsicologo`
---
-ALTER TABLE `usuariopsicologo`
-  ADD PRIMARY KEY (`email_usuario`);
+('julia@email.com', '11111111111', 'Araraquara', 1);
 
 --
 -- Restrições para despejos de tabelas

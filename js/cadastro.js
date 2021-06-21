@@ -83,7 +83,7 @@ $(document).ready(function(){
                 mensagemErroDois(dados.identificador);
             }
             else {
-                mensagemErroCadastro();
+                mensagemErroCadastro(dados.identificador);
             }
         });
         
@@ -150,8 +150,14 @@ $(document).ready(function(){
         
     }
 
-    function mensagemErroCadastro(){
-        $("#erro_cadastro").addClass("erro");
-        $("#erro_cadastro").html("Erro no Cadastro");
+    function mensagemErroCadastro(identificador){
+        if(identificador == 1){
+            $("#erro_cadastro").addClass("erro");
+            $("#erro_cadastro").html("Erro no Cadastro");
+        }
+        else{
+            $("#erro_cadastro_psi").addClass("erro");
+            $("#erro_cadastro_psi").html("Erro no Cadastro");
+        }
     }
 });

@@ -80,8 +80,8 @@
         $select = "SELECT crp FROM usuariopsicologo WHERE crp = '$crp'";
         $confereCRP = mysqli_query($conexao,$select);
 
-        $select = "SELECT email FROM usuario WHERE email = '$email'";
-        $confereEmail = mysqli_query($conexao,$select);
+        $select2 = "SELECT email FROM usuario WHERE email = '$email'";
+        $confereEmail = mysqli_query($conexao,$select2);
 
         if((mysqli_num_rows($confereCRP) > 0) || (mysqli_num_rows($confereEmail) > 0)){
             if(mysqli_num_rows($confereCRP) > 0){
@@ -92,7 +92,7 @@
             }
         }
         else{
-            $insert3 = "INSERT INTO usuario(
+            $insert = "INSERT INTO usuario(
                 nome,
                 email,
                 senha,
@@ -101,7 +101,7 @@
                 VALUES('$nome','$email','$senha','3')
             ";
 
-            $insert4 = "INSERT INTO usuariopsicologo(
+            $insert2 = "INSERT INTO usuariopsicologo(
                 crp,
                 cidade,
                 situacao,
@@ -109,7 +109,7 @@
                 )
                 VALUES('$crp', '$cidade', '1', '$email')";
 
-            if(mysqli_query($conexao,$insert3) && mysqli_query($conexao,$insert4)){
+            if(mysqli_query($conexao,$insert) && mysqli_query($conexao,$insert2)){
                 $error = 0;
             }
             else{
@@ -117,7 +117,6 @@
                 session_unset();
             }
         }
-        
     }
     echo $error;
 ?>

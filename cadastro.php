@@ -63,6 +63,7 @@
                     </section>
 
                     <section id="option-2-content">
+                        <div id="erro_cadastro_psi"></div>
                         <div>   
                             <input type="text" name="nome_completo_psi" id="nome_completo_psi" placeholder="Nome Completo" required />
                         </div>
@@ -83,7 +84,7 @@
                         </div>
 
                         <div>
-                            <input type="number" name="crp" id="crp" placeholder="CRP" required />
+                            <input type="text" name="crp" id="crp" placeholder="CRP" maxlength="11" required />
                             <div id="erro_crp"></div>
                         </div>
                         
@@ -179,6 +180,10 @@
                     $('#confirma_senha_psi').attr('type', 'password');
                     $('#mostrar_confirma_senha_psi').attr('src', './assets/eye.svg');
                 }
+            });
+
+            $("#crp").keyup(function() {
+                $("#crp").val(this.value.match(/[0-9]*/));
             });
         })
         
