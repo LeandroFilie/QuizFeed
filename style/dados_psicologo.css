@@ -1,0 +1,374 @@
+header {
+  background: var(--azul);
+}
+
+header nav .menu li:last-child {
+  margin-left: 50px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  text-align: center;
+
+  max-width: 800px;
+  margin: auto;
+
+  padding: 2rem;
+
+  min-height: calc(100vh - 110px);
+}
+
+main .filtro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px auto 50px;
+  flex-wrap: wrap;
+}
+
+main .filtro h3 {
+  font-size: 1.5rem;
+}
+
+main .filtro input {
+  width: 15rem;
+  height: 3rem;
+
+  padding: 0.375rem 0.75rem;
+  margin: 10px;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  background-color: #f8fafc;
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+main .filtro button {
+  padding: 5px 15px;
+  margin: 10px 0;
+
+  border-radius: 10px;
+  border: none;
+
+  background: var(--azul);
+  color: white;
+  font-size: 1.1rem;
+
+  cursor: pointer;
+}
+
+main .data-user-details-adm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  border-bottom: 1px solid var(--azul);
+
+  margin: 10px 0;
+} 
+
+main .data-user-details-adm .data-user-details-items-adm {
+  display: flex;
+  align-items: flex-start;  
+
+  margin: 0 20px;
+
+  min-width: 213px;
+}
+
+main .data-user-details-adm .data-user-details-items-adm p{
+  font-size: 1.3rem;
+  margin: 10px;
+}
+
+main .data-user-details-adm .data-user-details-items-adm button {
+  padding: 5px 10px;
+  margin: 10px 5px;
+
+  border-radius: 10px;
+  border: none;
+
+  background: var(--laranja);
+  color: white;
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+.erro{
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.sucesso{
+  background-color: #d4edda;
+  border: 1px #c3e6cb;
+  color: #155724;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-top: 20px;
+  margin-bottom: -50px;
+}
+
+main .data-user-title {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+  border-bottom: 2px solid var(--azul);
+}
+
+main .data-user-title h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: 3rem;
+  font-weight: bold;
+
+  padding: 0 1.5rem;
+  margin: 20px 0;
+}
+
+main .data-user-title .icon-user {
+  height: 6rem;
+  width: 6rem;
+}
+
+main #data-user {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main .data-user-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 50px;
+  width: 100%;
+}
+
+main .data-user-details .data-user-details-items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border-bottom: 1px solid var(--azul);
+  margin-bottom: 20px;  
+}
+
+main .data-user-details .data-user-details-items h3{
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+main .data-user-details .data-user-details-items p {
+  font-size: 1.2rem;
+}
+
+main .buttons-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+main .data-user-action,
+main .data-user-delete {
+  padding: 15px 25px;
+  margin: 10px;
+
+  border-radius: 10px;
+  border: none;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  cursor: pointer;
+}
+
+main .data-user-action {
+  background: var(--azul);
+}
+
+main .data-user-delete {
+  background: var(--laranja);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.modal-body input {
+  width: 100%;
+  min-width: 3rem;
+  height: 2.5rem;
+
+  padding: 0.3rem 0.5rem;
+  margin: 10px;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.modal-body input::placeholder {
+  font-size: 0.95rem;
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.data-user-action-cancel,
+.data-user-action-save {
+  padding: 10px 10px;
+
+  border-radius: 5px;
+  border: none;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+.data-user-action-cancel {
+  background: #747474;
+}
+
+.data-user-action-save {
+  background: var(--azul);
+}
+
+.modal-text {
+  text-align: justify;
+}
+
+.error {
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
+
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.sucess {
+  background-color: #d3fdd6;
+  border: 1px #16531a;
+  color: #16531a;
+  text-align: center;
+
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.select-estados-cidades {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-estados-cidades select {
+  width: 15rem;
+  height: 3rem;
+
+  margin: 10px;
+  padding: 0.375rem 0.75rem;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  background-color: #f8fafc;
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.select-estados-cidades select option {
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.modal-body .select-estados-cidades select:disabled{
+  background-color: #fafafa;
+}
+
+.modal-body .select-estados-cidades{
+  width: 100%;
+  margin: 0;
+}
+
+.modal-body .select-estados-cidades select {
+  width: 100%;
+}
+
+.modal-body .select-estados-cidades select:first-child {
+  margin-left: 0;
+}
+.modal-body .select-estados-cidades select:last-child {
+  margin-right: 0;
+}
+
+
+@media (max-width: 550px){
+  main .data-user-details-adm{
+    flex-direction: column;
+  }
+  main form, .select-estados-cidades {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 300px) {
+  main {
+    transform: scale(0.9);
+  }
+}

@@ -30,11 +30,11 @@
                             <section id="option-1-content">
                                 <div class="card">
                                     <p>Usuários</p>
-                                    <a href="./lista_usuarios.php"><button>Ver todos</button></a>
+                                    <a href="./dados_usuarios.php"><button>Ver todos</button></a>
                                 </div>
                                 <div class="card">
                                     <p>Psicólogos</p>
-                                    <button>Ver todas</button>
+                                    <a href="./dados_psicologos.php"><button>Ver todos</button></a>
                                 </div>
                             </section>
                             <section id="option-2-content">

@@ -74,6 +74,7 @@
     else if($identificador == 2){ //psicólogo
         $crp = $_POST["crp"];
         $cidade = $_POST["cidade"];
+        $uf = $_POST["uf"];
         $_SESSION["permissao"] = 3;
         $_SESSION["situacao"] = 1;
 
@@ -104,10 +105,11 @@
             $insert2 = "INSERT INTO usuariopsicologo(
                 crp,
                 cidade,
+                uf,
                 situacao,
                 email_usuario
                 )
-                VALUES('$crp', '$cidade', '1', '$email')";
+                VALUES('$crp', '$cidade', '$uf', '1', '$email')";
 
             if(mysqli_query($conexao,$insert) && mysqli_query($conexao,$insert2)){
                 $error = 0;

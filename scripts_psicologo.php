@@ -1,6 +1,6 @@
 <script>
 $(function(){
-    $('.salvar').click(function(){
+    /* $('.salvar').click(function(){
         p = {
             nome:$("#nome_completo_modal").val(),
             nome_usuario:$("#nome_usuario_modal").val(),
@@ -39,7 +39,7 @@ $(function(){
                 define_alterar_remover();
             }
         });
-    });
+    }); */
 
     define_alterar_remover();
 
@@ -49,18 +49,25 @@ $(function(){
             permissao = $('#permissao').val();
             if(permissao == 1){
                 $("#nome_completo_modal").attr("disabled", "disabled");
-                $("#nome_usuario_modal").attr("disabled", "disabled");
+                $("#crp_modal").attr("disabled", "disabled");
                 $("#email_modal").attr("disabled", "disabled");
+                $("#estado_modal").attr("disabled", "disabled");
+                $("#cidade_modal").attr("disabled", "disabled");
             }
-            $.get("seleciona.php?email="+i+"&identificador=1",function(r){
+            $.get("seleciona.php?email="+i+"&identificador=2",function(r){
                 u = r[0];
+                console.log(r); 
                 $("#nome_completo_modal").val(u.nome);
-                $("#nome_usuario_modal").val(u.nome_usuario);
+                $("#crp_modal").val(u.crp);
                 $("#email_modal").val(u.email);
+                var texto_estado = `<option>${u.uf}</option>`;
+                $("#estado_modal").html(texto_estado);
+                var texto_cidade = `<option>${u.cidade}</option>`;
+                $("#cidade_modal").html(texto_cidade);
             });
         });
 
-        $(".remover").click(function(){
+        /* $(".remover").click(function(){
             permissao = $("#permissao").val();
             i = $("#user-delete").val();
             c = "email";
@@ -87,10 +94,10 @@ $(function(){
                 }
                     
             });
-        });
+        }); */
     }
 
-    function atualizarDados(novo_email){
+    /* function atualizarDados(novo_email){
         $.get("seleciona.php?email="+novo_email,function(d){
             t = '';
             $.each(d,function(i,u){
@@ -98,40 +105,17 @@ $(function(){
                 console.log(`Nome ${u.nome_usuario}`);
                 console.log(`Nome ${u.email}`);
                 trocarCampos(u.nome, u.nome_usuario, u.email);
-                
-                /* t += '<div class="data-user-details">';
-                t +=     '<div class="data-user-details-items">';
-                t +=         '<h3>Nome</h3>';
-                t +=         `<p>${u.nome} </p>`;
-                t +=     '</div>';
-
-                t +=     '<div class="data-user-details-items">';
-                t +=         '<h3>Nome de Usuário</h3>';
-                t +=         `<p>${u.nome_usuario} </p>`;
-                t +=          '<div id="erro_nome"></div>';
-                t +=     '</div>';
-
-                t +=     '<div class="data-user-details-items">';
-                t +=         '<h3>Endereço de E-mail</h3>';
-                t +=         `<p>${u.email} </p>`;
-                t +=           '<div id="erro_email"></div>';
-                t +=     '</div>';
-                t += '</div>';
-                t += '<div class="buttons-action">';
-                t +=       `<button class="data-user-action alterar" value="${u.email}" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>`;
-                t +=       `<button class="data-user-delete" id="user-delete" value="${u.email}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
-                t +=   '</div>'; */
             });
         })    
-    }
+    } */
 
-    function trocarCampos(nome, nome_usuario, email){
+    /* function trocarCampos(nome, nome_usuario, email){
         $("#nome-user").html(nome);
         $("#nome-usuario-user").html(nome_usuario);
         $("#email-user").html(email);
-    }
+    } */
 
-    function limparMensagensErro(){        
+    /* function limparMensagensErro(){        
         $("#erro_email").removeClass("erro");
         $("#erro_email").html("");
 
@@ -149,6 +133,6 @@ $(function(){
     function mensagemErroNomeUsuario(){
         $("#erro_nome").addClass("erro");
         $("#erro_nome").html("Nome de Usuário já existe");
-    }
+    } */
 });
 </script>

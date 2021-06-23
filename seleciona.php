@@ -3,18 +3,35 @@
 
     include "conexao.php";
 
-    $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuariocomum ON usuario.email = usuariocomum.email_usuario";
+    if($_GET["identificador"] == 1){
+        $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuariocomum ON usuario.email = usuariocomum.email_usuario";
 
-    if(isset($_GET["email"])){
-        $email = $_GET["email"];
-        $select .= " WHERE usuario.email='$email'";
+        if(isset($_GET["email"])){
+            $email = $_GET["email"];
+            $select .= " WHERE usuario.email='$email'";
+        }
+
+        $resultado = mysqli_query($conexao,$select)
+            or die(mysqli_error($conexao));
+
+        while($linha = mysqli_fetch_assoc($resultado)){
+            $matriz[]=$linha;
+        }
     }
+    else{
+        $select = "SELECT nome, email, crp, cidade, uf FROM usuario INNER JOIN usuariopsicologo ON usuario.email = usuariopsicologo.email_usuario";
 
-    $resultado = mysqli_query($conexao,$select)
-        or die(mysqli_error($conexao));
+        if(isset($_GET["email"])){
+            $email = $_GET["email"];
+            $select .= " WHERE usuario.email='$email'";
+        }
 
-    while($linha = mysqli_fetch_assoc($resultado)){
-        $matriz[]=$linha;
+        $resultado = mysqli_query($conexao,$select)
+            or die(mysqli_error($conexao));
+
+        while($linha = mysqli_fetch_assoc($resultado)){
+            $matriz[]=$linha;
+        }
     }
 
     echo json_encode($matriz);

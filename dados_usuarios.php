@@ -7,7 +7,7 @@
     <?php include './inc/head.inc' ?>    
     <link rel="stylesheet" href="./Bootstrap/bootstrap.min.css" />
     <script src="./Bootstrap/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./style/dados.css">
+    <link rel="stylesheet" href="./style/dados_usuario.css">
     <title>Dados | TesteFeed</title>
 </head>
 <body>

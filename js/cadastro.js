@@ -37,6 +37,7 @@ $(document).ready(function(){
         var cidade = $("#cidade").val();
         var senha = $("#senha_psi").val();
         var confirma_senha = $("#confirma_senha_psi").val();
+        var estado = $('#estado').val();
 
         if((nome_usuario === '') || (crp === '') || (email === '') || (cidade == "") || (senha === '') || (confirma_senha === '')){
             alert("Preencha todos os campos");
@@ -53,7 +54,10 @@ $(document).ready(function(){
             if(confereSenha(senha, confirma_senha)){
                 var senha = $.md5(senha);
                 p.senha = senha;
-                enviarDados(p);
+                $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+estado,function(u){
+                    p.uf = u.sigla;
+                    enviarDados(p);
+                }) 
             }
             else{
                 mensagemErroSenha(2);
@@ -62,7 +66,6 @@ $(document).ready(function(){
     });
 
     function enviarDados(dados){
-    
         $.post("insere_usuario.php",dados,function(r){
 
             console.log(r);
