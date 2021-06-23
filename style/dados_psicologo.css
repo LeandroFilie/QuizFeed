@@ -156,39 +156,33 @@ main .filtro button {
 
 #tabs .tab-content-user #option-1-content,  #tabs .tab-content-user #option-2-content{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+
+  margin-top: 20px;
 }
 
 main .data-user-details-adm {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+
+  border-bottom: 1px solid var(--azul);
 
   margin: 10px 0;
+
+  width: 100%;
 } 
 
 main .data-user-details-adm .data-user-details-items-adm {
-  display: flex;
-  align-items: center;
-  justify-content: center;  
-
-  margin: 0 20px;
+  
 
   min-width: 213px;
 }
 
-main .data-user-details-adm .data-user-details-items-adm:nth-child(even){
-  border-bottom: 1px solid var(--azul);
-  margin-bottom: 20px;
-  width: 100%;
-}
-
 main .data-user-details-adm .data-user-details-items-adm p{
   font-size: 1.3rem;
-  text-align: center;
 }
 
 main .data-user-details-adm .data-user-details-items-adm button {
@@ -210,30 +204,6 @@ main #data-user {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-main .data-user-details{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  margin: 50px;
-  width: 100%;
-}
-
-main .data-user-details .data-user-details-items {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;    
-}
-
-main .data-user-details .data-user-details-items h3{
-  font-size: 1.7rem;
-  margin: 0;
-}
-
-main .data-user-details .data-user-details-items p {
-  font-size: 1.2rem;
 }
 
 main .buttons-action {
@@ -301,8 +271,10 @@ main .data-user-delete {
 }
 
 .data-user-action-cancel,
-.data-user-action-save {
+.data-user-action-save,
+.data-user-adm {
   padding: 10px 10px;
+  margin: 0 5px;
 
   border-radius: 5px;
   border: none;
@@ -318,8 +290,12 @@ main .data-user-delete {
   background: #747474;
 }
 
-.data-user-action-save {
+.data-user-action-save, .data-user-adm.aprovar {
   background: var(--azul);
+}
+
+.data-user-adm.reprovar {
+  background: var(--laranja);
 }
 
 .modal-text {

@@ -25,6 +25,12 @@
                 if($_SESSION["permissao"] != 1){
                     echo '<button class="data-user-action-save salvar">Salvar</button>';
                 }   
+                else{
+                    echo '
+                        <button class="data-user-adm reprovar" id="psicologo-reprovar" value="" data-toggle="modal" data-target="#reprovarPsicologo">Reprovar</button>
+                        <button class="data-user-adm aprovar" value="" id="psicologo-aprovar" data-toggle="modal" data-target="#aprovarPsicologo">Aprovar</button>
+                    ';
+                }
             ?>
         </div>
         </div>

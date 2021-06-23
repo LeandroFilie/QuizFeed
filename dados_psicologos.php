@@ -47,7 +47,7 @@
             </div>
             <div class="tab-content-user">
               <section id="option-1-content">
-                <div class="data-user-details-adm">
+                
         ';
 
                   $selectSituacao1 = 'SELECT nome, email_usuario FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario WHERE usuariopsicologo.situacao = "1"';
@@ -78,13 +78,13 @@
                   $i = 0;     
                   while($linha = mysqli_fetch_assoc($resultadoSituacao1)){
                     echo '
-                          <div class="data-user-details-items-adm">
-                            <p>'.$linha["nome"].' </p>
-                          </div>
-                          <div class="data-user-details-items-adm">
-                            <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>
-                            <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Aprovar</button>
-                            <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Reprovar</button>
+                          <div class="data-user-details-adm">
+                            <div class="data-user-details-items-adm">
+                              <p>'.$linha["nome"].' </p>
+                            </div>
+                            <div class="data-user-details-items-adm">
+                              <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>
+                            </div>
                           </div>
                     ';
                     $i++;
@@ -93,7 +93,7 @@
                     echo '<h2>Não há pedidos pendentes</h2>';
                   }
         echo '
-                </div> 
+                 
               </section>';
 
               $selectSituacao2 = 'SELECT nome, email_usuario FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario WHERE usuariopsicologo.situacao = "2 "';
@@ -122,18 +122,20 @@
 
             echo '
               <section id="option-2-content">
-                <div class="data-user-details-adm">
+                
             ';
                   $j = 0;     
                   while($linha = mysqli_fetch_assoc($resultadoSituacao2)){
                     echo '
-                        <div class="data-user-details-items-adm">
-                          <p>'.$linha["nome"].' </p>
-                        </div>
-                        <div class="data-user-details-items-adm">
-                          <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver mais</button>
-                          <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
-                        </div>
+                        <div class="data-user-details-adm">
+                          <div class="data-user-details-items-adm">
+                            <p>'.$linha["nome"].' </p>
+                          </div>
+                          <div class="data-user-details-items-adm">
+                            <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver mais</button>
+                            <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                          </div>
+                        </div> 
                     ';
                       $j++;
                   }
@@ -142,7 +144,7 @@
                   }
 
         echo '
-                </div> 
+                
               </section>
           </section>
         ';
