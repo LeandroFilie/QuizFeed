@@ -21,7 +21,7 @@
         echo '
         <div class="filtro">
           <h3>Filtrar Psicólogos</h3>
-          <form method="POST" action="lista_usuarios.php">
+          <form method="POST" action="dados_psicologos.php">
             <input type="text" name="nome" id="nome" placeholder="Nome" />
             <input type="text" name="crp" id="crp" placeholder="CRP" />
             <div class="select-estados-cidades">
@@ -30,9 +30,8 @@
                     include './inc/select_estados.inc';
                   echo '
                 </select>
-                <select id="cidade" disabled>
-                    <option value="" label="Cidade"></option>
-                </select>
+                <input type="hidden" name="estado_uf" id="estado_uf" />
+                <input type="text" name="cidade" placeholder="Cidade" />
             </div>
             <button>Pesquisar</button>
             <div id="msg"></div>
@@ -43,13 +42,25 @@
 
         $select = 'SELECT nome, email_usuario FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario';
 
-        /* if(!empty($_POST)){
+        if(!empty($_POST)){
           $select .= " WHERE(1=1)";
-          if($_POST["nome_usuario"] != ""){
-              $nome_usuario = $_POST["nome_usuario"];
-              $select .= " AND nome_usuario like '$nome_usuario'";
+          if($_POST["nome"] != ""){
+            $nome = $_POST["nome"];
+            $select .= " AND usuario.nome like '%$nome%'";
           }
-        } */
+          if($_POST["crp"] != ""){
+              $crp = $_POST["crp"];
+              $select .= " AND crp = '$crp'";
+          }
+          if($_POST["estado"] != 0){
+              $uf = $_POST["estado_uf"];
+              $select .= " AND uf = '$uf'";
+          }
+          if($_POST["cidade"] != ""){
+            $cidade = $_POST["cidade"];
+            $select .= " AND cidade like '%$cidade%'";
+          }
+        }
 
         echo '<span id="msg"></span>';
 
@@ -134,5 +145,18 @@
     echo '<input type="hidden" value="'.$_SESSION["permissao"].'" id="permissao">';
     echo '<input type="hidden" value="'.$_SESSION["email"].'" id="email_oculto">';
   ?>
+
+  <script>
+    $(function(){
+      $('#estado').change(function(){
+        
+          $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val(),function(u){
+            $('#estado_uf').val(u.sigla);
+            console.log(u.sigla);
+          }) 
+      })
+    })
+    
+  </script>
 </body>
 </html>

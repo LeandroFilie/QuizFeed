@@ -24,7 +24,7 @@
         echo '
           <div class="filtro">
             <h3>Filtrar usuários</h3>
-            <form method="POST" action="lista_usuarios.php">
+            <form method="POST" action="dados_usuarios.php">
               <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" />
               <button>Pesquisar Usuário</button>
               <div id="msg"></div>
