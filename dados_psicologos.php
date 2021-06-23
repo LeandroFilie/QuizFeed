@@ -39,56 +39,114 @@
         </div>
       ';
       if($_SESSION["permissao"] == 1){
+        echo '
+          <section id="tabs">
+            <div class="tab-links">
+                <button id="option-1">Aguardando Aprovação</button>
+                <button id="option-2">Cadastrados</button>
+            </div>
+            <div class="tab-content-user">
+              <section id="option-1-content">
+                <div class="data-user-details-adm">
+        ';
 
-        $select = 'SELECT nome, email_usuario FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario';
+                  $selectSituacao1 = 'SELECT nome, email_usuario FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario WHERE usuariopsicologo.situacao = "1"';
+                  
+                  if(!empty($_POST)){
+                    if($_POST["nome"] != ""){
+                      $nome = $_POST["nome"];
+                      $selectSituacao1 .= " AND usuario.nome like '%$nome%'";
+                    }
+                    if($_POST["crp"] != ""){
+                      $crp = $_POST["crp"];
+                      $selectSituacao1 .= " AND crp = '$crp'";
+                    }
+                    if($_POST["estado"] != 0){
+                      $uf = $_POST["estado_uf"];
+                      $selectSituacao1 .= " AND uf = '$uf'";
+                    }
+                    if($_POST["cidade"] != ""){
+                      $cidade = $_POST["cidade"];
+                      $selectSituacao1 .= " AND cidade like '%$cidade%'";
+                    }
+                  }
 
-        if(!empty($_POST)){
-          $select .= " WHERE(1=1)";
-          if($_POST["nome"] != ""){
-            $nome = $_POST["nome"];
-            $select .= " AND usuario.nome like '%$nome%'";
-          }
-          if($_POST["crp"] != ""){
-              $crp = $_POST["crp"];
-              $select .= " AND crp = '$crp'";
-          }
-          if($_POST["estado"] != 0){
-              $uf = $_POST["estado_uf"];
-              $select .= " AND uf = '$uf'";
-          }
-          if($_POST["cidade"] != ""){
-            $cidade = $_POST["cidade"];
-            $select .= " AND cidade like '%$cidade%'";
-          }
-        }
+                  
+                  
+                  $resultadoSituacao1 = mysqli_query($conexao,$selectSituacao1);
 
-        echo '<span id="msg"></span>';
+                  $i = 0;     
+                  while($linha = mysqli_fetch_assoc($resultadoSituacao1)){
+                    echo '
+                          <div class="data-user-details-items-adm">
+                            <p>'.$linha["nome"].' </p>
+                          </div>
+                          <div class="data-user-details-items-adm">
+                            <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>
+                            <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Aprovar</button>
+                            <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Reprovar</button>
+                          </div>
+                    ';
+                    $i++;
+                  }
+                  if($i == 0){
+                    echo '<h2>Não há pedidos pendentes</h2>';
+                  }
+        echo '
+                </div> 
+              </section>';
 
-        $resultado = mysqli_query($conexao,$select);
+              $selectSituacao2 = 'SELECT nome, email_usuario FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario WHERE usuariopsicologo.situacao = "2 "';
+              
+              if(!empty($_POST)){
+                if($_POST["nome"] != ""){
+                  $nome = $_POST["nome"];
+                  $selectSituacao2 .= " AND usuario.nome like '%$nome%'";
+                }
+                if($_POST["crp"] != ""){
+                  $crp = $_POST["crp"];
+                  $selectSituacao2 .= " AND crp = '$crp'";
+                }
+                if($_POST["estado"] != 0){
+                  $uf = $_POST["estado_uf"];
+                  $selectSituacao2 .= " AND uf = '$uf'";
+                }
+                if($_POST["cidade"] != ""){
+                  $cidade = $_POST["cidade"];
+                  $selectSituacao2 .= " AND cidade like '%$cidade%'";
+                }
+              }
+                  
+              $resultadoSituacao2 = mysqli_query($conexao,$selectSituacao2);
 
-        $i = 0;
-                
-        while($linha = mysqli_fetch_assoc($resultado)){
-          
-          echo '
-            <div class="data-user-details-adm">
-              <div class="data-user-details-items-adm">
-                <p>'.$linha["nome"].' </p>
-              </div>
-              <div class="data-user-details-items-adm">
-                <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver mais</button>
-                <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
-              </div>
-            </div>  
+
+            echo '
+              <section id="option-2-content">
+                <div class="data-user-details-adm">
             ';
+                  $j = 0;     
+                  while($linha = mysqli_fetch_assoc($resultadoSituacao2)){
+                    echo '
+                        <div class="data-user-details-items-adm">
+                          <p>'.$linha["nome"].' </p>
+                        </div>
+                        <div class="data-user-details-items-adm">
+                          <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver mais</button>
+                          <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                        </div>
+                    ';
+                      $j++;
+                  }
+                  if($j == 0){
+                    echo '<h2>Não há usuários cadastrados</h2>';
+                  }
 
-            $i++;
-          
-        }
+        echo '
+                </div> 
+              </section>
+          </section>
+        ';
         
-        if($i == 0){
-          echo '<h2>Não há usuários cadastrados</h2>';
-        }
         
       }
       /* else if($_SESSION["permissao"] == 2){
@@ -134,6 +192,15 @@
       }  */
     ?>
   </main>
+
+  <?php
+    function filtro($select){
+      
+        // $select .= " WHERE(1=1)";
+        
+      }
+    
+  ?>
   
   <?php
     include './inc/footer.inc';
@@ -149,12 +216,34 @@
   <script>
     $(function(){
       $('#estado').change(function(){
-        
           $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$(this).val(),function(u){
             $('#estado_uf').val(u.sigla);
             console.log(u.sigla);
           }) 
       })
+
+      initOptions();
+
+      $('#option-1').click(function(){
+          $('#option-2-content').hide();
+          $('#option-1-content').show();
+  
+          $('#option-2').removeClass('active');
+          $('#option-1').toggleClass('active');
+      });
+  
+      $('#option-2').click(function(){
+          $('#option-1-content').hide();
+          $('#option-2-content').show();
+  
+          $('#option-1').removeClass('active');
+          $('#option-2').toggleClass('active');
+      });
+  
+      function initOptions(){
+          $('#option-2-content').hide();
+          $('#option-1').toggleClass('active');
+      }
     })
     
   </script>

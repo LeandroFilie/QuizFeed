@@ -68,28 +68,127 @@ main .filtro button {
   cursor: pointer;
 }
 
+.select-estados-cidades {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.select-estados-cidades select {
+  width: 15rem;
+  height: 3rem;
+
+  margin: 10px;
+  padding: 0.375rem 0.75rem;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  background-color: #f8fafc;
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.select-estados-cidades select option {
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.tab-links button {
+
+  border: none;
+  background: transparent;
+
+  font-size: 1.5rem;
+
+  padding: 16px;
+
+  outline: none;
+
+  position: relative;
+}
+
+
+.tab-links button::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  content: "";
+  height: 2px;
+  width: 0%;
+
+  background-color: var(--laranja);
+
+  transition: .4s;
+}
+
+.tab-links button:hover::after,
+.tab-links button.active::after {
+  width: 100%;
+}
+
+#tabs .tab-content {
+  margin-top: 5rem;
+}
+
+#tabs .tab-content>section,  #tabs .tab-content-user>section{
+  animation: up 1s;
+}
+
+@keyframes up {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+#tabs .tab-content-user #option-1-content,  #tabs .tab-content-user #option-2-content{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 main .data-user-details-adm {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  border-bottom: 1px solid var(--azul);
+  flex-direction: column;
 
   margin: 10px 0;
 } 
 
 main .data-user-details-adm .data-user-details-items-adm {
   display: flex;
-  align-items: flex-start;  
+  align-items: center;
+  justify-content: center;  
 
   margin: 0 20px;
 
   min-width: 213px;
 }
 
+main .data-user-details-adm .data-user-details-items-adm:nth-child(even){
+  border-bottom: 1px solid var(--azul);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
 main .data-user-details-adm .data-user-details-items-adm p{
   font-size: 1.3rem;
-  margin: 10px;
+  text-align: center;
 }
 
 main .data-user-details-adm .data-user-details-items-adm button {
@@ -104,57 +203,6 @@ main .data-user-details-adm .data-user-details-items-adm button {
   font-size: 1rem;
 
   cursor: pointer;
-}
-
-.erro{
-  background-color: #f8d7da;
-  border: 1px #f5c6cb;
-  color: #721c24;
-  text-align: center;
-
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.25rem;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
-.sucesso{
-  background-color: #d4edda;
-  border: 1px #c3e6cb;
-  color: #155724;
-  text-align: center;
-
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.25rem;
-  margin-top: 20px;
-  margin-bottom: -50px;
-}
-
-main .data-user-title {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  width: 100%;
-  border-bottom: 2px solid var(--azul);
-}
-
-main .data-user-title h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  font-size: 3rem;
-  font-weight: bold;
-
-  padding: 0 1.5rem;
-  margin: 20px 0;
-}
-
-main .data-user-title .icon-user {
-  height: 6rem;
-  width: 6rem;
 }
 
 main #data-user {
@@ -176,10 +224,7 @@ main .data-user-details{
 main .data-user-details .data-user-details-items {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-
-  border-bottom: 1px solid var(--azul);
-  margin-bottom: 20px;  
+  align-items: flex-start;    
 }
 
 main .data-user-details .data-user-details-items h3{
@@ -281,6 +326,26 @@ main .data-user-delete {
   text-align: justify;
 }
 
+.modal-body .select-estados-cidades select:disabled{
+  background-color: #fafafa;
+}
+
+.modal-body .select-estados-cidades{
+  width: 100%;
+  margin: 0;
+}
+
+.modal-body .select-estados-cidades select {
+  width: 100%;
+}
+
+.modal-body .select-estados-cidades select:first-child {
+  margin-left: 0;
+}
+.modal-body .select-estados-cidades select:last-child {
+  margin-right: 0;
+}
+
 .error {
   background-color: #f8d7da;
   border: 1px #f5c6cb;
@@ -301,58 +366,31 @@ main .data-user-delete {
   border-radius: 0.25rem;
 }
 
-.select-estados-cidades {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.erro{
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
 
-.select-estados-cidades select {
-  width: 15rem;
-  height: 3rem;
-
-  margin: 10px;
-  padding: 0.375rem 0.75rem;
-  outline: none;
-  border: 1px solid #ced4da;
+  padding: 0.5rem 0.5rem;
   border-radius: 0.25rem;
-
-  background-color: #f8fafc;
-
-  font-size: 1rem;
-  color: #212529;
-  white-space: nowrap;
-  font-weight: 400;
-  line-height: 1.5;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
-.select-estados-cidades select option {
-  font-size: 1rem;
-  color: #212529;
-  white-space: nowrap;
-  font-weight: 400;
-  line-height: 1.5;
+.sucesso{
+  background-color: #d4edda;
+  border: 1px #c3e6cb;
+  color: #155724;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-top: 20px;
+  margin-bottom: -50px;
 }
 
-.modal-body .select-estados-cidades select:disabled{
-  background-color: #fafafa;
-}
 
-.modal-body .select-estados-cidades{
-  width: 100%;
-  margin: 0;
-}
-
-.modal-body .select-estados-cidades select {
-  width: 100%;
-}
-
-.modal-body .select-estados-cidades select:first-child {
-  margin-left: 0;
-}
-.modal-body .select-estados-cidades select:last-child {
-  margin-right: 0;
-}
 
 
 @media (max-width: 550px){
