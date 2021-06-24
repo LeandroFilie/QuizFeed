@@ -22,7 +22,7 @@
         if($_SESSION["permissao"] != 3){
 
 
-            $sql2 = "SELECT nome_usuario FROM usuariocomum INNER JOIN usuario ON usuario.email = usuariocomum.email_usuario WHERE usuario.email = '$email'";
+            $sql2 = "SELECT nome_usuario FROM usuario_comum INNER JOIN usuario ON usuario.email = usuario_comum.email_usuario WHERE usuario.email = '$email'";
             $resultado = mysqli_query($conexao,$sql2);
 
             $linha = mysqli_fetch_assoc($resultado);
@@ -32,12 +32,12 @@
             
         }
         else{
-            $sql3 = "SELECT crp, situacao FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario WHERE usuario.email = '$email'";
+            $sql3 = "SELECT registro, situacao FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario.email = '$email'";
             $resultado = mysqli_query($conexao,$sql3);
 
             $linha = mysqli_fetch_assoc($resultado);
 
-            $_SESSION["crp"] = $linha["crp"];
+            $_SESSION["registro"] = $linha["registro"];
             $_SESSION["situacao"] = $linha["situacao"];
         }
 

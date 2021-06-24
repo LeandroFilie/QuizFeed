@@ -84,8 +84,8 @@
                         </div>
 
                         <div>
-                            <input type="text" name="crp" id="crp" placeholder="CRP" maxlength="11" required />
-                            <div id="erro_crp"></div>
+                            <input type="text" name="registro" id="registro" placeholder="Registro" maxlength="11" required />
+                            <div id="erro_registro"></div>
                         </div>
                         
                         <div id="campo_senha_psi" class="campo_senha">
@@ -182,8 +182,8 @@
                 }
             });
 
-            $("#crp").keyup(function() {
-                $("#crp").val(this.value.match(/[0-9]*/));
+            $("#registro").keyup(function() {
+                $("#registro").val(this.value.match(/[0-9]*/));
             });
         })
         

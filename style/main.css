@@ -6,15 +6,16 @@
 :root {
   --azul: #002539;
   --laranja: #ed7201;
+  --area-main: calc(100vh - 110px);
+}
+
+html {
+  font-size: 14px;
 }
 
 * {
   box-sizing: border-box;
   font-family: "Mont";
-}
-
-html {
-  font-size: 14px;
 }
 
 body {

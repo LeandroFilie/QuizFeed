@@ -7,7 +7,7 @@ $email = $_POST["email"];
 $situacao = $_POST["situacao"];
 
 if($situacao == 3){
-  $update = "UPDATE usuariopsicologo
+  $update = "UPDATE usuario_psicologo
                     SET
                     situacao = '$situacao'
                     WHERE
@@ -21,7 +21,7 @@ if($situacao == 3){
   }
 }
 else if($situacao == 2){
-  $update = "UPDATE usuariopsicologo
+  $update = "UPDATE usuario_psicologo
                     SET
                     situacao = '$situacao'
                     WHERE

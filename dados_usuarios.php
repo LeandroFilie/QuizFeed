@@ -19,7 +19,7 @@
     <?php
       if($_SESSION["permissao"] == 1){
 
-        $select = 'SELECT nome_usuario, email_usuario FROM usuariocomum';
+        $select = 'SELECT nome_usuario, email_usuario FROM usuario_comum';
 
         echo '
           <div class="filtro">
@@ -70,7 +70,7 @@
         
       }
       else if($_SESSION["permissao"] == 2){
-        $selectUsuario = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuariocomum ON usuario.email = usuariocomum.email_usuario WHERE email='".$_SESSION["email"]."'";
+        $selectUsuario = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario WHERE email='".$_SESSION["email"]."'";
 
         $resultado = mysqli_query($conexao,$selectUsuario);
 

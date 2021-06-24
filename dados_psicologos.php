@@ -34,7 +34,7 @@
               <section id="option-1-content">
                 
         ';
-                  $selectSituacao1 = 'SELECT nome, email_usuario, situacao FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario WHERE usuariopsicologo.situacao = "1"';
+                  $selectSituacao1 = 'SELECT nome, email_usuario, situacao FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "1"';
                   
                   $resultadoSituacao1 = mysqli_query($conexao,$selectSituacao1);
 
@@ -59,16 +59,16 @@
                   }
         echo '</section>';
 
-              $selectSituacao2 = 'SELECT nome, email_usuario FROM usuariopsicologo INNER JOIN usuario ON usuario.email = usuariopsicologo.email_usuario WHERE usuariopsicologo.situacao = "2 "';
+              $selectSituacao2 = 'SELECT nome, email_usuario FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2 "';
               
               if(!empty($_POST)){
                 if($_POST["nome"] != ""){
                   $nome = $_POST["nome"];
                   $selectSituacao2 .= " AND usuario.nome like '%$nome%'";
                 }
-                if($_POST["crp"] != ""){
-                  $crp = $_POST["crp"];
-                  $selectSituacao2 .= " AND crp = '$crp'";
+                if($_POST["registro"] != ""){
+                  $registro = $_POST["registro"];
+                  $selectSituacao2 .= " AND registro = '$registro'";
                 }
                 if($_POST["estado"] != 0){
                   $uf = $_POST["estado_uf"];
@@ -117,7 +117,7 @@
             <h3>Filtrar Psicólogos</h3>
             <form method="POST" action="dados_psicologos.php">
               <input type="text" name="nome" id="nome" placeholder="Nome" />
-              <input type="text" name="crp" id="crp" placeholder="CRP" />
+              <input type="text" name="registro" id="registro" placeholder="Registro" />
               <div class="select-estados-cidades">
                   <select id="estado" name="estado">
                       <option value="0" label="Estado"></option>';

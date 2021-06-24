@@ -9,12 +9,6 @@ header {
 }
 
 header nav {
-  margin: 0 auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-
   height: 62px;
   width: 100%;
 
@@ -79,7 +73,7 @@ header nav {
   margin-top: 0;
 }
 
-header .erro_aut {
+.erro_aut {
   background-color: #f8d7da;
   border: 1px #f5c6cb;
   color: #721c24;
@@ -89,13 +83,13 @@ header .erro_aut {
   border-radius: 0.25rem;
 }
 
-header .header-content .card-login .campo_senha{
+.campo_senha{
   display: flex;
   align-items: center;
   position: relative;
 }
 
-header .header-content .card-login .campo_senha img{
+.campo_senha img{
   position: absolute;
   right: 0;
   margin: 10px 20px;
@@ -106,23 +100,23 @@ header .header-content .card-login .campo_senha img{
   z-index: 1;
 }
 
-header nav .menu {
+.menu {
   display: flex;
   align-items: center;
 }
 
-header nav .menu li:nth-child(2) {
+.menu li:nth-child(2) {
   margin-left: 50px;
 }
 
-header nav .menu li a {
+.menu li a {
   display: block;
   color: white;
   font-weight: 600;
   font-size: 1.4rem;
 }
 
-header .header-content {
+.header-content {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -131,7 +125,7 @@ header .header-content {
   padding: 170px;
 }
 
-header .header-content .card-login {
+.card-login {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -145,14 +139,14 @@ header .header-content .card-login {
   position: absolute;
 }
 
-header .header-content .card-login h1 {
+.card-login h1 {
   color: white;
   font-size: 2.5rem;
   font-style: italic;
   font-weight: 600;
 }
 
-header .header-content .card-login input {
+.card-login input {
   width: 17rem;
   height: 3rem;
 
@@ -171,7 +165,7 @@ header .header-content .card-login input {
   line-height: 1.5;
 }
 
-header .header-content .card-login button {
+.card-login button {
   padding: 10px 15px;
   font-size: 1.1rem;
   margin-top: 10px;
@@ -185,12 +179,12 @@ header .header-content .card-login button {
   cursor: pointer;
 }
 
-header .header-content .card-login button:hover {
+.card-login button:hover {
   transform: scale(1.1);
   transition: all 0.2s;
 }
 
-header .header-content .card-login .recovey {
+.card-login .recovey {
   color: white;
   margin-top: 30px;
   font-size: 1rem;
@@ -267,14 +261,14 @@ header .header-content .card-login .recovey {
 /* Responsividade */
 
 @media (min-width: 1500px) {
-  header .header-content .card-login {
+  .card-login {
     transform: scale(1.1);
     margin-right: 100px;
   }
 }
 
 @media (max-width: 800px) {
-  header .header-content {
+  .header-content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -282,18 +276,18 @@ header .header-content .card-login .recovey {
     padding: 150px;
   }
 
-  header .header-content .card-login {
+  .header-content .card-login {
     margin: auto;
   }
 }
 
 @media (max-width: 600px) {
-  header nav .menu-button {
+  nav .menu-button {
     display: block;
     z-index: 101;
   }
 
-  header nav .menu {
+  .menu {
     position: fixed;
     top: 0;
     right: -100%;
@@ -314,18 +308,18 @@ header .header-content .card-login .recovey {
     z-index: 100;
   }
 
-  header nav .menu li:nth-child(2) {
+  .menu li:nth-child(2) {
     margin-top: 50px;
     margin-left: 0;
   }
 
-  header nav .menu.active {
+  .menu.active {
     right: 0;
   }
 }
 
 @media (max-width: 360px) {
-  header .header-content .card-login {
+  .card-login {
     transform: scale(0.9);
   }
 }

@@ -68,17 +68,17 @@ $(function(){
             p = {tabela:t,email:i,coluna:c}
             $.post("remover.php",p,function(r){
                 if(permissao == 1){
-                    $("#msg").removeClass("error");
-                    $("#msg").removeClass("sucess");
+                    $("#msg").removeClass("erro");
+                    $("#msg").removeClass("sucesso");
                     $('.modal').modal('hide'); 
                     if(r=='1'){   
-                        $("#msg").addClass("sucess");             
+                        $("#msg").addClass("sucesso");             
                         $("#msg").html("Usuário removido com sucesso");
                         $("button[value='"+ i +"']").closest(".data-user-details-adm").remove();
 
                     }
                     else{
-                        $("#msg").addClass("error");            
+                        $("#msg").addClass("erro");            
                         $("#msg").html("Não foi possível remover o usuário");
                     }
                 }

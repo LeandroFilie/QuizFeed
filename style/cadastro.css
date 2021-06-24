@@ -12,10 +12,10 @@ main {
 
   max-width: 700px;
   margin: auto;
-  min-height: calc(100vh - 110px);
+  min-height: var(--area-main);
 }
 
-main .register-title {
+.register-title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,14 +25,14 @@ main .register-title {
   font-weight: bold;
 }
 
-main .form {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-main .form .erro{
+.erro{
   background-color: #f8d7da;
   border: 1px #f5c6cb;
   color: #721c24;
@@ -43,7 +43,7 @@ main .form .erro{
   margin: 10px;
 }
 
-main .tab-links button {
+.tab-links button {
 
   border: none;
   background: transparent;
@@ -57,7 +57,7 @@ main .tab-links button {
   position: relative;
 }
 
-main .tab-links button::after {
+.tab-links button::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -76,18 +76,18 @@ main .tab-links button::after {
   width: 100%;
 }
 
-main .form .tab-content-user {
+.tab-content-user {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-main #tabs .tab-content-user {
+.tab-content-user {
   margin-top: 2rem;
 }
 
-main #tabs .tab-content-user>section{
+.tab-content-user>section{
   animation: up .5s;
 }
 
@@ -102,7 +102,7 @@ main #tabs .tab-content-user>section{
   }
 }
 
-main .form  input {
+.form  input {
   width: 30rem;
   height: 3rem;
 
@@ -139,7 +139,7 @@ main .form  input {
   width: 20px;
 }
 
-main .form .register-btn {
+.register-btn {
   background: var(--azul);
 
   padding: 15px 25px;
@@ -155,13 +155,13 @@ main .form .register-btn {
   cursor: pointer;
 }
 
-main .form .select-estados-cidades {
+.select-estados-cidades {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-main .form .select-estados-cidades select {
+.select-estados-cidades select {
   width: 14.3rem;
   height: 3rem;
 
@@ -180,7 +180,7 @@ main .form .select-estados-cidades select {
   line-height: 1.5;
 }
 
-main .form .select-estados-cidades select option {
+.select-estados-cidades select option {
   font-size: 1rem;
   color: #212529;
   white-space: nowrap;
@@ -190,11 +190,11 @@ main .form .select-estados-cidades select option {
 
 /* Responsividade */
 @media (max-width: 480px) {
-  main .form input,  main .form .select-estados-cidades select{
+  .form input,  .select-estados-cidades select{
     width: 17rem;
   }
 
-  main .form .select-estados-cidades {
+  .select-estados-cidades {
     display: flex;
     flex-direction: column;
     justify-content: center;

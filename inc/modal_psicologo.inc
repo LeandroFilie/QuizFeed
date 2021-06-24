@@ -8,7 +8,7 @@
         <div class="modal-body modal-form">
             <input type="text" name="nome_completo_modal" id="nome_completo_modal" placeholder="Nome Completo" />
             <input type="text" name="email_modal" id="email_modal" placeholder="E-mail" />
-            <input type="text" name="crp_modal" id="crp_modal" placeholder="CRP" />
+            <input type="text" name="registro_modal" id="registro_modal" placeholder="Registro" />
             <div class="select-estados-cidades">
                 <select id="estado_modal" name="estado">
                     <option value="0" label="Estado"></option>
@@ -42,8 +42,8 @@
 
 <script>
     $(function(){
-        $("#crp_modal").keyup(function() {
-            $("#crp_modal").val(this.value.match(/[0-9]*/));
+        $("#registro_modal").keyup(function() {
+            $("#registro_modal").val(this.value.match(/[0-9]*/));
         });
     })
   

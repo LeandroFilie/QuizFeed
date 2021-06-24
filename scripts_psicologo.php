@@ -77,7 +77,7 @@ $(function(){
 
             if(permissao == 1){
                 $("#nome_completo_modal").attr("disabled", "disabled");
-                $("#crp_modal").attr("disabled", "disabled");
+                $("#registro_modal").attr("disabled", "disabled");
                 $("#email_modal").attr("disabled", "disabled");
                 $("#estado_modal").attr("disabled", "disabled");
                 $("#cidade_modal").attr("disabled", "disabled");
@@ -86,7 +86,7 @@ $(function(){
             $.get("seleciona.php?email="+i+"&identificador=2",function(r){
                 u = r[0];
                 $("#nome_completo_modal").val(u.nome);
-                $("#crp_modal").val(u.crp);
+                $("#registro_modal").val(u.registro);
                 $("#email_modal").val(u.email);
 
                 var texto_estado = `<option>${u.uf}</option>`;
@@ -154,40 +154,5 @@ $(function(){
             $('#option-2-content').html(t2);
         });
     }
-
-    /* function atualizarDados(novo_email){
-        $.get("seleciona.php?email="+novo_email,function(d){
-            t = '';
-            $.each(d,function(i,u){
-                trocarCampos(u.nome, u.nome_usuario, u.email);
-            });
-        })    
-    } */
-
-    /* function trocarCampos(nome, nome_usuario, email){
-        $("#nome-user").html(nome);
-        $("#nome-usuario-user").html(nome_usuario);
-        $("#email-user").html(email);
-    } */
-
-    /* function limparMensagensErro(){        
-        $("#erro_email").removeClass("erro");
-        $("#erro_email").html("");
-
-        $("#erro_nome").removeClass("erro");
-        $("#erro_nome").html("");
-
-        $("#msg").html("");
-    }
-
-    function mensagemErroEmail(){
-        $("#erro_email").addClass("erro");
-        $("#erro_email").html("E-mail já cadastrado");
-    }
-
-    function mensagemErroNomeUsuario(){
-        $("#erro_nome").addClass("erro");
-        $("#erro_nome").html("Nome de Usuário já existe");
-    } */
 });
 </script>

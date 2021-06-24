@@ -4,7 +4,7 @@
     include "conexao.php";
 
     if($_GET["identificador"] == 1){
-        $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuariocomum ON usuario.email = usuariocomum.email_usuario";
+        $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario";
 
         if(isset($_GET["email"])){
             $email = $_GET["email"];
@@ -19,7 +19,7 @@
         }
     }
     else{
-        $select = "SELECT nome, email, crp, cidade, uf, situacao FROM usuario INNER JOIN usuariopsicologo ON usuario.email = usuariopsicologo.email_usuario";
+        $select = "SELECT nome, email, registro, cidade, uf, situacao FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario";
 
         if(isset($_GET["situacao"])){
             $situacao = $_GET["situacao"];

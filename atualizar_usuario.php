@@ -12,7 +12,7 @@ $email = $_POST["email"];
 
 $error = 0;
 
-$select = "SELECT nome_usuario FROM usuariocomum WHERE nome_usuario <> '$nome_usuario_atual' AND nome_usuario = '$nome_usuario'";
+$select = "SELECT nome_usuario FROM usuario_comum WHERE nome_usuario <> '$nome_usuario_atual' AND nome_usuario = '$nome_usuario'";
 $confereNomeusuario = mysqli_query($conexao,$select);
 
 $select = "SELECT email FROM usuario WHERE email <> '$email_atual' AND email = '$email'";
@@ -33,7 +33,7 @@ else{
                             WHERE
                             email = '$email_atual'";
     
-    $update2 = "UPDATE usuariocomum INNER JOIN usuario ON usuariocomum.email_usuario = usuario.email
+    $update2 = "UPDATE usuario_comum INNER JOIN usuario ON usuario_comum.email_usuario = usuario.email
                             SET
                             nome_usuario = '$nome_usuario'
                             WHERE

@@ -32,20 +32,20 @@ $(document).ready(function(){
 
     $("#cadastro_usuario_psi").click(function(){
         var nome_completo = $("#nome_completo_psi").val();
-        var crp = $("#crp").val();
+        var registro = $("#registro").val();
         var email = $("#email_psi").val();
         var cidade = $("#cidade").val();
         var senha = $("#senha_psi").val();
         var confirma_senha = $("#confirma_senha_psi").val();
         var estado = $('#estado').val();
 
-        if((nome_usuario === '') || (crp === '') || (email === '') || (cidade == "") || (senha === '') || (confirma_senha === '')){
+        if((nome_usuario === '') || (registro === '') || (email === '') || (cidade == "") || (senha === '') || (confirma_senha === '')){
             alert("Preencha todos os campos");
         }
         else{
             var p = {
                 "nome_completo":nome_completo,
-                "crp":crp,
+                "registro":registro,
                 "email":email,
                 "cidade":cidade,
                 "identificador":2
@@ -67,6 +67,8 @@ $(document).ready(function(){
 
     function enviarDados(dados){
         $.post("insere_usuario.php",dados,function(r){
+
+            console.log(dados);
 
             console.log(r);
 
@@ -112,8 +114,8 @@ $(document).ready(function(){
         $("#erro_email_psi").removeClass("erro");
         $("#erro_email_psi").html("");
 
-        $("#erro_crp").removeClass("erro");
-        $("#erro_crp").html("");
+        $("#erro_registro").removeClass("erro");
+        $("#erro_registro").html("");
 
         $("#erro_nome").removeClass("erro");
         $("#erro_nome").html("");
@@ -147,8 +149,8 @@ $(document).ready(function(){
             $("#erro_nome").html("Nome de Usuário já existe");
         }
         else{
-            $("#erro_crp").addClass("erro");
-            $("#erro_crp").html("CRP já cadastrado");
+            $("#erro_registro").addClass("erro");
+            $("#erro_registro").html("Número de registro já cadastrado");
         }
         
     }

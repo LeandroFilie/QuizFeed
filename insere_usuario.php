@@ -22,8 +22,8 @@
     //Psicólogo
         //erro = 0 ==> sucesso
         //erro = 1 ==> email já cadastrado
-        //erro = 2 ==> crp já cadastrado
-        //erro = 3 ==> email e crp já cadastrados
+        //erro = 2 ==> registro já cadastrado
+        //erro = 3 ==> email e registro já cadastrados
         //erro = 4 ==> erro no cadastro
 
 
@@ -32,7 +32,7 @@
         $_SESSION["nome_usuario"] = $nome_usuario;
         $_SESSION["permissao"] = 2;
 
-        $select = "SELECT nome_usuario FROM usuariocomum WHERE nome_usuario = '$nome_usuario'";
+        $select = "SELECT nome_usuario FROM usuario_comum WHERE nome_usuario = '$nome_usuario'";
         $confereNomeusuario = mysqli_query($conexao,$select);
 
         $select = "SELECT email FROM usuario WHERE email = '$email'";
@@ -56,7 +56,7 @@
                 VALUES('$nome','$email','$senha','2')
             ";
 
-            $insert2 = "INSERT INTO usuariocomum(
+            $insert2 = "INSERT INTO usuario_comum(
                 nome_usuario,
                 email_usuario
                 )
@@ -72,20 +72,20 @@
         }
     }
     else if($identificador == 2){ //psicólogo
-        $crp = $_POST["crp"];
+        $registro = $_POST["registro"];
         $cidade = $_POST["cidade"];
         $uf = $_POST["uf"];
         $_SESSION["permissao"] = 3;
         $_SESSION["situacao"] = 1;
 
-        $select = "SELECT crp FROM usuariopsicologo WHERE crp = '$crp'";
-        $confereCRP = mysqli_query($conexao,$select);
+        $select = "SELECT registro FROM usuario_psicologo WHERE registro = '$registro'";
+        $confereregistro = mysqli_query($conexao,$select);
 
         $select2 = "SELECT email FROM usuario WHERE email = '$email'";
         $confereEmail = mysqli_query($conexao,$select2);
 
-        if((mysqli_num_rows($confereCRP) > 0) || (mysqli_num_rows($confereEmail) > 0)){
-            if(mysqli_num_rows($confereCRP) > 0){
+        if((mysqli_num_rows($confereregistro) > 0) || (mysqli_num_rows($confereEmail) > 0)){
+            if(mysqli_num_rows($confereregistro) > 0){
                 $error += 2; 
             }
             if(mysqli_num_rows($confereEmail) > 0){
@@ -102,14 +102,14 @@
                 VALUES('$nome','$email','$senha','3')
             ";
 
-            $insert2 = "INSERT INTO usuariopsicologo(
-                crp,
+            $insert2 = "INSERT INTO usuario_psicologo(
+                registro,
                 cidade,
                 uf,
                 situacao,
                 email_usuario
                 )
-                VALUES('$crp', '$cidade', '$uf', '1', '$email')";
+                VALUES('$registro', '$cidade', '$uf', '1', '$email')";
 
             if(mysqli_query($conexao,$insert) && mysqli_query($conexao,$insert2)){
                 $error = 0;
