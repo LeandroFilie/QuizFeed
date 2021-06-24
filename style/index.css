@@ -106,6 +106,7 @@ html {
 .menu {
   display: flex;
   align-items: center;
+  padding-left: 0;
 }
 
 .menu li:nth-child(2) {

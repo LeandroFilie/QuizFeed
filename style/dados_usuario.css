@@ -2,10 +2,6 @@ header {
   background: var(--azul);
 }
 
-header nav .menu li:last-child {
-  margin-left: 50px;
-}
-
 main {
   display: flex;
   flex-direction: column;
