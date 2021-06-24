@@ -19,7 +19,7 @@ main {
 
   padding: 2rem;
 
-  min-height: calc(100vh - 110px);
+  min-height: var(--area-main);
 }
 
 main h1 {

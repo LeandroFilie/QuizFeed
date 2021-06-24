@@ -6,18 +6,20 @@
     <title>Home | TesteFeed</title>
 </head>
 <body>
-    <header>
+    <header class="header-index">    
         <nav class="nav-index">
-            <div><a href="#"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
+            <a href="home.php"><img src="./assets/logo.svg" alt="logo" class="logo"></a>
             <button id="js-open-menu" class="menu-button">
                 <i class="menu-icon"></i>
             </button>
             <ul class="menu">
+            
                 <li><a href="cadastro.php">Cadastre-se</a></li>
-                <li><a href="#about" class="go-about">Sobre</a></li>
+            
+            
+                <li><a href="#about">Sobre</a></li>
             </ul>
-        </nav>
-        
+        </nav>        
         <div class="header-content">
             <div class="card-login">
                 <h1>Login</h1>   

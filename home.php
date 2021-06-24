@@ -91,9 +91,7 @@
             }
         ?>
     </main>
-    <footer>
-        <span> Site desenvolvido por: Carol, Julia Costa e Leandro</span>
-    </footer>
+    <?php include './inc/footer.inc';  ?>
 
     <script>
         $(function(){

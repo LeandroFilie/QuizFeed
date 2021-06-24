@@ -1,6 +1,6 @@
 <?php
     echo '
-        <header>
+        <header class="header">
             <nav>
                 <a href="home.php"><img src="./assets/logo.svg" alt="logo" class="logo"></a>
                 <button id="js-open-menu" class="menu-button">

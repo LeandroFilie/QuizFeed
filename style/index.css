@@ -2,13 +2,16 @@ html {
   scroll-behavior: smooth;
 }
 
-header {
+.header-index {
   background: no-repeat center/cover url("../assets/header.svg");
   height: 100vh;
   width: 100%;
 }
 
-header nav {
+.header-index nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   height: 62px;
   width: 100%;
 

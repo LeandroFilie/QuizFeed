@@ -8,7 +8,7 @@
     <title>Cadastro | TesteFeed</title>
 </head>
 <body>
-    <header>
+    <header class="header">
         <nav>
             <div><a href="index.php"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
             <button id="js-open-menu" class="menu-button">

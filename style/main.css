@@ -11,7 +11,7 @@
 :root {
   --azul: #002539;
   --laranja: #ed7201;
-  --area-main: calc(100vh - 149px);
+  --area-main: calc(100vh - 143px);
 }
 
 html {
@@ -29,7 +29,7 @@ body {
   background: #f3f3f3;
 }
 
-header {
+.header {
   width: 100%;
   top: 0;
   z-index: 100;
@@ -40,7 +40,7 @@ header {
   justify-content: space-around;
 }
 
-header nav {
+.header nav {
   width: 100%;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@ header nav {
   
 }
 
-header nav .menu {
+.header nav .menu {
   display: flex;
   align-items: center;
   gap: 4rem;
@@ -58,7 +58,7 @@ header nav .menu {
   padding-left: 0;
 }
 
-header nav .menu li a {
+.header nav .menu li a {
   display: block;
   color: white;
   font-weight: 600;
@@ -95,16 +95,19 @@ footer {
 
   
 
-  border-top: 2px var(--azul) solid;
+  border-top: 1px #00253988 solid;
 
   text-align: center;
-  font-size: 1.1rem;
+  
 }
 
 footer div {
   margin: 5px 0;
-  color: var(--azul);
-  font-family: "Mont-SemiBold";
+
+  font-size: 1rem;
+  color: #002539;
+
+
 }
 
 @media (max-width: 1080px) {
