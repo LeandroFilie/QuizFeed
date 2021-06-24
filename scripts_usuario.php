@@ -94,33 +94,7 @@ $(function(){
         $.get("seleciona.php?email="+novo_email,function(d){
             t = '';
             $.each(d,function(i,u){
-                console.log(`Nome ${u.nome}`);
-                console.log(`Nome ${u.nome_usuario}`);
-                console.log(`Nome ${u.email}`);
                 trocarCampos(u.nome, u.nome_usuario, u.email);
-                
-                /* t += '<div class="data-user-details">';
-                t +=     '<div class="data-user-details-items">';
-                t +=         '<h3>Nome</h3>';
-                t +=         `<p>${u.nome} </p>`;
-                t +=     '</div>';
-
-                t +=     '<div class="data-user-details-items">';
-                t +=         '<h3>Nome de Usuário</h3>';
-                t +=         `<p>${u.nome_usuario} </p>`;
-                t +=          '<div id="erro_nome"></div>';
-                t +=     '</div>';
-
-                t +=     '<div class="data-user-details-items">';
-                t +=         '<h3>Endereço de E-mail</h3>';
-                t +=         `<p>${u.email} </p>`;
-                t +=           '<div id="erro_email"></div>';
-                t +=     '</div>';
-                t += '</div>';
-                t += '<div class="buttons-action">';
-                t +=       `<button class="data-user-action alterar" value="${u.email}" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>`;
-                t +=       `<button class="data-user-delete" id="user-delete" value="${u.email}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
-                t +=   '</div>'; */
             });
         })    
     }

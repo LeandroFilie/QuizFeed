@@ -19,7 +19,12 @@
         }
     }
     else{
-        $select = "SELECT nome, email, crp, cidade, uf FROM usuario INNER JOIN usuariopsicologo ON usuario.email = usuariopsicologo.email_usuario";
+        $select = "SELECT nome, email, crp, cidade, uf, situacao FROM usuario INNER JOIN usuariopsicologo ON usuario.email = usuariopsicologo.email_usuario";
+
+        if(isset($_GET["situacao"])){
+            $situacao = $_GET["situacao"];
+            $select .= " WHERE usuariopsicologo.situacao='$situacao'";
+        }
 
         if(isset($_GET["email"])){
             $email = $_GET["email"];

@@ -22,6 +22,16 @@ main {
   min-height: calc(100vh - 110px);
 }
 
+main h1 {
+  margin: 50px 0;
+
+  font-size: 3rem;
+  font-weight: bold;
+
+  width: 100%;
+  border-bottom: 2px solid var(--azul);
+}
+
 main .filtro {
   display: flex;
   flex-direction: column;
@@ -350,8 +360,6 @@ main .data-user-delete {
 
   padding: 0.5rem 0.5rem;
   border-radius: 0.25rem;
-  margin-top: 5px;
-  margin-bottom: 10px;
 }
 
 .sucesso{
@@ -362,8 +370,6 @@ main .data-user-delete {
 
   padding: 0.5rem 0.5rem;
   border-radius: 0.25rem;
-  margin-top: 20px;
-  margin-bottom: -50px;
 }
 
 
