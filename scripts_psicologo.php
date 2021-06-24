@@ -3,27 +3,30 @@ $(function(){
     define_alterar_remover();
 
     $(".reprovar").click(function(){
+        
+        $('#alterarDadosPsicologo').hide();
         var email = $(this).val();
 
         r = {
             "email":email,
             "situacao":3
         };
-
         $.post("atualizar_psicologo.php",r,function(r){
             $("#msg").removeClass("erro");
             $("#msg").removeClass("sucesso");
+
             if(r==0){
-                atualizarListaSituacao1();
-                atualizarListaSituacao2();
-                $("#msg").addClass("sucesso");
-                $('#msg').html('Psicólogo Reprovado com Sucesso.');
-
-                $("button[value='"+ email +"']").closest(".data-user-details-adm").remove();
-
-                
-
-                $('.close').click();
+                Swal.fire({
+                    title: 'Pronto',
+                    text: "Psicólogo reprovado com sucesso",
+                    icon: 'success',
+                    confirmButtonColor: '#ed7201',
+                    backdrop: false,
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+                })
             }
             else{
                 $("#msg").addClass("erro");
@@ -33,8 +36,9 @@ $(function(){
     })
 
     $(".aprovar").click(function(){
+        $('#alterarDadosPsicologo').hide();
+        
         var email = $(this).val();
-        console.log('entrou aprovar');
         r = {
             "email":email,
             "situacao":2
@@ -44,34 +48,33 @@ $(function(){
             $("#msg").removeClass("erro");
             $("#msg").removeClass("sucesso");
             if(r==0){
-                atualizarListaSituacao1();
-                atualizarListaSituacao2();
-                $("#msg").addClass("sucesso");
-                $('#msg').html('Psicólogo Aprovado com Sucesso.');
-
-                $("button[value='"+ email +"']").closest(".data-user-details-adm").remove();
-
-                $('#option-1-content').hide();
-                $('#option-1').removeClass('active');
-
-                $('#option-2-content').show();
-                $('#option-2').toggleClass('active');
-
-                $('.close').click();
+                Swal.fire({
+                    title: 'Pronto',
+                    text: "Psicólogo aprovado com sucesso",
+                    icon: 'success',
+                    confirmButtonColor: '#002539',
+                    backdrop: false,
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+                }) 
                 
             }
             else{
                 $("#msg").addClass("erro");
                 $('#msg').html('Falha ao aprovar pscicólogo.');
             }
-        })
+        }) 
     })
+    
+
+    
 
     function define_alterar_remover(){ 
 
         $(".alterar").click(function(){
 
-            console.log('alterar entrou');
             i = $(this).val();
             permissao = $('#permissao').val();
 
@@ -94,9 +97,19 @@ $(function(){
 
                 var texto_cidade = `<option>${u.cidade}</option>`;
                 $("#cidade_modal").html(texto_cidade);
-
+                
                 $('#psicologo-aprovar').val(u.email);
                 $('#psicologo-reprovar').val(u.email);
+
+                if(permissao == 1){
+                    t='';
+                    if(u.situacao == 2){
+                        $('#buttonsSituacao1').hide();
+                    }
+                    else{
+                        $('#buttonsSituacao1').show();
+                    }
+                }
             });
         });
 
@@ -105,53 +118,40 @@ $(function(){
         }); */
     }
 
-    function atualizarListaSituacao1(){
-        $.get("seleciona.php?identificador=2&situacao=1",function(d){
-            var i = 0;
-            t = '';
-            $.each(d,function(i,u){
-                console.log(`Nome ${u.nome}`);
-                console.log(`Nome ${u.email}`);
-                t += '<div class="data-user-details-adm">';
-                t +=    '<div class="data-user-details-items-adm">';
-                t +=        `<p>${u.nome} </p>`;
-                t +=    '</div>';
-                t +=    '<div class="data-user-details-items-adm">';
-                t +=        `<button class="data-user-adm alterar" value="${u.email}" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>`;
-                t +=    '</div>';
-                t +=   '</div>';
-                i++;
-            })
-            if(i>0){
-                $('#emptySituacao1').html('Não há pedidos pendentes');
-            }
+    function atualizarLista(situacao){
+        $.get("seleciona.php?identificador=2&situacao="+situacao,function(d){
             
-            $('#option-1-content').html(t);
-        });
-    }
+            if(d != 0){
+                t = '';
+                $.each(d,function(i,u){
+                    t += '<div class="data-user-details-adm">';
+                    t +=    '<div class="data-user-details-items-adm">';
+                    t +=        `<p>${u.nome} </p>`;
+                    t +=    '</div>';
+                    t +=    '<div class="data-user-details-items-adm">';
+                    t +=        `<button class="data-user-adm alterar" value="${u.email}" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>`;
+                    if(situacao == 1){
+                        t+=     `<button class="data-user-delete-adm" id="user-delete" value="${u.email}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
+                    }
+                    t +=    '</div>';
+                    t +=   '</div>';
+                })
 
-    function atualizarListaSituacao2(){
-        $.get("seleciona.php?identificador=2&situacao=2",function(d){
-            var j = 0;
-            t2 = '';
-            $.each(d,function(i,u){
-                console.log(`Nome ${u.nome}`);
-                console.log(`Nome ${u.email}`);
-                t2 += '<div class="data-user-details-adm">';
-                t2 +=    '<div class="data-user-details-items-adm">';
-                t2 +=        `<p>${u.nome} </p>`;
-                t2 +=    '</div>';
-                t2 +=    '<div class="data-user-details-items-adm">';
-                t2 +=        `<button class="data-user-adm alterar" value="${u.email}" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>`;
-                t2+= `<button class="data-user-delete-adm" id="user-delete" value="${u.email}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
-                t2 +=    '</div>';
-                t2 +=   '</div>';
-            })
-
-            if(j>0){
-                $('#emptySituacao2').html('Não há psicólogos cadastrados');
+                if(situacao == 1){
+                    $('#option-1-content').html(t);
+                }
+                else{
+                    $('#option-2-content').html(t);
+                }
             }
-            $('#option-2-content').html(t2);
+            else{
+                if(situacao == 1){
+                    $('#emptySituacao1').html('Não há pedidos de aprovação');
+                }
+                else{
+                    $('#emptySituacao2').html('Não há nenhum pscicólogo cadastrado');
+                }
+            }
         });
     }
 });

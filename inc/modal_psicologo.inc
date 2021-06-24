@@ -26,13 +26,10 @@
                     echo '<button class="data-user-action-save salvar">Salvar</button>';
                 }   
                 else{
-                    if($_SESSION["situacao"] == 1){
-                        echo '
-                            <button class="data-user-adm reprovar" id="psicologo-reprovar" value="" data-toggle="modal">Reprovar</button>
-                            <button class="data-user-adm aprovar" value="" id="psicologo-aprovar" data-toggle="modal">Aprovar</button>
-                        ';
-                        $_SESSION["situacao"] = 2;
-                    }
+                    echo '<div id="buttonsSituacao1">
+                        <button class="data-user-adm reprovar" id="psicologo-reprovar" value="" data-toggle="modal">Reprovar</button>
+                        <button class="data-user-adm aprovar" value="" id="psicologo-aprovar" data-toggle="modal">Aprovar</button>
+                    </div>';
                 }
             ?>
         </div>
@@ -45,6 +42,10 @@
         $("#registro_modal").keyup(function() {
             $("#registro_modal").val(this.value.match(/[0-9]*/));
         });
+
+        
+            
+        
     })
   
 </script>

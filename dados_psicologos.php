@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="./style/dados_psicologo.css">
     <script src="./js/select_estados.js"></script>
     <title>Dados | TesteFeed</title>
+
+    
+    
 </head>
 <body>
   <?php
@@ -43,9 +46,7 @@
                     echo '
                           <div class="data-user-details-adm">
                             <div class="data-user-details-items-adm">
-                              <p>'.$linha["nome"].' </p>';
-                              $_SESSION["situacao"] = $linha["situacao"];
-                            echo '
+                              <p>'.$linha["nome"].' </p>
                             </div>
                             <div class="data-user-details-items-adm">
                               <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>
@@ -146,6 +147,8 @@
 
     include 'scripts_psicologo.php'; 
   ?>
+
+  <script src="./js/sweetalert2.all.min.js"></script>
 
   <script>
     $(function(){

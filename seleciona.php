@@ -14,16 +14,21 @@
         $resultado = mysqli_query($conexao,$select)
             or die(mysqli_error($conexao));
 
+        $i = 0;
         while($linha = mysqli_fetch_assoc($resultado)){
             $matriz[]=$linha;
+            $i++;
+        }
+        if($i == 0){
+            $matriz = 0;
         }
     }
-    else{
+    else if($_GET["identificador"] == 2){
         $select = "SELECT nome, email, registro, cidade, uf, situacao FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario";
 
         if(isset($_GET["situacao"])){
             $situacao = $_GET["situacao"];
-            $select .= " WHERE usuariopsicologo.situacao='$situacao'";
+            $select .= " WHERE usuario_psicologo.situacao='$situacao'";
         }
 
         if(isset($_GET["email"])){
@@ -34,8 +39,13 @@
         $resultado = mysqli_query($conexao,$select)
             or die(mysqli_error($conexao));
 
+        $j = 0;
         while($linha = mysqli_fetch_assoc($resultado)){
             $matriz[]=$linha;
+            $j++;
+        }
+        if($j == 0){
+            $matriz = 0;
         }
     }
 
