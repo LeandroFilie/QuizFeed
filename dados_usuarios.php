@@ -55,7 +55,7 @@
                 </div>
                 <div class="data-user-details-items-adm">
                   <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDados">Ver mais</button>
-                  <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                  <button class="data-user-delete-adm delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
                 </div>
               </div>  
               ';
@@ -104,7 +104,7 @@
                   </div>  
                   <div class="buttons-action">
                       <button class="data-user-action alterar" value="'.$linha["email"].'" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
-                      <button class="data-user-delete" id="user-delete" value="'.$linha["email"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                      <button class="data-user-delete delete" value="'.$linha["email"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
                   </div>
                 ';
               }

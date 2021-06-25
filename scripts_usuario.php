@@ -62,7 +62,7 @@ $(function(){
 
         $(".remover").click(function(){
             permissao = $("#permissao").val();
-            i = $("#user-delete").val();
+            i = $(".delete").val();
             c = "email";
             t = "usuario";
             p = {tabela:t,email:i,coluna:c}

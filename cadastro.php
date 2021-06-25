@@ -38,7 +38,7 @@
                         </div>
 
                         <div>
-                            <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" required />
+                            <input type="text" name="nome_usuario" id="nome_usuario" placeholder="Nome de Usuário" maxlength="20" required />
                             <div id="erro_nome"></div>
                         </div>
 

@@ -61,7 +61,7 @@ main #tabs .tab-content {
 }
 
 main #tabs .tab-content>section,  main #tabs .tab-content-adm>section{
-  animation: up 1s;
+  animation: up 0.5s;
 }
 
 @keyframes up {

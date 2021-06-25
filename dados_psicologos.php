@@ -24,8 +24,12 @@
         
       if($_SESSION["permissao"] == 1){
         echo '
-          
-          <h1>Psicólogos</h1>
+          <div class="title-dados-psicologos">
+            <h1>Psicólogos</h1>
+            <div>
+              <p><a href="https://cadastro.cfp.org.br/" target="_blank">Clique aqui</a> para consultar o registro do profissional</p>
+            </div>
+          </div>
           <div id="msg"></div>
           <section id="tabs">
             <div class="tab-links">
@@ -95,7 +99,7 @@
                           </div>
                           <div class="data-user-details-items-adm">
                             <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver mais</button>
-                            <button class="data-user-delete-adm" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                            <button class="data-user-delete-adm delete" id="user-delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
                           </div>
                         </div> 
                     ';

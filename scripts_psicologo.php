@@ -113,46 +113,29 @@ $(function(){
             });
         });
 
-        /* $(".remover").click(function(){
-            
-        }); */
-    }
-
-    function atualizarLista(situacao){
-        $.get("seleciona.php?identificador=2&situacao="+situacao,function(d){
-            
-            if(d != 0){
-                t = '';
-                $.each(d,function(i,u){
-                    t += '<div class="data-user-details-adm">';
-                    t +=    '<div class="data-user-details-items-adm">';
-                    t +=        `<p>${u.nome} </p>`;
-                    t +=    '</div>';
-                    t +=    '<div class="data-user-details-items-adm">';
-                    t +=        `<button class="data-user-adm alterar" value="${u.email}" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>`;
-                    if(situacao == 1){
-                        t+=     `<button class="data-user-delete-adm" id="user-delete" value="${u.email}" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>`;
+        $(".remover").click(function(){
+            permissao = $("#permissao").val();
+            i = $(".delete").val();
+            c = "email";
+            t = "usuario";
+            p = {tabela:t,email:i,coluna:c}
+            $.post("remover.php",p,function(r){
+                if(permissao == 1){
+                    $("#msg").removeClass("erro");
+                    $("#msg").removeClass("sucesso");
+                    $('.modal').modal('hide'); 
+                    if(r=='1'){   
+                        $("#msg").addClass("sucesso");             
+                        $("#msg").html("Usuário removido com sucesso");
+                        $("button[value='"+ i +"']").closest(".data-user-details-adm").remove();
                     }
-                    t +=    '</div>';
-                    t +=   '</div>';
-                })
-
-                if(situacao == 1){
-                    $('#option-1-content').html(t);
-                }
-                else{
-                    $('#option-2-content').html(t);
-                }
-            }
-            else{
-                if(situacao == 1){
-                    $('#emptySituacao1').html('Não há pedidos de aprovação');
-                }
-                else{
-                    $('#emptySituacao2').html('Não há nenhum pscicólogo cadastrado');
-                }
-            }
-        });
+                    else{
+                        $("#msg").addClass("erro");            
+                        $("#msg").html("Não foi possível remover o usuário");
+                    }
+                }                    
+            });
+        }); 
     }
 });
 </script>

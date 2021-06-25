@@ -18,13 +18,26 @@ main {
   min-height: var(--area-main);
 }
 
-main h1 {
+.title-dados-psicologos {
+  width: 100%;
   margin: 50px 0;
+}
 
+.title-dados-psicologos h1{  
   font-size: 3rem;
 
   width: 100%;
   border-bottom: 0.5px solid var(--azul);
+
+  padding-bottom: 10px;
+}
+
+.title-dados-psicologos p {
+  font-size: 1.1rem;
+}
+
+.title-dados-psicologos a {
+  text-decoration: underline;
 }
 
 .filtro {

@@ -12,6 +12,7 @@
                     echo '<li><a href="dados_usuarios.php">Meus Dados</a></li>';
                 }
                 echo '
+                    <li><a href="home.php">Home</a></li>
                     <li><a href="logout.php">Sair</a></li>
                 </ul>
             </nav>
