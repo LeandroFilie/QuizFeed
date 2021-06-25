@@ -3,7 +3,17 @@
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">Alterar Dados</h4>
+            <h4 class="modal-title">
+                <?php
+                    if($_SESSION["permissao"] == 3){
+                        echo 'Alterar Dados';
+                    }   
+                    else{
+                        echo 'Dados do Psicólogo';
+                    }
+                ?>
+            
+            </h4>
         </div>
         <div class="modal-body modal-form">
             <input type="text" name="nome_completo_modal" id="nome_completo_modal" placeholder="Nome Completo" />
@@ -22,10 +32,10 @@
         <div class="modal-footer">
             <button class="data-user-action-cancel" data-dismiss="modal">Cancelar</button>
             <?php
-                if($_SESSION["permissao"] != 1){
+                if($_SESSION["permissao"] == 3){
                     echo '<button class="data-user-action-save salvar">Salvar</button>';
                 }   
-                else{
+                else if($_SESSION["permissao"] == 1){
                     echo '<div id="buttonsSituacao1">
                         <button class="data-user-adm reprovar" id="psicologo-reprovar" value="" data-toggle="modal">Reprovar</button>
                         <button class="data-user-adm aprovar" value="" id="psicologo-aprovar" data-toggle="modal">Aprovar</button>

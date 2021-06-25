@@ -23,7 +23,7 @@
                     <section id="tabs">
                         <div class="tab-links">
                             <button id="option-1">Gerenciar Usuários</button>
-                            <button id="option-2">Gerenciar Quiz e Redes</button>
+                            <button id="option-2">Gerenciar Redes Colaborativas</button>
                         </div>
 
                         <div class="tab-content-adm">
@@ -38,10 +38,6 @@
                                 </div>
                             </section>
                             <section id="option-2-content">
-                                <div class="card">
-                                    <p>Sites dos Testes</p>
-                                    <button>Cadastrar</button>
-                                </div>
                                 <div class="card">
                                     <p>Redes Colaborativas</p>
                                     <button>Listar</button>
@@ -71,9 +67,15 @@
                                 <p>Então escolha a sua área de maior afinidade</p>
                             </section>
                             <section id="option-2-content">
-                                <p>Então bora fazer um quiz?</p>
                                 <div class="section-cta">
-                                    <a href="teste.html"><button>Iniciar Quiz</button></a>
+                                    <div class="cta-psicologos">
+                                        <p>Veja profissionais especializados para você fazer uma orientação vocacional</p>
+                                        <a href="./dados_psicologos.php"><button>Ver mais</button></a>
+                                    </div>
+                                    <div class="cta-testes">
+                                        <p>Veja testes vocacionais online que podem te ajudar também</p>
+                                        <button>Ver mais</button>
+                                    </div>
                                 </div>
                             </section>
                         </div>
@@ -85,6 +87,20 @@
                     echo '
                         <div class="section-title">
                             <h1 class="title">Seja bem-vindo!<br/> Aguarde o administrador aprovar o seu cadastro</h1>
+                        </div>
+                    ';
+                }
+                else if($_SESSION["situacao"] == 2){
+                    echo '
+                        <div class="section-title">
+                            <h1 class="title">Seja bem-vindo!<br/> Seu cadastro foi aprovado</h1>
+                        </div>
+                    ';
+                }
+                else if($_SESSION["situacao"] == 3){
+                    echo '
+                        <div class="section-title">
+                            <h1 class="title">Seu cadastro não foi aprovado!<br /> Regularize sua situação e solicite novamente</h1>
                         </div>
                     ';
                 }

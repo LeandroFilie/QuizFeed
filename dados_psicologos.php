@@ -65,28 +65,8 @@
         echo '</section>';
 
               $selectSituacao2 = 'SELECT nome, email_usuario FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2 "';
-              
-              if(!empty($_POST)){
-                if($_POST["nome"] != ""){
-                  $nome = $_POST["nome"];
-                  $selectSituacao2 .= " AND usuario.nome like '%$nome%'";
-                }
-                if($_POST["registro"] != ""){
-                  $registro = $_POST["registro"];
-                  $selectSituacao2 .= " AND registro = '$registro'";
-                }
-                if($_POST["estado"] != 0){
-                  $uf = $_POST["estado_uf"];
-                  $selectSituacao2 .= " AND uf = '$uf'";
-                }
-                if($_POST["cidade"] != ""){
-                  $cidade = $_POST["cidade"];
-                  $selectSituacao2 .= " AND cidade like '%$cidade%'";
-                }
-              }
-                  
+                                
               $resultadoSituacao2 = mysqli_query($conexao,$selectSituacao2);
-
 
             echo '<section id="option-2-content">';
 
@@ -136,6 +116,47 @@
             </form>
           </div>
         ';
+
+        $selectSituacao2 = 'SELECT nome, email_usuario, situacao FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2"';
+
+        if(!empty($_POST)){
+          if($_POST["nome"] != ""){
+            $nome = $_POST["nome"];
+            $selectSituacao2 .= " AND usuario.nome like '%$nome%'";
+          }
+          if($_POST["registro"] != ""){
+            $registro = $_POST["registro"];
+            $selectSituacao2 .= " AND registro = '$registro'";
+          }
+          if($_POST["estado"] != 0){
+            $uf = $_POST["estado_uf"];
+            $selectSituacao2 .= " AND uf = '$uf'";
+          }
+          if($_POST["cidade"] != ""){
+            $cidade = $_POST["cidade"];
+            $selectSituacao2 .= " AND cidade like '%$cidade%'";
+          }
+        }
+        
+        $resultadoSituacao2 = mysqli_query($conexao,$selectSituacao2);
+
+        $i = 0;     
+        while($linha = mysqli_fetch_assoc($resultadoSituacao2)){
+          echo '
+                <div class="data-user-details-adm">
+                  <div class="data-user-details-items-adm">
+                    <p>'.$linha["nome"].' </p>
+                  </div>
+                  <div class="data-user-details-items-adm">
+                    <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>
+                  </div>
+                </div>
+          ';
+          $i++;
+        }
+        if($i == 0){
+          echo '<h2 id="emptySituacao1">Não há psicólogos cadastrados</h2>';
+        }
       }
     ?>
   </main>

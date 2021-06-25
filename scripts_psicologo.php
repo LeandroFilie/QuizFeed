@@ -78,7 +78,7 @@ $(function(){
             i = $(this).val();
             permissao = $('#permissao').val();
 
-            if(permissao == 1){
+            if(permissao != 1){
                 $("#nome_completo_modal").attr("disabled", "disabled");
                 $("#registro_modal").attr("disabled", "disabled");
                 $("#email_modal").attr("disabled", "disabled");

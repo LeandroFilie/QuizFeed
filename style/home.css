@@ -57,7 +57,7 @@ main .tab-links button::after {
 }
 
 main #tabs .tab-content {
-  margin-top: 5rem;
+  margin-top: 2rem;
 }
 
 main #tabs .tab-content>section,  main #tabs .tab-content-adm>section{
@@ -121,15 +121,22 @@ main .tab-content-adm .card button {
   will-change: transform;
 }
 
-main .section-cta button {
+.section-cta .cta-psicologos, .section-cta .cta-testes{
+  font-size: 1.2rem;
+  background: white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 20px;
+} 
+
+main .section-cta .cta-psicologos button, .section-cta .cta-testes button {
   background: var(--laranja);
-  padding: 10px 30px;
+  padding: 5px 20px;
   border-radius: 10px;
   border: none;
   color: white;
   font-weight: bold;
-  font-size: 1.5rem;
-  margin: 20px 0;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.2s;
   will-change: transform;
