@@ -22,10 +22,9 @@ main h1 {
   margin: 50px 0;
 
   font-size: 3rem;
-  font-weight: bold;
 
   width: 100%;
-  border-bottom: 2px solid var(--azul);
+  border-bottom: 0.5px solid var(--azul);
 }
 
 .filtro {

@@ -1,23 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.2
--- http://www.phpmyadmin.net
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
--- Máquina: localhost
--- Data de Criação: 24-Jun-2021 às 16:33
--- Versão do servidor: 5.6.13
--- versão do PHP: 5.4.17
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 25-Jun-2021 às 00:34
+-- Versão do servidor: 5.7.31
+-- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de Dados: `quizfeed`
+-- Banco de dados: `quizfeed`
 --
 CREATE DATABASE IF NOT EXISTS `quizfeed` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `quizfeed`;
@@ -28,12 +29,13 @@ USE `quizfeed`;
 -- Estrutura da tabela `area`
 --
 
+DROP TABLE IF EXISTS `area`;
 CREATE TABLE IF NOT EXISTS `area` (
   `id_area` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   PRIMARY KEY (`id_area`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -41,6 +43,7 @@ CREATE TABLE IF NOT EXISTS `area` (
 -- Estrutura da tabela `area_resultado`
 --
 
+DROP TABLE IF EXISTS `area_resultado`;
 CREATE TABLE IF NOT EXISTS `area_resultado` (
   `cod_resultado` int(11) NOT NULL,
   `cod_area` int(11) NOT NULL,
@@ -54,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `area_resultado` (
 -- Estrutura da tabela `comentario`
 --
 
+DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE IF NOT EXISTS `comentario` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_postagem` int(11) NOT NULL,
@@ -70,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `comentario` (
 -- Estrutura da tabela `curtida`
 --
 
+DROP TABLE IF EXISTS `curtida`;
 CREATE TABLE IF NOT EXISTS `curtida` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_postagem` int(11) NOT NULL,
@@ -85,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `curtida` (
 -- Estrutura da tabela `inscricao`
 --
 
+DROP TABLE IF EXISTS `inscricao`;
 CREATE TABLE IF NOT EXISTS `inscricao` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_rede` int(11) NOT NULL,
@@ -100,6 +106,7 @@ CREATE TABLE IF NOT EXISTS `inscricao` (
 -- Estrutura da tabela `postagem`
 --
 
+DROP TABLE IF EXISTS `postagem`;
 CREATE TABLE IF NOT EXISTS `postagem` (
   `id_postagem` int(11) NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
@@ -110,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
   KEY `email_usuario` (`email_usuario`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -118,13 +125,14 @@ CREATE TABLE IF NOT EXISTS `postagem` (
 -- Estrutura da tabela `rede`
 --
 
+DROP TABLE IF EXISTS `rede`;
 CREATE TABLE IF NOT EXISTS `rede` (
   `id_rede` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`id_rede`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -132,6 +140,7 @@ CREATE TABLE IF NOT EXISTS `rede` (
 -- Estrutura da tabela `resultado`
 --
 
+DROP TABLE IF EXISTS `resultado`;
 CREATE TABLE IF NOT EXISTS `resultado` (
   `id_resultado` int(11) NOT NULL,
   `cod_teste` int(11) NOT NULL,
@@ -146,12 +155,13 @@ CREATE TABLE IF NOT EXISTS `resultado` (
 -- Estrutura da tabela `teste_pronto`
 --
 
+DROP TABLE IF EXISTS `teste_pronto`;
 CREATE TABLE IF NOT EXISTS `teste_pronto` (
   `id_teste` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `link` varchar(100) NOT NULL,
   PRIMARY KEY (`id_teste`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -159,6 +169,7 @@ CREATE TABLE IF NOT EXISTS `teste_pronto` (
 -- Estrutura da tabela `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(100) NOT NULL,
   `nome` varchar(100) NOT NULL,
@@ -167,17 +178,41 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`email`, `nome`, `senha`, `permissao`) VALUES
+('admin', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 1),
+('carol@email.com', 'Caroline Motta', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('carol@psicologa.com', 'Carol Psicologa', '827ccb0eea8a706c4c34a16891f84e7b', 3),
+('julia@email.com', 'Julia Costa', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('julia@psicologa.com', 'Julia Psicologa', '827ccb0eea8a706c4c34a16891f84e7b', 3),
+('leandro@email.com', 'Leandro Filié', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('leandro@psicologo.com', 'Leandro Psicologo', '827ccb0eea8a706c4c34a16891f84e7b', 3);
+
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `usuario_comum`
 --
 
+DROP TABLE IF EXISTS `usuario_comum`;
 CREATE TABLE IF NOT EXISTS `usuario_comum` (
   `email_usuario` varchar(100) NOT NULL,
   `nome_usuario` varchar(100) NOT NULL,
   PRIMARY KEY (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuario_comum`
+--
+
+INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`) VALUES
+('admin', 'admin'),
+('carol@email.com', 'CarolMotta'),
+('julia@email.com', 'JuliaCosta'),
+('leandro@email.com', 'LeandroFilie');
 
 -- --------------------------------------------------------
 
@@ -185,14 +220,24 @@ CREATE TABLE IF NOT EXISTS `usuario_comum` (
 -- Estrutura da tabela `usuario_psicologo`
 --
 
+DROP TABLE IF EXISTS `usuario_psicologo`;
 CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
   `email_usuario` varchar(100) NOT NULL,
-  `registro` int(20) NOT NULL,
+  `registro` varchar(11) NOT NULL,
   `cidade` varchar(50) NOT NULL,
-  `uf` varchar(50) NOT NULL,
+  `uf` varchar(2) NOT NULL,
   `situacao` int(1) NOT NULL,
   PRIMARY KEY (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuario_psicologo`
+--
+
+INSERT INTO `usuario_psicologo` (`email_usuario`, `registro`, `cidade`, `uf`, `situacao`) VALUES
+('carol@psicologa.com', '33333333333', 'Franca', 'SP', 1),
+('julia@psicologa.com', '11111111111', 'São Paulo', 'SP', 1),
+('leandro@psicologo.com', '22222222222', 'Ribeirão Preto', 'SP', 1);
 
 -- --------------------------------------------------------
 
@@ -200,6 +245,7 @@ CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
 -- Estrutura da tabela `usuario_testepronto`
 --
 
+DROP TABLE IF EXISTS `usuario_testepronto`;
 CREATE TABLE IF NOT EXISTS `usuario_testepronto` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_teste` int(11) NOT NULL,
@@ -211,29 +257,29 @@ CREATE TABLE IF NOT EXISTS `usuario_testepronto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Constraints for dumped tables
+-- Restrições para despejos de tabelas
 --
 
 --
 -- Limitadores para a tabela `area_resultado`
 --
 ALTER TABLE `area_resultado`
-  ADD CONSTRAINT `area_resultado_ibfk_2` FOREIGN KEY (`cod_area`) REFERENCES `area` (`id_area`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `area_resultado_ibfk_1` FOREIGN KEY (`cod_resultado`) REFERENCES `resultado` (`id_resultado`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `area_resultado_ibfk_1` FOREIGN KEY (`cod_resultado`) REFERENCES `resultado` (`id_resultado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `area_resultado_ibfk_2` FOREIGN KEY (`cod_area`) REFERENCES `area` (`id_area`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `comentario`
 --
 ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`cod_postagem`) REFERENCES `postagem` (`id_postagem`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`cod_postagem`) REFERENCES `postagem` (`id_postagem`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `curtida`
 --
 ALTER TABLE `curtida`
-  ADD CONSTRAINT `curtida_ibfk_2` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `curtida_ibfk_1` FOREIGN KEY (`cod_postagem`) REFERENCES `postagem` (`id_postagem`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `curtida_ibfk_1` FOREIGN KEY (`cod_postagem`) REFERENCES `postagem` (`id_postagem`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `curtida_ibfk_2` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `inscricao`
@@ -277,8 +323,9 @@ ALTER TABLE `usuario_psicologo`
 -- Limitadores para a tabela `usuario_testepronto`
 --
 ALTER TABLE `usuario_testepronto`
-  ADD CONSTRAINT `usuario_testepronto_ibfk_2` FOREIGN KEY (`cod_teste`) REFERENCES `teste_pronto` (`id_teste`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `usuario_testepronto_ibfk_1` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usuario_testepronto_ibfk_1` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `usuario_testepronto_ibfk_2` FOREIGN KEY (`cod_teste`) REFERENCES `teste_pronto` (`id_teste`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
