@@ -217,6 +217,67 @@ main {
   cursor: pointer;
 }
 
+.data-user-title {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: 100%;
+  border-bottom: 2px solid var(--azul);
+}
+
+.data-user-title h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: 3rem;
+  font-weight: bold;
+
+  padding: 0 1.5rem;
+  margin: 20px 0;
+}
+
+.icon-user {
+  height: 6rem;
+  width: 6rem;
+}
+
+#data-user {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-user-details{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  margin: 50px;
+  width: 100%;
+}
+
+.data-user-details .data-user-details-items {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  border-bottom: 1px solid var(--azul);
+  margin-bottom: 20px;  
+}
+
+.data-user-details .data-user-details-items h3{
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+.data-user-details .data-user-details-items p {
+  font-size: 1.2rem;
+}
+
 .buttons-action {
   display: flex;
   align-items: center;

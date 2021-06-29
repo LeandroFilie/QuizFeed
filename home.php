@@ -94,6 +94,7 @@
                     echo '
                         <div class="section-title">
                             <h1 class="title">Seja bem-vindo!<br/> Seu cadastro foi aprovado</h1>
+                            
                         </div>
                     ';
                 }
