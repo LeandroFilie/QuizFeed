@@ -13,6 +13,7 @@
                     echo '<li><a href="dados_usuarios.php">Meus Dados</a></li>';
                 }
                 if($_SESSION["permissao"] == 3){
+                    if($_SESSION["situacao"] != 1)
                     echo '<li><a href="dados_psicologos.php">Meus Dados</a></li>';
                 }
                 echo '
