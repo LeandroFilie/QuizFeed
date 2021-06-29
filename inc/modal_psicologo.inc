@@ -24,7 +24,7 @@
                     <option value="0" label="Estado"></option>
                     <?php include './inc/select_estados.inc' ?>
                 </select>
-                <select id="cidade_modal" disabled>
+                <select id="cidade_modal">
                     <option value="" label="Cidade"></option>
                 </select>
             </div>

@@ -93,17 +93,34 @@ $(function(){
                 $("#registro_modal").val(u.registro);
                 $("#email_modal").val(u.email);
 
-                
-                var texto_estado = `<option>${u.uf}</option>`;
-                $("#estado_modal").html(texto_estado);
-                console.log(u.uf);
-                $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+texto_estado,function(f){
-                    u.uf = f.id;
-                });
-                include './inc/select_estados.inc';
+                //var texto_estado = `<option>${u.uf}</option>`;
+                //$("#estado_modal").html(texto_estado);
 
-                var texto_cidade = `<option>${u.cidade}</option>`;
-                $("#cidade_modal").html(texto_cidade);
+                $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+u.uf,function(f){
+                    jQuery(`option[value='${f.id}']`).attr('selected', 'selected');
+                    $("#estado_modal").val(f.id);
+                });
+                var estado_modal = $("#estado_modal").val();
+                
+                if(estado_modal == '0'){
+                    $('#cidade_modal').attr("disabled", "disabled");
+                    t = '<option value="" label="Cidade"></option>';
+                    $('#cidade_modal').html(t);
+                }
+                else{
+                    $('#cidade_modal').removeAttr("disabled");
+                    $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+estado_modal+'/municipios',function(c){
+                        t = "";
+                        $.each(c,function(i,v){
+                            t += `<option value="${v.nome}">${v.nome}</option>`;
+                        })
+                        $('#cidade_modal').html(t);
+                    })
+                }
+                
+
+                //var texto_cidade = `<option>${u.cidade}</option>`;
+                //$("#cidade_modal").html(texto_cidade);
                 
                 $('#psicologo-aprovar').val(u.email);
                 $('#psicologo-reprovar').val(u.email);
