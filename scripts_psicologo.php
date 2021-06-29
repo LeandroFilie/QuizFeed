@@ -63,7 +63,7 @@ $(function(){
             }
             else{
                 $("#msg").addClass("erro");
-                $('#msg').html('Falha ao aprovar pscicólogo.');
+                $('#msg').html('Falha ao aprovar psicólogo.');
             }
         }) 
     })
@@ -78,13 +78,14 @@ $(function(){
             i = $(this).val();
             permissao = $('#permissao').val();
 
-            if(permissao != 1){
+            if(permissao != 3){
                 $("#nome_completo_modal").attr("disabled", "disabled");
                 $("#registro_modal").attr("disabled", "disabled");
                 $("#email_modal").attr("disabled", "disabled");
                 $("#estado_modal").attr("disabled", "disabled");
                 $("#cidade_modal").attr("disabled", "disabled");
             }
+           
 
             $.get("seleciona.php?email="+i+"&identificador=2",function(r){
                 u = r[0];
@@ -92,15 +93,26 @@ $(function(){
                 $("#registro_modal").val(u.registro);
                 $("#email_modal").val(u.email);
 
+                
                 var texto_estado = `<option>${u.uf}</option>`;
                 $("#estado_modal").html(texto_estado);
+                console.log(u.uf);
+                $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+texto_estado,function(f){
+                    u.uf = f.id;
+                });
+                include './inc/select_estados.inc';
 
                 var texto_cidade = `<option>${u.cidade}</option>`;
                 $("#cidade_modal").html(texto_cidade);
                 
                 $('#psicologo-aprovar').val(u.email);
                 $('#psicologo-reprovar').val(u.email);
-
+                
+                if(permissao == 3){
+                    if(u.situacao == 2){
+                        $("#registro_modal").attr("disabled", "disabled"); 
+                    }
+                }
                 if(permissao == 1){
                     t='';
                     if(u.situacao == 2){

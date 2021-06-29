@@ -12,6 +12,9 @@
                 if($_SESSION["permissao"] == 2){
                     echo '<li><a href="dados_usuarios.php">Meus Dados</a></li>';
                 }
+                if($_SESSION["permissao"] == 3){
+                    echo '<li><a href="dados_psicologos.php">Meus Dados</a></li>';
+                }
                 echo '
                     
                     <li><a href="logout.php">Sair</a></li>

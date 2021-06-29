@@ -14,7 +14,7 @@ $(document).ready(function(){
             var p = {
                 "nome_completo":nome_completo,
                 "nome_usuario":nome_usuario,
-                "email":email,
+                "email":email, 
                 "identificador":1
             }
 

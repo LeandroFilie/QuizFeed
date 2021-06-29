@@ -157,6 +157,54 @@
         if($i == 0){
           echo '<h2 id="emptySituacao1">Não há psicólogos cadastrados</h2>';
         }
+      } else if($_SESSION["permissao"] == 3){
+        if(($_SESSION["situacao"] == 2)||($_SESSION["situacao"] == 3)){
+          $selectPsico = "SELECT nome, email, registro, cidade, uf FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario WHERE email='".$_SESSION["email"]."'";
+
+          $resultado = mysqli_query($conexao,$selectPsico);
+
+          echo '
+              <div class="data-user-title">
+                <img src="assets/dados.svg" Alt="user" class="icon-user"/>
+                <h1>Dados Pessoais</h1>
+              </div>
+              <div id="msg"></div>
+              <div id="data-user">
+          ';
+                while($linha = mysqli_fetch_assoc($resultado)){
+                  echo '
+                    <div class="data-user-details">
+                      <div class="data-user-details-items">
+                        <h3>Nome</h3>
+                        <p id="nome-psico">'.$linha["nome"].' </p>
+                      </div>
+
+                      <div class="data-user-details-items">
+                        <h3>Endereço de Email</h3>
+                        <p id="email-psico">'.$linha["email"].' </p>
+                        <div id="erro_email"></div>
+                      </div>
+
+                      <div class="data-user-details-items">
+                        <h3>Registro Federal de Psicologia</h3>
+                        <p id="registro-psico">'.$linha["registro"].'</p>
+                        <div id="erro_email"></div>
+                      </div>
+
+                      <div class="data-user-details-items">
+                        <h3>Registro Federal de Psicologia</h3>
+                        <p id="registro-psico">'.$linha["registro"].'</p>
+                        <div id="erro_registro"></div>
+                      </div>
+                    </div>  
+                    <div class="buttons-action">
+                        <button class="data-user-action alterar" value="'.$linha["email"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Alterar Dados</button>
+                        <button class="data-user-delete delete" value="'.$linha["email"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                    </div>
+                  ';
+                }
+          echo '</div>';
+        }
       }
     ?>
   </main>
