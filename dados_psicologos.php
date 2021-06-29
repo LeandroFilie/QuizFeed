@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./Bootstrap/bootstrap.min.css" />
     <script src="./Bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./style/dados_psicologo.css">
-    <script src="./js/select_estados.js"></script>
+    
     <title>Dados | TesteFeed</title>
 
     
@@ -204,6 +204,8 @@
       }
     ?>
   </main>
+
+  <script src="./js/select_estados.js"></script>
   
   <?php
     include './inc/footer.inc';
