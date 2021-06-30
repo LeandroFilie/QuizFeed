@@ -17,12 +17,7 @@ $error = 0;
         //erro = 2 ==> nome de usuário já cadastrado
         //erro = 3 ==> email e nome de usuário já cadastrados
         //erro = 4 ==> erro no cadastro
-    //Psicólogo
-        //erro = 0 ==> sucesso
-        //erro = 1 ==> email já cadastrado
-        //erro = 2 ==> registro já cadastrado
-        //erro = 3 ==> email e registro já cadastrados
-        //erro = 4 ==> erro no cadastro
+    
 
 $select = "SELECT nome_usuario FROM usuario_comum WHERE nome_usuario <> '$nome_usuario_atual' AND nome_usuario = '$nome_usuario'";
 $confereNomeusuario = mysqli_query($conexao,$select);

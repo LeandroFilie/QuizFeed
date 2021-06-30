@@ -189,7 +189,12 @@
                       <div class="data-user-details-items">
                         <h3>Registro Federal de Psicologia</h3>
                         <p id="registro-psico">'.$linha["registro"].'</p>
-                        <div id="erro_email"></div>
+                        <div id="erro_registro"></div>
+                      </div>
+
+                      <div class="data-user-details-items">
+                        <h3>Localidade</h3>
+                        <p id="local-psico">'.$linha["cidade"].' - '.$linha["uf"].'</p>
                       </div>
 
                     </div>  
