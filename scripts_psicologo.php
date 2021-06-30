@@ -5,7 +5,8 @@ $(function(){
             nome:$("#nome_completo_modal").val(),
             email:$("#email_modal").val(),
             registro:$("#registro_modal").val(),
-            cidade:$("#cidade_modal").val()
+            cidade:$("#cidade_modal").val(),
+            identificador:2
         };    
         $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+$("#estado_modal").val(),function(f){
             p.uf = f.sigla;
@@ -17,13 +18,13 @@ $(function(){
     define_alterar_remover();
 
     $(".reprovar").click(function(){
-        
         $('#alterarDadosPsicologo').hide();
         var email = $(this).val();
 
         r = {
             "email":email,
-            "situacao":3
+            "situacao":3,
+            "identificador": 1
         };
         $.post("atualizar_psicologo.php",r,function(r){
             $("#msg").removeClass("erro");
@@ -33,8 +34,8 @@ $(function(){
                 Swal.fire({
                     title: 'Pronto',
                     text: "Psicólogo reprovado com sucesso",
-                    icon: 'success',
-                    confirmButtonColor: '#ed7201',
+                    icon: 'info',
+                    confirmButtonColor: '#002539',
                     backdrop: false,
                 }).then((result) => {
                 if (result.isConfirmed) {
@@ -43,6 +44,7 @@ $(function(){
                 })
             }
             else{
+                $('.close').click();
                 $("#msg").addClass("erro");
                 $('#msg').html('Falha ao reprovar pscicólogo.');
             }
@@ -55,7 +57,8 @@ $(function(){
         var email = $(this).val();
         r = {
             "email":email,
-            "situacao":2
+            "situacao":2,
+            "identificador": 1
         };
 
         $.post("atualizar_psicologo.php",r,function(r){
@@ -76,17 +79,14 @@ $(function(){
                 
             }
             else{
+                $('.close').click();
                 $("#msg").addClass("erro");
                 $('#msg').html('Falha ao aprovar psicólogo.');
             }
         }) 
     })
     
-
-    
-
     function define_alterar_remover(){ 
-
         $(".alterar").click(function(){
 
             i = $(this).val();
@@ -109,7 +109,7 @@ $(function(){
                 $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+u.uf,function(f){
                     jQuery(`option[value='${f.id}']`).attr('selected', 'selected');
                 });
-                console.log(u.uf)
+
                 $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+u.uf+'/municipios',function(c){
                     t = "";
                     $.each(c,function(i,v){
@@ -131,7 +131,6 @@ $(function(){
                     }
                 }
                 if(permissao == 1){
-                    t='';
                     if(u.situacao == 2){
                         $('#buttonsSituacao1').hide();
                     }
@@ -142,29 +141,40 @@ $(function(){
             });
         });
 
-        $(".remover").click(function(){
-            permissao = $("#permissao").val();
-            i = $(".delete").val();
-            c = "email";
-            t = "usuario";
-            p = {tabela:t,email:i,coluna:c}
-            $.post("remover.php",p,function(r){
-                if(permissao == 1){
-                    $("#msg").removeClass("erro");
-                    $("#msg").removeClass("sucesso");
-                    $('.modal').modal('hide'); 
-                    if(r=='1'){   
-                        $("#msg").addClass("sucesso");             
-                        $("#msg").html("Usuário removido com sucesso");
-                        $("button[value='"+ i +"']").closest(".data-user-details-adm").remove();
+        $(".delete").click(function(){
+            i = '';
+            i = $(this).val();
+            remover(i);
+        })
+
+        function remover(i){
+            $(".remover").click(function(){
+                permissao = $("#permissao").val();
+                c = "email";
+                t = "usuario";
+                p = {tabela:t,email:i,coluna:c}
+                $.post("remover.php",p,function(r){
+                    if(permissao == 1){
+                        $("#msg").removeClass("erro");
+                        $("#msg").removeClass("sucesso");
+                        $('.modal').modal('hide'); 
+                        if(r=='1'){   
+                            $("#msg").addClass("sucesso");             
+                            $("#msg").html("Usuário removido com sucesso");
+                            $("button[value='"+ i +"']").closest(".data-user-details-adm").remove();
+                        }
+                        else{
+                            $("#msg").addClass("erro");            
+                            $("#msg").html("Não foi possível remover o usuário");
+                        }
                     }
                     else{
-                        $("#msg").addClass("erro");            
-                        $("#msg").html("Não foi possível remover o usuário");
-                    }
-                }                    
-            });
-        }); 
+                        location.href="index.php";
+                    }                    
+                });
+            }); 
+        }
+        i = '';
     }
 
     function enviarDados(dados){
@@ -180,6 +190,7 @@ $(function(){
                 $("#msg").html("Dados alterados com sucesso.");
                 $(".close").click();
                 atualizarDados(dados.email);
+                console.log(dados.email);
             }
             else if(r == 1){
                 mensagemErroEmail();
@@ -199,11 +210,11 @@ $(function(){
             }
         });
     }
+
     function atualizarDados(novo_email){
         $.get("seleciona.php?email="+novo_email+"&identificador=2",function(d){
             t = '';
             $.each(d,function(i,u){
-                
                 trocarCampos(u.nome, u.email, u.registro, u.uf, u.cidade);
             });
         });    
@@ -214,6 +225,8 @@ $(function(){
         $("#email-psico").html(email);
         $("#registro-psico").html(registro);
         $('#local-psico').html(`${cidade} - ${uf}`);
+        $(".alterar").val(email);
+        $(".delete").val(email);
     }
 
     function limparMensagensErro(){        
@@ -233,7 +246,7 @@ $(function(){
 
     function mensagemErroRegistro(){
         $("#erro_registro").addClass("erro");
-        $("#erro_registro").html("CFP já etsa vinculado a uma conta.");
+        $("#erro_registro").html("CFP já está vinculado a uma conta.");
     }
 });
 </script>

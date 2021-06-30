@@ -6,7 +6,7 @@
             <h4 class="modal-title">Excluir Conta</h4>
         </div>
         <div class="modal-body">
-            <p class="modal-text">Tem certeza que deseja excluir sua conta?</p>
+            <p class="modal-text">Tem certeza que deseja excluir a conta?</p>
         </div>
         <div class="modal-footer">
             <button class="data-user-action-cancel" data-dismiss="modal">Não</button>

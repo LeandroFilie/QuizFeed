@@ -6,10 +6,8 @@ $(function(){
             nome_usuario:$("#nome_usuario_modal").val(),
             email:$("#email_modal").val()
         };    
-
-        console.log(p);
         
-        $.post("atualizar.php",p,function(r){
+        $.post("atualizar_usuario.php",p,function(r){
             console.log(`R: ${r}`);
             $("#msg").removeClass("erro");
             $("#msg").removeClass("sucesso");
@@ -60,9 +58,14 @@ $(function(){
             });
         });
 
-        $(".remover").click(function(){
+        $(".delete").click(function(){
+            i = $(this).val();
+            remover(i);
+        })
+
+        function remover(i){
+            $(".remover").click(function(){
             permissao = $("#permissao").val();
-            i = $(".delete").val();
             c = "email";
             t = "usuario";
             p = {tabela:t,email:i,coluna:c}
@@ -85,13 +88,17 @@ $(function(){
                 else{
                     location.href="index.php";
                 }
-                    
+                  
             });
         });
-    }
+        }
+        }
+
+        
+    
 
     function atualizarDados(novo_email){
-        $.get("seleciona.php?email="+novo_email,function(d){
+        $.get("seleciona.php?email="+novo_email+"&identificador=1",function(d){
             t = '';
             $.each(d,function(i,u){
                 trocarCampos(u.nome, u.nome_usuario, u.email);
@@ -103,6 +110,8 @@ $(function(){
         $("#nome-user").html(nome);
         $("#nome-usuario-user").html(nome_usuario);
         $("#email-user").html(email);
+        $(".alterar").val(email);
+        $(".delete").val(email);
     }
 
     function limparMensagensErro(){        
