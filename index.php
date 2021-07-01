@@ -40,25 +40,25 @@
         <div class="about-card">
             <div class="card">
                 <div class="card-content">
-                    <h3>Sobre o Trabalho</h3>
+                    <h3>Nossa Motivação</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        O motivo de criarmos um sistema relacionado a faculdade, foi observarmos que há uma grande responsabilidade e pressão sobre jovens e adolescentes em relação a vida profissional e carreira.</strong>
                     </p>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
-                    <h3>Sobre o Quiz</h3>
+                    <h3>Fique Calmo!</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        A maioridade chega, e sente-se uma necessidade forte de escolher um caminho que parece que será trilhado pela vida toda, mas não precisa ser assim.</strong>
                     </p>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
-                    <h3>Sobre a Rede Colaborativa</h3>
+                    <h3>Um Cantinho Pra Geral!</h3>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    Além da rede colaborativa auxiliar os jovens que estão entrando na vida adulta, também pode dar uma mão para quem não sente que está no caminho certo e gostaria de mudar, é um lugar em que há espaço para todas as faixas etárias, então sejam todos/as bem vindos/as!</strong>
                 </p>
                 </div>
             </div>
