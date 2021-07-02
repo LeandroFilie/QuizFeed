@@ -74,6 +74,14 @@ ul {
   list-style: none;
 }
 
+select:disabled{
+  cursor: not-allowed;
+}
+
+input:disabled{
+  cursor: not-allowed;
+}
+
 button {
   outline: none;
 }

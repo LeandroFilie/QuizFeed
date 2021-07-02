@@ -107,7 +107,7 @@ $(function(){
                 $("#email_modal").val(u.email);
 
                 $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+u.uf,function(f){
-                    jQuery(`option[value='${f.id}']`).attr('selected', 'selected');
+                    jQuery(`#estado_modal option[value='${f.id}']`).attr('selected', 'selected');
                 });
 
                 $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+u.uf+'/municipios',function(c){

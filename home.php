@@ -101,7 +101,7 @@
                 else if($_SESSION["situacao"] == 3){
                     echo '
                         <div class="section-title">
-                            <h1 class="title">Seu cadastro não foi aprovado!<br /> Regularize sua situação e solicite novamente</h1>
+                            <h1 class="title">Seu cadastro não foi aprovado!<br /> Regularize seu registro e solicite novamente</h1>
                         </div>
                     ';
                 }

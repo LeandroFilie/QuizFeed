@@ -104,7 +104,7 @@
               <input type="text" name="nome" id="nome" placeholder="Nome" />
               <input type="text" name="registro" id="registro" placeholder="Registro" />
               <div class="select-estados-cidades">
-                  <select id="estado" name="estado">
+                  <select id="estado_filtro" name="estado_filtro">
                       <option value="0" label="Estado"></option>';
                       include './inc/select_estados.inc';
                     echo '
@@ -128,7 +128,7 @@
             $registro = $_POST["registro"];
             $selectSituacao2 .= " AND registro = '$registro'";
           }
-          if($_POST["estado"] != 0){
+          if($_POST["estado_filtro"] != 0){
             $uf = $_POST["estado_uf"];
             $selectSituacao2 .= " AND uf = '$uf'";
           }
