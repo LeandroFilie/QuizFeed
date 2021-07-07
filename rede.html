@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="./assets/favicon.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style/main.css">
+  <link rel="stylesheet" href="./style/menu_mobile.css">
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="js/moment.js"></script>
+  <script src="js/md5.js"></script>
+  <script src="./js/main.js"></script>
+  <title>Rede Colaborativa | TesteFeed</title>
+  <link rel="stylesheet" href="./style/rede.css">
+</head>
+<body>
+  <header class="header">
+    <nav>
+        <a href="home.php"><img src="./assets/logo.svg" alt="logo" class="logo"></a>
+        <button id="js-open-menu" class="menu-button">
+            <i class="menu-icon"></i>
+        </button>
+        <ul class="menu">
+        <li><a href="home.php">Home</a></li>            
+        <li><a href="logout.php">Sair</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+  <div class="header-rede">
+    <div class="rede-title">
+      <h1>Ciências Exatas</h1>
+    </div>
+    <div class="user-info">
+      <img src="./assets/avatar.svg" alt="Avatar" />
+      <span>NomeUsuário</span>
+    </div>  
+  </div>
+  
+  <form>
+    <textarea name="" id="" placeholder="O que você quer postar?"></textarea>
+    <div class="form-footer">
+      <button>Postar</button>
+    </div>
+  </form>
+
+  <section class="posts">
+    <div class="post">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus facere adipisci animi accusantium fuga sunt quod, ocabo nisi. Adipisci laborum aut praesentium modi deserunt nihil.</p>
+      <div class="post-footer">
+        <div class="user-info">
+          <img src="./assets/avatar.svg" alt="Avatar" />
+          <span>NomeUsuário</span>
+        </div>
+        <div class="interacoes">
+          <img src="./assets/answer.svg" alt="comentar">
+          <div class="like">
+            <span id="likeCount">10</span>
+            <img src="./assets/like.svg" alt="like">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="post">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus facere adipisci animi accusantium fuga sunt quod, ocabo nisi. Adipisci laborum aut praesentium modi deserunt nihil.</p>
+      <div class="post-footer">
+        <div class="user-info">
+          <img src="./assets/avatar.svg" alt="Avatar" />
+          <span>NomeUsuário</span>
+        </div>
+        <div class="interacoes">
+          <img src="./assets/answer.svg" alt="comentar">
+          <div class="like">
+            <span id="likeCount">10</span>
+            <img src="./assets/like.svg" alt="like">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div> Site desenvolvido por: Caroline Motta, Julia Costa e Leandro Filié</div>
+  <div>Copyright &copy 2021</div>
+</footer>
+
+</body>
+</html>
