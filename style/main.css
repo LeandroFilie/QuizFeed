@@ -37,16 +37,18 @@ body {
   display: flex;
   align-items: center;
   
-  justify-content: space-around;
+  justify-content: center;
 }
 
 .header nav {
   width: 100%;
+  max-width: 1000px;
   display: flex;
   align-items: center;
 
-  justify-content: space-around;
+  justify-content: space-between;
 
+  margin: 0 50px;
   
 }
 
@@ -63,6 +65,10 @@ body {
   color: white;
   font-weight: 600;
   font-size: 1.3rem;
+}
+
+main{
+  max-width: 800px;
 }
 
 .logo {
@@ -128,5 +134,11 @@ footer div {
 @media (max-width: 720px) {
   html {
     font-size: 87.5%;
+  }
+}
+
+@media (max-width: 500px){
+  .header nav{
+    margin: 0 20px;
   }
 }

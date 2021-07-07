@@ -158,10 +158,18 @@ $(function(){
                         $("#msg").removeClass("erro");
                         $("#msg").removeClass("sucesso");
                         $('.modal').modal('hide'); 
-                        if(r=='1'){   
-                            $("#msg").addClass("sucesso");             
-                            $("#msg").html("Usuário removido com sucesso");
-                            $("button[value='"+ i +"']").closest(".data-user-details-adm").remove();
+                        if(r=='1'){  
+                            Swal.fire({
+                                title: 'Pronto',
+                                text: "Psicólogo removido com sucesso",
+                                icon: 'success',
+                                confirmButtonColor: '#002539',
+                                backdrop: true,
+                            }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                            }) 
                         }
                         else{
                             $("#msg").addClass("erro");            

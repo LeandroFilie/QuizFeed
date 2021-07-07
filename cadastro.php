@@ -113,6 +113,8 @@
 
     <?php include './inc/footer.inc' ?>
 
+  <script src="./js/sweetalert2.all.min.js"></script>
+
     <script>
         $(function(){
             initOptions();

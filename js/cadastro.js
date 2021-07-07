@@ -8,7 +8,17 @@ $(document).ready(function(){
         var confirma_senha = $("#confirma_senha").val(); 
         
         if((nome_usuario === '') || (nome_completo === '') || (email === '') || (senha === '') || (confirma_senha === '')){
-            alert("Preencha todos os campos");
+            Swal.fire({
+                title: 'Preencha todos os campos',
+                icon: 'error',
+                confirmButtonColor: 'red',
+            })
+            
+            nome_usuario === '' ? $("#nome_usuario").addClass('erro-input') : $("#nome_usuario").removeClass('erro-input');
+            nome_completo === '' ? $("#nome_completo").addClass('erro-input') : $("#nome_completo").removeClass('erro-input');
+            email === '' ? $("#email").addClass('erro-input') : $("#email").removeClass('erro-input');
+            senha === '' ? $("#senha").addClass('erro-input') : $("#senha").removeClass('erro-input');
+            confirma_senha === '' ? $("#confirma_senha").addClass('erro-input') : $("#confirma_senha").removeClass('erro-input');
         }
         else{
             var p = {
@@ -39,8 +49,20 @@ $(document).ready(function(){
         var confirma_senha = $("#confirma_senha_psi").val();
         var estado = $('#estado').val();
 
-        if((nome_usuario === '') || (registro === '') || (email === '') || (cidade == "") || (senha === '') || (confirma_senha === '')){
-            alert("Preencha todos os campos");
+        if((nome_usuario === '') || (registro === '') || (email === '') || (cidade === "") || (senha === '') || (confirma_senha === '')){
+            Swal.fire({
+                title: 'Preencha todos os campos',
+                icon: 'error',
+                confirmButtonColor: 'red',
+            })
+
+            nome_completo === '' ? $("#nome_completo_psi").addClass('erro-input') : $("#nome_completo_psi").removeClass('erro-input');
+            registro === '' ? $("#registro").addClass('erro-input') : $("#registro").removeClass('erro-input');
+            email === '' ? $("#email_psi").addClass('erro-input') : $("#email_psi").removeClass('erro-input');
+            estado === '0' ? $("#estado").addClass('erro-input') : $("#estado").removeClass('erro-input');
+            cidade === '' ? $("#cidade").addClass('erro-input') : $("#cidade").removeClass('erro-input');
+            senha === '' ? $("#senha_psi").addClass('erro-input') : $("#senha_psi").removeClass('erro-input');
+            confirma_senha === '' ? $("#confirma_senha_psi").addClass('erro-input') : $("#confirma_senha_psi").removeClass('erro-input');
         }
         else{
             var p = {
