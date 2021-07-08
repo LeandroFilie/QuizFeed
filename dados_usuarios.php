@@ -76,7 +76,7 @@
 
         echo '
             <div class="data-user-title">
-              <img src="assets/dados.svg" Alt="user" class="icon-user"/>
+              <img src="./assets/dados.svg" Alt="user" class="icon-user"/>
               <h1>Dados Pessoais</h1>
             </div>
             <div id="msg"></div>

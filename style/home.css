@@ -98,6 +98,9 @@ main .tab-content-adm .card{
   border: none;
 
   transition: all 0.2s;
+
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+
 }
 
 main .tab-content-adm .card p {
@@ -126,6 +129,7 @@ main .tab-content-adm .card button {
   border-radius: 10px;
   padding: 10px 20px;
   margin: 20px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
 } 
 
 main .section-cta .cta-psicologos button, .section-cta .cta-testes button {
@@ -137,13 +141,6 @@ main .section-cta .cta-psicologos button, .section-cta .cta-testes button {
   font-weight: bold;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.2s;
-  will-change: transform;
-}
-
-main .section-cta button:hover,  main .card button:hover{
-  transform: scale(1.1);
-  transition: all 0.2s;
 }
 
 main .section-description .description-title {

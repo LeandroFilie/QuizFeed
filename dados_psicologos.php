@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="./Bootstrap/bootstrap.min.css" />
     <script src="./Bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./style/dados_psicologo.css">
-    
-    <title>Dados | TesteFeed</title>
-
-    
-    
+    <title>Dados | TesteFeed</title> 
 </head>
 <body>
   <?php

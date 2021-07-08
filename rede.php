@@ -1,31 +1,15 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <link rel="icon" href="./assets/favicon.png" type="image/png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style/main.css">
-  <link rel="stylesheet" href="./style/menu_mobile.css">
-  <script src="./js/jquery-3.6.0.min.js"></script>
-  <script src="js/moment.js"></script>
-  <script src="js/md5.js"></script>
-  <script src="./js/main.js"></script>
+  <?php include './inc/head.inc' ?>
   <title>Rede Colaborativa | TesteFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
 </head>
 <body>
-  <header class="header">
-    <nav>
-        <a href="home.php"><img src="./assets/logo.svg" alt="logo" class="logo"></a>
-        <button id="js-open-menu" class="menu-button">
-            <i class="menu-icon"></i>
-        </button>
-        <ul class="menu">
-        <li><a href="home.php">Home</a></li>            
-        <li><a href="logout.php">Sair</a></li>
-        </ul>
-    </nav>
-</header>
+  <?php include './inc/menu.inc'; ?>
 
 <main>
   <div class="header-rede">
@@ -34,7 +18,7 @@
     </div>
     <div class="user-info">
       <img src="./assets/avatar.svg" alt="Avatar" />
-      <span>NomeUsuário</span>
+      <span><?php echo $_SESSION['nome_usuario']; ?></span>
     </div>  
   </div>
   
@@ -54,14 +38,42 @@
           <span>NomeUsuário</span>
         </div>
         <div class="interacoes">
-          <img src="./assets/answer.svg" alt="comentar">
+          <img src="./assets/answer.svg" alt="comentar" class="comentar">
           <div class="like">
             <span id="likeCount">10</span>
             <img src="./assets/like.svg" alt="like">
           </div>
         </div>
       </div>
+      <div class="section-comentarios">
+
+          <div class="enviar-comentario hide">
+              <input type="text" placeholder="Escreva seu comentário" />
+              <img src="./assets/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
+          </div>
+
+          <div class="comentario">
+            <div class="avatar">
+              <img src="./assets/avatar.svg" alt="Avatar" />
+            </div>
+            <div class="comentario-content">
+              <span>@NomeUsuário</span>
+              <p>Comentário aquiii!!</p>
+            </div>
+          </div>
+
+          <div class="comentario">
+            <div class="avatar">
+              <img src="./assets/avatar.svg" alt="Avatar" />
+            </div>
+            <div class="comentario-content">
+              <span>@NomeUsuário</span>
+              <p>Comentário aquiii!!</p>
+            </div>
+          </div>
+        </div>
     </div>
+
     <div class="post">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus facere adipisci animi accusantium fuga sunt quod, ocabo nisi. Adipisci laborum aut praesentium modi deserunt nihil.</p>
       <div class="post-footer">
@@ -70,21 +82,33 @@
           <span>NomeUsuário</span>
         </div>
         <div class="interacoes">
-          <img src="./assets/answer.svg" alt="comentar">
+          <img src="./assets/answer.svg" alt="comentar" class="comentar">
           <div class="like">
             <span id="likeCount">10</span>
             <img src="./assets/like.svg" alt="like">
           </div>
         </div>
       </div>
+      <div class="section-comentarios">
+
+          <div class="enviar-comentario hide">
+              <input type="text" placeholder="Escreva seu comentário" />
+              <img src="./assets/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
+          </div>
+
+          <div class="comentario">
+            <div class="comentario-content">
+              <p>Seja o primeiro a comentar nesse post!</p>
+            </div>
+          </div>
+
+        </div>
     </div>
   </section>
 </main>
 
-<footer>
-  <div> Site desenvolvido por: Caroline Motta, Julia Costa e Leandro Filié</div>
-  <div>Copyright &copy 2021</div>
-</footer>
+<?php include './inc/footer.inc' ?>
+<?php include './scripts_rede.php' ?>
 
 </body>
 </html>

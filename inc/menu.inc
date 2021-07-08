@@ -11,6 +11,7 @@
                 ';
                 if($_SESSION["permissao"] == 2){
                     echo '<li><a href="dados_usuarios.php">Meus Dados</a></li>';
+                    echo '<li><a href="rede.php">Rede</a></li>';
                 }
                 if($_SESSION["permissao"] == 3){
                     if($_SESSION["situacao"] != 1)
