@@ -50,7 +50,7 @@
             }
             else if($_SESSION["permissao"] == 2){
                 //USUÁRIO SEM REDE
-                if(){
+                if(true){
                     echo '
                         <div class="section-title">
                             <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     header('Content-Type: application/json');
 
     include "conexao.php";
@@ -48,6 +49,20 @@
             $matriz = 0;
         }
     }
+    else if($_GET["identificador"] == 3){
+        $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = '".$_SESSION["id_rede"]."' ORDER BY postagem.data, postagem.hora DESC";
+        $resultadoPosts = mysqli_query($conexao,$selectPosts);
+
+        $j = 0;
+        while($linha = mysqli_fetch_assoc($resultadoPosts)){
+            $matriz[]=$linha;
+            $j++;
+        }
+        if($j == 0){
+            $matriz = 0;
+        }
+    }
 
     echo json_encode($matriz);
+    
 ?>

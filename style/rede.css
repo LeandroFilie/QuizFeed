@@ -164,6 +164,32 @@ form .form-footer button{
   animation: mostrar-campo 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+.erro{
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 8px;
+}
+
+.empty-post{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.empty-post p{
+  font-family: 'Mont-SemiBold';
+  font-size: 1.5rem;  
+  line-height: 15px;
+}
+
+.empty-post span{
+  font-size: 1.2rem;
+}
+
 @keyframes mostrar-campo {
   0%{
     transform: translateY(-16px);
