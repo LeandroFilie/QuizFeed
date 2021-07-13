@@ -12,7 +12,7 @@ main {
   min-height: var(--area-main);
 }
 
-main .section-title .title {
+.section-title .title {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,7 @@ main .section-title .title {
   font-weight: 600;
 }
 
-main .tab-links button {
+.tab-links button {
 
   border: none;
   background: transparent;
@@ -36,7 +36,7 @@ main .tab-links button {
 }
 
 
-main .tab-links button::after {
+.tab-links button::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -55,11 +55,11 @@ main .tab-links button::after {
   width: 100%;
 }
 
-main #tabs .tab-content {
+#tabs .tab-content {
   margin-top: 2rem;
 }
 
-main #tabs .tab-content>section,  main #tabs .tab-content-adm>section{
+#tabs .tab-content>section,  #tabs .tab-content-adm>section{
   animation: up 0.5s;
 }
 
@@ -81,7 +81,7 @@ main #tabs .tab-content>section,  main #tabs .tab-content-adm>section{
   flex-wrap: wrap;
 }
 
-main .tab-content-adm .card{
+.tab-content-adm .card{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,13 +103,13 @@ main .tab-content-adm .card{
 
 }
 
-main .tab-content-adm .card p {
+.tab-content-adm .card p {
   font-weight: 600;
   font-size: 1.5rem;
   color: var(--azul);
 }
 
-main .tab-content-adm .card button {
+.tab-content-adm .card button {
   border: none;
   padding: 10px 20px;
   border-radius: 10px;
@@ -132,7 +132,7 @@ main .tab-content-adm .card button {
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
 } 
 
-main .section-cta .cta-psicologos button, .section-cta .cta-testes button {
+.section-cta .cta-psicologos button, .section-cta .cta-testes button {
   background: var(--laranja);
   padding: 5px 20px;
   border-radius: 10px;
@@ -143,38 +143,153 @@ main .section-cta .cta-psicologos button, .section-cta .cta-testes button {
   cursor: pointer;
 }
 
-main .section-description .description-title {
+.section-description .description-title {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 50px;
 }
 
-main .section-description .description-title p {
+.section-description .description-title p {
   margin-left: 10px;
   font-weight: 600;
   font-size: 1.3rem;
 }
 
-main .section-description .description-content {
+.section-description .description-content {
   margin-top: -15px;
   font-size: 1.1rem;
 }
 
-main .section-description-question, .tab-content  {
+.section-description-question, .tab-content  {
   font-weight: 600;
   font-size: 1.3rem;
 }
 
-main .section-description-question .section-description-options {
+.section-description-question .section-description-options {
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
 
-main .section-description-question .section-description-options input {
+.section-description-question .section-description-options input {
   height: 100px;
   width: 100px;
+}
+
+/* ================= Usuário ja na rede ================== */
+.cards{
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card-area, .card-rede{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 350px;
+  min-width: 200px;
+  min-height: 400px;
+  
+  padding: 40px 25px;
+  margin: 20px;
+
+  background: #ffffff;
+
+  border-radius: 10px;
+  border: none;
+
+  transition: all 0.2s;
+
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.card-area p{
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.card-area h2{
+  margin: 0;
+  font-size: 2.5rem;
+  color: var(--laranja);
+  text-transform: uppercase;
+}
+
+.card-area span{
+  font-size: 1rem;
+  color: var(--azul);
+}
+
+.card-area span .link{
+  color: var(--laranja);
+}
+
+.card-area button, .card-rede button{
+  border: none;
+  border-radius: 10px;
+
+  padding: 10px 15px;
+  margin: 5px;
+  width: 130px;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  background: var(--laranja);
+}
+
+.card-rede .last-posts{
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-rede .last-posts .post{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1.8px solid var(--azul);
+}
+
+.post .data-user{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.post .data-user img {
+  height: 20px;
+  width: 20px;
+}
+
+.post .data-user span{
+  font-size: 0.9rem;
+}
+
+.post .conteudo{
+  text-align: justify;
+  margin-bottom: 8px;
+  font-size: 1rem;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.card-rede h2{
+  margin: 0;
+  font-size: 2rem;
+  color: var(--laranja);
 }
 
 @media (max-width: 300px) {
