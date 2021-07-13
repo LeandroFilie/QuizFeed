@@ -191,8 +191,7 @@ main {
   align-items: center;
   justify-content: space-between;
 
-  max-width: 350px;
-  min-width: 200px;
+  width: 350px;
   min-height: 400px;
   
   padding: 40px 25px;
@@ -215,7 +214,7 @@ main {
 
 .card-area h2{
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: var(--laranja);
   text-transform: uppercase;
 }
@@ -258,6 +257,7 @@ main {
   flex-direction: column;
   gap: 8px;
   border-bottom: 1.8px solid var(--azul);
+  width: 100%;
 }
 
 .post .data-user{
