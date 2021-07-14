@@ -3,7 +3,7 @@ html {
 }
 
 .header-index {
-  background: no-repeat center/cover url("../assets/header.svg");
+  background: no-repeat center/cover url("../assets/images/header.svg");
   height: 100vh;
 }
 

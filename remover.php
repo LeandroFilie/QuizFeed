@@ -1,5 +1,5 @@
 <?php
-    include "conexao.php";
+    include "./inc/conexao.php";
 
     $tabela = $_POST["tabela"];
     $coluna = $_POST["coluna"];

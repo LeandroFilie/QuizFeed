@@ -1,6 +1,6 @@
 <?php
 
-include "conexao.php";
+include "./inc/conexao.php";
 session_start();
 
 $nome_usuario_atual = $_SESSION['nome_usuario'];

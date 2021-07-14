@@ -1,6 +1,6 @@
 <?php
 
-include "conexao.php";
+include "./inc/conexao.php";
 session_start();
 
 if($_POST["identificador"] == 1){

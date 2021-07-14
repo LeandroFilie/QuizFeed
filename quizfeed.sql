@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 25-Jun-2021 às 00:34
+-- Tempo de geração: 13-Jul-2021 às 20:56
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `quizfeed`
 --
-CREATE DATABASE IF NOT EXISTS `quizfeed` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `quizfeed`;
 
 -- --------------------------------------------------------
 
@@ -35,7 +33,21 @@ CREATE TABLE IF NOT EXISTS `area` (
   `nome` varchar(50) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   PRIMARY KEY (`id_area`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `area`
+--
+
+INSERT INTO `area` (`id_area`, `nome`, `descricao`) VALUES
+(1, 'Ciências Exatas e da Terra', ''),
+(2, 'Ciências Biológicas', ''),
+(3, 'Engenharias', ''),
+(4, 'Ciências da Saúde', ''),
+(5, 'Ciências Agrárias', ''),
+(6, 'Ciências Sociais Aplicadas', ''),
+(7, 'Ciências Humanas', ''),
+(8, 'Linguística, Letras e Artes', '');
 
 -- --------------------------------------------------------
 
@@ -100,6 +112,13 @@ CREATE TABLE IF NOT EXISTS `inscricao` (
   KEY `cod_rede` (`cod_rede`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `inscricao`
+--
+
+INSERT INTO `inscricao` (`email_usuario`, `cod_rede`, `data`, `hora`) VALUES
+('julia@email.com', 2, '2021-07-13', '16:32:33');
+
 -- --------------------------------------------------------
 
 --
@@ -132,7 +151,21 @@ CREATE TABLE IF NOT EXISTS `rede` (
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`id_rede`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `rede`
+--
+
+INSERT INTO `rede` (`id_rede`, `nome`, `cod_area`) VALUES
+(1, 'Ciências Exatas e da Terra', 1),
+(2, 'Ciências Biológicas', 2),
+(3, 'Engenharias', 3),
+(4, 'Ciências da Saúde', 4),
+(5, 'Ciências Agrárias', 5),
+(6, 'Ciências Sociais Aplicadas', 6),
+(7, 'Ciências Humanas', 7),
+(8, 'Linguística, Letras e Artes', 8);
 
 -- --------------------------------------------------------
 

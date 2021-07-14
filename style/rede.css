@@ -50,14 +50,21 @@ form textarea{
 }
 
 .user-info img{
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
 }
 
 .user-info span{
   margin-left: 8px;
   color: #29292e;
-  font-size: 14px;
+}
+
+.posts .user-info span{
+  font-size: 0.85rem;
+}
+
+.header-rede .user-info span{
+  font-size: 1rem;
 }
 
 form .form-footer{
@@ -268,6 +275,11 @@ form .form-footer button{
   margin: 0;
 }
 
+@media(min-width: 550px){
+  .button_enviar_comentario{
+    margin-right: 20px;
+  }
+}
 
 @media(max-width: 345px){
   .user-info, form .form-footer{

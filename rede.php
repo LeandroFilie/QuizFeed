@@ -12,7 +12,7 @@
   <?php include './inc/menu.inc'; ?>
   
   <?php
-    include 'conexao.php';
+    include './inc/conexao.php';
 
     $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
     $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
@@ -20,7 +20,7 @@
       $nomeRede = $linha['nome'];
       $idRede = $linha["id_rede"];
     }    
-    $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.data, postagem.hora DESC";
+    $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.data DESC, postagem.hora DESC";
     $resultadoPosts = mysqli_query($conexao,$selectPosts); 
 
     $_SESSION["id_rede"] = $idRede;
@@ -35,7 +35,7 @@
       </h1>
     </div>
     <div class="user-info">
-      <img src="./assets/avatar.svg" alt="Avatar" />
+      <img src="./assets/images/avatar.svg" alt="Avatar" />
       <span><?php echo $_SESSION['nome_usuario']; ?></span>
     </div>  
   </div>
@@ -58,22 +58,22 @@
             <p>'.$linha["conteudo"].'</p>
             <div class="post-footer">
               <div class="user-info">
-                <img src="./assets/avatar.svg" alt="Avatar" />
+                <img src="./assets/images/avatar.svg" alt="Avatar" />
                 <span>'.$linha["nome_usuario"].'</span>
               </div>
               <div class="interacoes">
-                <img src="./assets/answer.svg" alt="comentar" class="comentar">
-                <div class="like">
+                <img src="./assets/images/answer.svg" alt="comentar" class="comentar" onclick="comentar('.$linha["id_postagem"].')"/>
+                <div class="like" id="like" onclick="curtir('.$linha["id_postagem"].')">
                   <span id="likeCount">10</span>
-                  <img src="./assets/like.svg" alt="like">
+                  <img src="./assets/images/like.svg" alt="like"  >
                 </div>
               </div>
             </div>
 
             <div class="section-comentarios">
-              <div class="enviar-comentario hide">
+              <div class="enviar-comentario hide" value='.$linha["id_postagem"].'>
                 <input type="text" placeholder="Escreva seu comentário" />
-                <img src="./assets/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
+                <img src="./assets/images/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
               </div>
 
               <div class="comentario">
@@ -86,14 +86,13 @@
 
           </div>
         ';
-
         $i++;
       }
 
       if($i == 0){
         echo '
           <div class="empty-post">
-            <img src="./assets/empty_post.svg" alt="Icone de Mensagem">
+            <img src="./assets/images/empty_post.svg" alt="Icone de Mensagem">
             <p>Nenhum post por aqui...</p>
             <span>Seja o primeiro a postar!</span>
           </div>
@@ -105,7 +104,8 @@
 </main>
 
 <?php include './inc/footer.inc' ?>
-<?php include './scripts_rede.php' ?>
+
+<script src="./js/rede.js" ></script>
 
 </body>
 </html>

@@ -2,7 +2,7 @@
     session_start();
     header('Content-Type: application/json');
 
-    include "conexao.php";
+    include "./inc/conexao.php";
 
     if($_GET["identificador"] == 1){
         $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario";
@@ -50,7 +50,7 @@
         }
     }
     else if($_GET["identificador"] == 3){
-        $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = '".$_SESSION["id_rede"]."' ORDER BY postagem.data, postagem.hora DESC";
+        $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = '".$_SESSION["id_rede"]."' ORDER BY postagem.data DESC, postagem.hora DESC";
         $resultadoPosts = mysqli_query($conexao,$selectPosts);
 
         $j = 0;

@@ -3,14 +3,13 @@
 <head>
     <?php include './inc/head.inc' ?>
     <link rel="stylesheet" href="./style/cadastro.css">
-    <script src="./js/cadastro.js"></script>
-    <script src="./js/select_estados.js"></script>
+    
     <title>Cadastro | TesteFeed</title>
 </head>
 <body>
     <header class="header">
         <nav>
-            <div><a href="index.php"><img src="./assets/logo.svg" alt="logo" class="logo"></a></div>
+            <div><a href="index.php"><img src="./assets/images/logo.svg" alt="logo" class="logo"></a></div>
             <button id="js-open-menu" class="menu-button">
                 <i class="menu-icon"></i>
             </button>
@@ -49,12 +48,12 @@
 
                         <div id="campo_senha" class="campo_senha">
                             <input type="password" name="senha" id="senha" placeholder="Senha" required />
-                            <img src="./assets/eye.svg" alt="" id="mostrar_senha" class="button_mostrar_senha">
+                            <img src="./assets/images/eye.svg" alt="" id="mostrar_senha" class="button_mostrar_senha">
                         </div>
 
                         <div id="campo_confirma_senha" class="campo_senha">
                             <input type="password" name="confirma_senha" id="confirma_senha" placeholder="Confirme a Senha" required />
-                            <img src="./assets/eye.svg" alt="" id="mostrar_confirma_senha" class="button_mostrar_senha">
+                            <img src="./assets/images/eye.svg" alt="" id="mostrar_confirma_senha" class="button_mostrar_senha">
                         </div>
 
                         <div id="erro_senha"></div>
@@ -90,12 +89,12 @@
                         
                         <div id="campo_senha_psi" class="campo_senha">
                             <input type="password" name="senha_psi" id="senha_psi" placeholder="Senha" required />
-                            <img src="./assets/eye.svg" alt="" id="mostrar_senha_psi" class="button_mostrar_senha">
+                            <img src="./assets/images/eye.svg" alt="" id="mostrar_senha_psi" class="button_mostrar_senha">
                         </div>
 
                         <div id="campo_confirma_senha_psi" class="campo_senha">
                             <input type="password" name="confirma_senha_psi" id="confirma_senha_psi" placeholder="Confirme a Senha" required />
-                            <img src="./assets/eye.svg" alt="" id="mostrar_confirma_senha_psi" class="button_mostrar_senha">
+                            <img src="./assets/images/eye.svg" alt="" id="mostrar_confirma_senha_psi" class="button_mostrar_senha">
                         </div>
 
                         <div id="erro_senha_psi"></div>
@@ -110,82 +109,8 @@
 
     <?php include './inc/footer.inc' ?>
 
-  <script src="./js/sweetalert2.all.min.js"></script>
-
-    <script>
-        $(function(){
-            initOptions();
-
-            $('#option-1').click(function(){
-                $('#option-2-content').hide();
-                $('#option-1-content').show();
-        
-                $('#option-2').removeClass('active');
-                $('#option-1').toggleClass('active');
-            });
-        
-            $('#option-2').click(function(){
-                $('#option-1-content').hide();
-                $('#option-2-content').show();
-        
-                $('#option-1').removeClass('active');
-                $('#option-2').toggleClass('active');
-            });
-        
-            function initOptions(){
-                $('#option-2-content').hide();
-                $('#option-1').toggleClass('active');
-            }
-
-            $('#mostrar_senha').click(function(){
-                if($('#senha').attr('type') == 'password'){
-                    $('#senha').attr('type', 'text');
-                    $('#mostrar_senha').attr('src', './assets/eye-off.svg');
-                }
-                else{
-                    $('#senha').attr('type', 'password');
-                    $('#mostrar_senha').attr('src', './assets/eye.svg');
-                }
-            });
-
-            $('#mostrar_confirma_senha').click(function(){
-                if($('#confirma_senha').attr('type') == 'password'){
-                    $('#confirma_senha').attr('type', 'text');
-                    $('#mostrar_confirma_senha').attr('src', './assets/eye-off.svg');
-                }
-                else{
-                    $('#confirma_senha').attr('type', 'password');
-                    $('#mostrar_confirma_senha').attr('src', './assets/eye.svg');
-                }
-            });
-
-            $('#mostrar_senha_psi').click(function(){
-                if($('#senha_psi').attr('type') == 'password'){
-                    $('#senha_psi').attr('type', 'text');
-                    $('#mostrar_senha_psi').attr('src', './assets/eye-off.svg');
-                }
-                else{
-                    $('#senha_psi').attr('type', 'password');
-                    $('#mostrar_senha_psi').attr('src', './assets/eye.svg');
-                }
-            });
-
-            $('#mostrar_confirma_senha_psi').click(function(){
-                if($('#confirma_senha_psi').attr('type') == 'password'){
-                    $('#confirma_senha_psi').attr('type', 'text');
-                    $('#mostrar_confirma_senha_psi').attr('src', './assets/eye-off.svg');
-                }
-                else{
-                    $('#confirma_senha_psi').attr('type', 'password');
-                    $('#mostrar_confirma_senha_psi').attr('src', './assets/eye.svg');
-                }
-            });
-
-            $("#registro").keyup(function() {
-                $("#registro").val(this.value.match(/[0-9]*/));
-            });
-        })
-        
-    </script>
+    <script src="./assets/libs/sweetalert2.all.min.js"></script>
+    <script src="./js/cadastro.js"></script>
+    <script src="./js/select_estados.js"></script>
 </body>
 </html>

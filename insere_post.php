@@ -4,7 +4,7 @@ session_start();
 
 date_default_timezone_set('America/Sao_Paulo');
 
-include 'conexao.php';
+include './inc/conexao.php';
 
 $conteudo = $_POST["conteudo"];
 $data = date('Y-m-d');

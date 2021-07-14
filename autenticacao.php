@@ -1,15 +1,13 @@
 <?php
     session_start();
 
-    include "conexao.php";
+    include "./inc/conexao.php";
 
     $email = $_POST["email"];
     $senha = $_POST["senha"];
-    
 
     $sql = "SELECT permissao, email FROM usuario WHERE email='$email' AND senha='$senha'";
     
-
     $resultado = mysqli_query($conexao,$sql)
                                     or die(mysqli_error($conexao));
 

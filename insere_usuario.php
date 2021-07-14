@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    include "conexao.php";
+    include "./inc/conexao.php";
 
     $nome = $_POST["nome_completo"];
 

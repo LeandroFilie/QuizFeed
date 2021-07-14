@@ -1,5 +1,108 @@
 $(document).ready(function(){
 
+// ========================= DECLARAÇÃO DE FUNÇÕES CADASTRO ===========================
+    function confereSenha(senha, confirma_senha){
+        limparMensagemErroSenha();
+        return senha === confirma_senha ? true : false;
+    }
+
+    function limparMensagemErroSenha(){
+        $("#erro_senha").removeClass("erro");
+        $("#erro_senha").html("");
+
+        $("#erro_senha_psi").removeClass("erro");
+        $("#erro_senha_psi").html("");
+    }
+
+    function mensagemErroSenha(identificador){
+        if(identificador == 1){
+            $("#erro_senha").addClass("erro");
+            $("#erro_senha").html("As senhas não conferem");
+        }
+        else{
+            $("#erro_senha_psi").addClass("erro");
+            $("#erro_senha_psi").html("As senhas não conferem");
+        }
+    }
+
+    function limparMensagensErro(){
+        $("#erro_email").removeClass("erro");
+        $("#erro_email").html("");
+
+        $("#erro_email_psi").removeClass("erro");
+        $("#erro_email_psi").html("");
+
+        $("#erro_registro").removeClass("erro");
+        $("#erro_registro").html("");
+
+        $("#erro_nome").removeClass("erro");
+        $("#erro_nome").html("");
+    }
+
+    function mensagemErroEmail(identificador){
+        if(identificador == 1){
+            $("#erro_email").addClass("erro");
+            $("#erro_email").html("E-mail já cadastrado");
+        }
+        else{
+            $("#erro_email_psi").addClass("erro");
+            $("#erro_email_psi").html("E-mail já cadastrado");
+        }
+    }
+
+    function mensagemErroNomeUsuarioRegistro(identificador){
+        if(identificador == 1){
+            $("#erro_nome").addClass("erro");
+            $("#erro_nome").html("Nome de Usuário já existe");
+        }
+        else{
+            $("#erro_registro").addClass("erro");
+            $("#erro_registro").html("Número de registro já cadastrado");
+        }
+        
+    }
+
+    function mensagemErroCadastro(identificador){
+        if(identificador == 1){
+            $("#erro_cadastro").addClass("erro");
+            $("#erro_cadastro").html("Erro no Cadastro");
+        }
+        else{
+            $("#erro_cadastro_psi").addClass("erro");
+            $("#erro_cadastro_psi").html("Erro no Cadastro");
+        }
+    }
+
+    function enviarDados(dados){
+        $.post("insere_usuario.php",dados,function(r){
+
+            console.log(dados);
+
+            console.log(r);
+
+            limparMensagensErro();
+
+            if(r == 0){
+                location.href="home.php";
+            }
+            else if(r == 1){
+                mensagemErroEmail(dados.identificador);
+            }
+            else if(r == 2){
+                mensagemErroNomeUsuarioRegistro(dados.identificador);
+            }
+            else if(r == 3){
+                mensagemErroEmail(dados.identificador);
+                mensagemErroNomeUsuarioRegistro(dados.identificador);
+            }
+            else {
+                mensagemErroCadastro(dados.identificador);
+            }
+        });
+        
+    }
+
+// ========================= CADASTRO ===========================
     $("#cadastro_usuario").click(function(){
         var nome_completo = $("#nome_completo").val();
         var nome_usuario = $("#nome_usuario").val();
@@ -16,11 +119,17 @@ $(document).ready(function(){
             
             nome_usuario === '' ? $("#nome_usuario").addClass('erro-input') : $("#nome_usuario").removeClass('erro-input');
             nome_completo === '' ? $("#nome_completo").addClass('erro-input') : $("#nome_completo").removeClass('erro-input');
-            email === '' ? $("#email").addClass('erro-input') : $("#email").removeClass('erro-input');
+            email === '' ? $("#email").addClass('erro-input') : $("#email").removeClass('erro-input')
             senha === '' ? $("#senha").addClass('erro-input') : $("#senha").removeClass('erro-input');
-            confirma_senha === '' ? $("#confirma_senha").addClass('erro-input') : $("#confirma_senha").removeClass('erro-input');
+            confirma_senha === '' ? $("#confirma_senha").addClass('erro-input') : $("#senha").removeClass('erro-input');
         }
         else{
+            $("#nome_usuario").removeClass('erro-input');
+            $("#nome_completo").removeClass('erro-input');
+            $("#email").removeClass('erro-input');
+            $("#senha").removeClass('erro-input');
+            $("#confirma_senha").removeClass('erro-input');
+
             var p = {
                 "nome_completo":nome_completo,
                 "nome_usuario":nome_usuario,
@@ -65,21 +174,27 @@ $(document).ready(function(){
             confirma_senha === '' ? $("#confirma_senha_psi").addClass('erro-input') : $("#confirma_senha_psi").removeClass('erro-input');
         }
         else{
+            $("#nome_completo_psi").removeClass('erro-input');
+            $("#registro").removeClass('erro-input');
+            $("#email_psi").removeClass('erro-input');
+            $("#estado").removeClass('erro-input');
+            $("#cidade").removeClass('erro-input');
+            $("#senha_psi").removeClass('erro-input');
+            $("#confirma_senha_psi").removeClass('erro-input');
+
             var p = {
                 "nome_completo":nome_completo,
                 "registro":registro,
                 "email":email,
                 "cidade":cidade,
+                "uf":estado,
                 "identificador":2
             }
 
             if(confereSenha(senha, confirma_senha)){
                 var senha = $.md5(senha);
                 p.senha = senha;
-                $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+estado,function(u){
-                    p.uf = u.sigla;
-                    enviarDados(p);
-                }) 
+                enviarDados(p);
             }
             else{
                 mensagemErroSenha(2);
@@ -87,104 +202,80 @@ $(document).ready(function(){
         }
     });
 
-    function enviarDados(dados){
-        $.post("insere_usuario.php",dados,function(r){
+// ========================= OPÇÕES DE ENTRADA CADASTRO ===========================
 
-            console.log(dados);
-
-            console.log(r);
-
-            limparMensagensErro();
-
-            if(r == 0){
-                location.href="home.php";
-            }
-            else if(r == 1){
-                mensagemErroEmail(dados.identificador);
-            }
-            else if(r == 2){
-                mensagemErroDois(dados.identificador);
-            }
-            else if(r == 3){
-                mensagemErroEmail(dados.identificador);
-                mensagemErroDois(dados.identificador);
-            }
-            else {
-                mensagemErroCadastro(dados.identificador);
-            }
-        });
-        
+    function initOptions(){
+        $('#option-2-content').hide();
+        $('#option-1').toggleClass('active');
     }
 
-    function confereSenha(senha, confirma_senha){
-        limparMensagemErroSenha();
-        return senha === confirma_senha ? true : false;
-    }
+    initOptions();
 
-    function limparMensagemErroSenha(){
-        $("#erro_senha").removeClass("erro");
-        $("#erro_senha").html("");
+    $('#option-1').click(function(){
+        $('#option-2-content').hide();
+        $('#option-1-content').show();
 
-        $("#erro_senha_psi").removeClass("erro");
-        $("#erro_senha_psi").html("");
-    }
+        $('#option-2').removeClass('active');
+        $('#option-1').toggleClass('active');
+    });
 
-    function limparMensagensErro(){
-        $("#erro_email").removeClass("erro");
-        $("#erro_email").html("");
+    $('#option-2').click(function(){
+        $('#option-1-content').hide();
+        $('#option-2-content').show();
 
-        $("#erro_email_psi").removeClass("erro");
-        $("#erro_email_psi").html("");
+        $('#option-1').removeClass('active');
+        $('#option-2').toggleClass('active');
+    });
 
-        $("#erro_registro").removeClass("erro");
-        $("#erro_registro").html("");
+// ========================= MOSTRAR/OCULTAR SENHA ===========================
 
-        $("#erro_nome").removeClass("erro");
-        $("#erro_nome").html("");
-    }
-
-    function mensagemErroSenha(identificador){
-        if(identificador == 1){
-            $("#erro_senha").addClass("erro");
-            $("#erro_senha").html("As senhas não conferem");
+    $('#mostrar_senha').click(function(){
+        if($('#senha').attr('type') == 'password'){
+            $('#senha').attr('type', 'text');
+            $('#mostrar_senha').attr('src', './assets/images/eye-off.svg');
         }
         else{
-            $("#erro_senha_psi").addClass("erro");
-            $("#erro_senha_psi").html("As senhas não conferem");
+            $('#senha').attr('type', 'password');
+            $('#mostrar_senha').attr('src', './assets/images/eye.svg');
         }
-    }
+    });
 
-    function mensagemErroEmail(identificador){
-        if(identificador == 1){
-            $("#erro_email").addClass("erro");
-            $("#erro_email").html("E-mail já cadastrado");
+    $('#mostrar_confirma_senha').click(function(){
+        if($('#confirma_senha').attr('type') == 'password'){
+            $('#confirma_senha').attr('type', 'text');
+            $('#mostrar_confirma_senha').attr('src', './assets/images/eye-off.svg');
         }
         else{
-            $("#erro_email_psi").addClass("erro");
-            $("#erro_email_psi").html("E-mail já cadastrado");
+            $('#confirma_senha').attr('type', 'password');
+            $('#mostrar_confirma_senha').attr('src', './assets/images/eye.svg');
         }
-    }
+    });
 
-    function mensagemErroDois(identificador){
-        if(identificador == 1){
-            $("#erro_nome").addClass("erro");
-            $("#erro_nome").html("Nome de Usuário já existe");
+    $('#mostrar_senha_psi').click(function(){
+        if($('#senha_psi').attr('type') == 'password'){
+            $('#senha_psi').attr('type', 'text');
+            $('#mostrar_senha_psi').attr('src', './assets/images/eye-off.svg');
         }
         else{
-            $("#erro_registro").addClass("erro");
-            $("#erro_registro").html("Número de registro já cadastrado");
+            $('#senha_psi').attr('type', 'password');
+            $('#mostrar_senha_psi').attr('src', './assets/images/eye.svg');
         }
-        
-    }
+    });
 
-    function mensagemErroCadastro(identificador){
-        if(identificador == 1){
-            $("#erro_cadastro").addClass("erro");
-            $("#erro_cadastro").html("Erro no Cadastro");
+    $('#mostrar_confirma_senha_psi').click(function(){
+        if($('#confirma_senha_psi').attr('type') == 'password'){
+            $('#confirma_senha_psi').attr('type', 'text');
+            $('#mostrar_confirma_senha_psi').attr('src', './assets/images/eye-off.svg');
         }
         else{
-            $("#erro_cadastro_psi").addClass("erro");
-            $("#erro_cadastro_psi").html("Erro no Cadastro");
+            $('#confirma_senha_psi').attr('type', 'password');
+            $('#mostrar_confirma_senha_psi').attr('src', './assets/images/eye.svg');
         }
-    }
+    });
+
+// ========================= MÁSCARA INPUT DE REGISTRO ===========================
+
+    $("#registro").keyup(function() {
+        $("#registro").val(this.value.match(/[0-9]*/));
+    });
 });

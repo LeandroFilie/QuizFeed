@@ -5,14 +5,14 @@
 <html lang="pt-br">
 <head>
     <?php include './inc/head.inc' ?>    
-    <link rel="stylesheet" href="./Bootstrap/bootstrap.min.css" />
-    <script src="./Bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
+    <script src="./assets/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./style/dados_usuario.css">
     <title>Dados | TesteFeed</title>
 </head>
 <body>
   <?php
-    include 'conexao.php';
+    include './inc/conexao.php';
     include './inc/menu.inc';
   ?>
   <main>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="data-user-details-items-adm">
                   <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDados">Ver mais</button>
-                  <button class="data-user-delete-adm delete" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                  <button class="data-user-delete-adm delete" onclick="removerUser(\''.$linha['email_usuario'].'\')" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
                 </div>
               </div>  
               ';
@@ -76,7 +76,7 @@
 
         echo '
             <div class="data-user-title">
-              <img src="./assets/dados.svg" Alt="user" class="icon-user"/>
+              <img src="./assets/images/dados.svg" Alt="user" class="icon-user"/>
               <h1>Dados Pessoais</h1>
             </div>
             <div id="msg"></div>
@@ -104,7 +104,7 @@
                   </div>  
                   <div class="buttons-action">
                       <button class="data-user-action alterar" value="'.$linha["email"].'" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
-                      <button class="data-user-delete delete" value="'.$linha["email"].'" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                      <button class="data-user-delete delete" onclick="removerUser(\''.$linha['email'].'\')" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
                   </div>
                 ';
               }
@@ -116,12 +116,13 @@
   <?php
     include './inc/footer.inc';
 
-    include './inc/modal_editar.inc';
-    include './inc/modal_excluir.inc';
+    include './inc/modal_usuario.inc';
 
-    include 'scripts_usuario.php'; 
     echo '<input type="hidden" value="'.$_SESSION["permissao"].'" id="permissao">';
     echo '<input type="hidden" value="'.$_SESSION["email"].'" id="email_oculto">';
   ?>
+  
+  <script src="./js/usuario.js"></script>
+
 </body>
 </html>

@@ -190,9 +190,9 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  flex: 1;
 
-  width: 350px;
-  min-height: 400px;
+  min-height: 430px;
   
   padding: 40px 25px;
   margin: 20px;
@@ -201,8 +201,6 @@ main {
 
   border-radius: 10px;
   border: none;
-
-  transition: all 0.2s;
 
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
 }
@@ -213,7 +211,7 @@ main {
 }
 
 .card-area h2{
-  margin: 0;
+  margin: 10px 0;
   font-size: 2rem;
   color: var(--laranja);
   text-transform: uppercase;
@@ -233,7 +231,7 @@ main {
   border-radius: 10px;
 
   padding: 10px 15px;
-  margin: 5px;
+  margin: 8px;
   width: 130px;
 
   color: white;
@@ -247,9 +245,22 @@ main {
 
 .card-rede .last-posts{
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
+  width: 100%;
+}
+
+.card-rede .last-posts + .post{
+  align-items: flex-start;
+}
+
+.card-rede .last-posts .empty-post{
+  align-items: center;
+}
+
+.card-rede .last-posts button{
+  margin-top: 8px;
 }
 
 .card-rede .last-posts .post{
