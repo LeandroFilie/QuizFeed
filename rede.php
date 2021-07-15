@@ -20,11 +20,10 @@
       $nomeRede = $linha['nome'];
       $idRede = $linha["id_rede"];
     }    
-    $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.data DESC, postagem.hora DESC";
+    $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.id_postagem DESC";
     $resultadoPosts = mysqli_query($conexao,$selectPosts); 
 
-    $_SESSION["id_rede"] = $idRede;
-  
+    $_SESSION["id_rede"] = $idRede;  
   ?>
   
 <main>
@@ -53,6 +52,7 @@
     <?php
     $i = 0;
       while($linha = mysqli_fetch_assoc($resultadoPosts)){
+        $selectLikes = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida";
         echo '
           <div class="post">
             <p>'.$linha["conteudo"].'</p>
@@ -63,9 +63,26 @@
               </div>
               <div class="interacoes">
                 <img src="./assets/images/answer.svg" alt="comentar" class="comentar" onclick="comentar('.$linha["id_postagem"].')"/>
-                <div class="like" id="like" onclick="curtir('.$linha["id_postagem"].')">
-                  <span id="likeCount">10</span>
-                  <img src="./assets/images/like.svg" alt="like"  >
+                <div class="like" id="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">
+                ';
+                $selectLikes .= ' WHERE cod_postagem = '.$linha["id_postagem"].'';
+                $resultadoLikes = mysqli_query($conexao,$selectLikes); 
+                $qtdLikes = mysqli_num_rows($resultadoLikes);
+
+                echo '  
+                  <span id="likeCount">'.$qtdLikes.'</span>
+                ';
+
+                $selectLikeUser = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida WHERE email_usuario = '".$_SESSION["email"]."' AND cod_postagem = '".$linha["id_postagem"]."'";
+                $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser); 
+
+                if(mysqli_num_rows($resultadoLikeUser) > 0){
+                  echo '<img src="./assets/images/liked.svg" alt="liked"  />';
+                }
+                else{
+                  echo '<img src="./assets/images/like.svg" alt="like"  />';
+                }
+                echo '
                 </div>
               </div>
             </div>

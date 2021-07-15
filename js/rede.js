@@ -1,9 +1,33 @@
 function curtir(id){
-  console.log(id);
+  dados = {
+    'cod_postagem': id,
+    'situacao': 1 //curtindo
+  }
+
+  $.post('interacoes_rede.php',dados,function(r){
+    if(r == 0){
+      $.get('seleciona.php?identificador=4&id='+id,function(r){
+        $("#like[value='"+ id +"'] #likeCount").text(`${r.qtdLikes}`);
+        $("#like[value='"+ id +"'] img").attr('src', '././assets/images/liked.svg');
+      }) 
+    }
+    else{
+      dados.situacao = 2
+      $.post('interacoes_rede.php',dados,function(r){
+        if(r == 0){
+          $.get('seleciona.php?identificador=4&id='+id,function(r){
+            $("#like[value='"+ id +"'] #likeCount").text(`${r.qtdLikes}`);
+            $("#like[value='"+ id +"'] img").attr('src', '././assets/images/like.svg');
+          })
+        }
+      })
+
+    }
+
+  })
 }
 
 function comentar(id){
-  console.log(id);
   elemento = jQuery(`.enviar-comentario[value='${id}']`);
   if(elemento.hasClass('hide')){
     elemento.removeClass('hide')
@@ -16,7 +40,6 @@ function comentar(id){
 }
 
 $(document).ready(function(){
-
   $('#postar').click(function(){
     var p = {
       'conteudo': $('#conteudo').val()
@@ -34,60 +57,61 @@ $(document).ready(function(){
       }
     })
   })
-  /* $('.comentar').click(function(){
-    
-    if($('.enviar-comentario').hasClass('hide')){
-      $('.enviar-comentario').removeClass('hide')
-      $('.enviar-comentario').toggleClass('show')
-    }
-    else{
-      $('.enviar-comentario').removeClass('show')
-      $('.enviar-comentario').toggleClass('hide')
-    } 
-    
-  }) */
 
   function atualizarListaPosts(){
-      $.get("seleciona.php?identificador=3",function(r){
-        console.log(r);
-        t = '';
-        $.each(r,function(i,p){            
+    $.get("seleciona.php?identificador=3",function(r){
+      t = '';
+      $.each(r,function(i,p){     
+        $.get("seleciona.php?identificador=4&id="+p.id_postagem,function(resultado){
+          console.log(resultado);
             t += `
-              <div class="post">
-                <p>${p.conteudo}</p>
-                <div class="post-footer">
-                  <div class="user-info">
-                    <img src="./assets/images/avatar.svg" alt="Avatar" />
-                    <span>${p.nome_usuario}</span>
-                  </div>
-                  <div class="interacoes">
-                    <img src="./assets/images/answer.svg" alt="comentar" class="comentar" onclick="comentar(${p.id_postagem})">
-                    <div class="like" id="like" onclick="curtir(${p.id_postagem})">
-                      <span id="likeCount">10</span>
-                      <img src="./assets/images/like.svg" alt="like">
-                    </div>
+            <div class="post">
+              <p>${p.conteudo}</p>
+              <div class="post-footer">
+                <div class="user-info">
+                  <img src="./assets/images/avatar.svg" alt="Avatar" />
+                  <span>${p.nome_usuario}</span>
+                </div>
+                <div class="interacoes">
+                  <img src="./assets/images/answer.svg" alt="comentar" class="comentar" onclick="comentar(${p.id_postagem})">
+                  <div class="like" id="like" value="${p.id_postagem}" onclick="curtir(${p.id_postagem})" >
+                    <span id="likeCount">${resultado.qtdLikes}</span>`;
+                    if(resultado.verificaLikes > 0){
+                      t += `<img src="././assets/images/liked.svg" alt="liked">`;
+                    }
+                    else{
+                      t += `<img src="././assets/images/like.svg" alt="like">`;
+                    } 
+                    console.log(resultado.verificaLikes);
+
+              t +=`      
                   </div>
                 </div>
+              </div>
 
-                <div class="section-comentarios">
-                  <div class="enviar-comentario hide" value="${p.id_postagem}">
-                    <input type="text" placeholder="Escreva seu comentário" />
-                    <img src="./assets/images/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
+              <div class="section-comentarios">
+                <div class="enviar-comentario hide" value="${p.id_postagem}">
+                  <input type="text" placeholder="Escreva seu comentário" />
+                  <img src="./assets/images/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
+                </div>
+
+                <div class="comentario">
+                  <div class="comentario-content">
+                    <p>Seja o primeiro a comentar nesse post!</p>
                   </div>
-
-                  <div class="comentario">
-                    <div class="comentario-content">
-                      <p>Seja o primeiro a comentar nesse post!</p>
-                    </div>
-                  </div>
-
                 </div>
 
               </div>
+
+            </div>
             `;
-        });  
-        $('.posts').html(t);
-    });
-    $('#conteudo').val('');
+            $('.posts').html(t);
+          
+        })
+      });  
+    }); 
+  $('#conteudo').val('');
+
   }
+
 })
