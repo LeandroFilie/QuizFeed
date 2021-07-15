@@ -92,8 +92,8 @@ DROP TABLE IF EXISTS `curtida`;
 CREATE TABLE IF NOT EXISTS `curtida` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_postagem` int(11) NOT NULL,
-  `data` int(11) NOT NULL,
-  `hora` int(11) NOT NULL,
+  `data` date NOT NULL,
+  `hora` time NOT NULL,
   PRIMARY KEY (`email_usuario`,`cod_postagem`),
   KEY `cod_postagem` (`cod_postagem`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
