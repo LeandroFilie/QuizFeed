@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 13-Jul-2021 às 20:56
+-- Tempo de geração: 15-Jul-2021 às 17:04
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `quizfeed`
 --
+CREATE DATABASE IF NOT EXISTS `quizfeed` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `quizfeed`;
 
 -- --------------------------------------------------------
 
@@ -33,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `area` (
   `nome` varchar(50) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   PRIMARY KEY (`id_area`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `area`
@@ -61,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `area_resultado` (
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`cod_resultado`,`cod_area`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -78,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `comentario` (
   `time` time NOT NULL,
   PRIMARY KEY (`email_usuario`,`cod_postagem`),
   KEY `cod_postagem` (`cod_postagem`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -94,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `curtida` (
   `hora` int(11) NOT NULL,
   PRIMARY KEY (`email_usuario`,`cod_postagem`),
   KEY `cod_postagem` (`cod_postagem`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -110,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `inscricao` (
   `hora` time NOT NULL,
   PRIMARY KEY (`email_usuario`,`cod_rede`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `inscricao`
@@ -136,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
   KEY `email_usuario` (`email_usuario`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -151,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `rede` (
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`id_rede`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `rede`
@@ -180,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `resultado` (
   `descricao` varchar(500) NOT NULL,
   PRIMARY KEY (`id_resultado`,`cod_teste`),
   KEY `cod_teste` (`cod_teste`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -194,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `teste_pronto` (
   `nome` varchar(50) NOT NULL,
   `link` varchar(100) NOT NULL,
   PRIMARY KEY (`id_teste`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -209,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `senha` varchar(50) NOT NULL,
   `permissao` int(1) NOT NULL,
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuario`
@@ -235,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `usuario_comum` (
   `email_usuario` varchar(100) NOT NULL,
   `nome_usuario` varchar(100) NOT NULL,
   PRIMARY KEY (`email_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuario_comum`
@@ -261,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
   `uf` varchar(2) NOT NULL,
   `situacao` int(1) NOT NULL,
   PRIMARY KEY (`email_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuario_psicologo`
@@ -287,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `usuario_testepronto` (
   `data` date NOT NULL,
   PRIMARY KEY (`email_usuario`,`cod_teste`),
   KEY `cod_teste` (`cod_teste`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Restrições para despejos de tabelas
