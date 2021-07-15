@@ -54,6 +54,7 @@ main {
   outline: none;
 
   position: relative;
+  cursor: pointer
 }
 
 .tab-links button::after {

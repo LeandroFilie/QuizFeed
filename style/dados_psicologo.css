@@ -138,6 +138,7 @@ main {
   outline: none;
 
   position: relative;
+  cursor: pointer;
 }
 
 
@@ -404,6 +405,8 @@ main {
 .modal-footer{
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .erro{
@@ -437,6 +440,15 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+}
+
+@media(max-width: 355px){
+  .modal-footer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 }
 

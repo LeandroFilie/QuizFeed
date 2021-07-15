@@ -33,6 +33,7 @@ main {
   outline: none;
 
   position: relative;
+  cursor: pointer;
 }
 
 
