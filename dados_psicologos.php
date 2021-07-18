@@ -95,10 +95,8 @@
       else if($_SESSION["permissao"] == 2){
         echo '
           <div class="filtro">
-            <h3>Filtrar Psicólogos</h3>
+            <h3>Encontre psicólogos na sua cidade!</h3>
             <form method="POST" action="dados_psicologos.php">
-              <input type="text" name="nome" id="nome" placeholder="Nome" />
-              <input type="text" name="registro" id="registro" placeholder="Registro" maxlength="11"/>
               <div class="select-estados-cidades">
                   <select id="estado_filtro" name="estado_filtro">
                       <option value="" label="Estado"></option>';
@@ -115,15 +113,6 @@
         $selectSituacao2 = 'SELECT nome, email_usuario, situacao FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2"';
 
         if(!empty($_POST)){
-          if($_POST["nome"] != ""){
-            $nome = $_POST["nome"];
-            $selectSituacao2 .= " AND usuario.nome like '%$nome%'";
-            
-          }
-          if($_POST["registro"] != ""){
-            $registro = $_POST["registro"];
-            $selectSituacao2 .= " AND registro = '$registro'";
-          }
           if($_POST["estado_filtro"] != ""){
             $uf = $_POST["estado_filtro"];
             $selectSituacao2 .= " AND uf = '$uf'";

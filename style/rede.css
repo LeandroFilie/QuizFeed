@@ -28,25 +28,9 @@ main {
   font-family: "Mont-SemiBold";
 }
 
-form textarea{
-  width: 100%;
-  border: 0;
-  padding: 16px;
-  border-radius: 8px;
-  background: #fefefe;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
-  
-  resize: vertical;
-  min-height: 130px;
-}
-
-.header-rede .user-info, .posts .user-info{
+.form_footer .user-info, .posts .user-info{
   display: flex;
   align-items: center;
-}
-
-.header-rede .user-info{
-  margin-bottom: 16px;
 }
 
 .user-info img{
@@ -63,20 +47,40 @@ form textarea{
   font-size: 0.85rem;
 }
 
-.header-rede .user-info span{
-  font-size: 1rem;
+form{
+  background-color: #fff;
+  padding: 16px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+}
+
+form textarea{
+  width: 100%;
+  border: 0;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fefefe;
+  resize: none;
+  min-height: 130px;
 }
 
 form .form-footer{
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  margin-top: 16px;
+
+  border-top: 1px solid #29292e3b;
+  padding-top: 8px;
+}
+
+form .form-footer .user-info{
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
 }
 
 form .form-footer button{
   padding: 10px 20px;
-  margin: 10px;
   background: var(--laranja);
   color: white;
 
@@ -282,8 +286,12 @@ form .form-footer button{
 }
 
 @media(max-width: 345px){
-  .user-info, form .form-footer{
+  form .form-footer{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+  }
+
+  form .form-footer .user-info{
+    display: none;
   }
 }

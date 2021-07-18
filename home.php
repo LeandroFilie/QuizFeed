@@ -59,12 +59,12 @@
                             <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
                          </div>
                         <section class="section-description-question">
-                            <p>Me fala, você já fez alguma orientação vocacional com algum especialista?</p>
+                            <p>Me fala, você já fez alguma orientação vocacional ou tem ideia da área que mais se identifica?</p>
                         </section>
                         <section id="tabs">
                             <div class="tab-links">
-                                <button id="option-1">Sim, já fiz</button>
-                                <button id="option-2">Não, nunca fiz</button>
+                                <button id="option-1">Sim, já fiz ou tenho uma ideia</button>
+                                <button id="option-2">Não, estou completamente perdido</button>
                             </div>
     
                             <div class="tab-content">
@@ -79,6 +79,9 @@
                                         </div>
                                         <div class="cta-testes">
                                             <p>Veja testes vocacionais online que podem te ajudar também</p>
+                                            <span>Teste 1</span>
+                                            <span>Teste 2</span>
+                                            <span>Teste 3</span>
                                             <button>Ver mais</button>
                                         </div>
                                     </div>

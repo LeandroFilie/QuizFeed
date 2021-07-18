@@ -32,17 +32,17 @@
       <h1>
         <?php echo $nomeRede; ?>
       </h1>
-    </div>
-    <div class="user-info">
-      <img src="./assets/images/avatar.svg" alt="Avatar" />
-      <span><?php echo $_SESSION['nome_usuario']; ?></span>
-    </div>  
+    </div> 
   </div>
   
   <form>
     <div id="erro_post"></div>
     <textarea id="conteudo" placeholder="O que você quer postar?"></textarea>
     <div class="form-footer">
+      <div class="user-info">
+        <img src="./assets/images/avatar.svg" alt="Avatar" />
+        <span><?php echo $_SESSION['nome_usuario']; ?></span>
+      </div> 
       <button type='button' id="postar">Postar</button>
     </div>
   </form>
