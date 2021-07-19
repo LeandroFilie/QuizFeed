@@ -20,6 +20,48 @@
                 echo '
                     <div class="section-title">
                         <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
+                    </div>
+
+                    <section class="cards">
+
+                        <section class="card-adm">
+                            <div class="card-title">Gerenciamento de Usuários</div>
+                            <div class="item">
+                                <p>Comuns</p>
+                                <a href="./dados_usuarios.php"><button>Ver todos</button></a>
+                            </div>
+                            <div class="item">
+                                <p>Psicólogos</p>
+                                <a href="./dados_psicologos.php"><button>Ver todos</button></a>
+                            </div>
+                        </section>
+
+                        <section class="card-adm">
+                            <div class="card-title">Gerenciamento das Redes</div>
+                            <select id="nome_rede">
+                                <option value="">Selecione uma Rede</option>
+                            ';
+                            
+                            $selectAreas = 'SELECT * FROM area';
+                            $resultadoAreas = mysqli_query($conexao, $selectAreas);
+
+                            while($linha = mysqli_fetch_assoc($resultadoAreas)){
+                                echo '
+                                    <option value="'.$linha["id_area"].'">'.$linha["nome"].'</option>
+                                ';
+                            }
+                            echo '
+                            </select>
+
+                            <button>Ir para a Rede</button>
+
+                        </section>
+
+                    </section>
+                    ';
+                /* echo '
+                    <div class="section-title">
+                        <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
                      </div>
                     <section id="tabs">
                         <div class="tab-links">
@@ -47,7 +89,7 @@
                         </div>
                     </section>
 
-                ';
+                '; */
             }
             else if($_SESSION["permissao"] == 2){
                 $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
@@ -57,38 +99,53 @@
                     echo '
                         <div class="section-title">
                             <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
-                         </div>
-                        <section class="section-description-question">
-                            <p>Me fala, você já fez alguma orientação vocacional ou tem ideia da área que mais se identifica?</p>
-                        </section>
-                        <section id="tabs">
-                            <div class="tab-links">
-                                <button id="option-1">Sim, já fiz ou tenho uma ideia</button>
-                                <button id="option-2">Não, estou completamente perdido</button>
-                            </div>
-    
-                            <div class="tab-content">
-                                <section id="option-1-content">
-                                    <p>Então escolha a sua área de maior afinidade</p>
-                                </section>
-                                <section id="option-2-content">
-                                    <div class="section-cta">
-                                        <div class="cta-psicologos">
-                                            <p>Veja profissionais especializados para você fazer uma orientação vocacional</p>
-                                            <a href="./dados_psicologos.php"><button>Ver mais</button></a>
-                                        </div>
-                                        <div class="cta-testes">
-                                            <p>Veja testes vocacionais online que podem te ajudar também</p>
-                                            <span>Teste 1</span>
-                                            <span>Teste 2</span>
-                                            <span>Teste 3</span>
-                                            <button>Ver mais</button>
-                                        </div>
+                        </div>
+
+                        <section class="cards">
+
+                            <section class="card-inicio">
+                                <div class="card-title">Está completamente perdido? Comece por aqui!</div>
+                                <p>Quer fazer uma orientação vocaional? <a href="#">Clique aqui</a> e veja profissionais da área.</p>
+                                <span class="separator">ou</span>
+                                <div class="lista-testes">
+                                    <p class="text-testes">Faça testes vocacionais online</p>
+                                    <div class="testes">
+                                        <a href="https://www.guiadacarreira.com.br/teste-vocacional/" target="_blank" >Guia da Carreira</a>
+                                        <a href="https://querobolsa.com.br/teste-vocacional-gratis" target="_blank" >Quero Bolsa</a>
+                                        <a href="https://www.vix.com/pt/comportamento/546867/qual-profissao-mais-combina-com-voce-este-teste-vocacional-te-ajuda-a-descobrir" target="_blank" >Vix</a>
                                     </div>
-                                </section>
-                            </div>
+                                </div>
+                                <span class="obs">* O recomendado é você se consultar com um profissional especializado</span>
+                            </section>
+
+                            <section class="card-redes">
+                                <div class="card-title">Já tem uma área em mente? Já fez um teste ou orientação vocaional? Selecione aqui!</div>
+                                <select id="nome_rede">
+                                    <option value="">Selecione uma Rede</option>
+                                ';
+                                
+                                $selectAreas = 'SELECT * FROM area';
+                                $resultadoAreas = mysqli_query($conexao, $selectAreas);
+
+                                while($linha = mysqli_fetch_assoc($resultadoAreas)){
+                                    echo '
+                                        <option value="'.$linha["id_area"].'">'.$linha["nome"].'</option>
+                                    ';
+                                }
+                                echo '
+                                </select>
+                                
+                                <button>Entrar na Rede</button>
+
+                                <span class="separator">ou</span>
+
+                                <p><a href="#">Clique aqui</a> para saber mais sobre as áreas de conhecimento e os cursos mais populares</p>
+
+                            </section>
+
                         </section>
                     ';
+                        
                 }
                 else{
                     while($linha = mysqli_fetch_assoc($resultadoNomeRede)){
@@ -174,32 +231,5 @@
         ?>
     </main>
     <?php include './inc/footer.inc';  ?>
-
-    <script>
-        $(function(){
-            ocultarOptions();
-
-            $('#option-1').click(function(){
-                $('#option-2-content').hide();
-                $('#option-1-content').show();
-        
-                $('#option-2').removeClass('active');
-                $('#option-1').toggleClass('active');
-            });
-        
-            $('#option-2').click(function(){
-                $('#option-1-content').hide();
-                $('#option-2-content').show();
-        
-                $('#option-1').removeClass('active');
-                $('#option-2').toggleClass('active');
-            });
-        
-            function ocultarOptions(){
-                $('#option-1-content').hide();
-                $('#option-2-content').hide();
-            }
-        });
-    </script>
 </body>
 </html>

@@ -29,13 +29,18 @@ function curtir(id){
 
 function comentar(id){
   elemento = jQuery(`.enviar-comentario[value='${id}']`);
+  emptyComment = jQuery(`.empty-comment[value='${id}']`);
   if(elemento.hasClass('hide')){
-    elemento.removeClass('hide')
-    elemento.toggleClass('show')
+    elemento.removeClass('hide');
+    elemento.toggleClass('show');
+
+    emptyComment.css('display', 'none');
   }
   else{
-    elemento.removeClass('show')
-    elemento.toggleClass('hide')
+    elemento.removeClass('show');
+    elemento.toggleClass('hide');
+
+    emptyComment.css('display', 'block');
   } 
 }
 

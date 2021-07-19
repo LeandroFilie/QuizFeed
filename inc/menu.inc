@@ -23,7 +23,7 @@
                 }
                 echo '
                     
-                    <li><a href="logout.php">Sair</a></li>
+                    <li class="logout"><a href="logout.php" class="icon-logout"><img src="././assets/images/log-out.svg"/></a></li>
                 </ul>
             </nav>
         </header>

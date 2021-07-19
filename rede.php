@@ -34,7 +34,7 @@
       </h1>
     </div> 
   </div>
-  
+
   <form>
     <div id="erro_post"></div>
     <textarea id="conteudo" placeholder="O que você quer postar?"></textarea>
@@ -88,16 +88,24 @@
             </div>
 
             <div class="section-comentarios">
+
               <div class="enviar-comentario hide" value='.$linha["id_postagem"].'>
                 <input type="text" placeholder="Escreva seu comentário" />
-                <img src="./assets/images/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
+                <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario">
               </div>
-
-              <div class="comentario">
-                <div class="comentario-content">
-                  <p>Seja o primeiro a comentar nesse post!</p>
-                </div>
-              </div>
+              <div class="empty-comment comentario-content" value='.$linha["id_postagem"].'>Seja o primeiro a comentar nesse post!</div>
+                <!-- 
+                <div class="comentario">
+                  <div class="avatar">
+                    <img src="./assets/images/avatar.svg" alt="Avatar" />
+                  </div>
+                  <div class="comentario-content">
+                    <span>@NomeUsuário</span>
+                    <p>Comentário aquiii!!</p>
+                  </div>
+                </div> 
+                -->
+  
 
             </div>
 

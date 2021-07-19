@@ -17,168 +17,10 @@ main {
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-family: 'Mont-SemiBold';
 }
 
-.tab-links button {
-
-  border: none;
-  background: transparent;
-
-  font-size: 1.5rem;
-
-  padding: 16px;
-
-  outline: none;
-
-  position: relative;
-  cursor: pointer;
-}
-
-
-.tab-links button::after {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  content: "";
-  height: 2px;
-  width: 0%;
-
-  background-color: var(--laranja);
-
-  transition: .4s;
-}
-
-.tab-links button:hover::after,
-.tab-links button.active::after {
-  width: 100%;
-}
-
-#tabs .tab-content {
-  margin-top: 2rem;
-}
-
-#tabs .tab-content>section,  #tabs .tab-content-adm>section{
-  animation: up 0.5s;
-}
-
-@keyframes up {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-#tabs .tab-content-adm #option-1-content,  #tabs .tab-content-adm #option-2-content{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.tab-content-adm .card{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  max-width: 350px;
-  min-width: 200px;
-  
-  padding: 10px;
-  margin: 20px;
-
-  background: #ffffff;
-
-  border-radius: 10px;
-  border: none;
-
-  transition: all 0.2s;
-
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
-
-}
-
-.tab-content-adm .card p {
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: var(--azul);
-}
-
-.tab-content-adm .card button {
-  border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 20px 0;
-  cursor: pointer;
-  background: var(--laranja);
-  transition: all 0.2s;
-  will-change: transform;
-}
-
-.section-cta .cta-psicologos, .section-cta .cta-testes{
-  font-size: 1.2rem;
-  background: white;
-  border-radius: 10px;
-  padding: 10px 20px;
-  margin: 20px;
-  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
-} 
-
-.section-cta .cta-psicologos button, .section-cta .cta-testes button {
-  background: var(--laranja);
-  padding: 5px 20px;
-  border-radius: 10px;
-  border: none;
-  color: white;
-  font-weight: bold;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.section-description .description-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 50px;
-}
-
-.section-description .description-title p {
-  margin-left: 10px;
-  font-weight: 600;
-  font-size: 1.3rem;
-}
-
-.section-description .description-content {
-  margin-top: -15px;
-  font-size: 1.1rem;
-}
-
-.section-description-question, .tab-content  {
-  font-weight: 600;
-  font-size: 1.3rem;
-}
-
-.section-description-question .section-description-options {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.section-description-question .section-description-options input {
-  height: 100px;
-  width: 100px;
-}
-
-/* ================= Usuário ja na rede ================== */
 .cards{
   display: flex;
   align-items: stretch;
@@ -186,16 +28,13 @@ main {
   flex-wrap: wrap;
 }
 
-.card-area, .card-rede{
+.card-area, .card-rede, .card-inicio, .card-redes, .card-adm{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex: 1;
 
-  min-height: 430px;
-  
-  padding: 25px 25px;
+  min-width: 250px;
+
   margin: 20px;
 
   background: #ffffff;
@@ -204,6 +43,133 @@ main {
   border: none;
 
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+
+}
+
+.card-area, .card-rede, .card-inicio, .card-redes{
+  flex: 1;
+  min-height: 430px;
+}
+
+
+.card-adm{
+  justify-content: center;
+
+  min-height: 200px;
+
+  gap: 16px;
+  padding: 25px;
+}
+
+.card-adm .item{
+  width: 100%;
+}
+
+.card-adm .item p{
+  font-size: 1.1rem;
+}
+
+.card-adm .item button{
+  width: 50%;
+}
+
+/* ================= Usuário sem rede ================== */
+.card-inicio, .card-redes{
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.card-title{
+  margin:0;
+  font-size: 1.15rem;
+  color: var(--azul);
+  font-family: 'Mont-SemiBold';
+}
+
+.card-inicio p, .card-redes p{
+  font-size: 1.03rem;
+}
+
+.card-inicio p a, .card-redes p a{
+  color: var(--laranja);
+}
+
+.card-inicio .lista-testes{
+  display: flex;
+  flex-direction: column;
+}
+
+.lista-testes .testes{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lista-testes .testes a{
+  color: var(--laranja);
+}
+
+.card-inicio .obs{
+  font-size: 0.8rem;
+}
+
+.separator{  
+  color: #29292e6e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+}
+.separator::before, .separator::after{
+  content:"";
+  width: 40%;
+  height: 1px;
+  background: #29292e41;
+}
+
+.card-redes select, .card-adm select{
+  width: 90%;
+  height: 2.5rem;
+
+  margin: 10px;
+  padding: 0.375rem 0.75rem;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.card-redes select option, .card-adm select option{
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+}
+
+.card-redes button, .card-adm button{
+  border: none;
+  border-radius: 10px;
+
+  width: 90%;
+  height: 2.5rem;
+
+  color: white;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  background: var(--laranja);
+}
+
+/* ================= Usuário ja na rede ================== */
+.card-area, .card-rede{
+  padding: 25px;
+  justify-content: space-between;
 }
 
 .card-area p{
@@ -268,7 +234,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  border-bottom: 1.8px solid var(--azul);
+  border-bottom: 1.8px solid var(--border-color);
   width: 100%;
 }
 

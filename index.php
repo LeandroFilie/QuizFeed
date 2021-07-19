@@ -91,11 +91,11 @@
             $('#mostrar_senha').click(function(){
                 if($('#senha').attr('type') == 'password'){
                     $('#senha').attr('type', 'text');
-                    $('#mostrar_senha').attr('src', './assets/eye-off.svg');
+                    $('#mostrar_senha').attr('src', './assets/images/eye-off.svg');
                 }
                 else{
                     $('#senha').attr('type', 'password');
-                    $('#mostrar_senha').attr('src', './assets/eye.svg');
+                    $('#mostrar_senha').attr('src', './assets/images/eye.svg');
                 }
             });
         });

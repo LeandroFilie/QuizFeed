@@ -87,8 +87,6 @@ header nav .menu-icon {
     z-index: 100;
   }
 
-  
-
   header nav .menu.active {
     right: 0;
   }
@@ -96,4 +94,20 @@ header nav .menu-icon {
   header nav .menu.active a {
     font-size: 1.6rem;
   }
+
+  header nav .menu .logout{
+    width: 100%;
+  }
+
+  header nav .menu .logout .icon-logout::before{
+    content:"Sair";
+  }
+
+  header nav .menu .logout .icon-logout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
 }

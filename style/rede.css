@@ -49,7 +49,7 @@ main {
 
 form{
   background-color: #fff;
-  padding: 16px;
+  padding: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
 }
@@ -61,7 +61,7 @@ form textarea{
   border-radius: 8px;
   background: #fefefe;
   resize: none;
-  min-height: 130px;
+  min-height: 120px;
 }
 
 form .form-footer{
@@ -69,18 +69,18 @@ form .form-footer{
   justify-content: space-between;
   align-items: center;
 
-  border-top: 1px solid #29292e3b;
+  border-top: 1px solid var(--border-color);
   padding-top: 8px;
 }
 
 form .form-footer .user-info{
   display: flex;
   align-items: center;
-  margin-left: 16px;
+  margin-left: 8px;
 }
 
 form .form-footer button{
-  padding: 10px 20px;
+  padding: 7px 17px;
   background: var(--laranja);
   color: white;
 
@@ -116,6 +116,21 @@ form .form-footer button{
   border-radius: 8px;
   background: #fefefe;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.empty-post{
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.empty-post p{
+  font-family: 'Mont-SemiBold';
+  font-size: 1.5rem;  
+  line-height: 2rem;
+}
+
+.empty-post span{
+  font-size: 1.2rem;
 }
 
 .posts .post p{
@@ -155,7 +170,7 @@ form .form-footer button{
 
 .post .section-comentarios{
   margin-top: 16px;
-  border-top: 1px solid var(--azul);
+  border-top: 1px solid var(--border-color);
 }
 
 .section-comentarios .enviar-comentario{
@@ -173,32 +188,6 @@ form .form-footer button{
   justify-content: space-around;
   position: relative;
   animation: mostrar-campo 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-.erro{
-  background-color: #f8d7da;
-  border: 1px #f5c6cb;
-  color: #721c24;
-  text-align: center;
-
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.25rem;
-  margin-bottom: 8px;
-}
-
-.empty-post{
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.empty-post p{
-  font-family: 'Mont-SemiBold';
-  font-size: 1.5rem;  
-  line-height: 15px;
-}
-
-.empty-post span{
-  font-size: 1.2rem;
 }
 
 @keyframes mostrar-campo {
@@ -261,7 +250,7 @@ form .form-footer button{
 
   background: #fefefe;
 
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border-color);
   border-radius: 8px;
 
   margin-top: 16px;
@@ -277,6 +266,17 @@ form .form-footer button{
 
 .section-comentarios .comentario-content p{
   margin: 0;
+}
+
+.erro{
+  background-color: #f8d7da;
+  border: 1px #f5c6cb;
+  color: #721c24;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 8px;
 }
 
 @media(min-width: 550px){

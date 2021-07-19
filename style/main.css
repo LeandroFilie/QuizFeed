@@ -12,6 +12,7 @@
   --azul: #002539;
   --laranja: #ed7201;
   --area-main: calc(100vh - 143px);
+  --border-color: #e5e5e5;
 }
 
 html {
@@ -68,6 +69,12 @@ body {
   font-size: 1.3rem;
 }
 
+.header nav .menu .icon-logout{
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
 main{
   max-width: 800px;
 }
@@ -108,8 +115,6 @@ footer {
   width: 100%;
   padding: 40px 0;
 
-  
-
   border-top: 1px #00253921 solid;
 
   text-align: center;
@@ -120,7 +125,7 @@ footer div {
   margin: 5px 0;
 
   font-size: 1rem;
-  font-family: "Mont-SemiBold";
+  /* font-family: "Mont-SemiBold"; */
   color: #002539;
 
 
