@@ -105,14 +105,21 @@
 
                             <section class="card-inicio">
                                 <div class="card-title">Está completamente perdido? Comece por aqui!</div>
-                                <p>Quer fazer uma orientação vocaional? <a href="#">Clique aqui</a> e veja profissionais da área.</p>
+                                <p>Quer fazer uma orientação vocaional? <a href="dados_psicologos.php">Clique aqui</a> e veja profissionais da área.</p>
                                 <span class="separator">ou</span>
                                 <div class="lista-testes">
                                     <p class="text-testes">Faça testes vocacionais online</p>
-                                    <div class="testes">
-                                        <a href="https://www.guiadacarreira.com.br/teste-vocacional/" target="_blank" >Guia da Carreira</a>
-                                        <a href="https://querobolsa.com.br/teste-vocacional-gratis" target="_blank" >Quero Bolsa</a>
-                                        <a href="https://www.vix.com/pt/comportamento/546867/qual-profissao-mais-combina-com-voce-este-teste-vocacional-te-ajuda-a-descobrir" target="_blank" >Vix</a>
+                                    <div class="testes">';
+                                    $selectTestes = 'SELECT * FROM teste_pronto';
+                                    $resultadoTestes = mysqli_query($conexao, $selectTestes);
+
+                                    while($linha = mysqli_fetch_assoc($resultadoTestes)){
+                                        echo '
+                                            <a href="'.$linha["link"].'" target="_blank" >'.$linha["nome"].'</a>
+                                        ';
+                                    }
+                                   
+                                    echo'
                                     </div>
                                 </div>
                                 <span class="obs">* O recomendado é você se consultar com um profissional especializado</span>
@@ -134,8 +141,8 @@
                                 }
                                 echo '
                                 </select>
-                                
-                                <button>Entrar na Rede</button>
+                                <span class="erro_entrar_rede"></span>
+                                <button id="entrar_rede">Entrar na Rede</button>
 
                                 <span class="separator">ou</span>
 
@@ -231,5 +238,6 @@
         ?>
     </main>
     <?php include './inc/footer.inc';  ?>
+    <script src="./js/rede.js"></script>
 </body>
 </html>

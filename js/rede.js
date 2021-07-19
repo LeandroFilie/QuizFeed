@@ -45,74 +45,7 @@ function comentar(id){
 }
 
 $(document).ready(function(){
-
-  /* function confereLikes(id_postagem){
-    $.ajax({
-      url: "seleciona.php?identificador=4&id="+id_postagem,
-      type: 'get',
-      dataType: 'json',
-      async: false,
-      success: function(data) {
-        resultado = data;
-      } 
-   });
-   return resultado;
-  }  */
-
-  /* function atualizarListaPosts(){
-    $.get("seleciona.php?identificador=3",function(r){
-      t = '';
-      $.each(r,function(i,p){
-        t += `
-        <div class="post">
-          <p>${p.conteudo}</p>
-          <div class="post-footer">
-            <div class="user-info">
-              <img src="./assets/images/avatar.svg" alt="Avatar" />
-              <span>${p.nome_usuario}</span>
-            </div>
-            <div class="interacoes">
-              <img src="./assets/images/answer.svg" alt="comentar" class="comentar" onclick="comentar(${p.id_postagem})">
-              <div class="like" id="like" value="${p.id_postagem}" onclick="curtir(${p.id_postagem})" >
-              `;
-                resultado = confereLikes(p.id_postagem);
-
-                t += `<span id="likeCount">${resultado.qtdLikes}</span>`;
-          
-                if(resultado.verificaLikes > 0){
-                  t += `<img src="././assets/images/liked.svg" alt="liked">`;
-                }
-                else{
-                  t += `<img src="././assets/images/like.svg" alt="like">`;
-                }  
-
-          t +=`      
-              </div>
-            </div>
-          </div>
-
-          <div class="section-comentarios">
-            <div class="enviar-comentario hide" value="${p.id_postagem}">
-              <input type="text" placeholder="Escreva seu comentário" />
-              <img src="./assets/images/send.svg" alt="" id="mostrar_senha" class="button_enviar_comentario">
-            </div>
-
-            <div class="comentario">
-              <div class="comentario-content">
-                <p>Seja o primeiro a comentar nesse post!</p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-        `;
-        $('.posts').html(t);
-      });  
-    }); 
-    $('#conteudo').val('');
-  } */
-
+//rede.php
   $('#postar').click(function(){
     var p = {
       'conteudo': $('#conteudo').val()
@@ -130,5 +63,35 @@ $(document).ready(function(){
         $('#erro_post').addClass('erro');
       }
     })
+  })
+
+//gerenciamento_rede.php
+  $('#entrar_rede').click(function(){
+
+    var id = {
+      'id': $('#nome_rede').val()
+    }
+
+    $('.erro_entrar_rede').html('');
+    $('.erro_entrar_rede').removeClass('erro');
+    $('.erro_entrar_rede').css('display','none');
+
+    if(id.id!=""){
+      $.post("gerenciamento_rede.php",id,function(r){
+        console.log(r);
+        if(r==0){
+          location.href="rede.php";
+        }else{
+          $('.erro_entrar_rede').css('display','block');
+          $('.erro_entrar_rede').html('Erro ao entrar na rede. Por favor, contate o administrador.');
+          $('.erro_entrar_rede').addClass('erro');
+        }
+      })
+    }else{
+      $('.erro_entrar_rede').css('display','block')
+        $('.erro_entrar_rede').html('Selecione uma rede para entrar.');
+        $('.erro_entrar_rede').addClass('erro');
+    }
+
   })
 })
