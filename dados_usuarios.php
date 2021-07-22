@@ -1,5 +1,9 @@
 <?php
   session_start();
+
+  if(!isset($_SESSION["email"])){
+    echo "<script>location.href='index.php'</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,7 +40,7 @@
           $select .= " WHERE(1=1)";
           if($_POST["nome_usuario"] != ""){
               $nome_usuario = $_POST["nome_usuario"];
-              $select .= " AND nome_usuario like '$nome_usuario'";
+              $select .= " AND nome_usuario like '%$nome_usuario%'";
           }
         }
 
@@ -100,7 +104,21 @@
                       <h3>Endereço de E-mail</h3>
                       <p id="email-user">'.$linha["email"].'</p>
                       <div id="erro_email"></div>
-                    </div>
+                    </div>';
+
+                    $selectNomeRede = "SELECT nome FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
+                    $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
+                    if(mysqli_num_rows($resultadoNomeRede) > 0){
+                      while($linhaNomeRede = mysqli_fetch_assoc($resultadoNomeRede)){
+                        echo '
+                          <div class="data-user-details-items">
+                            <h3>Sua Área</h3>
+                            <p>'.$linhaNomeRede["nome"].'</p>
+                          </div>
+                        ';
+                      }
+                    }
+                  echo '
                   </div>  
                   <div class="buttons-action">
                       <button class="data-user-action alterar" value="'.$linha["email"].'" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>

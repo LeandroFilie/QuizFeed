@@ -1,23 +1,24 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.2
--- http://www.phpmyadmin.net
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
 --
--- Máquina: localhost
--- Data de Criação: 19-Jul-2021 às 23:40
--- Versão do servidor: 5.6.13
--- versão do PHP: 5.4.17
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 22-Jul-2021 às 01:25
+-- Versão do servidor: 5.7.31
+-- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de Dados: `quizfeed`
+-- Banco de dados: `quizfeed`
 --
 CREATE DATABASE IF NOT EXISTS `quizfeed` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `quizfeed`;
@@ -28,12 +29,13 @@ USE `quizfeed`;
 -- Estrutura da tabela `area`
 --
 
+DROP TABLE IF EXISTS `area`;
 CREATE TABLE IF NOT EXISTS `area` (
   `id_area` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `descricao` varchar(200) NOT NULL,
   PRIMARY KEY (`id_area`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `area`
@@ -55,6 +57,7 @@ INSERT INTO `area` (`id_area`, `nome`, `descricao`) VALUES
 -- Estrutura da tabela `area_resultado`
 --
 
+DROP TABLE IF EXISTS `area_resultado`;
 CREATE TABLE IF NOT EXISTS `area_resultado` (
   `cod_resultado` int(11) NOT NULL,
   `cod_area` int(11) NOT NULL,
@@ -68,14 +71,16 @@ CREATE TABLE IF NOT EXISTS `area_resultado` (
 -- Estrutura da tabela `comentario`
 --
 
+DROP TABLE IF EXISTS `comentario`;
 CREATE TABLE IF NOT EXISTS `comentario` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_postagem` int(11) NOT NULL,
   `conteudo` varchar(500) NOT NULL,
   `data` date NOT NULL,
-  `time` time NOT NULL,
-  PRIMARY KEY (`email_usuario`,`cod_postagem`),
-  KEY `cod_postagem` (`cod_postagem`)
+  `hora` time NOT NULL,
+  PRIMARY KEY (`data`,`hora`),
+  KEY `cod_postagem` (`cod_postagem`),
+  KEY `comentario_ibfk_1` (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -84,6 +89,7 @@ CREATE TABLE IF NOT EXISTS `comentario` (
 -- Estrutura da tabela `curtida`
 --
 
+DROP TABLE IF EXISTS `curtida`;
 CREATE TABLE IF NOT EXISTS `curtida` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_postagem` int(11) NOT NULL,
@@ -93,19 +99,13 @@ CREATE TABLE IF NOT EXISTS `curtida` (
   KEY `cod_postagem` (`cod_postagem`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `curtida`
---
-
-INSERT INTO `curtida` (`email_usuario`, `cod_postagem`, `data`, `hora`) VALUES
-('leandro@email.com', 3, '2021-07-19', '20:18:53');
-
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `inscricao`
 --
 
+DROP TABLE IF EXISTS `inscricao`;
 CREATE TABLE IF NOT EXISTS `inscricao` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_rede` int(11) NOT NULL,
@@ -115,20 +115,13 @@ CREATE TABLE IF NOT EXISTS `inscricao` (
   KEY `cod_rede` (`cod_rede`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `inscricao`
---
-
-INSERT INTO `inscricao` (`email_usuario`, `cod_rede`, `data`, `hora`) VALUES
-('julia@email.com', 2, '2021-07-13', '16:32:33'),
-('leandro@email.com', 4, '2021-07-19', '20:17:57');
-
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `postagem`
 --
 
+DROP TABLE IF EXISTS `postagem`;
 CREATE TABLE IF NOT EXISTS `postagem` (
   `id_postagem` int(11) NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
@@ -139,16 +132,7 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
   KEY `email_usuario` (`email_usuario`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Extraindo dados da tabela `postagem`
---
-
-INSERT INTO `postagem` (`id_postagem`, `data`, `hora`, `conteudo`, `email_usuario`, `cod_rede`) VALUES
-(1, '2021-07-18', '15:35:20', 'Meu primeiro post', 'julia@email.com', 2),
-(2, '2021-07-18', '15:35:41', 'Meu segundo Post', 'julia@email.com', 2),
-(3, '2021-07-19', '20:18:16', 'oi galera', 'leandro@email.com', 4);
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -156,13 +140,14 @@ INSERT INTO `postagem` (`id_postagem`, `data`, `hora`, `conteudo`, `email_usuari
 -- Estrutura da tabela `rede`
 --
 
+DROP TABLE IF EXISTS `rede`;
 CREATE TABLE IF NOT EXISTS `rede` (
   `id_rede` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`id_rede`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `rede`
@@ -184,6 +169,7 @@ INSERT INTO `rede` (`id_rede`, `nome`, `cod_area`) VALUES
 -- Estrutura da tabela `resultado`
 --
 
+DROP TABLE IF EXISTS `resultado`;
 CREATE TABLE IF NOT EXISTS `resultado` (
   `id_resultado` int(11) NOT NULL,
   `cod_teste` int(11) NOT NULL,
@@ -198,12 +184,13 @@ CREATE TABLE IF NOT EXISTS `resultado` (
 -- Estrutura da tabela `teste_pronto`
 --
 
+DROP TABLE IF EXISTS `teste_pronto`;
 CREATE TABLE IF NOT EXISTS `teste_pronto` (
   `id_teste` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
   `link` varchar(200) NOT NULL,
   PRIMARY KEY (`id_teste`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `teste_pronto`
@@ -220,6 +207,7 @@ INSERT INTO `teste_pronto` (`id_teste`, `nome`, `link`) VALUES
 -- Estrutura da tabela `usuario`
 --
 
+DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(100) NOT NULL,
   `nome` varchar(100) NOT NULL,
@@ -247,6 +235,7 @@ INSERT INTO `usuario` (`email`, `nome`, `senha`, `permissao`) VALUES
 -- Estrutura da tabela `usuario_comum`
 --
 
+DROP TABLE IF EXISTS `usuario_comum`;
 CREATE TABLE IF NOT EXISTS `usuario_comum` (
   `email_usuario` varchar(100) NOT NULL,
   `nome_usuario` varchar(100) NOT NULL,
@@ -269,6 +258,7 @@ INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`) VALUES
 -- Estrutura da tabela `usuario_psicologo`
 --
 
+DROP TABLE IF EXISTS `usuario_psicologo`;
 CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
   `email_usuario` varchar(100) NOT NULL,
   `registro` varchar(11) NOT NULL,
@@ -283,9 +273,9 @@ CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
 --
 
 INSERT INTO `usuario_psicologo` (`email_usuario`, `registro`, `cidade`, `uf`, `situacao`) VALUES
-('carol@psicologa.com', '33333333333', 'Franca', 'SP', 1),
-('julia@psicologa.com', '11111111111', 'São Paulo', 'SP', 1),
-('leandro@psicologo.com', '22222222222', 'Ribeirão Preto', 'SP', 1);
+('carol@psicologa.com', '33333333333', 'Franca', 'SP', 2),
+('julia@psicologa.com', '11111111111', 'São Paulo', 'SP', 2),
+('leandro@psicologo.com', '22222222222', 'Ribeirão Preto', 'SP', 2);
 
 -- --------------------------------------------------------
 
@@ -293,6 +283,7 @@ INSERT INTO `usuario_psicologo` (`email_usuario`, `registro`, `cidade`, `uf`, `s
 -- Estrutura da tabela `usuario_testepronto`
 --
 
+DROP TABLE IF EXISTS `usuario_testepronto`;
 CREATE TABLE IF NOT EXISTS `usuario_testepronto` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_teste` int(11) NOT NULL,
@@ -304,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `usuario_testepronto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Constraints for dumped tables
+-- Restrições para despejos de tabelas
 --
 
 --
@@ -372,6 +363,7 @@ ALTER TABLE `usuario_psicologo`
 ALTER TABLE `usuario_testepronto`
   ADD CONSTRAINT `usuario_testepronto_ibfk_1` FOREIGN KEY (`email_usuario`) REFERENCES `usuario` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario_testepronto_ibfk_2` FOREIGN KEY (`cod_teste`) REFERENCES `teste_pronto` (`id_teste`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

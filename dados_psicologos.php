@@ -1,5 +1,9 @@
 <?php
   session_start();
+
+  if(!isset($_SESSION["email"])){
+    echo "<script>location.href='index.php'</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -56,7 +60,7 @@
                     $i++;
                   }
                   if($i == 0){
-                    echo '<h2 id="emptySituacao1">Não há pedidos pendentes</h2>';
+                    echo '<h4 id="emptySituacao1">Não há pedidos pendentes</h4>';
                   }
         echo '</section>';
 

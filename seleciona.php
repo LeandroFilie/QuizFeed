@@ -54,31 +54,49 @@
 
     }
     else if($_GET["identificador"] == 3){
-        $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = '".$_SESSION["id_rede"]."' ORDER BY postagem.id_postagem DESC";
-        $resultadoPosts = mysqli_query($conexao,$selectPosts);
+        $selectLikes = 'SELECT * FROM curtida WHERE cod_postagem = '.$_GET["id"].'';
+        $resultadoLikes = mysqli_query($conexao,$selectLikes); 
+
+        $matriz['qtdLikes'] = mysqli_num_rows($resultadoLikes);
+
+        echo json_encode($matriz);
+    }
+    else if($_GET["identificador"] == 4){
+        $id_postagem = $_GET["id_postagem"];
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data DESC, comentario.hora DESC LIMIT 3";
+        $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
+
+        $selectCountComentarioPost = "SELECT conteudo FROM comentario WHERE cod_postagem = '$id_postagem'";
+        $resultadoCountComentarioPost = mysqli_query($conexao,$selectCountComentarioPost); 
 
         $j = 0;
-        while($linha = mysqli_fetch_assoc($resultadoPosts)){
+        while($linha = mysqli_fetch_assoc($resultadoComentarioPost)){
             $matriz[]=$linha;
             $j++;
         }
         if($j == 0){
             $matriz = 0;
         }
+
+        $matriz["qtdComentarios"] = mysqli_num_rows($resultadoCountComentarioPost);
         echo json_encode($matriz);
-
-
     }
-    else if($_GET["identificador"] == 4){
-        $selectLikeUser = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida WHERE email_usuario = '".$_SESSION["email"]."' AND cod_postagem = '".$_GET["id"]."'";
-        $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser);
+    else if($_GET["identificador"] == 5){
+        $id_postagem = $_GET["id_postagem"];
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data DESC, comentario.hora DESC";
+        $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
-        $selectLikes = 'SELECT * FROM curtida WHERE cod_postagem = '.$_GET["id"].'';
-        $resultadoLikes = mysqli_query($conexao,$selectLikes); 
+        $resultado = mysqli_query($conexao,$selectComentarioPost)
+        or die(mysqli_error($conexao));
 
-        $matriz['qtdLikes'] = mysqli_num_rows($resultadoLikes);
-        $matriz['verificaLikes'] = mysqli_num_rows($resultadoLikeUser);
-
+        $j = 0;
+        while($linha = mysqli_fetch_assoc($resultadoComentarioPost)){
+            $matriz[]=$linha;
+            $j++;
+        }
+        if($j == 0){
+            $matriz = 0;
+        }
         echo json_encode($matriz);
     }
 ?>

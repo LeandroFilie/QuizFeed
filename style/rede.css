@@ -52,6 +52,7 @@ form{
   padding: 8px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
   border-radius: 8px;
+  margin-bottom: 32px;
 }
 
 form textarea{
@@ -135,6 +136,7 @@ form .form-footer button{
 
 .posts .post p{
   text-align: justify;
+  font-size: 1rem;
 }
 
 .post .post-footer{
@@ -177,10 +179,6 @@ form .form-footer button{
   display: none;
 }
 
-.section-comentarios .enviar-comentario.hide{
-  animation: ocultar-campo 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
 .section-comentarios .enviar-comentario.show{
   margin-top: 16px;
   display: flex;
@@ -196,15 +194,6 @@ form .form-footer button{
   }
   100%{
     transform: translateY(0);
-  }
-}
-
-@keyframes ocultar-campo {
-  0%{
-    transform: translateY(0);
-  }
-  100%{
-    transform: translateY(-16px);
   }
 }
 
@@ -266,6 +255,15 @@ form .form-footer button{
 
 .section-comentarios .comentario-content p{
   margin: 0;
+  font-size: 0.9rem;
+}
+
+.section-comentarios .ver-mais{
+  display: block;
+  text-align: left;
+  margin-top: 16px;
+  color: var(--azul);
+  cursor: pointer;
 }
 
 .erro{

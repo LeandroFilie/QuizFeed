@@ -232,10 +232,12 @@ html {
   width: 350px;
   margin: 25px;
 
-  background: #f9f9ff;
+  background: #fefefe;
 
   border-radius: 10px;
   border: none;
+
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
 
   transition: all 0.2s;
 }
