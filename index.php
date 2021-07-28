@@ -67,6 +67,25 @@
             </div>
         </div>
     </section>
+    <section class="faq">
+    <h1 class="faq-title">Perguntas Frequentes</h1>
+    <div class="faq-content">
+            <button class="accordion">O que é Orientação Vocacional?</button>
+        <div class="panel">
+        <p>Conteúdo...</p>
+        </div>
+
+        <button class="accordion">Qual a diferença entre a Orientação Vocacional e o Teste Vocacional?</button>
+        <div class="panel">
+        <p>Conteúdo...</p>
+        </div>
+
+        <button class="accordion">E se eu estiver muito perdida (o)?</button>
+        <div class="panel">
+        <p>Conteúdo...</p>
+        </div>
+    </div>
+    </section>
 
     <?php include './inc/footer.inc' ?>
 
@@ -99,6 +118,26 @@
                 }
             });
         });
+        var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                panel.style.display = "none";
+                } else {
+                panel.style.display = "block";
+                }
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    }
+            });
+            }
     </script>
 </body>
 </html>
