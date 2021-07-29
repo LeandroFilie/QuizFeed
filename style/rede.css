@@ -45,6 +45,7 @@ main {
 
 .posts .user-info span{
   font-size: 0.85rem;
+  color: #29292ea8;
 }
 
 form{
@@ -139,6 +140,50 @@ form .form-footer button{
   font-size: 1rem;
 }
 
+.post .post-info{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post-info .post-info-details{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  margin-right: 8px;
+  flex-wrap: wrap;
+}
+
+.post-info .post-info-content{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-info .post-info-content span{
+  color: #29292ea8;
+}
+
+.post-info .denunciar{
+  display: flex;
+  align-items: center;
+  cursor:pointer;
+}
+
+.post-info .denunciar:hover{
+  filter: brightness(0);
+}
+
+.post-info .denunciar svg{
+  stroke: #29292ea8;
+}
+
+.post-info span{
+  font-size: 0.85rem;
+  color:#29292e;
+}
+
 .post .post-footer{
   display: flex;
   align-items: center;
@@ -161,12 +206,21 @@ form .form-footer button{
   cursor: pointer;
 }
 
+.post .post-footer .interacoes .like:hover{
+  filter: brightness(0.8);
+}
+
 .post .post-footer .interacoes .like span{
   font-size: 16px;
   color: #737380;
 }  
 
 .post .post-footer .interacoes .comentar{
+  cursor: pointer;
+}
+
+.post .post-footer .interacoes .comentar:hover{
+  filter: brightness(0.8);
   cursor: pointer;
 }
 
@@ -226,6 +280,16 @@ form .form-footer button{
   gap: 4px;
 }
 
+.section-comentarios .comentario .comentario-info{
+  text-align: right;
+  width: 100%;
+}
+
+.section-comentarios .comentario .comentario-info span{
+  font-size: 0.85rem;
+  color: #29292ea8;
+}
+
 .section-comentarios .comentario .avatar img{
   width: 25px;
   height: 25px;
@@ -248,7 +312,7 @@ form .form-footer button{
 
 }
 
-.section-comentarios .comentario-content span{
+.section-comentarios .comentario-content > span{
   font-family: 'Mont-SemiBold';
   font-size: 0.8rem;
 }
@@ -280,6 +344,18 @@ form .form-footer button{
 @media(min-width: 550px){
   .button_enviar_comentario{
     margin-right: 20px;
+  }
+}
+
+@media(max-width: 500px){
+  .post .post-info{
+    align-items: flex-start;
+  }
+
+  .post-info .post-info-details{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 }
 

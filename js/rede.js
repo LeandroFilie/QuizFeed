@@ -55,32 +55,6 @@ function exibeCampoComentar(id){
   } 
 }
 
-function selecionaComentarios(r, id_postagem){
-  t='';
-  $.each(r, function(i, v){
-    if(v.nome_usuario != undefined){
-      t += `
-      <div class="comentario">
-        <div class="avatar">
-          <img src="./assets/images/avatar.svg" alt="Avatar" />
-        </div>
-        <div class="comentario-content">
-          <span>${v.nome_usuario}</span>
-          <p>${v.conteudo}</p>
-        </div>
-      </div> 
-    `;
-    } 
-    
-  })
-
-  if(r.qtdComentarios > 3){
-    t += `<span class="ver-mais" onclick="allComentarios(${id_postagem})">Ver mais comentários</span>`;
-  }
-
-  return t;
-}
-
 function atualizarComentarios(id_postagem){
 
   dadosPost = {
@@ -90,14 +64,6 @@ function atualizarComentarios(id_postagem){
 
   allComentarios(id_postagem)
   $(`input[name="${id_postagem}"]`).val('');
-  
-  /* $.post('seleciona.php',dadosPost,function(r){
-    
-    t = selecionaComentarios(r, id_postagem);
-    $(`#${id_postagem}`).html(t);
-
-
-  }) */
 }
 
 function comentar(id){
@@ -124,8 +90,33 @@ function partComentarios(id_postagem){
     identificador: '4'
   }
 
-  $.post('seleciona.php',dadosPost,function(r){    
-    t = selecionaComentarios(r, id_postagem);
+  $.post('seleciona.php',dadosPost,function(r){  
+    console.log(r);
+    t='';
+    $.each(r, function(i, v){
+      if(v.nome_usuario != undefined){
+        t += `
+        <div class="comentario">
+          <div class="avatar">
+            <img src="./assets/images/avatar.svg" alt="Avatar" />
+          </div>
+          <div class="comentario-content">
+            <span>${v.nome_usuario}</span>
+            <p>${v.conteudo}</p>
+            <div class="comentario-info">
+              <span>${v.data}</span>
+              <span>${v.hora}</span>
+            </div>
+          </div>
+        </div> 
+      `;
+      } 
+      
+    })
+  
+    if(r.qtdComentarios > 3){
+      t += `<span class="ver-mais" onclick="allComentarios(${id_postagem})">Ver mais comentários</span>`;
+    }
 
     $(`#${id_postagem}`).html(t);
 
@@ -137,8 +128,9 @@ function allComentarios(id_postagem){
     id_postagem: id_postagem,
     identificador: '5'
   }
-  $.post('seleciona.php',dadosPost,function(r){
 
+  $.post('seleciona.php',dadosPost,function(r){
+    console.log(r);
     t = '';
     j = 0;
     $.each(r, function(i, v){
@@ -150,6 +142,10 @@ function allComentarios(id_postagem){
           <div class="comentario-content">
             <span>${v.nome_usuario}</span>
             <p>${v.conteudo}</p>
+            <div class="comentario-info">
+              <span>${v.data}</span>
+              <span>${v.hora}</span>
+            </div>
           </div>
         </div> 
       `;

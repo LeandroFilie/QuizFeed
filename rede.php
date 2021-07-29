@@ -18,6 +18,9 @@
     echo "<script>location.href='home.php'</script>";
   }
 
+  date_default_timezone_set('America/Sao_Paulo');
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,6 +28,7 @@
   <?php include './inc/head.inc' ?>
   <title><?php echo $nomeRede?> | TesteFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
+  <script src="./assets/libs/moment.js"></script>
 </head>
 <body>
   <?php include './inc/menu.inc'; ?>
@@ -53,21 +57,60 @@
   <section class="posts">
     
     <?php
-      $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.id_postagem DESC";
+      $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.id_postagem DESC";
       $resultadoPosts = mysqli_query($conexao,$selectPosts); 
 
       $_SESSION["id_rede"] = $idRede;  
       $i = 0;
       while($linha = mysqli_fetch_assoc($resultadoPosts)){
         $selectLikes = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida";
+
+        $dataPost = date('d/m/Y', strtotime($linha["data"]));
+        $anoPost = date('Y', strtotime($linha["data"]));
+
+        $dataAtual = date('d/m/Y');
+        $anoAtual = date('Y');
+
+
+        if($dataPost == $dataAtual){
+          $dataFormatada = 'Hoje';
+        }
+        else if($anoPost == $anoAtual){
+          $dataFormatada = date('d/m', strtotime($linha["data"]));
+        }
+        else{
+          $dataFormatada = $dataPost;
+        }
+
+        $horaPost = date('H:i', strtotime($linha["hora"]));
+
+
+
         echo '
           <div class="post">
-            <p>'.$linha["conteudo"].'</p>
-            <div class="post-footer">
-              <div class="user-info">
-                <img src="./assets/images/avatar.svg" alt="Avatar" />
-                <span>'.$linha["nome_usuario"].'</span>
+            <div class="post-info">
+              <div class="post-info-details">
+                <div class="user-info">
+                  <img src="./assets/images/avatar.svg" alt="Avatar" />
+                  <span>'.$linha["nome_usuario"].'</span>
+                </div> 
+                  
+                
+                <div class="post-info-content">
+                  <span>'.$horaPost.'</span>
+                  <span>'.$dataFormatada.'</span>
+                </div>
               </div>
+
+              <div class="denunciar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+              </div>
+            </div>
+
+            <p>'.$linha["conteudo"].'</p>
+
+            <div class="post-footer">
+             
               <div class="interacoes">
                 <img src="./assets/images/answer.svg" alt="comentar" class="comentar" onclick="exibeCampoComentar('.$linha["id_postagem"].')"/>
                 <div class="like" id="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">
@@ -102,12 +145,34 @@
               </div>
               ';
 
-              $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC LIMIT 4";
+              $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC LIMIT 4";
               $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
               echo '<div id="'.$linha["id_postagem"].'">';
               $c = 0;
               while(($linhaComentarios = mysqli_fetch_assoc($resultadoComentarioPost)) && ($c < 3)){
+                $dataComentario = date('d/m/Y', strtotime($linhaComentarios["data"]));
+                $anoComentario = date('Y', strtotime($linhaComentarios["data"]));
+        
+                $dataAtual = date('d/m/Y');
+                $anoAtual = date('Y');
+        
+        
+                if($dataComentario == $dataAtual){
+                  $dataFormatadaComentario = 'Hoje';
+                }
+                else if($anoComentario == $anoAtual){
+                  $dataFormatadaComentario = date('d/m', strtotime($linhaComentarios["data"]));
+                }
+                else{
+                  $dataFormatadaComentario = $dataComentario;
+                }
+
+                $horaComentario = date('H:i', strtotime($linhaComentarios["hora"]));
+
+                
+                
+
                 echo '
                   <div class="comentario">
                     <div class="avatar">
@@ -116,7 +181,12 @@
                     <div class="comentario-content">
                       <span>'.$linhaComentarios["nome_usuario"].'</span>
                       <p>'.$linhaComentarios["conteudo"].'</p>
+                      <div class="comentario-info">
+                        <span>'.$dataFormatadaComentario.'</span>
+                        <span>'.$horaComentario.'</span>
+                      </div>
                     </div>
+
                   </div> 
                 ';
                 $c++;

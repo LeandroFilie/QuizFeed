@@ -63,7 +63,7 @@
     }
     else if($_POST["identificador"] == 4){
         $id_postagem = $_POST["id_postagem"];
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC LIMIT 3";
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC LIMIT 3";
         $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
         $selectCountComentarioPost = "SELECT conteudo FROM comentario WHERE cod_postagem = '$id_postagem'";
@@ -71,7 +71,30 @@
 
         $j = 0;
         while($linha = mysqli_fetch_assoc($resultadoComentarioPost)){
-            $matriz[]=$linha;
+            $dataComentario = date('d/m/Y', strtotime($linha["data"]));
+            $anoComentario = date('Y', strtotime($linha["data"]));
+    
+            $dataAtual = date('d/m/Y');
+            $anoAtual = date('Y');
+    
+    
+            if($dataComentario == $dataAtual){
+              $dataFormatadaComentario = 'Hoje';
+            }
+            else if($anoComentario == $anoAtual){
+              $dataFormatadaComentario = date('d/m', strtotime($linha["data"]));
+            }
+            else{
+              $dataFormatadaComentario = $dataComentario;
+            }
+
+            $horaComentario = date('H:i', strtotime($linha["hora"]));
+
+            $linha['data'] = $dataFormatadaComentario;
+            $linha['hora'] = $horaComentario;
+
+            $matriz[]=$linha; 
+            
             $j++;
         }
         if($j == 0){
@@ -83,7 +106,7 @@
     }
     else if($_POST["identificador"] == 5){
         $id_postagem = $_POST["id_postagem"];
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
         $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
         $resultado = mysqli_query($conexao,$selectComentarioPost)
@@ -91,12 +114,36 @@
 
         $j = 0;
         while($linha = mysqli_fetch_assoc($resultadoComentarioPost)){
-            $matriz[]=$linha;
+            $dataComentario = date('d/m/Y', strtotime($linha["data"]));
+            $anoComentario = date('Y', strtotime($linha["data"]));
+    
+            $dataAtual = date('d/m/Y');
+            $anoAtual = date('Y');
+    
+    
+            if($dataComentario == $dataAtual){
+              $dataFormatadaComentario = 'Hoje';
+            }
+            else if($anoComentario == $anoAtual){
+              $dataFormatadaComentario = date('d/m', strtotime($linha["data"]));
+            }
+            else{
+              $dataFormatadaComentario = $dataComentario;
+            }
+
+            $horaComentario = date('H:i', strtotime($linha["hora"]));
+
+            $linha['data'] = $dataFormatadaComentario;
+            $linha['hora'] = $horaComentario;
+
+            $matriz[]=$linha;    
+
             $j++;
         }
         if($j == 0){
             $matriz = 0;
         }
         echo json_encode($matriz);
+        // echo $matriz;
     }
 ?>
