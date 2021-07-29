@@ -7,7 +7,11 @@ function curtir(id){
 
   $.post('interacoes_rede.php',dados,function(r){
     if(r == 0){
-      $.get('seleciona.php?identificador=3&id='+id,function(r){
+      dadosLike = {
+        id: id,
+        identificador: '3'
+      }
+      $.post('seleciona.php',dadosLike,function(r){
         $("#like[value='"+ id +"'] #likeCount").text(`${r.qtdLikes}`);
         $("#like[value='"+ id +"'] img").attr('src', '././assets/images/liked.svg');
       }) 
@@ -16,7 +20,11 @@ function curtir(id){
       dados.situacao = 2
       $.post('interacoes_rede.php',dados,function(r){
         if(r == 0){
-          $.get('seleciona.php?identificador=3&id='+id,function(r){
+          dadosLike = {
+            id: id,
+            identificador: '3'
+          }
+          $.post('seleciona.php',dadosLike,function(r){
             $("#like[value='"+ id +"'] #likeCount").text(`${r.qtdLikes}`);
             $("#like[value='"+ id +"'] img").attr('src', '././assets/images/like.svg');
           })
@@ -74,17 +82,22 @@ function selecionaComentarios(r, id_postagem){
 }
 
 function atualizarComentarios(id_postagem){
+
+  dadosPost = {
+    id_postagem: id_postagem,
+    identificador: '4'
+  }
+
+  allComentarios(id_postagem)
+  $(`input[name="${id_postagem}"]`).val('');
   
-  $.get('seleciona.php?identificador=4&id_postagem='+id_postagem,function(r){
+  /* $.post('seleciona.php',dadosPost,function(r){
     
     t = selecionaComentarios(r, id_postagem);
     $(`#${id_postagem}`).html(t);
 
-    $(`input[name="${id_postagem}"]`).val('');
-    $(`.enviar-comentario[value='${id_postagem}']`).removeClass('show');
-    $(`.enviar-comentario[value='${id_postagem}']`).toggleClass('hide');
 
-  })
+  }) */
 }
 
 function comentar(id){
@@ -106,7 +119,12 @@ function comentar(id){
 }
 
 function partComentarios(id_postagem){
-  $.get('seleciona.php?identificador=4&id_postagem='+id_postagem,function(r){    
+  dadosPost = {
+    id_postagem: id_postagem,
+    identificador: '4'
+  }
+
+  $.post('seleciona.php',dadosPost,function(r){    
     t = selecionaComentarios(r, id_postagem);
 
     $(`#${id_postagem}`).html(t);
@@ -115,9 +133,14 @@ function partComentarios(id_postagem){
 }
 
 function allComentarios(id_postagem){
-  $.get('seleciona.php?identificador=5&id_postagem='+id_postagem,function(r){
+  dadosPost = {
+    id_postagem: id_postagem,
+    identificador: '5'
+  }
+  $.post('seleciona.php',dadosPost,function(r){
 
     t = '';
+    j = 0;
     $.each(r, function(i, v){
       t += `
         <div class="comentario">
@@ -130,9 +153,11 @@ function allComentarios(id_postagem){
           </div>
         </div> 
       `;
-    
+      j++;
     })
-    t+= `<span class="ver-mais" onclick="partComentarios(${id_postagem})">Ver menos</span>`;
+    if(j > 3){
+      t+= `<span class="ver-mais" onclick="partComentarios(${id_postagem})">Ver menos</span>`;
+    }
 
     $(`#${id_postagem}`).html(t);
 

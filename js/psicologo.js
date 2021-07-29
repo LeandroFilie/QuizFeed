@@ -72,9 +72,13 @@ $(function(){
         $("#estado_modal").attr("disabled", "disabled");
         $("#cidade_modal").attr("disabled", "disabled");
       }
+
+      dados = {
+        'email': i,
+        'identificador': '2'
+      }
   
-      $.get("seleciona.php?email="+i+"&identificador=2",function(r){
-        console.log('entrou finalmente');
+      $.post("seleciona.php",dados,function(r){
         u = r[0];
         $("#nome_completo_modal").val(u.nome);
         $("#registro_modal").val(u.registro);
@@ -148,7 +152,12 @@ $(function(){
   }
 
   function atualizarDados(novo_email){
-    $.get("seleciona.php?email="+novo_email+"&identificador=2",function(d){
+    dados = {
+      email: novo_email,
+      identificador: '2'
+    }
+
+    $.post("seleciona.php",dados,function(d){
       t = '';
       $.each(d,function(i,u){
           trocarCampos(u.nome, u.email, u.registro, u.uf, u.cidade);

@@ -14,11 +14,9 @@
                     <i class="menu-icon"></i>
                 </button>
                 <ul class="menu">
-                
                     <li><a href="cadastro.php">Cadastre-se</a></li>
-                
-                
-                    <li><a href="#about">Sobre</a></li>
+                    <li class="go-about"><a href="#about">Sobre</a></li>
+                    <li class="go-faq"><a href="#faq">Faq</a></li>
                 </ul>
             </nav>   
         </div> 
@@ -67,24 +65,30 @@
             </div>
         </div>
     </section>
-    <section class="faq">
-    <h1 class="faq-title">Perguntas Frequentes</h1>
-    <div class="faq-content">
-            <button class="accordion">O que é Orientação Vocacional?</button>
-        <div class="panel">
-        <p>Conteúdo...</p>
-        </div>
+    <section class="faq" id="faq">
+        <h1 class="faq-title">Perguntas Frequentes</h1>
+        <div class="faq-content">
+            <div class="faq-item">
+                <button class="accordion">O que é Orientação Vocacional?</button>
+                <div class="panel">
+                    <p>Conteúdo 1...</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="accordion">Qual a diferença entre a Orientação Vocacional e o Teste Vocacional?</button>
+                <div class="panel">
+                    <p>Conteúdo 2...</p>
+                </div>
+            </div>
 
-        <button class="accordion">Qual a diferença entre a Orientação Vocacional e o Teste Vocacional?</button>
-        <div class="panel">
-        <p>Conteúdo...</p>
+            <div class="faq-item">
+                <button class="accordion">E se eu estiver muito perdida (o)?</button>
+                <div class="panel">
+                    <p>Conteúdo 3...</p>
+                </div>
+            </div>
         </div>
-
-        <button class="accordion">E se eu estiver muito perdida (o)?</button>
-        <div class="panel">
-        <p>Conteúdo...</p>
-        </div>
-    </div>
     </section>
 
     <?php include './inc/footer.inc' ?>
@@ -117,27 +121,36 @@
                     $('#mostrar_senha').attr('src', './assets/images/eye.svg');
                 }
             });
-        });
-        var acc = document.getElementsByClassName("accordion");
-            var i;
 
-            for (i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.classList.toggle("active");
+            function itemsAccordion(){
+                var items = $('.accordion');
 
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                panel.style.display = "none";
-                } else {
-                panel.style.display = "block";
+                for(let i = 0; i < items.length; i++){
+                    $(items[i]).click(function(){
+                        $(items[i]).toggleClass('active');
+                        var panel = $(items[i]).next();
+
+                        if(panel.css('display') == 'block') {
+                            panel.css('display', 'none');
+                        } 
+                        else{
+                            panel.css('display', 'block');
+                        }
+                        
+                        if(panel.css('maxHeight') === '0px'){
+                            panelScrollHeight = `${panel.prop("scrollHeight")}px`;
+                            panel.css('maxHeight', panelScrollHeight);
+                        } 
+                        else{
+                            panel.css('maxHeight', '0px');
+                        } 
+                    })
                 }
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                    } else {
-                    panel.style.maxHeight = panel.scrollHeight + "px";
-                    }
-            });
+                
             }
+
+            itemsAccordion();
+        });
     </script>
 </body>
 </html>

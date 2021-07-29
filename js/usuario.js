@@ -62,7 +62,11 @@ $(document).ready(function(){
             $("#nome_usuario_modal").attr("disabled", "disabled");
             $("#email_modal").attr("disabled", "disabled");
         }
-        $.get("seleciona.php?email="+i+"&identificador=1",function(r){
+        dados = {
+          email: i,
+          identificador: '1'
+        }
+        $.post("seleciona.php",dados,function(r){
           console.log('foi');
             u = r[0];
             $("#nome_completo_modal").val(u.nome);
@@ -72,7 +76,11 @@ $(document).ready(function(){
     });
   }
   function atualizarDados(novo_email){
-    $.get("seleciona.php?email="+novo_email+"&identificador=1",function(d){
+    dados = {
+      email: novo_email,
+      identificador: '1'
+    }
+    $.post("seleciona.php",dados,function(d){
       t = '';
       $.each(d,function(i,u){
           trocarCampos(u.nome, u.nome_usuario, u.email);

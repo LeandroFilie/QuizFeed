@@ -102,7 +102,7 @@
               </div>
               ';
 
-              $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data DESC, comentario.hora DESC LIMIT 4";
+              $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC LIMIT 4";
               $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
               echo '<div id="'.$linha["id_postagem"].'">';

@@ -4,11 +4,11 @@
 
     include "./inc/conexao.php";
 
-    if($_GET["identificador"] == 1){
+    if($_POST["identificador"] == 1){
         $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario";
 
-        if(isset($_GET["email"])){
-            $email = $_GET["email"];
+        if(isset($_POST["email"])){
+            $email = $_POST["email"];
             $select .= " WHERE usuario.email='$email'";
         }
 
@@ -26,16 +26,16 @@
         echo json_encode($matriz);
 
     }
-    else if($_GET["identificador"] == 2){
+    else if($_POST["identificador"] == 2){
         $select = "SELECT nome, email, registro, cidade, uf, situacao FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario";
 
-        if(isset($_GET["situacao"])){
-            $situacao = $_GET["situacao"];
+        if(isset($_POST["situacao"])){
+            $situacao = $_POST["situacao"];
             $select .= " WHERE usuario_psicologo.situacao='$situacao'";
         }
 
-        if(isset($_GET["email"])){
-            $email = $_GET["email"];
+        if(isset($_POST["email"])){
+            $email = $_POST["email"];
             $select .= " WHERE usuario.email='$email'";
         }
 
@@ -53,17 +53,17 @@
         echo json_encode($matriz);
 
     }
-    else if($_GET["identificador"] == 3){
-        $selectLikes = 'SELECT * FROM curtida WHERE cod_postagem = '.$_GET["id"].'';
+    else if($_POST["identificador"] == 3){
+        $selectLikes = 'SELECT * FROM curtida WHERE cod_postagem = '.$_POST["id"].'';
         $resultadoLikes = mysqli_query($conexao,$selectLikes); 
 
         $matriz['qtdLikes'] = mysqli_num_rows($resultadoLikes);
 
         echo json_encode($matriz);
     }
-    else if($_GET["identificador"] == 4){
-        $id_postagem = $_GET["id_postagem"];
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data DESC, comentario.hora DESC LIMIT 3";
+    else if($_POST["identificador"] == 4){
+        $id_postagem = $_POST["id_postagem"];
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC LIMIT 3";
         $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
         $selectCountComentarioPost = "SELECT conteudo FROM comentario WHERE cod_postagem = '$id_postagem'";
@@ -81,9 +81,9 @@
         $matriz["qtdComentarios"] = mysqli_num_rows($resultadoCountComentarioPost);
         echo json_encode($matriz);
     }
-    else if($_GET["identificador"] == 5){
-        $id_postagem = $_GET["id_postagem"];
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data DESC, comentario.hora DESC";
+    else if($_POST["identificador"] == 5){
+        $id_postagem = $_POST["id_postagem"];
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
         $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
         $resultado = mysqli_query($conexao,$selectComentarioPost)

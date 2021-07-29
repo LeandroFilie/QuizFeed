@@ -115,11 +115,7 @@ html {
 .menu {
   display: flex;
   align-items: center;
-  padding-left: 0;
-}
-
-.menu li:nth-child(2) {
-  margin-left: 50px;
+  gap: 40px;
 }
 
 .menu li a {
@@ -207,6 +203,7 @@ html {
 
   font-size: 2.5rem;
   font-style: italic;
+  text-align: center;
 
   margin-top: 20px;
   margin-bottom: 10px;
@@ -269,56 +266,64 @@ html {
 .faq {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   max-width: 1200px;
-  justify-content: center;
-  margin: auto;
+  margin: 0 auto;
+  margin-bottom: 32px;
 }
 
-.faq-content {
+.faq .faq-content {
   padding: 15px;
-  margin-bottom: 30px;
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  height: 100%;
 }
 
 .accordion {
-  background-color: #eee;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+  background-color: #e5e5e5;
+
+  font-size: 1.1rem;
   text-align: left;
-  font-size: 1.2rem;
+
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 8px;
+  
+  cursor: pointer;
+
   border: none;
   border-radius: 8px;
   outline: none;
   transition: 0.4s;
 }
 
-.active, .accordion:hover {
-  background-color: #ccc;
-}
+.panel{
+  display: none;
 
-.panel {
-  padding: 0 18px;
   background-color: #fefefe;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+
+  margin-bottom: 8px;
+
   max-height: 0;
   overflow: hidden;
   border-radius: 8px;
-  transition: max-height 0.2s ease-out;
   font-size: 1.1rem;
-}
-.accordion:after {
-  content: url("../assets/images/plus.svg");
-  height: 3px;
-  width: 3px;
-  margin-right: 8px;
-  float: right;
-  margin-left: 5px;
+  padding: 0 18px;
+  transition: max-height 0.2s ease-out;
+
 }
 
-.active:after {
+.accordion:after {
+  content: url("../assets/images/plus.svg");
+}
+
+.faq .active:after {
   content: url("../assets/images/minus.svg");
 }
 
@@ -371,12 +376,7 @@ html {
 
     z-index: 100;
   }
-
-  .menu li:nth-child(2) {
-    margin-top: 50px;
-    margin-left: 0;
-  }
-
+  
   .menu.active {
     right: 0;
   }
