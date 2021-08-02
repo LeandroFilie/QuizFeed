@@ -104,8 +104,8 @@ function partComentarios(id_postagem){
             <span>${v.nome_usuario}</span>
             <p>${v.conteudo}</p>
             <div class="comentario-info">
+              <span>${v.hora}</span>  
               <span>${v.data}</span>
-              <span>${v.hora}</span>
             </div>
           </div>
         </div> 
@@ -143,8 +143,8 @@ function allComentarios(id_postagem){
             <span>${v.nome_usuario}</span>
             <p>${v.conteudo}</p>
             <div class="comentario-info">
-              <span>${v.data}</span>
               <span>${v.hora}</span>
+              <span>${v.data}</span>
             </div>
           </div>
         </div> 
@@ -187,7 +187,7 @@ $(document).ready(function(){
     })
   })
 
-//gerenciamento_rede.php
+//home.php ==> usuário entrar na rede
   $('#entrar_rede').click(function(){
 
     var id = {

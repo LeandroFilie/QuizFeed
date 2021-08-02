@@ -10,6 +10,7 @@ main {
   text-align: center;
   margin: auto;
   min-height: var(--area-main);
+  padding: 0 20px;
 }
 
 .section-title .title {
@@ -28,7 +29,7 @@ main {
   flex-wrap: wrap;
 }
 
-.card-area, .card-rede, .card-inicio, .card-redes, .card-adm{
+.card-area, .card-rede, .card-adm{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,7 +47,7 @@ main {
 
 }
 
-.card-area, .card-rede, .card-inicio, .card-redes{
+.card-area, .card-rede{
   flex: 1;
   min-height: 430px;
 }
@@ -73,62 +74,7 @@ main {
   width: 50%;
 }
 
-/* ================= Usuário sem rede ================== */
-.card-inicio, .card-redes{
-  padding: 20px;
-  justify-content: space-between;
-}
-
-.card-title{
-  margin:0;
-  font-size: 1.15rem;
-  color: var(--azul);
-  font-family: 'Mont-SemiBold';
-}
-
-.card-inicio p, .card-redes p{
-  font-size: 1.03rem;
-}
-
-.card-inicio p a, .card-redes p a{
-  color: var(--laranja);
-}
-
-.card-inicio .lista-testes{
-  display: flex;
-  flex-direction: column;
-}
-
-.lista-testes .testes{
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.lista-testes .testes a{
-  color: var(--laranja);
-}
-
-.card-inicio .obs{
-  font-size: 0.8rem;
-}
-
-.separator{  
-  color: #29292e6e;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  justify-content: center;
-  width: 100%;
-}
-.separator::before, .separator::after{
-  content:"";
-  width: 40%;
-  height: 1px;
-  background: #29292e41;
-}
-
-.card-redes select, .card-adm select{
+.card-adm select{
   width: 90%;
   height: 2.5rem;
 
@@ -145,13 +91,13 @@ main {
   line-height: 1.5;
 }
 
-.card-redes select option, .card-adm select option{
+.card-adm select option{
   font-size: 1rem;
   color: #212529;
   white-space: nowrap;
 }
 
-.card-redes button, .card-adm button{
+.card-adm button{
   border: none;
   border-radius: 10px;
 
@@ -165,6 +111,183 @@ main {
 
   background: var(--laranja);
 }
+
+/* ================= Usuário sem rede ================== */
+#steps{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 40px;
+  min-height: 450px;
+  width: 90%;
+
+  background: #fff;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+
+  border-radius: 8px;
+  padding: 16px;
+
+  position: relative;
+}
+
+.steps-bar{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 32px;
+
+  list-style: none;
+
+  margin: 0;
+  width: 70%;
+  min-width: 250px;
+
+  position: absolute;
+  top: 32px;
+}
+
+.steps-bar li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: rgba(0, 0, 0, 0.5);
+  font-family: 'Mont-SemiBold';
+
+  background: rgba(0, 0, 0, 0.1);
+
+  min-width: 32px;
+  height: 32px;
+  font-size: 16px;
+
+  border-radius: 50%;
+}
+
+.steps-bar li.active, .steps-bar .divider.active{
+  background: rgba(237, 114, 1, 0.5);
+  color: #fff;
+}
+
+.steps-bar .divider{
+  height: 2px;
+  width: 40%;
+
+  margin: 0 8px;
+
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.step p{
+  margin: 0;
+}
+
+.step, .buttons{
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.steps{
+  position: absolute;
+  top: 64px;
+}
+
+.buttons-options button{
+  cursor: pointer;
+
+  background: var(--laranja);
+  color: #fff;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 10px 15px;
+  width: 180px;
+
+  font-size: 1.1rem;
+
+}
+ 
+.buttons{
+  justify-content: space-between;
+  
+  width: 100%;
+
+
+}
+
+.buttons button{
+  cursor: pointer;
+
+  background: var(--azul);
+  color: #fff;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 5px 10px;
+
+  font-size: 0.9rem;
+}
+
+.buttons button:nth-child(2){
+  background: var(--laranja);
+
+}
+
+
+/* .steps-bar li::before{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  content:attr(data-step);
+  color: rgba(0, 0, 0, 0.5);
+
+  background: rgba(0, 0, 0, 0.1);
+
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+
+  border-radius: 50%;
+} */
+
+/* .steps-bar li:not(:last-child)::after{
+  content: '';
+
+  position: absolute;
+  left: 65%;
+
+  height: 2px;
+  width: 70%;
+
+  margin: 0 10px;
+
+  background: rgba(0, 0, 0, 0.1);
+} */
+
+
+.separator{  
+  color: #29292e6e;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+}
+.separator::before, .separator::after{
+  content:"";
+  width: 40%;
+  height: 1px;
+  background: #29292e41;
+}
+
+
 
 /* ================= Usuário ja na rede ================== */
 .card-area, .card-rede{

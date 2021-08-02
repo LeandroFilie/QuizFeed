@@ -12,6 +12,7 @@
     <?php include './inc/head.inc' ?>
     <title>Home | TesteFeed</title>
     <link rel="stylesheet" href="./style/home.css">
+    <script src="./js/home.js"></script>
 </head>
 <body>
     <?php 
@@ -63,47 +64,128 @@
 
                     </section>
                     ';
-                /* echo '
-                    <div class="section-title">
-                        <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
-                     </div>
-                    <section id="tabs">
-                        <div class="tab-links">
-                            <button id="option-1">Gerenciar Usuários</button>
-                            <button id="option-2">Gerenciar Redes Colaborativas</button>
-                        </div>
-
-                        <div class="tab-content-adm">
-                            <section id="option-1-content">
-                                <div class="card">
-                                    <p>Usuários</p>
-                                    <a href="./dados_usuarios.php"><button>Ver todos</button></a>
-                                </div>
-                                <div class="card">
-                                    <p>Psicólogos</p>
-                                    <a href="./dados_psicologos.php"><button>Ver todos</button></a>
-                                </div>
-                            </section>
-                            <section id="option-2-content">
-                                <div class="card">
-                                    <p>Redes Colaborativas</p>
-                                    <button>Listar</button>
-                                </div>
-                            </section>
-                        </div>
-                    </section>
-
-                '; */
             }
             else if($_SESSION["permissao"] == 2){
                 $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
                 $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
           
-                if(mysqli_num_rows($resultadoNomeRede) == 0){
+                if(mysqli_num_rows($resultadoNomeRede) == 0){ //Usuário sem Rede
                     echo '
                         <div class="section-title">
                             <h1 class="title">Seja bem-vindo, @'.$_SESSION["nome_usuario"].'</h1>
                         </div>
+                    ';
+                    echo '
+                        <section id="steps">
+
+                            <ul class="steps-bar">
+                                <li data-step="1" class="active">1</li>
+                                <span data-step="2" class="divider"></span>
+                                <li data-step="2">2</li>
+                                <span data-step="3" class="divider"></span>
+                                <li data-step="3">3</li>
+                            </ul>
+
+                            <div class="steps">
+                                <div class="steps-options">
+                                    <div class="step active" data-step="1">
+                                        <p>Você tem alguma ideia de área que quer seguir ou está completamente perdido?</p>
+                                        <div class="buttons-options">
+                                            <button class="select-option" value="1" >Tenho uma ideia</button>
+                                            <button class="select-option" value="2" >Estou perdido</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="option-1">
+                                    <div class="step" data-step="2">
+                                        <h3>Que legal que você está decidido!<h3>
+                                        <p>Entre em uma área aqui</p>
+                                        <select id="nome_rede">
+                                            <option value="">Selecione uma Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                        </select>
+
+                                        <span class="erro_entrar_rede"></span>
+                                        <button id="entrar_rede">Entrar na Rede</button>
+
+                                        <span>* Fique tranquilo, se você se arrepender poderá trocar!</span>
+
+                                        <span class="separator">ou</span>
+
+                                        <p>Veja detalhes sobre as áreas para ajudar em sua escolha</p>
+
+                                        <select id="nome_rede">
+                                            <option value="">Selecione uma Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="option-2">
+                                    <div class="step" data-step="2">
+
+                                        <h3>Já que você está perdido, temos duas opções:<h3>
+                                        <p>Faça uma orientação Vocacional com um profissional!<br /> 
+                                        <span class="link-modal">Clique aqui e veja profissionais </p>
+
+                                        <span class="separator">ou</span>
+
+                                        <p>Faça testes vocacionais online</p>
+                                        <ul class="lista-testes">
+                                            <li>Guia da Carreira</li>
+                                            <li>Vix</li>
+                                            <li>Quero Bolsa</li>
+                                            <li>Quero Bolsa</li>
+                                        </ul>
+
+                                        <span>* O recomendado é você se consultar com um profissional especializado</span>
+                                    </div>
+
+                                    <div class="step" data-step="3">
+
+                                        <h3>Agora é com você!<h3>
+                                        <p>Já está decidido? Entre em uma área aqui</p>
+                                        <select id="nome_rede">
+                                            <option value="">Selecione uma Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                        </select>
+
+                                        <span class="erro_entrar_rede"></span>
+                                        <button id="entrar_rede">Entrar na Rede</button>
+
+                                        <span>* Fique tranquilo, se você se arrepender poderá trocar!</span>
+
+                                        <span class="separator">ou</span>
+
+                                        <p>Veja detalhes sobre as áreas para ajudar em sua escolha</p>
+
+                                        <select id="nome_rede">
+                                            <option value="">Selecione uma Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                            <option value="">Rede</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+
+                                <div class="buttons">
+                                    <button class="prev-btn">Anterior</button>
+                                    <button class="next-btn">Próximo</button>
+                                </div>
+                            
+                            </div>
+                        </section>
+                    ';
+                   /*  echo '
+
 
                         <section class="cards">
 
@@ -155,10 +237,10 @@
                             </section>
 
                         </section>
-                    ';
+                    '; */
                         
                 }
-                else{
+                else{ // Usuário na rede
                     while($linha = mysqli_fetch_assoc($resultadoNomeRede)){
                         $nomeRede = $linha['nome'];
                         $idRede = $linha["id_rede"];
@@ -242,6 +324,7 @@
         ?>
     </main>
     <?php include './inc/footer.inc';  ?>
+
     <script src="./js/rede.js"></script>
 </body>
 </html>

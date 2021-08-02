@@ -28,7 +28,6 @@
   <?php include './inc/head.inc' ?>
   <title><?php echo $nomeRede?> | TesteFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
-  <script src="./assets/libs/moment.js"></script>
 </head>
 <body>
   <?php include './inc/menu.inc'; ?>
@@ -88,6 +87,7 @@
 
         echo '
           <div class="post">
+
             <div class="post-info">
               <div class="post-info-details">
                 <div class="user-info">
@@ -95,10 +95,9 @@
                   <span>'.$linha["nome_usuario"].'</span>
                 </div> 
                   
-                
                 <div class="post-info-content">
-                  <span>'.$horaPost.'</span>
                   <span>'.$dataFormatada.'</span>
+                  <span>'.$horaPost.'</span>
                 </div>
               </div>
 
