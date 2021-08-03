@@ -14,7 +14,10 @@
                     $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
                     $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede);
                     if(mysqli_num_rows($resultadoNomeRede) != 0){
-                        echo '<li><a href="rede.php">Rede</a></li>';
+                         echo '
+                            <li><a href="rede.php">Rede</a></li>
+                            <li><a href="posts.php">Meus Posts</a></li>
+                        ';
                     }
                 }
                 if($_SESSION["permissao"] == 3){

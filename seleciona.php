@@ -144,6 +144,32 @@
             $matriz = 0;
         }
         echo json_encode($matriz);
-        // echo $matriz;
+    }
+    else if($_POST["identificador"] == 6){
+        $selectFiltro = $_POST["select"];
+        $resultadoFiltro = mysqli_query($conexao,$selectFiltro); 
+
+        $j = 0;
+        while($linha = mysqli_fetch_assoc($resultadoFiltro)){
+            $matriz[]=$linha;
+            $j++;
+        }
+        if($j == 0){
+            $matriz = 0;
+        }
+        echo json_encode($matriz);
+
+    }
+    else if($_POST["identificador"] == 7){
+        $id_area = $_POST["id"];
+
+        $selectArea = "SELECT * FROM area WHERE id_area = $id_area";
+        $resultadoArea = mysqli_query($conexao,$selectArea);
+
+        while($linha = mysqli_fetch_assoc($resultadoArea)){
+            $matriz[] = $linha;
+        }
+
+        echo json_encode($matriz);
     }
 ?>

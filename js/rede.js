@@ -104,8 +104,8 @@ function partComentarios(id_postagem){
             <span>${v.nome_usuario}</span>
             <p>${v.conteudo}</p>
             <div class="comentario-info">
-              <span>${v.hora}</span>  
               <span>${v.data}</span>
+              <span>${v.hora}</span>  
             </div>
           </div>
         </div> 
@@ -143,8 +143,8 @@ function allComentarios(id_postagem){
             <span>${v.nome_usuario}</span>
             <p>${v.conteudo}</p>
             <div class="comentario-info">
-              <span>${v.hora}</span>
               <span>${v.data}</span>
+              <span>${v.hora}</span>
             </div>
           </div>
         </div> 
@@ -159,12 +159,6 @@ function allComentarios(id_postagem){
 
   })
 }
-
-
-
-
-
-
 
 $(document).ready(function(){
 //rede.php
@@ -188,8 +182,7 @@ $(document).ready(function(){
   })
 
 //home.php ==> usuário entrar na rede
-  $('#entrar_rede').click(function(){
-
+  $('.btn-entrar-rede').click(function(){
     var id = {
       'id': $('#nome_rede').val()
     }

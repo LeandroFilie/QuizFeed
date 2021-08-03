@@ -33,8 +33,9 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
 
-  min-width: 250px;
+  width: 300px;
 
   margin: 20px;
 
@@ -74,7 +75,7 @@ main {
   width: 50%;
 }
 
-.card-adm select{
+.card-adm select, .steps select{
   width: 90%;
   height: 2.5rem;
 
@@ -84,7 +85,7 @@ main {
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
 
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #212529;
   white-space: nowrap;
   font-weight: 400;
@@ -116,11 +117,10 @@ main {
 #steps{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
-  margin-top: 40px;
-  min-height: 450px;
+  margin: 40px 0;
   width: 90%;
 
   background: #fff;
@@ -141,11 +141,9 @@ main {
   list-style: none;
 
   margin: 0;
+  margin-bottom: 16px;
   width: 70%;
   min-width: 250px;
-
-  position: absolute;
-  top: 32px;
 }
 
 .steps-bar li{
@@ -179,21 +177,96 @@ main {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.step p{
-  margin: 0;
+.steps{
+  width: 100%;
+/* 
+  min-height: 350px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+.steps-options .step-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 64px;
+}
+
+.steps-options .step p {
+  font-size: 1.5rem;
+}
+
+.steps-options .buttons-options{
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
 
 .step, .buttons{
   display: none;
 }
 
-.active {
-  display: block;
+.step h3{
+  color: var(--azul);
+  font-size: 1.5rem;
+  font-family: 'Mont-SemiBold';
 }
 
-.steps{
-  position: absolute;
-  top: 64px;
+.step-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+  justify-content: space-around;
+  min-height: 400px;
+}
+
+.step-content .btn-entrar-rede{
+  cursor: pointer;
+
+  background: var(--laranja);
+  color: #fff;
+
+  border: none;
+  border-radius: 8px;
+
+  padding: 10px 15px;
+  margin: 10px;
+  width: 200px;
+
+  font-size: 0.9rem;
+}
+
+.step-content p{
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.step-content .obs{
+  font-size: 0.8rem;
+}
+
+.link{
+  color: var(--laranja);
+  cursor: pointer;
+  width: 150px;
+}
+
+.step-content .lista-testes{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  padding: 0;
+}
+
+.active {
+  display: block;
 }
 
 .buttons-options button{
@@ -216,8 +289,6 @@ main {
   justify-content: space-between;
   
   width: 100%;
-
-
 }
 
 .buttons button{
@@ -236,58 +307,156 @@ main {
 
 .buttons button:nth-child(2){
   background: var(--laranja);
-
 }
-
-
-/* .steps-bar li::before{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  content:attr(data-step);
-  color: rgba(0, 0, 0, 0.5);
-
-  background: rgba(0, 0, 0, 0.1);
-
-  width: 32px;
-  height: 32px;
-  font-size: 16px;
-
-  border-radius: 50%;
-} */
-
-/* .steps-bar li:not(:last-child)::after{
-  content: '';
-
-  position: absolute;
-  left: 65%;
-
-  height: 2px;
-  width: 70%;
-
-  margin: 0 10px;
-
-  background: rgba(0, 0, 0, 0.1);
-} */
-
 
 .separator{  
   color: #29292e6e;
   display: flex;
   align-items: center;
   gap: 16px;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
+  margin: 20px auto;
 }
 .separator::before, .separator::after{
   content:"";
-  width: 40%;
+  width: 50%;
   height: 1px;
   background: #29292e41;
 }
 
+/* ===================== Modal apresentando psicólogos ==================== */
+.filtro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
 
+.filtro h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.filtro input {
+  width: 12rem;
+  height: 2.5rem;
+
+  padding: 0.375rem 0.75rem;
+  margin: 10px;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  /* background-color: #f8fafc; */
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.filtro button {
+  padding: 2px 10px;
+  margin: 5px 0;
+
+  border-radius: 8px;
+  border: none;
+
+  background: var(--azul);
+  color: white;
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+.select-estados-cidades {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filtro .select-estados-cidades select {
+  width: 12rem;
+  height: 2.5rem;
+
+  margin: 10px;
+  padding: 0.375rem 0.75rem;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.select-estados-cidades select option {
+  font-size: 1rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.modal-body{
+  overflow-y: scroll;
+  max-height: 30rem;
+}
+
+#psicologos{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+#psicologos .accordion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 1.1rem;
+  text-align: left;
+
+  width: 100%;
+  padding: 16px;
+  
+  cursor: pointer;
+
+  border-bottom: 1px solid var(--border-color);
+  outline: none;
+  transition: 0.4s;
+}
+
+#psicologos .dados{
+  display: none;
+  width: 100%;
+
+  border-bottom: 1px solid var(--border-color);
+
+  max-height: 0;
+  overflow: hidden;
+  font-size: 1rem;
+  padding: 0 18px;
+  transition: max-height 0.2s ease-out;
+}
+
+#psicologos .accordion:after {
+  content: url("../assets/images/chevron-down.svg");
+}
+
+#psicologos .accordion.active:after {
+  content: url("../assets/images/chevron-up.svg");
+}
 
 /* ================= Usuário ja na rede ================== */
 .card-area, .card-rede{
@@ -408,9 +577,14 @@ main {
   margin: 10px;
 }
 
+@media(max-width: 500px){
+  .lista-testes{
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 300px) {
   main {
     transform: scale(0.9);
   }
 }
-
