@@ -40,12 +40,36 @@
       </h1>
     </div> 
   </div>
+  <form action="posts.php" method="post">
+      <select id="areas_post" name="areas_post">
+          <option value="">Selecione uma Area</option>
+      <?php 
+        $selectAreaPost = "SELECT DISTINCT cod_rede, nome FROM postagem INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE email_usuario = '".$_SESSION["email"]."'";
+        $resultadoAreaPost = mysqli_query($conexao, $selectAreaPost);
 
+        while($linha = mysqli_fetch_assoc($resultadoAreaPost)){
+            echo '
+                <option value="'.$linha["cod_rede"].'">'.$linha["nome"].'</option>
+            ';
+
+        }
+      ?>      
+      </select>
+      <button>Pesquisar</button>
+  </form>
 
   <section class="posts">
 
     <?php
-      $selectPosts = "SELECT cod_rede, rede.nome as rede, postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE usuario_comum.email_usuario = '".$_SESSION["email"]."' ORDER BY postagem.id_postagem DESC";
+      $selectPosts = "SELECT cod_rede, rede.nome as rede, postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE usuario_comum.email_usuario = '".$_SESSION["email"]."' ";
+
+      if(!empty($_POST)){
+        if($_POST["areas_post"] != ""){
+          $area = $_POST["areas_post"];
+          $selectPosts .= " AND cod_rede = '$area'";
+        }
+      }
+      $selectPosts .= "ORDER BY postagem.id_postagem DESC";  
       $resultadoPosts = mysqli_query($conexao,$selectPosts); 
 
       $_SESSION["id_rede"] = $idRede;  
