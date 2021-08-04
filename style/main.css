@@ -134,13 +134,13 @@ footer div {
 }
 
 *::-webkit-scrollbar {
-  width: 16px;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: #29292e83;
   border-radius: 16px;
-  border: 5px solid #fff;
+  border: 2px solid #e8e8e8;
 }
 
 @media (max-width: 1080px) {
