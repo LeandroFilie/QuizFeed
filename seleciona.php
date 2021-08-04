@@ -27,7 +27,7 @@
 
     }
     else if($_POST["identificador"] == 2){
-        $select = "SELECT nome, email, registro, cidade, uf, situacao FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario";
+        $select = "SELECT nome, email, registro, cidade, uf, situacao, telefone FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario";
 
         if(isset($_POST["situacao"])){
             $situacao = $_POST["situacao"];

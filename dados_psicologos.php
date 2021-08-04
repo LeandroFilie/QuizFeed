@@ -150,7 +150,7 @@
       } 
       else if($_SESSION["permissao"] == 3){
         if(($_SESSION["situacao"] == 2)||($_SESSION["situacao"] == 3)){
-          $selectPsico = "SELECT nome, email, registro, cidade, uf FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario WHERE email='".$_SESSION["email"]."'";
+          $selectPsico = "SELECT nome, email, registro, cidade, uf, telefone FROM usuario INNER JOIN usuario_psicologo ON usuario.email = usuario_psicologo.email_usuario WHERE email='".$_SESSION["email"]."'";
 
           $resultado = mysqli_query($conexao,$selectPsico);
 
@@ -174,6 +174,11 @@
                         <h3>Endereço de Email</h3>
                         <p id="email-psico">'.$linha["email"].' </p>
                         <div id="erro_email"></div>
+                      </div>
+
+                      <div class="data-user-details-items">
+                        <h3>Telefone</h3>
+                        <p id="tel-psico">'.$linha["telefone"].' </p>
                       </div>
 
                       <div class="data-user-details-items">

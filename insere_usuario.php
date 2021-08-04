@@ -75,6 +75,7 @@
         $registro = $_POST["registro"];
         $cidade = $_POST["cidade"];
         $uf = $_POST["uf"];
+        $tel = $_POST["tel"];
         $_SESSION["permissao"] = 3;
         $_SESSION["situacao"] = 1;
 
@@ -107,9 +108,10 @@
                 cidade,
                 uf,
                 situacao,
-                email_usuario
+                email_usuario,
+                telefone
                 )
-                VALUES('$registro', '$cidade', '$uf', '1', '$email')";
+                VALUES('$registro', '$cidade', '$uf', '1', '$email', '$tel')";
 
             if(mysqli_query($conexao,$insert) && mysqli_query($conexao,$insert2)){
                 $error = 0;

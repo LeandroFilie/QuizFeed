@@ -18,6 +18,7 @@
         <div class="modal-body modal-form">
             <input type="text" name="nome_completo_modal" id="nome_completo_modal" placeholder="Nome Completo" />
             <input type="text" name="email_modal" id="email_modal" placeholder="E-mail" />
+            <input type="text" name="tel_modal" id="tel_modal" placeholder="Telefone" />
             <input type="text" name="registro_modal" id="registro_modal" placeholder="Registro" maxlength="11" />
             <div class="select-estados-cidades">
                 <select id="estado_modal" name="estado">

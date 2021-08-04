@@ -153,12 +153,13 @@ $(document).ready(function(){
         var nome_completo = $("#nome_completo_psi").val();
         var registro = $("#registro").val();
         var email = $("#email_psi").val();
+        var tel = $("#tel_psi").val();
         var cidade = $("#cidade").val();
         var senha = $("#senha_psi").val();
         var confirma_senha = $("#confirma_senha_psi").val();
         var estado = $('#estado').val();
 
-        if((nome_usuario === '') || (registro === '') || (email === '') || (cidade === "") || (senha === '') || (confirma_senha === '')){
+        if((nome_usuario === '') || (registro === '') || (email === '') || (tel === '') || (cidade === "") || (senha === '') || (confirma_senha === '')){
             Swal.fire({
                 title: 'Preencha todos os campos',
                 icon: 'error',
@@ -168,6 +169,7 @@ $(document).ready(function(){
             nome_completo === '' ? $("#nome_completo_psi").addClass('erro-input') : $("#nome_completo_psi").removeClass('erro-input');
             registro === '' ? $("#registro").addClass('erro-input') : $("#registro").removeClass('erro-input');
             email === '' ? $("#email_psi").addClass('erro-input') : $("#email_psi").removeClass('erro-input');
+            tel === '' ? $("#tel_psi").addClass('erro-input') : $("#tel_psi").removeClass('erro-input');
             estado === '0' ? $("#estado").addClass('erro-input') : $("#estado").removeClass('erro-input');
             cidade === '' ? $("#cidade").addClass('erro-input') : $("#cidade").removeClass('erro-input');
             senha === '' ? $("#senha_psi").addClass('erro-input') : $("#senha_psi").removeClass('erro-input');
@@ -177,6 +179,7 @@ $(document).ready(function(){
             $("#nome_completo_psi").removeClass('erro-input');
             $("#registro").removeClass('erro-input');
             $("#email_psi").removeClass('erro-input');
+            $("#tel_psi").removeClass('erro-input');
             $("#estado").removeClass('erro-input');
             $("#cidade").removeClass('erro-input');
             $("#senha_psi").removeClass('erro-input');
@@ -186,6 +189,7 @@ $(document).ready(function(){
                 "nome_completo":nome_completo,
                 "registro":registro,
                 "email":email,
+                "tel":tel,
                 "cidade":cidade,
                 "uf":estado,
                 "identificador":2
@@ -278,4 +282,20 @@ $(document).ready(function(){
     $("#registro").keyup(function() {
         $("#registro").val(this.value.match(/[0-9]*/));
     });
+
+    maskTel();
+
+    function maskTel(){
+        $('#tel_psi').mask('(00) 0000-00009');
+
+        $('#tel_psi').keyup(function() {
+            if($(this).val().length == 15){ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
+                $('#tel_psi').mask('(00) 00000-0009');
+            } else {
+                $('#tel_psi').mask('(00) 0000-00009');
+            }
+        });
+    }
+
+    
 });

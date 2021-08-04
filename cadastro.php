@@ -72,6 +72,10 @@
                             <div id="erro_email_psi"></div>
                         </div>
 
+                        <div>
+                            <input type="text" name="tel_psi" id="tel_psi" placeholder="Telefone" required />
+                        </div>
+
                         <div class="select-estados-cidades">
                             <select id="estado" name="estado">
                                 <option value="0" label="Estado"></option>
@@ -110,6 +114,7 @@
     <?php include './inc/footer.inc' ?>
 
     <script src="./assets/libs/sweetalert2.all.min.js"></script>
+    <script src="./assets/libs/jquery.mask.min.js"></script>
     <script src="./js/cadastro.js"></script>
     <script src="./js/select_estados.js"></script>
 </body>

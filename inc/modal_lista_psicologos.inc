@@ -19,7 +19,7 @@
                 </div>
                 <?php
 
-                    $selectSituacao2 = 'SELECT nome, email_usuario, uf, cidade FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2"';
+                    $selectSituacao2 = 'SELECT nome, email_usuario, uf, cidade, telefone FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2"';
                     
                     $resultadoSituacao2 = mysqli_query($conexao,$selectSituacao2);
 
@@ -30,6 +30,7 @@
                             <span class="accordion">'.$linha["nome"].'</span>
                             <div class="dados">
                                 <p>Email: '.$linha["email_usuario"].'</p>
+                                <p>Telefone: '.$linha["telefone"].'</p>
                                 <p>'.$linha["cidade"].' - '.$linha["uf"].'</p>
                             </div>
                         ';

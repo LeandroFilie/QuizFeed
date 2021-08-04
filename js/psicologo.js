@@ -68,6 +68,7 @@ $(function(){
       if(permissao != 3){
         $("#nome_completo_modal").attr("disabled", "disabled");
         $("#registro_modal").attr("disabled", "disabled");
+        $("#tel_modal").attr("disabled", "disabled");
         $("#email_modal").attr("disabled", "disabled");
         $("#estado_modal").attr("disabled", "disabled");
         $("#cidade_modal").attr("disabled", "disabled");
@@ -82,6 +83,7 @@ $(function(){
         u = r[0];
         $("#nome_completo_modal").val(u.nome);
         $("#registro_modal").val(u.registro);
+        $("#tel_modal").val(u.telefone);
         $("#email_modal").val(u.email);
         jQuery(`#estado_modal option[value='${u.uf}']`).attr('selected', 'selected');
       
@@ -160,14 +162,15 @@ $(function(){
     $.post("seleciona.php",dados,function(d){
       t = '';
       $.each(d,function(i,u){
-          trocarCampos(u.nome, u.email, u.registro, u.uf, u.cidade);
+          trocarCampos(u.nome, u.email, u.registro, u.uf, u.cidade, u.telefone);
       });
     });    
   }
 
-  function trocarCampos(nome, email, registro, uf, cidade){
+  function trocarCampos(nome, email, registro, uf, cidade, telefone){
     $("#nome-psico").html(nome);
     $("#email-psico").html(email);
+    $("#tel-psico").html(telefone);
     $("#registro-psico").html(registro);
     $('#local-psico').html(`${cidade} - ${uf}`);
     $(".alterar").val(email);
@@ -183,6 +186,7 @@ $(function(){
     p = {
         nome:$("#nome_completo_modal").val(),
         email:$("#email_modal").val(),
+        tel:$("#tel_modal").val(),
         registro:$("#registro_modal").val(),
         uf:$("#estado_modal").val(),
         cidade:$("#cidade_modal").val(),

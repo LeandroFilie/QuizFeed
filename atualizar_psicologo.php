@@ -26,7 +26,7 @@ if($_POST["identificador"] == 1){
                       situacao = '$situacao'
                       WHERE
                       email_usuario = '$email'";
-  
+
     if(mysqli_query($conexao,$update)){
       $error = 0;
     }   
@@ -42,6 +42,7 @@ else{
 
   $nome = $_POST["nome"];
   $email = $_POST["email"];
+  $tel = $_POST["tel"];
   $registro = $_POST["registro"];
   $cidade = $_POST["cidade"];
   $uf = $_POST["uf"];
@@ -91,7 +92,8 @@ else{
                         SET
                         uf= '$uf',
                         registro = '$registro',
-                        cidade = '$cidade'
+                        cidade = '$cidade',
+                        telefone = '$tel'
                         WHERE
                         email_usuario = '$email'";
     }

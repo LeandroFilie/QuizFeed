@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 04-Ago-2021 às 01:37
+-- Tempo de geração: 04-Ago-2021 às 03:13
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -235,6 +235,7 @@ INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`) VALUES
 DROP TABLE IF EXISTS `usuario_psicologo`;
 CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
   `email_usuario` varchar(100) NOT NULL,
+  `telefone` varchar(30) NOT NULL,
   `registro` varchar(11) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `uf` varchar(2) NOT NULL,
@@ -246,10 +247,10 @@ CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
 -- Extraindo dados da tabela `usuario_psicologo`
 --
 
-INSERT INTO `usuario_psicologo` (`email_usuario`, `registro`, `cidade`, `uf`, `situacao`) VALUES
-('carol@psicologa.com', '33333333333', 'Franca', 'SP', 2),
-('julia@psicologa.com', '11111111111', 'São Paulo', 'SP', 2),
-('leandro@psicologo.com', '22222222222', 'Ribeirão Preto', 'SP', 2);
+INSERT INTO `usuario_psicologo` (`email_usuario`, `telefone`, `registro`, `cidade`, `uf`, `situacao`) VALUES
+('carol@psicologa.com', '(11) 1111-1111', '33333333333', 'Franca', 'SP', 2),
+('julia@psicologa.com', '(22) 2222-2222', '11111111111', 'São Paulo', 'SP', 2),
+('leandro@psicologo.com', '(33) 3333-3333', '22222222222', 'Ribeirão Preto', 'SP', 2);
 
 --
 -- Restrições para despejos de tabelas
