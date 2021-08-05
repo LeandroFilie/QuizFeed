@@ -96,6 +96,42 @@ form .form-footer button{
   cursor: pointer;
 }
 
+.filtro-areas{
+  background: none;
+  box-shadow: none;
+  margin: 0;
+}
+
+.filtro-areas select{
+  height: 2.5rem;
+
+  margin: 10px;
+  padding: 0.375rem 0.75rem;
+  outline: none;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+
+  font-size: 0.95rem;
+  color: #212529;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.filtro-areas button {
+  padding: 5px 15px;
+  margin: 10px 0;
+
+  border-radius: 10px;
+  border: none;
+
+  background: var(--azul);
+  color: white;
+  font-size: 1.1rem;
+
+  cursor: pointer;
+}
+
 .posts {
   display: flex;
   flex-direction: column;
@@ -138,6 +174,18 @@ form .form-footer button{
 .posts .post p{
   text-align: justify;
   font-size: 1rem;
+  margin: 24px 0;
+  line-height: 24px;
+}
+
+.post .rede-info{
+  width: 100%;
+  text-align: left;
+  margin: 16px 0;
+}
+
+.post .rede-info span{
+  color: #29292ea8;
 }
 
 .post .post-info{
@@ -186,69 +234,54 @@ form .form-footer button{
 
 .post .post-footer{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 16px;
+}
+
+.post .post-footer .info-interacoes{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .post .post-footer .interacoes{
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
+  justify-content: space-around;
+  width: 100%;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 4px;
 }
 
-.post .post-footer .interacoes .like{
+.not-interacoes{
+  border-top: 1px solid var(--border-color);
+  width: 100%;
+  padding: 4px;
+}
+
+.post .post-footer .interacoes .like, 
+.post .post-footer .interacoes .comentario{
   display: flex;
   align-items: flex-end;
   gap: 8px;
   cursor: pointer;
 }
 
-.post .post-footer .interacoes .like:hover{
-  filter: brightness(0.8);
-}
-
-.post .post-footer .interacoes .like span{
-  font-size: 16px;
+.post .post-footer .interacoes .like span, 
+.post .post-footer .interacoes .comentario span,
+.post .post-footer .info-interacoes span{
   color: #737380;
-}  
-
-.post .post-footer .interacoes .comentar{
-  cursor: pointer;
-}
-
-.post .post-footer .interacoes .comentar:hover{
-  filter: brightness(0.8);
-  cursor: pointer;
-}
-
-.post .section-comentarios{
-  margin-top: 16px;
-  border-top: 1px solid var(--border-color);
+  font-size: 1rem;
 }
 
 .section-comentarios .enviar-comentario{
-  display: none;
-}
-
-.section-comentarios .enviar-comentario.show{
   margin-top: 16px;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: relative;
-  animation: mostrar-campo 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-@keyframes mostrar-campo {
-  0%{
-    transform: translateY(-16px);
-  }
-  100%{
-    transform: translateY(0);
-  }
 }
 
 .section-comentarios .enviar-comentario input {

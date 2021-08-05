@@ -40,7 +40,7 @@
       </h1>
     </div> 
   </div>
-  <form action="posts.php" method="post">
+  <form action="posts.php" method="post" class="filtro-areas">
       <select id="areas_post" name="areas_post">
           <option value="">Selecione uma Area</option>
       <?php 
@@ -100,7 +100,7 @@
 
         echo '
           <div class="post">
-            <div class="user-info">
+            <div class="rede-info">
                 <span>'.$linha["rede"].'</span>
             </div> 
             <div class="post-info">
@@ -121,113 +121,135 @@
               </div>
             </div>
             <p>'.$linha["conteudo"].'</p>
-            <div class="post-footer">
-             
-              <div class="interacoes">';
+            <div class="post-footer">';
+
+            $selectLikes .= ' WHERE cod_postagem = '.$linha["id_postagem"].'';
+            $resultadoLikes = mysqli_query($conexao,$selectLikes); 
+            $qtdLikes = mysqli_num_rows($resultadoLikes);
+
+            $selectCountComentarioPost = "SELECT conteudo FROM comentario WHERE cod_postagem = '".$linha["id_postagem"]."'";
+            $resultadoCountComentarioPost = mysqli_query($conexao,$selectCountComentarioPost); 
+            $qtdComentarios = mysqli_num_rows($resultadoCountComentarioPost);
+
+              echo '
+              <div class="info-interacoes" value="'.$linha["id_postagem"].'">
+                <span id="likeCount">'.$qtdLikes.' Curtidas</span>
+                <span id="comentarioCount">'.$qtdComentarios.' Comentários</span>
+              </div>';
+
                 $selectInteracoes = "SELECT email_usuario FROM inscricao WHERE email_usuario = '".$_SESSION["email"]."' AND cod_rede = '".$linha['cod_rede']."'";
                 $resultadoInteracoes = mysqli_query($conexao,$selectInteracoes); 
 
-                if(mysqli_num_rows($resultadoInteracoes) > 0){
-                    echo '<img src="./assets/images/answer.svg" alt="comentar" class="comentar" onclick="exibeCampoComentar('.$linha["id_postagem"].')"/>
-                    <div class="like" id="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">';
-                }else{
-                    echo '<img src="./assets/images/answer.svg" alt="comentar" class="comentar" style="cursor:not-allowed"/>
-                    <div class="like" id="like" style="cursor:not-allowed">';
-                }
-
-                $selectLikes .= ' WHERE cod_postagem = '.$linha["id_postagem"].'';
-                $resultadoLikes = mysqli_query($conexao,$selectLikes); 
-                $qtdLikes = mysqli_num_rows($resultadoLikes);
-
-                echo '  
-                  <span id="likeCount">'.$qtdLikes.'</span>
-                ';
-
                 $selectLikeUser = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida WHERE email_usuario = '".$_SESSION["email"]."' AND cod_postagem = '".$linha["id_postagem"]."'";
-                $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser); 
+                $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser);
 
-                if(mysqli_num_rows($resultadoLikeUser) > 0){
-                  echo '<img src="./assets/images/liked.svg" alt="liked"  />';
-                }
-                else{
-                  echo '<img src="./assets/images/like.svg" alt="like"  />';
-                }
-                echo '
-                </div>
-              </div>
-            </div>
-            <div class="section-comentarios">
-          <div class="enviar-comentario hide" value='.$linha["id_postagem"].'>
-                        <input type="text" name="'.$linha["id_postagem"].'" placeholder="Escreva seu comentário" maxlength="500" />
-                        <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario" onclick="comentar('.$linha["id_postagem"].')">
-                    </div>';
-
-
-
-
-
-              $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC LIMIT 4";
-              $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
-
-              echo '<div id="'.$linha["id_postagem"].'">';
-              $c = 0;
-              while(($linhaComentarios = mysqli_fetch_assoc($resultadoComentarioPost)) && ($c < 3)){
-                $dataComentario = date('d/m/Y', strtotime($linhaComentarios["data"]));
-                $anoComentario = date('Y', strtotime($linhaComentarios["data"]));
-
-                $dataAtual = date('d/m/Y');
-                $anoAtual = date('Y');
-
-
-                if($dataComentario == $dataAtual){
-                  $dataFormatadaComentario = 'Hoje';
-                }
-                else if($anoComentario == $anoAtual){
-                  $dataFormatadaComentario = date('d/m', strtotime($linhaComentarios["data"]));
-                }
-                else{
-                  $dataFormatadaComentario = $dataComentario;
-                }
-
-                $horaComentario = date('H:i', strtotime($linhaComentarios["hora"]));
-
-
-
-
-                echo '
-                  <div class="comentario">
-                    <div class="avatar">
-                      <img src="./assets/images/avatar.svg" alt="Avatar" />
-                    </div>
-                    <div class="comentario-content">
-                      <span>'.$linhaComentarios["nome_usuario"].'</span>
-                      <p>'.$linhaComentarios["conteudo"].'</p>
-                      <div class="comentario-info">
-                        <span>'.$dataFormatadaComentario.'</span>
-                        <span>'.$horaComentario.'</span>
+               if(mysqli_num_rows($resultadoInteracoes) > 0){
+                    echo '
+                      <div class="interacoes">
+                        <div class="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">
+                        ';
+                        echo '  
+                          <span >Curtir</span>
+                        ';      
+                          if(mysqli_num_rows($resultadoLikeUser) > 0){
+                            echo '<img src="./assets/images/liked.svg" alt="liked"  />';
+                          }
+                          else{
+                            echo '<img src="./assets/images/like.svg" alt="like"  />';
+                          }
+      
+                          echo '
+                        </div>
+      
+                        <div class="comentario" onclick="focusComentar('.$linha["id_postagem"].')">
+                          <span>Comentar</span>
+                        <img src="./assets/images/answer.svg" alt="comentar" class="comentar" />
                       </div>
                     </div>
-                  </div> 
-                ';
-                $c++;
-              }
-
-              if($c == 0){
-                echo '<span class="empty-comment comentario-content" value='.$linha["id_postagem"].'>Seja o primeiro a comentar nesse post!</span>';
-              }
-              else{
-                if(mysqli_num_rows($resultadoComentarioPost) > 3){
-                  echo '<span class="ver-mais" onclick="allComentarios('.$linha["id_postagem"].')">Ver mais comentários</span>';
-
+                    ';
+              }else{
+                  echo '
+                    <div class="not-interacoes">
+                     
+                    </div>
+                  ';
                 }
-              }
+
               echo '
-                  </div>';
-
-
-            echo '
-  
             </div>
+            
+            <div class="section-comentarios">';
+
+              echo '
+                <div id="'.$linha["id_postagem"].'">';
+
+                $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC";
+                
+                  if($qtdComentarios > 3){
+                    $initial = $qtdComentarios - 3;
+    
+                    $selectComentarioPost .= " LIMIT $initial, 3";
+
+                    echo '<span class="ver-mais" onclick="allComentarios('.$linha["id_postagem"].')">Ver comentários mais antigos</span>';
+                  }
+    
+                  $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
+
+
+                  while(($linhaComentarios = mysqli_fetch_assoc($resultadoComentarioPost))){
+                    $dataComentario = date('d/m/Y', strtotime($linhaComentarios["data"]));
+                    $anoComentario = date('Y', strtotime($linhaComentarios["data"]));
+            
+                    $dataAtual = date('d/m/Y');
+                    $anoAtual = date('Y');
+            
+            
+                    if($dataComentario == $dataAtual){
+                      $dataFormatadaComentario = 'Hoje';
+                    }
+                    else if($anoComentario == $anoAtual){
+                      $dataFormatadaComentario = date('d/m', strtotime($linhaComentarios["data"]));
+                    }
+                    else{
+                      $dataFormatadaComentario = $dataComentario;
+                    }
+
+                    $horaComentario = date('H:i', strtotime($linhaComentarios["hora"]));
+
+                    echo '
+                      <div class="comentario">
+                        <div class="avatar">
+                          <img src="./assets/images/avatar.svg" alt="Avatar" />
+                        </div>
+                        <div class="comentario-content">
+                          <span>'.$linhaComentarios["nome_usuario"].'</span>
+                          <p>'.$linhaComentarios["conteudo"].'</p>
+                          <div class="comentario-info">
+                            <span>'.$dataFormatadaComentario.'</span>
+                            <span>'.$horaComentario.'</span>
+                          </div>
+                        </div>
+
+                      </div> 
+                    ';
+                  }
+
+              echo '
+                </div>
+              ';
+
+              if(mysqli_num_rows($resultadoInteracoes) > 0){
+                echo '
+                  <div class="enviar-comentario" value='.$linha["id_postagem"].'>
+                    <input type="text" name="'.$linha["id_postagem"].'" placeholder="Escreva seu comentário" maxlength="500" />
+                    <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario" onclick="comentar('.$linha["id_postagem"].')">
+                  </div>
+                ';
+              }
+                
+            echo '
+            </div>
+
           </div>
         ';
         $i++;

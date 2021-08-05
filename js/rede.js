@@ -12,8 +12,8 @@ function curtir(id){
         identificador: '3'
       }
       $.post('seleciona.php',dadosLike,function(r){
-        $("#like[value='"+ id +"'] #likeCount").text(`${r.qtdLikes}`);
-        $("#like[value='"+ id +"'] img").attr('src', '././assets/images/liked.svg');
+        $(".info-interacoes[value='"+ id +"'] #likeCount").text(`${r.qtdLikes} Curtidas`);
+        $(".like[value='"+ id +"'] img").attr('src', '././assets/images/liked.svg');
       }) 
     }
     else{
@@ -25,8 +25,8 @@ function curtir(id){
             identificador: '3'
           }
           $.post('seleciona.php',dadosLike,function(r){
-            $("#like[value='"+ id +"'] #likeCount").text(`${r.qtdLikes}`);
-            $("#like[value='"+ id +"'] img").attr('src', '././assets/images/like.svg');
+            $(".info-interacoes[value='"+ id +"'] #likeCount").text(`${r.qtdLikes} Curtidas`);
+            $(".like[value='"+ id +"'] img").attr('src', '././assets/images/like.svg');
           })
         }
       })
@@ -36,26 +36,116 @@ function curtir(id){
   })
 }
 
-function exibeCampoComentar(id){
-  elemento = jQuery(`.enviar-comentario[value='${id}']`);
-  emptyComment = jQuery(`.empty-comment[value='${id}']`);
-  if(elemento.hasClass('hide')){
-    elemento.removeClass('hide');
-    elemento.toggleClass('show');
-
-    $(`input[name="${id}"]`).focus();
-
-    emptyComment.css('display', 'none');
-  }
-  else{
-    elemento.removeClass('show');
-    elemento.toggleClass('hide');
-
-    emptyComment.css('display', 'block');
-  } 
+function focusComentar(id){
+  $(`.enviar-comentario [name='${id}']`).focus();
 }
 
-function atualizarComentarios(id_postagem){
+function atualizarComentarios(id_postagem, identificador){
+  dadosPost = {
+    id_postagem,
+    identificador
+  }
+
+  $.post('seleciona.php',dadosPost,function(r){
+    t = '';
+    j = 0;
+    $(`.info-interacoes[value="${id_postagem}"] #comentarioCount`).text(`${r.qtdComentarios} Comentários`)
+    if(r.qtdComentarios > 3 && identificador == 5){
+      t += `<span class="ver-mais" onclick="allComentarios(${id_postagem})">Ver comentários mais antigos</span>`;
+    }
+    $.each(r, function(i, v){
+      if(v.nome_usuario != undefined){
+        t += `
+          <div class="comentario">
+            <div class="avatar">
+              <img src="./assets/images/avatar.svg" alt="Avatar" />
+            </div>
+            <div class="comentario-content">
+              <span>${v.nome_usuario}</span>
+              <p>${v.conteudo}</p>
+              <div class="comentario-info">
+                <span>${v.data}</span>
+                <span>${v.hora}</span>
+              </div>
+            </div>
+          </div> 
+        `;
+        j++;
+      }
+
+    })
+    if(identificador == 4){
+      t+= `<span class="ver-mais" onclick="atualizarComentarios(${id_postagem}, 5)">Ver menos</span>`;
+    }
+
+    $(`#${id_postagem}`).html(t);
+
+  })
+
+
+  $(`input[name="${id_postagem}"]`).val('');
+
+}
+
+function comentar(id){
+  conteudo = $(`input[name="${id}"]`).val();
+
+  dados = {
+    'conteudo': conteudo,
+    'cod_postagem': id, //curtindo
+    'acao': 2
+  }
+
+  $.post('interacoes_rede.php',dados,function(r){
+    if(r == 0){
+      atualizarComentarios(id, 5);
+    }
+
+  })
+}
+
+function allComentarios(id_postagem){
+  atualizarComentarios(id_postagem, 4);
+}
+/* function allComentarios(id_postagem){
+  dadosPost = {
+    id_postagem: id_postagem,
+    identificador: '5'
+  }
+
+  $.post('seleciona.php',dadosPost,function(r){
+    console.log(r);
+    t = '';
+    j = 0;
+    $(`info-interacoes[value="${id_postagem}"] #comentarioCount`).text(`${r.qtdComentarios} Comentários`)
+    $.each(r, function(i, v){
+      t += `
+        <div class="comentario">
+          <div class="avatar">
+            <img src="./assets/images/avatar.svg" alt="Avatar" />
+          </div>
+          <div class="comentario-content">
+            <span>${v.nome_usuario}</span>
+            <p>${v.conteudo}</p>
+            <div class="comentario-info">
+              <span>${v.data}</span>
+              <span>${v.hora}</span>
+            </div>
+          </div>
+        </div> 
+      `;
+      j++;
+    })
+    if(j > 3){
+      t+= `<span class="ver-mais" onclick="partComentarios(${id_postagem})">Ver menos</span>`;
+    }
+
+    $(`#${id_postagem}`).html(t);
+
+  })
+} */
+
+/* function atualizarComentarios(id_postagem){
 
   dadosPost = {
     id_postagem: id_postagem,
@@ -64,9 +154,9 @@ function atualizarComentarios(id_postagem){
 
   allComentarios(id_postagem)
   $(`input[name="${id_postagem}"]`).val('');
-}
+} */
 
-function comentar(id){
+/* function comentar(id){
   conteudo = $(`input[name="${id}"]`).val();
 
   dados = {
@@ -82,9 +172,9 @@ function comentar(id){
 
   })
 
-}
+} */
 
-function partComentarios(id_postagem){
+/* function partComentarios(id_postagem){
   dadosPost = {
     id_postagem: id_postagem,
     identificador: '4'
@@ -121,44 +211,9 @@ function partComentarios(id_postagem){
     $(`#${id_postagem}`).html(t);
 
   })
-}
+} */
 
-function allComentarios(id_postagem){
-  dadosPost = {
-    id_postagem: id_postagem,
-    identificador: '5'
-  }
 
-  $.post('seleciona.php',dadosPost,function(r){
-    console.log(r);
-    t = '';
-    j = 0;
-    $.each(r, function(i, v){
-      t += `
-        <div class="comentario">
-          <div class="avatar">
-            <img src="./assets/images/avatar.svg" alt="Avatar" />
-          </div>
-          <div class="comentario-content">
-            <span>${v.nome_usuario}</span>
-            <p>${v.conteudo}</p>
-            <div class="comentario-info">
-              <span>${v.data}</span>
-              <span>${v.hora}</span>
-            </div>
-          </div>
-        </div> 
-      `;
-      j++;
-    })
-    if(j > 3){
-      t+= `<span class="ver-mais" onclick="partComentarios(${id_postagem})">Ver menos</span>`;
-    }
-
-    $(`#${id_postagem}`).html(t);
-
-  })
-}
 
 $(document).ready(function(){
 //rede.php
