@@ -204,10 +204,10 @@
                 else{ // Usuário na rede
                     while($linha = mysqli_fetch_assoc($resultadoNomeRede)){
                         $nomeRede = $linha['nome'];
-                        $idRede = $linha["id_rede"];
+                        $_SESSION["id_rede"] = $linha["id_rede"];
                     } 
 
-                    $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.id_postagem DESC LIMIT 3";
+                    $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = '".$_SESSION["id_rede"]."'  ORDER BY postagem.id_postagem DESC LIMIT 3";
                     $resultadoPosts = mysqli_query($conexao,$selectPosts);
                     echo '
                         <section class="cards">

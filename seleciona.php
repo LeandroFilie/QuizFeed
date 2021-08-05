@@ -5,11 +5,14 @@
     include "./inc/conexao.php";
 
     if($_POST["identificador"] == 1){
-        $select = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario";
+        $select = "SELECT usuario.nome as nome, email, nome_usuario, rede.nome as rede FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario INNER JOIN inscricao ON usuario.email = inscricao.email_usuario INNER JOIN rede ON rede.id_rede=inscricao.cod_rede ";
 
         if(isset($_POST["email"])){
             $email = $_POST["email"];
             $select .= " WHERE usuario.email='$email'";
+        }
+        if(isset($_POST["area"])){
+            $select .= " WHERE usuario.email='".$_SESSION["email"]."'";
         }
 
         $resultado = mysqli_query($conexao,$select)

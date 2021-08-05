@@ -83,18 +83,33 @@ $(document).ready(function(){
     $.post("seleciona.php",dados,function(d){
       t = '';
       $.each(d,function(i,u){
-          trocarCampos(u.nome, u.nome_usuario, u.email);
+          trocarCampos(u.nome, u.nome_usuario, u.email, u.cod_area);
       });
     })    
   }
-
-  function trocarCampos(nome, nome_usuario, email){
+  function atualizarRede(nova_area){
+    dados = {
+      area: nova_area,
+      identificador: '1'
+    }
+    
+    $.post("seleciona.php",dados,function(d){
+      t = '';console.log(d);
+      $.each(d,function(i,u){
+        trocarCampos(u.nome, u.nome_usuario, u.email, u.rede);
+      });
+    })    
+  }
+  function trocarCampos(nome, nome_usuario, email, rede){
     $("#nome-user").html(nome);
     $("#nome-usuario-user").html(nome_usuario);
     $("#email-user").html(email);
+    $("#area-user").html(rede);
     $(".alterar").val(email);
     $(".delete").attr('onclick', `removerUser('${email}')`);
   }
+  
+
 
   // =========================== SCRIPTS ===============================
 
@@ -136,6 +151,25 @@ $(document).ready(function(){
             mensagemErroNomeUsuario();
             $(".close").click();
             define_alterar_remover();
+        }
+    });
+  });
+
+  $('.trocar-rede').click(function(){
+    p = {
+        area:$("#nome_rede").val(),
+    };    
+      
+    $.post("atualizar_rede.php",p,function(r){
+        console.log(`R: ${r}`);
+        $("#msg").removeClass("erro");
+        $("#msg").removeClass("sucesso");
+
+        if(r == 0){
+          $("#msg").addClass("sucesso");
+          $("#msg").html("Sua área da rede foi alterada!");
+          $(".close").click();
+          atualizarRede(p.area);
         }
     });
   });

@@ -77,7 +77,6 @@
         $selectUsuario = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario WHERE email='".$_SESSION["email"]."'";
 
         $resultado = mysqli_query($conexao,$selectUsuario);
-
         echo '
             <div class="data-user-title">
               <img src="./assets/images/dados.svg" Alt="user" class="icon-user"/>
@@ -113,7 +112,8 @@
                         echo '
                           <div class="data-user-details-items">
                             <h3>Sua Área</h3>
-                            <p>'.$linhaNomeRede["nome"].'</p>
+                            <p id="area-user">'.$linhaNomeRede["nome"].'</p>
+                            <button class="data-user-action " data-toggle="modal" data-target="#trocarArea">Mudar de Rede</button>
                           </div>
                         ';
                       }
@@ -135,6 +135,7 @@
     include './inc/footer.inc';
 
     include './inc/modal_usuario.inc';
+    include './inc/modal_trocar_area.inc';
 
     echo '<input type="hidden" value="'.$_SESSION["permissao"].'" id="permissao">';
     echo '<input type="hidden" value="'.$_SESSION["email"].'" id="email_oculto">';
