@@ -79,7 +79,7 @@
         $resultado = mysqli_query($conexao,$selectUsuario);
         echo '
             <div class="data-user-title">
-              <img src="./assets/images/dados.svg" Alt="user" class="icon-user"/>
+              
               <h1>Dados Pessoais</h1>
             </div>
             <div id="msg"></div>
@@ -110,10 +110,14 @@
                     if(mysqli_num_rows($resultadoNomeRede) > 0){
                       while($linhaNomeRede = mysqli_fetch_assoc($resultadoNomeRede)){
                         echo '
-                          <div class="data-user-details-items">
-                            <h3>Sua Área</h3>
-                            <p id="area-user">'.$linhaNomeRede["nome"].'</p>
-                            <button class="data-user-action " data-toggle="modal" data-target="#trocarArea">Mudar de Rede</button>
+                          <div class="data-user-details-items-area">
+                            <div class="area">
+                              <h3>Sua Área</h3>
+                              <p id="area-user">'.$linhaNomeRede["nome"].'</p>
+                            </div>
+                            <div class="btn-area">
+                              <button class="data-user-action-rede " data-toggle="modal" data-target="#trocarArea">Mudar de Rede</button>
+                            </div>
                           </div>
                         ';
                       }

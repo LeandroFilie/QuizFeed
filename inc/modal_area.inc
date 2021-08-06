@@ -8,5 +8,6 @@
           <div class="modal-body">
               <div id="descricao"></div>
           </div>
-    </div>
-</div>
+        </div>
+    </div> 
+</div> 

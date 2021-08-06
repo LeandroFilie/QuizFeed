@@ -107,113 +107,6 @@ function comentar(id){
 function allComentarios(id_postagem){
   atualizarComentarios(id_postagem, 4);
 }
-/* function allComentarios(id_postagem){
-  dadosPost = {
-    id_postagem: id_postagem,
-    identificador: '5'
-  }
-
-  $.post('seleciona.php',dadosPost,function(r){
-    console.log(r);
-    t = '';
-    j = 0;
-    $(`info-interacoes[value="${id_postagem}"] #comentarioCount`).text(`${r.qtdComentarios} Comentários`)
-    $.each(r, function(i, v){
-      t += `
-        <div class="comentario">
-          <div class="avatar">
-            <img src="./assets/images/avatar.svg" alt="Avatar" />
-          </div>
-          <div class="comentario-content">
-            <span>${v.nome_usuario}</span>
-            <p>${v.conteudo}</p>
-            <div class="comentario-info">
-              <span>${v.data}</span>
-              <span>${v.hora}</span>
-            </div>
-          </div>
-        </div> 
-      `;
-      j++;
-    })
-    if(j > 3){
-      t+= `<span class="ver-mais" onclick="partComentarios(${id_postagem})">Ver menos</span>`;
-    }
-
-    $(`#${id_postagem}`).html(t);
-
-  })
-} */
-
-/* function atualizarComentarios(id_postagem){
-
-  dadosPost = {
-    id_postagem: id_postagem,
-    identificador: '4'
-  }
-
-  allComentarios(id_postagem)
-  $(`input[name="${id_postagem}"]`).val('');
-} */
-
-/* function comentar(id){
-  conteudo = $(`input[name="${id}"]`).val();
-
-  dados = {
-    'conteudo': conteudo,
-    'cod_postagem': id, //curtindo
-    'acao': 2
-  }
-
-  $.post('interacoes_rede.php',dados,function(r){
-    if(r == 0){
-      atualizarComentarios(id);
-    }
-
-  })
-
-} */
-
-/* function partComentarios(id_postagem){
-  dadosPost = {
-    id_postagem: id_postagem,
-    identificador: '4'
-  }
-
-  $.post('seleciona.php',dadosPost,function(r){  
-    console.log(r);
-    t='';
-    $.each(r, function(i, v){
-      if(v.nome_usuario != undefined){
-        t += `
-        <div class="comentario">
-          <div class="avatar">
-            <img src="./assets/images/avatar.svg" alt="Avatar" />
-          </div>
-          <div class="comentario-content">
-            <span>${v.nome_usuario}</span>
-            <p>${v.conteudo}</p>
-            <div class="comentario-info">
-              <span>${v.data}</span>
-              <span>${v.hora}</span>  
-            </div>
-          </div>
-        </div> 
-      `;
-      } 
-      
-    })
-  
-    if(r.qtdComentarios > 3){
-      t += `<span class="ver-mais" onclick="allComentarios(${id_postagem})">Ver mais comentários</span>`;
-    }
-
-    $(`#${id_postagem}`).html(t);
-
-  })
-} */
-
-
 
 $(document).ready(function(){
 //rede.php
@@ -237,11 +130,8 @@ $(document).ready(function(){
   })
 
 //home.php ==> usuário entrar na rede
-  $('.btn-entrar-rede').click(function(){
-    var id = {
-      'id': $('#nome_rede').val()
-    }
 
+  function entrarRede(id){
     $('.erro_entrar_rede').html('');
     $('.erro_entrar_rede').removeClass('erro');
     $('.erro_entrar_rede').css('display','none');
@@ -263,5 +153,21 @@ $(document).ready(function(){
         $('.erro_entrar_rede').addClass('erro');
     }
 
+  }
+
+  $('.btn-entrar-rede-option-1').click(function(){
+    var id = {
+      'id': $('.nome_rede_option-1').val()
+    }
+
+    entrarRede(id);
+  })
+
+  $('.btn-entrar-rede-option-2').click(function(){
+    var id = {
+      'id': $('.nome_rede_option-2').val()
+    }
+
+    entrarRede(id);
   })
 })

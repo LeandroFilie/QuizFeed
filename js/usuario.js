@@ -156,11 +156,13 @@ $(document).ready(function(){
   });
 
   $('.trocar-rede').click(function(){
-    p = {
-        area:$("#nome_rede").val(),
-    };    
-      
-    $.post("atualizar_rede.php",p,function(r){
+    area = $("#nome_rede").val();
+    if(area != ''){
+      p = {
+        area
+      };
+
+      $.post("atualizar_rede.php",p,function(r){
         console.log(`R: ${r}`);
         $("#msg").removeClass("erro");
         $("#msg").removeClass("sucesso");
@@ -171,7 +173,11 @@ $(document).ready(function(){
           $(".close").click();
           atualizarRede(p.area);
         }
-    });
+      });
+
+      $("#nome_rede").val('');
+    }
+
   });
 
 });
