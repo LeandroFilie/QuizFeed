@@ -116,14 +116,14 @@
                                             <h3>Que legal que você está decidido!</h3>
                                             <p>Entre em uma área aqui</p>
                                             
-                                            <select id="nome_rede">
+                                            <select id="nome_rede" class="nome_rede_option-1">
                                                 <option value="">Selecione uma Rede</option>';
                                                 exibeAreas();
                                             echo '
                                             </select>
 
                                             <span class="erro_entrar_rede"></span>
-                                            <button class="btn-entrar-rede">Entrar na Rede</button>
+                                            <button class="btn-entrar-rede-option-1">Entrar na Rede</button>
 
                                             <span class="obs">* Fique tranquilo, se você se arrepender poderá trocar!</span>
 
@@ -165,14 +165,14 @@
                                         <div class="step-content">
                                             <h3>Agora é com você!</h3>
                                             <p>Já está decidido? Entre em uma área aqui</p>
-                                            <select id="nome_rede">
+                                            <select id="nome_rede" class="nome_rede_option-2">
                                                 <option value="">Selecione uma Área</option>';
                                                 exibeAreas();
                                             echo '
                                             </select>
 
                                             <span class="erro_entrar_rede"></span>
-                                            <button class="btn-entrar-rede">Entrar na Rede</button>
+                                            <button class="btn-entrar-rede-option-2">Entrar na Rede</button>
 
                                             <span class="obs">* Fique tranquilo, se você se arrepender poderá trocar!</span>
 
@@ -214,8 +214,8 @@
 
                             <section class="card-area">
                                 <p>Sua área de maior afinidade é</p>
-                                <h2>'.$nomeRede.'</h2>
-                                <span>Ainda está em dúvida? Quer ir para outra rede? <a href="" class="link">Clique Aqui</a></span>
+                                <h2 id="nomeRede">'.$nomeRede.'</h2>
+                                <span>Ainda está em dúvida? Quer ir para outra rede? <a href="" class="link" data-toggle="modal" data-target="#trocarArea">Clique Aqui</a></span>
                                 <a href="posts.php"><button>Meus Posts</button></a>
                                 <a href="dados_usuarios.php"><button>Meus Dados</button></a>
                             </section>
@@ -288,6 +288,7 @@
     <?php 
         include './inc/modal_lista_psicologos.inc';
         include './inc/modal_area.inc';
+        include './inc/modal_trocar_area.inc';
     ?>
 
     <script src="./js/rede.js"></script>

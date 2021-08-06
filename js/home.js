@@ -179,5 +179,24 @@ $(function(){
 
   })
 
+  $('.trocar-rede').click(function(){
+    area = $("#nome_rede").val();
+    if(area != ''){
+      p = {
+        area
+      };
+
+      $.post("atualizar_rede.php",p,function(r){
+        if(r == 0){
+          $(".close").click();
+          location.reload();
+        }
+      });
+
+      $("#nome_rede").val('');
+    }
+
+  });
+
 
 }) 

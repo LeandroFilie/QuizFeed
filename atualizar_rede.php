@@ -1,6 +1,7 @@
 <?php
 
 include "./inc/conexao.php";
+header('Content-Type: application/json');
 session_start();
 
 $email_atual = $_SESSION['email'];
