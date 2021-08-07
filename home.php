@@ -59,16 +59,23 @@
 
                         <section class="card-adm">
                             <div class="card-title">Gerenciamento das Redes</div>
-                            <form action="rede.php" method="post">
-                                <select id="nome_rede" name="nome_rede">
-                                    <option value="">Selecione uma Rede</option>
-                                ';
-                                exibeAreas();
-                                echo '
-                                </select>
+                            <div class="item">
+                                <form action="rede.php" method="post">
+                                    <select id="nome_rede" name="nome_rede">
+                                        <option value="">Selecione uma Rede</option>
+                                    ';
+                                    exibeAreas();
+                                    echo '
+                                    </select>
 
-                                <button type="submit">Ir para a Rede</button>
-                            </form>
+                                    <button type="submit">Ir para a Rede</button>
+                                </form>
+                            </div>
+                            <div class="item">
+                                <p>Posts Denunciados</p>
+                                <button><a href="posts_denunciados.php">Ver Mais</a></button>
+                            </div>
+
                         </section>
 
                     </section>

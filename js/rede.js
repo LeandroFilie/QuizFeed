@@ -1,4 +1,5 @@
 function curtir(id){
+  console.log(id);
   dados = {
     'cod_postagem': id,
     'situacao': 1, //curtindo
@@ -6,6 +7,7 @@ function curtir(id){
   }
 
   $.post('interacoes_rede.php',dados,function(r){
+    console.log(r);
     if(r == 0){
       dadosLike = {
         id: id,
@@ -109,6 +111,87 @@ function allComentarios(id_postagem){
   atualizarComentarios(id_postagem, 4);
 }
 
+function abrirMenu(id){
+  elemento = $(`.more-menu[value="${id}"]`);
+
+  if(elemento.css('display') == 'none'){
+    elemento.css('display', 'flex');
+  }
+  else{
+    elemento.css('display', 'none');
+  }
+}
+
+function ocultarPost(id, acao){
+  elemento = $(`.post[value="${id}"]`);
+  if(acao == 'remover'){
+    elemento.toggleClass('post-removido');
+    elemento.html('<p>Pronto! O post foi removido com sucesso</p>')
+  
+    elemento.removeClass('post');
+  }
+  else if(acao == 'denunciar'){
+    elemento.toggleClass('post-denunciado');
+    elemento.html('<p>Que pena que houve essa inconveniência. Obrigado por nos ajudar, vamos tomar providências</p>')
+  
+    elemento.removeClass('post');
+  }
+
+}
+
+function removerPost(id){
+  p = {
+    tabela:'postagem',
+    id,
+    coluna:'id_postagem',
+  };
+
+  $.post('remover.php',p,function(r){
+    if(r == 1){
+        ocultarPost(id, 'remover');
+    }
+  })
+}
+
+function denunciarPost(id){
+  dados = {
+    'cod_postagem': id,
+    'situacao': 2, //denunciado
+    'acao': 3
+  }
+
+  $.post('interacoes_rede.php',dados,function(r){
+    if(r == 0){
+      ocultarPost(id, 'denunciar');
+
+    }
+  })
+
+}
+
+function tirarDenuncia(id){
+  console.log(id);
+  dados = {
+    'cod_postagem': id,
+    'situacao': 1, //tirando denuncia
+    'acao': 3
+  }
+
+
+
+  $.post('interacoes_rede.php',dados,function(r){
+    if(r == 0){
+
+      $(`.post-denunciado-adm[value="${id}"] .tirar-denuncia`).css('display', 'none');
+
+      $(`.post-denunciado-adm[value="${id}"]`).removeClass('post-denunciado-adm');
+      $(`.msg-denuncia[value="${id}"]`).text('');
+      $(`.msg-denuncia[value="${id}"]`).removeClass('msg-denuncia');
+
+    }
+  })
+}
+
 $(document).ready(function(){
 //rede.php
   $('#postar').click(function(){
@@ -116,12 +199,14 @@ $(document).ready(function(){
       'conteudo': $('#conteudo').val()
     }
 
+    console.log(p);
+
     $.post("insere_post.php",p,function(r){
+      console.log(r);
       $('#erro_post').html('');
       $('#erro_post').removeClass('erro');
       if(r == 0){
         location.reload();
-        // atualizarListaPosts();
       }
       else if(r == 1){
         $('#erro_post').html('Erro ao fazer post. Por favor, contate o admistrador');
@@ -131,7 +216,6 @@ $(document).ready(function(){
   })
 
 //home.php ==> usuário entrar na rede
-
   function entrarRede(id){
     $('.erro_entrar_rede').html('');
     $('.erro_entrar_rede').removeClass('erro');

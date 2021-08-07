@@ -6,13 +6,13 @@
   include './inc/conexao.php';
 
   $cod_postagem = $_POST["cod_postagem"];
-  $email = $_SESSION["email"];
   $data = date('Y-m-d');
   $hora = date('H:i:s');
   $acao = $_POST["acao"];
 
   if($acao == 1){
     $situacao = $_POST["situacao"];
+    $email = $_SESSION["email"];
 
     if($situacao == 1){
       $insert = "INSERT INTO curtida(
@@ -49,6 +49,7 @@
   }
   else if($acao == 2){  
     $conteudo = $_POST["conteudo"];
+    $email = $_SESSION["email"];
 
     $insert = "INSERT INTO comentario(
       cod_postagem,
@@ -71,6 +72,22 @@
       $erro = 1;
     }
 
+  }
+  else if($acao == 3){ //denuncias
+    $situacao = $_POST["situacao"];
+
+    $update = "UPDATE postagem
+    SET
+    situacao = '$situacao'
+    WHERE
+    id_postagem = '$cod_postagem'";
+
+    if(mysqli_query($conexao,$update)){
+      $erro = 0;
+    }   
+    else{
+      $erro = 1;
+    }
   }
 
 

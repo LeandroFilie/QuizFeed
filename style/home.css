@@ -59,12 +59,12 @@ main {
 
 
 .card-adm{
-  justify-content: center;
+  justify-content: space-between;
 
-  min-height: 200px;
+  min-height: 350px;
 
   gap: 16px;
-  padding: 25px;
+  padding: 50px 16px;
 }
 
 .card-adm .item{

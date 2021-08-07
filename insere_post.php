@@ -9,26 +9,28 @@ include './inc/conexao.php';
 $conteudo = $_POST["conteudo"];
 $data = date('Y-m-d');
 $hora = date('H:i:s');
+$email = $_SESSION["email"];
+$codRede = $_SESSION["id_rede"];
 
-$selectCodRede = "SELECT inscricao.cod_rede as rede FROM inscricao INNER JOIN rede ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
-$resultado = mysqli_query($conexao, $selectCodRede);
-while($linha = mysqli_fetch_assoc($resultado)){
-  $codRede = $linha['rede'];
-} 
+//SITUAÇÕES
+// 1 -> ACABOU DE POSTAR
+// 2 -> DENUNCIADO
 
 $insert = "INSERT INTO postagem(
             data,
             hora,
             conteudo,
             email_usuario,
-            cod_rede
+            cod_rede,
+            situacao
           )
           VALUES(
             '$data',
             '$hora',
             '$conteudo',
-            '".$_SESSION["email"]."',
-            '$codRede'
+            '$email',
+            '$codRede',
+            1
           )
           ";
   

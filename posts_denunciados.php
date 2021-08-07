@@ -1,33 +1,20 @@
 <?php
   session_start();
 
-  if(!isset($_SESSION["email"])){
+  if(!isset($_SESSION["email"]) || $_SESSION["permissao"] != 1){
     echo "<script>location.href='index.php'</script>";
   }
 
   include './inc/conexao.php';
 
-  $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
-  $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
-  while($linha = mysqli_fetch_assoc($resultadoNomeRede)){
-    $nomeRede = $linha['nome'];
-    $idRede = $linha["id_rede"];
-  }  
-
-  if(mysqli_num_rows($resultadoNomeRede) == 0){
-    echo "<script>location.href='home.php'</script>";
-  }
-
-
   date_default_timezone_set('America/Sao_Paulo');
-
 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <?php include './inc/head.inc' ?>
-  <title>Meus Posts | TesteFeed</title>
+  <title>Posts Denunciados | TesteFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
 </head>
 <body>
@@ -36,23 +23,20 @@
 <main>
   <div class="header-rede">
     <div class="rede-title">
-      <h1>
-        <?php echo "Meus Posts"; ?>
-      </h1>
+      <h1>Posts Denunciados</h1>
     </div> 
   </div>
-  <form action="posts.php" method="post" class="filtro-areas">
+  <form action="posts_denunciados.php" method="post" class="filtro-areas">
       <select id="areas_post" name="areas_post">
           <option value="">Selecione uma Area</option>
       <?php 
-        $selectAreaPost = "SELECT DISTINCT cod_rede, nome FROM postagem INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE email_usuario = '".$_SESSION["email"]."'";
-        $resultadoAreaPost = mysqli_query($conexao, $selectAreaPost);
+        $selectAreas = 'SELECT * FROM area';
+        $resultadoAreas = mysqli_query($conexao, $selectAreas);
 
-        while($linha = mysqli_fetch_assoc($resultadoAreaPost)){
+        while($linha = mysqli_fetch_assoc($resultadoAreas)){
             echo '
-                <option value="'.$linha["cod_rede"].'">'.$linha["nome"].'</option>
+                <option value="'.$linha["id_area"].'">'.$linha["nome"].'</option>
             ';
-
         }
       ?>      
       </select>
@@ -62,7 +46,7 @@
   <section class="posts">
 
     <?php
-      $selectPosts = "SELECT cod_rede, rede.nome as rede, postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE usuario_comum.email_usuario = '".$_SESSION["email"]."' ";
+      $selectPosts = "SELECT cod_rede, rede.nome as rede, postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE postagem.situacao = 2 ";
 
       if(!empty($_POST)){
         if($_POST["areas_post"] != ""){
@@ -70,6 +54,7 @@
           $selectPosts .= " AND cod_rede = '$area'";
         }
       }
+
       $selectPosts .= "ORDER BY postagem.id_postagem DESC";  
       $resultadoPosts = mysqli_query($conexao,$selectPosts); 
 
@@ -100,7 +85,7 @@
 
         if($linha["situacao"] == 2){
           echo ' 
-            <span class="msg-denuncia" value="'.$linha["id_postagem"].'">Seu Post foi denunciado e o administrador está tomando providências</span>
+            <span class="msg-denuncia" value="'.$linha["id_postagem"].'">Post Denunciado. Tome alguma providência</span>
             <div class="post post-denunciado-adm" value="'.$linha["id_postagem"].'">
           ';
         }
@@ -128,10 +113,16 @@
               <div class="more-menu-post" value="'.$linha["id_postagem"].'" onclick="abrirMenu('.$linha["id_postagem"].')">
                 <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></div>
                   <div class="more-menu" value="'.$linha["id_postagem"].'">';
-                  if($linha["nome_usuario"] == $_SESSION["nome_usuario"]){
+                  if($linha["nome_usuario"] == $_SESSION["nome_usuario"] || $_SESSION["permissao"] == 1){
                     echo '<div class="more-menu-item excluir" onclick=removerPost('.$linha["id_postagem"].')>
                             <img src="./assets/images/trash.svg" />
                             <p>Excluir</p>
+                          </div>';
+                  }
+                  if($_SESSION["permissao"] == 1 && $linha["situacao"] == 2){
+                    echo '<div class="more-menu-item tirar-denuncia" onclick=tirarDenuncia('.$linha["id_postagem"].')>
+                            <img src="./assets/images/alert-octagon.svg" />
+                            <p>Tirar Denuncia</p>
                           </div>';
                   }
                 echo '
@@ -186,14 +177,7 @@
                       </div>
                     </div>
                     ';
-              }else{
-                  echo '
-                    <div class="not-interacoes">
-                     
-                    </div>
-                  ';
-                }
-
+              }
               echo '
             </div>
             
@@ -278,7 +262,7 @@
         echo '
           <div class="empty-post">
             <img src="./assets/images/empty_post.svg" alt="Icone de Mensagem">
-            <p>Você não postou nada ainda...</p>
+            <p>Nenhum post denunciado por aqui!</p>
           </div>
         ';
       }

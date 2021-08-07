@@ -213,18 +213,62 @@ form .form-footer button{
   color: #29292ea8;
 }
 
-.post-info .denunciar{
+.post-info .more-menu-post{
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.post-info .more-menu-post .icon{
   cursor:pointer;
 }
 
-.post-info .denunciar:hover{
-  filter: brightness(0);
+.post-info .more-menu-post .icon svg{
+  stroke: #29292ea8;
 }
 
-.post-info .denunciar svg{
-  stroke: #29292ea8;
+.post-info .more-menu-post .icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
+
+.post-info .more-menu-post .icon:hover{
+  background: #e5e5e579;
+}
+
+.post-info .more-menu-post .more-menu{
+  position: absolute;
+  bottom: 30px;
+  right: 0px;
+  background: var(--border-color);
+  padding: 16px;
+  border-radius: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.post-info .more-menu-post .more-menu .more-menu-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.post-info .more-menu-post .more-menu .more-menu-item img{
+  height: 1rem;
+  width: 1rem;
+}
+
+.post-info .more-menu-post .more-menu .more-menu-item p{
+  display: inline;
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1rem;
 }
 
 .post-info span{
@@ -365,13 +409,53 @@ form .form-footer button{
 
 .erro{
   background-color: #f8d7da;
-  border: 1px #f5c6cb;
+  border: 1px #f5c6cb solid;
   color: #721c24;
   text-align: center;
 
   padding: 0.5rem 0.5rem;
   border-radius: 0.25rem;
   margin-bottom: 8px;
+}
+
+.post-removido{
+  background-color: #d4edda;
+  border: 1px #c3e6cb solid;
+  color: #155724;
+  
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.post-denunciado{
+  background-color: var(--border-color);
+  border: 1px #bbb solid;
+  font-style: italic;
+  
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+.post.post-denunciado-adm{
+  border: 1px #721c24 solid;
+  border-radius: 0 0 8px 8px;
+  border-top: none;
+}
+
+.msg-denuncia{
+  background-color: #f8d7da;
+  border: 1px #721c24 solid;
+  color: #721c24;
+  text-align: center;
+  text-align: center;
+
+  padding: 0.5rem 0.5rem;
+  border-radius: 8px 8px 0 0;
+  margin-bottom: -25px;
 }
 
 @media(min-width: 550px){

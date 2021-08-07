@@ -14,6 +14,7 @@
       $nomeRede = $linha['nome'];
       $idRede = $linha["id_rede"];
     }  
+    $_SESSION["id_rede"] = $idRede;
 
     if(mysqli_num_rows($resultadoNomeRede) == 0){
       echo "<script>location.href='home.php'</script>";
@@ -25,6 +26,7 @@
       $nomeRede = $linha['nome'];
       $idRede = $linha["id_rede"];
     }  
+    
   }
   date_default_timezone_set('America/Sao_Paulo');
 ?>
@@ -62,10 +64,16 @@
   <section class="posts">
     
     <?php
-      $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ORDER BY postagem.id_postagem DESC";
-      $resultadoPosts = mysqli_query($conexao,$selectPosts); 
+      $selectPosts = "SELECT postagem.conteudo as conteudo, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ";
+      
+      if($_SESSION["permissao"] != 1){
+        $selectPosts .= "AND postagem.situacao = 1";
+      }
 
-      $_SESSION["id_rede"] = $idRede;  
+      $selectPosts .= " ORDER BY postagem.id_postagem DESC";
+      
+      $resultadoPosts = mysqli_query($conexao,$selectPosts); 
+  
       $i = 0;
       while($linha = mysqli_fetch_assoc($resultadoPosts)){
         $selectLikes = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida";
@@ -88,8 +96,17 @@
 
         $horaPost = date('H:i', strtotime($linha["hora"]));
 
-        echo '
-          <div class="post">
+          if($linha["situacao"] == 2){
+            echo ' 
+              <span class="msg-denuncia" value="'.$linha["id_postagem"].'">Post Denunciado. Tome alguma providência</span>
+              <div class="post post-denunciado-adm" value="'.$linha["id_postagem"].'">
+                  
+            ';
+          }
+          else{
+            echo ' <div class="post" value="'.$linha["id_postagem"].'">';
+          }
+          echo '
 
             <div class="post-info">
               <div class="post-info-details">
@@ -104,8 +121,33 @@
                 </div>
               </div>
 
-              <div class="denunciar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+              <div class="more-menu-post" value="'.$linha["id_postagem"].'" onclick="abrirMenu('.$linha["id_postagem"].')">
+                <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></div>
+                <div class="more-menu" value="'.$linha["id_postagem"].'">';
+                if($linha["nome_usuario"] == $_SESSION["nome_usuario"] || $_SESSION["permissao"] == 1){
+                  echo '<div class="more-menu-item excluir" onclick=removerPost('.$linha["id_postagem"].')>
+                          <img src="./assets/images/trash.svg" />
+                          <p>Excluir</p>
+                        </div>';
+                }
+                else if($_SESSION["permissao"] != 1){
+                  echo '<div class="more-menu-item denunciar" onclick=denunciarPost('.$linha["id_postagem"].')>
+                          <img src="./assets/images/alert-octagon.svg" />
+                          <p>Denunciar</p>
+                        </div>';
+                }
+                if($_SESSION["permissao"] == 1 && $linha["situacao"] == 2){
+                  echo '<div class="more-menu-item tirar-denuncia" onclick=tirarDenuncia('.$linha["id_postagem"].')>
+                          <img src="./assets/images/alert-octagon.svg" />
+                          <p>Tirar Denuncia</p>
+                        </div>';
+                }
+
+
+                  
+                echo '
+                </div>
+                
               </div>
             </div>
 
