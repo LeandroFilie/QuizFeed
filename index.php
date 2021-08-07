@@ -25,13 +25,14 @@
             <div class="card-login">
                 <h1>Login</h1>   
                 <div id="erro_aut"></div>
-                <input type="text" name="email" id="email" placeholder="E-mail" />
-                <div id="campo_senha" class="campo_senha">
-                    <input type="password" name="senha" id="senha" placeholder="Senha" required />
-                    <img src="./assets/images/eye.svg" alt="mostrar_ocultar_senha" id="mostrar_senha">
+                <div class="form">
+                    <input type="text" name="email" id="email" placeholder="E-mail" />
+                    <div id="campo_senha" class="campo_senha">
+                        <input type="password" name="senha" id="senha" placeholder="Senha" required />
+                        <img src="./assets/images/eye.svg" alt="mostrar_ocultar_senha" id="mostrar_senha">
+                    </div>
+                    <button id="autenticar">Entrar</button>
                 </div>
-                <button id="autenticar">Entrar</button>
-                <span class="recovey">Recuperar Senha</span>
             </div>
         </div>
     </header>

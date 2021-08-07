@@ -48,6 +48,10 @@ main {
 
 }
 
+.card-title{
+  font-size: 1.2rem;
+}
+
 .card-area, .card-rede{
   flex: 1;
   min-height: 430px;

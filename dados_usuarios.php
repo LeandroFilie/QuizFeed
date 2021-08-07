@@ -11,7 +11,7 @@
     <?php include './inc/head.inc' ?>    
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
     <script src="./assets/bootstrap/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./style/dados_usuario.css">
+    <link rel="stylesheet" href="./style/dados.css">
     <title>Dados | TesteFeed</title>
 </head>
 <body>
@@ -49,7 +49,7 @@
         $resultado = mysqli_query($conexao,$select);
 
         $i = 0;
-                
+        echo '<div id="data-user">';
         while($linha = mysqli_fetch_assoc($resultado)){
           if($linha["nome_usuario"] != 'admin'){
             echo '
@@ -71,6 +71,8 @@
         if($i == 0){
           echo '<h2>Não há usuários cadastrados</h2>';
         }
+
+        echo '</div>';
         
       }
       else if($_SESSION["permissao"] == 2){
@@ -140,9 +142,6 @@
 
     include './inc/modal_usuario.inc';
     include './inc/modal_trocar_area.inc';
-
-    echo '<input type="hidden" value="'.$_SESSION["permissao"].'" id="permissao">';
-    echo '<input type="hidden" value="'.$_SESSION["email"].'" id="email_oculto">';
   ?>
   
   <script src="./js/usuario.js"></script>

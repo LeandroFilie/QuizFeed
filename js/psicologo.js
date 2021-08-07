@@ -1,38 +1,45 @@
 function removerUser(email){
-  console.log(email);
   $(".remover").click(function(){
-    permissao = $("#permissao").val();
     c = "email";
     t = "usuario";
     p = {tabela:t,email:email,coluna:c};
 
-    $.post("remover.php",p,function(r){
-      if(permissao == 1){
-        $("#msg").removeClass("erro");
-        $("#msg").removeClass("sucesso");
-        $('.modal').modal('hide'); 
-        if(r=='1'){  
-            Swal.fire({
-                title: 'Pronto',
-                text: "Psicólogo removido com sucesso",
-                icon: 'success',
-                confirmButtonColor: '#002539',
-                backdrop: true,
-            }).then((result) => {
-            if (result.isConfirmed) {
-                location.reload();
-            }
-            }) 
+    $.post('seleciona.php',{identificador: '8'},function(permissao){
+      
+      $.post("remover.php",p,function(r){
+
+        if(permissao[0] == 1){
+          $("#msg").removeClass("erro");
+          $("#msg").removeClass("sucesso");
+          $('.modal').modal('hide'); 
+
+          if(r=='1'){  
+              Swal.fire({
+                  title: 'Pronto',
+                  text: "Psicólogo removido com sucesso",
+                  icon: 'success',
+                  confirmButtonColor: '#002539',
+                  backdrop: true,
+              }).then((result) => {
+              if (result.isConfirmed) {
+                  location.reload();
+              }
+              }) 
+          }
+          else{
+              $("#msg").addClass("erro");            
+              $("#msg").html("Não foi possível remover o usuário");
+          }
+
         }
         else{
-            $("#msg").addClass("erro");            
-            $("#msg").html("Não foi possível remover o usuário");
+          location.href="index.php";
         }
-      }
-      else{
-        location.href="index.php";
-      } 
+
+      })
+
     })
+
   })
 }
 
@@ -60,62 +67,65 @@ $(function(){
   }
   
   function define_alterar_remover(){ 
-    $(".alterar").click(function(){
-
+     $(".alterar").click(function(){
       i = $(this).val();
-      permissao = $('#permissao').val();
 
-      if(permissao != 3){
-        $("#nome_completo_modal").attr("disabled", "disabled");
-        $("#registro_modal").attr("disabled", "disabled");
-        $("#tel_modal").attr("disabled", "disabled");
-        $("#email_modal").attr("disabled", "disabled");
-        $("#estado_modal").attr("disabled", "disabled");
-        $("#cidade_modal").attr("disabled", "disabled");
-      }
+      $.post('seleciona.php',{identificador: '8'},function(permissao){
+        
+        if(permissao[0] != 3){
+          $("#nome_completo_modal").attr("disabled", "disabled");
+          $("#registro_modal").attr("disabled", "disabled");
+          $("#tel_modal").attr("disabled", "disabled");
+          $("#email_modal").attr("disabled", "disabled");
+          $("#estado_modal").attr("disabled", "disabled");
+          $("#cidade_modal").attr("disabled", "disabled");
+        }
 
-      dados = {
-        'email': i,
-        'identificador': '2'
-      }
-  
-      $.post("seleciona.php",dados,function(r){
-        u = r[0];
-        $("#nome_completo_modal").val(u.nome);
-        $("#registro_modal").val(u.registro);
-        $("#tel_modal").val(u.telefone);
-        $("#email_modal").val(u.email);
-        jQuery(`#estado_modal option[value='${u.uf}']`).attr('selected', 'selected');
-      
-        $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+u.uf+'/municipios',function(c){
-          t = "";
-          $.each(c,function(i,v){
-              t += `<option value="${v.nome}" `;
-              if(v.nome == u.cidade){
-                  t += 'selected';
-              }
-              t += `>${v.nome}</option>`
+        dados = {
+          'email': i,
+          'identificador': '2'
+        }
+    
+        $.post("seleciona.php",dados,function(r){
+          u = r[0];
+          $("#nome_completo_modal").val(u.nome);
+          $("#registro_modal").val(u.registro);
+          $("#tel_modal").val(u.telefone);
+          $("#email_modal").val(u.email);
+          jQuery(`#estado_modal option[value='${u.uf}']`).attr('selected', 'selected');
+        
+          $.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/'+u.uf+'/municipios',function(c){
+            t = "";
+            $.each(c,function(i,v){
+                t += `<option value="${v.nome}" `;
+                if(v.nome == u.cidade){
+                    t += 'selected';
+                }
+                t += `>${v.nome}</option>`
+            })
+            $('#cidade_modal').html(t);
           })
-          $('#cidade_modal').html(t);
-        })
-        
-        $('#psicologo-aprovar').val(u.email);
-        $('#psicologo-reprovar').val(u.email);
-        
-        if(permissao == 3){
-          if(u.situacao == 2){
-              $("#registro_modal").attr("disabled", "disabled"); 
+          
+          $('#psicologo-aprovar').val(u.email);
+          $('#psicologo-reprovar').val(u.email);
+          
+          if(permissao[0] == 3){
+            if(u.situacao == 2){
+                $("#registro_modal").attr("disabled", "disabled"); 
+            }
           }
-        }
-        if(permissao == 1){
-          if(u.situacao == 2){
-              $('#buttonsSituacao1').hide();
+          if(permissao[0] == 1){
+            if(u.situacao == 2){
+                $('#buttonsSituacao1').hide();
+            }
+            else{
+                $('#buttonsSituacao1').show();
+            }
           }
-          else{
-              $('#buttonsSituacao1').show();
-          }
-        }
+        });
+
       });
+
     });
   }
 
@@ -225,7 +235,7 @@ $(function(){
         else{
             $('.close').click();
             $("#msg").addClass("erro");
-            $('#msg').html('Falha ao reprovar pscicólogo.');
+            $('#msg').html('Falha ao reprovar psicólogo.');
         }
     })
   })
@@ -290,5 +300,18 @@ $(function(){
     $('#option-2').toggleClass('active');
   });
 
+  maskTel();
+
+  function maskTel(){
+      $('#tel_modal').mask('(00) 0000-00009');
+
+      $('#tel_modal').keyup(function() {
+          if($(this).val().length == 15){ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
+              $('#tel_modal').mask('(00) 00000-0009');
+          } else {
+              $('#tel_modal').mask('(00) 0000-00009');
+          }
+      });
+  }
 
 });

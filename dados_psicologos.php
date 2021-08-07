@@ -11,7 +11,7 @@
     <?php include './inc/head.inc' ?>    
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
     <script src="./assets/bootstrap/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="./style/dados_psicologo.css">
+    <link rel="stylesheet" href="./style/dados.css">
     <title>Dados | TesteFeed</title> 
 </head>
 <body>
@@ -24,7 +24,7 @@
         
       if($_SESSION["permissao"] == 1){
         echo '
-          <div class="title-dados-psicologos">
+          <div class="data-user-title">
             <h1>Psicólogos</h1>
             <div>
               <p><a href="https://cadastro.cfp.org.br/" target="_blank">Clique aqui</a> para consultar o registro do profissional</p>
@@ -156,7 +156,6 @@
 
           echo '
               <div class="data-user-title">
-                <img src="assets/images/dados.svg" Alt="user" class="icon-user"/>
                 <h1>Dados Pessoais</h1>
               </div>
               <div id="msg"></div>
@@ -209,14 +208,11 @@
     include './inc/footer.inc';
 
     include './inc/modal_psicologo.inc';
-
-    echo '<input type="hidden" value="'.$_SESSION["permissao"].'" id="permissao">';
-    echo '<input type="hidden" value="'.$_SESSION["email"].'" id="email_oculto">';
-
   ?>
 
   <script src="./assets/libs/sweetalert2.all.min.js"></script>
   <script src="./js/select_estados.js"></script>
+  <script src="./assets/libs/jquery.mask.min.js"></script>
   <script src="./js/psicologo.js"></script>
 
 </body>

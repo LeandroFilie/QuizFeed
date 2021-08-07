@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 04-Ago-2021 às 03:13
+-- Tempo de geração: 07-Ago-2021 às 02:38
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -139,6 +139,7 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   `data` date NOT NULL,
   `hora` time NOT NULL,
   `conteudo` varchar(500) NOT NULL,
+  `situacao` int(11) NOT NULL,
   `email_usuario` varchar(100) NOT NULL,
   `cod_rede` int(11) NOT NULL,
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),

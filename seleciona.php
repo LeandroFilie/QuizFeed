@@ -1,19 +1,25 @@
 <?php
     session_start();
     header('Content-Type: application/json');
+    date_default_timezone_set('America/Sao_Paulo');
 
     include "./inc/conexao.php";
 
     if($_POST["identificador"] == 1){
-        $select = "SELECT usuario.nome as nome, email, nome_usuario, rede.nome as rede FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario INNER JOIN inscricao ON usuario.email = inscricao.email_usuario INNER JOIN rede ON rede.id_rede=inscricao.cod_rede ";
+        $email = $_POST["email"];
+        $select = "SELECT usuario.nome as nome, email, nome_usuario ";
+        // $select = "SELECT usuario.nome as nome, email, nome_usuario, rede.nome as rede FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario INNER JOIN inscricao ON usuario.email = inscricao.email_usuario INNER JOIN rede ON rede.id_rede=inscricao.cod_rede ";
 
-        if(isset($_POST["email"])){
-            $email = $_POST["email"];
-            $select .= " WHERE usuario.email='$email'";
-        }
         if(isset($_POST["area"])){
-            $select .= " WHERE usuario.email='".$_SESSION["email"]."'";
+            $select .= ", rede.nome as rede FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario INNER JOIN inscricao ON usuario.email = inscricao.email_usuario INNER JOIN rede ON rede.id_rede=inscricao.cod_rede";
         }
+        else{
+            $select .= " FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario ";
+        }
+
+        $select .= " WHERE usuario.email='$email'";
+
+
 
         $resultado = mysqli_query($conexao,$select)
             or die(mysqli_error($conexao));
@@ -191,5 +197,15 @@
         }
 
         echo json_encode($matriz);
+    }
+    else if($_POST["identificador"] == 8){
+        $email = $_SESSION["email"];
+        $selectPermissao = "SELECT permissao FROM usuario WHERE email = '$email'";
+        $resultadoPermissao = mysqli_query($conexao,$selectPermissao);
+
+        $permissao = mysqli_fetch_row($resultadoPermissao);
+
+        echo json_encode($permissao);
+
     }
 ?>

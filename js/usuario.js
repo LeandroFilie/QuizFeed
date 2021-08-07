@@ -1,32 +1,38 @@
 function removerUser(email){
-  console.log(email);
+  
   $(".remover").click(function(){
-    permissao = $("#permissao").val();
     c = "email";
     t = "usuario";
     p = {tabela:t,email:email,coluna:c};
 
-    $.post("remover.php",p,function(r){
-      if(permissao == 1){
-          $("#msg").removeClass("erro");
-          $("#msg").removeClass("sucesso");
-          $('.modal').modal('hide'); 
-          if(r=='1'){   
-              $("#msg").addClass("sucesso");             
-              $("#msg").html("Usuário removido com sucesso");
-              $("button[value='"+ email +"']").closest(".data-user-details-adm").remove();
+    $.post('seleciona.php',{identificador: '8'},function(permissao){
+      $.post("remover.php",p,function(r){
+        if(permissao[0] == 1){
+            $("#msg").removeClass("erro_adm");
+            $("#msg").removeClass("sucesso_adm");
+            $('.modal').modal('hide'); 
 
-          }
-          else{
-              $("#msg").addClass("erro");            
-              $("#msg").html("Não foi possível remover o usuário");
-          }
-      }
-      else{
-          location.href="index.php";
-      }
-        
-    });
+            if(r=='1'){   
+                $("#msg").addClass("sucesso");     
+                $("#msg").css('margin-top', '24px');        
+                $("#msg").css('margin-bottom  ', '24px');        
+                $("#msg").html("Usuário removido com sucesso");
+                $("button[value='"+ email +"']").closest(".data-user-details-adm").remove();
+            }
+            else{
+                $("#msg").addClass("erro");            
+                $("#msg").html("Não foi possível remover o usuário");
+            }
+        }
+        else{
+            location.href="index.php";
+        }
+          
+      });
+
+    })
+
+ 
   })
 }
 
@@ -55,27 +61,33 @@ $(document).ready(function(){
   function define_alterar_remover(){ 
     $(".alterar").click(function(){
         i = $(this).val();
-        permissao = $('#permissao').val();
 
-        if(permissao == 1){
+        $.post('seleciona.php',{identificador: '8'},function(permissao){
+          if(permissao[0] == 1){
             $("#nome_completo_modal").attr("disabled", "disabled");
             $("#nome_usuario_modal").attr("disabled", "disabled");
             $("#email_modal").attr("disabled", "disabled");
-        }
-        dados = {
-          email: i,
-          identificador: '1'
-        }
-        $.post("seleciona.php",dados,function(r){
-          console.log('foi');
-            u = r[0];
-            $("#nome_completo_modal").val(u.nome);
-            $("#nome_usuario_modal").val(u.nome_usuario);
-            $("#email_modal").val(u.email);
-        });
+          }
+
+          dados = {
+            email: i,
+            identificador: '1'
+          }
+
+          
+          $.post("seleciona.php",dados,function(r){
+              console.log(r);
+              u = r[0];
+              $("#nome_completo_modal").val(u.nome);
+              $("#nome_usuario_modal").val(u.nome_usuario);
+              $("#email_modal").val(u.email);
+          });
+
+        })
+
     });
   }
-  function atualizarDados(novo_email){
+   function atualizarDados(novo_email){
     dados = {
       email: novo_email,
       identificador: '1'
@@ -83,40 +95,25 @@ $(document).ready(function(){
     $.post("seleciona.php",dados,function(d){
       t = '';
       $.each(d,function(i,u){
-          trocarCampos(u.nome, u.nome_usuario, u.email, u.cod_area);
+          trocarCampos(u.nome, u.nome_usuario, u.email);
       });
     })    
   }
-  function atualizarRede(nova_area){
-    dados = {
-      area: nova_area,
-      identificador: '1'
-    }
-    
-    $.post("seleciona.php",dados,function(d){
-      t = '';console.log(d);
-      $.each(d,function(i,u){
-        trocarCampos(u.nome, u.nome_usuario, u.email, u.rede);
-      });
-    })    
-  }
-  function trocarCampos(nome, nome_usuario, email, rede){
+
+  function trocarCampos(nome, nome_usuario, email){
     $("#nome-user").html(nome);
     $("#nome-usuario-user").html(nome_usuario);
     $("#email-user").html(email);
-    $("#area-user").html(rede);
     $(".alterar").val(email);
     $(".delete").attr('onclick', `removerUser('${email}')`);
   }
-  
-
 
   // =========================== SCRIPTS ===============================
 
   define_alterar_remover();
 
 
-  $('.salvar').click(function(){
+   $('.salvar').click(function(){
     p = {
         nome:$("#nome_completo_modal").val(),
         nome_usuario:$("#nome_usuario_modal").val(),
@@ -124,7 +121,6 @@ $(document).ready(function(){
     };    
       
     $.post("atualizar_usuario.php",p,function(r){
-        console.log(`R: ${r}`);
         $("#msg").removeClass("erro");
         $("#msg").removeClass("sucesso");
 
@@ -155,7 +151,22 @@ $(document).ready(function(){
     });
   });
 
-  $('.trocar-rede').click(function(){
+  function atualizarRede(nova_area){
+    dados = {
+      id: nova_area,
+      identificador: '7'
+    }
+    console.log(dados);
+    
+    $.post("seleciona.php",dados,function(d){
+      console.log(d);
+      $.each(d,function(i,u){
+        $("#area-user").html(u.nome);
+      });
+    })    
+  }
+
+   $('.trocar-rede').click(function(){
     area = $("#nome_rede").val();
     if(area != ''){
       p = {
@@ -163,7 +174,6 @@ $(document).ready(function(){
       };
 
       $.post("atualizar_rede.php",p,function(r){
-        console.log(`R: ${r}`);
         $("#msg").removeClass("erro");
         $("#msg").removeClass("sucesso");
 

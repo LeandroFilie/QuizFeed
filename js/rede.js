@@ -54,6 +54,7 @@ function atualizarComentarios(id_postagem, identificador){
       t += `<span class="ver-mais" onclick="allComentarios(${id_postagem})">Ver comentários mais antigos</span>`;
     }
     $.each(r, function(i, v){
+
       if(v.nome_usuario != undefined){
         t += `
           <div class="comentario">
