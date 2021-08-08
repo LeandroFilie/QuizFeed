@@ -30,9 +30,7 @@ function removerUser(email){
           
       });
 
-    })
-
- 
+    }) 
   })
 }
 
@@ -76,7 +74,7 @@ $(document).ready(function(){
 
           
           $.post("seleciona.php",dados,function(r){
-              console.log(r);
+
               u = r[0];
               $("#nome_completo_modal").val(u.nome);
               $("#nome_usuario_modal").val(u.nome_usuario);
@@ -106,6 +104,19 @@ $(document).ready(function(){
     $("#email-user").html(email);
     $(".alterar").val(email);
     $(".delete").attr('onclick', `removerUser('${email}')`);
+  }
+
+  function atualizarRede(nova_area){
+    dados = {
+      id: nova_area,
+      identificador: '7'
+    }
+    
+    $.post("seleciona.php",dados,function(d){
+      $.each(d,function(i,u){
+        $("#area-user").html(u.nome);
+      });
+    })    
   }
 
   // =========================== SCRIPTS ===============================
@@ -151,29 +162,17 @@ $(document).ready(function(){
     });
   });
 
-  function atualizarRede(nova_area){
-    dados = {
-      id: nova_area,
-      identificador: '7'
-    }
-    console.log(dados);
-    
-    $.post("seleciona.php",dados,function(d){
-      console.log(d);
-      $.each(d,function(i,u){
-        $("#area-user").html(u.nome);
-      });
-    })    
-  }
+
 
    $('.trocar-rede').click(function(){
     area = $("#nome_rede").val();
     if(area != ''){
       p = {
-        area
+        area,
+        identificador: '2'
       };
 
-      $.post("atualizar_rede.php",p,function(r){
+      $.post("gerenciamento_rede.php",p,function(r){
         $("#msg").removeClass("erro");
         $("#msg").removeClass("sucesso");
 

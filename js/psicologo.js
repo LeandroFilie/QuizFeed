@@ -131,7 +131,7 @@ $(function(){
 
   function enviarDados(dados){
     $.post("atualizar_psicologo.php",dados,function(r){
-      console.log(`R: ${r}`);
+      
       $("#msg").removeClass("erro");
       $("#msg").removeClass("sucesso");
 
@@ -142,7 +142,6 @@ $(function(){
         $("#msg").html("Dados alterados com sucesso.");
         $(".close").click();
         atualizarDados(dados.email);
-        console.log(dados.email);
       }
       else if(r == 1){
         mensagemErroEmail();
@@ -299,19 +298,5 @@ $(function(){
     $('#option-1').removeClass('active');
     $('#option-2').toggleClass('active');
   });
-
-  maskTel();
-
-  function maskTel(){
-      $('#tel_modal').mask('(00) 0000-00009');
-
-      $('#tel_modal').keyup(function() {
-          if($(this).val().length == 15){ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
-              $('#tel_modal').mask('(00) 00000-0009');
-          } else {
-              $('#tel_modal').mask('(00) 0000-00009');
-          }
-      });
-  }
 
 });

@@ -3,7 +3,10 @@
 include "./inc/conexao.php";
 session_start();
 
-if($_POST["identificador"] == 1){
+$identificador = $_POST["identificador"];
+
+
+if($identificador == 1){
   $email = $_POST["email"];
   $situacao = $_POST["situacao"];
   if($situacao == 3){

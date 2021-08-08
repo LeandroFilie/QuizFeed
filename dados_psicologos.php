@@ -10,7 +10,6 @@
 <head>
     <?php include './inc/head.inc' ?>    
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
-    <script src="./assets/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./style/dados.css">
     <title>Dados | TesteFeed</title> 
 </head>
@@ -129,24 +128,25 @@
         
         $resultadoSituacao2 = mysqli_query($conexao,$selectSituacao2);
 
-
-        $i = 0;     
-        while($linha = mysqli_fetch_assoc($resultadoSituacao2)){
-          echo '
-                <div class="data-user-details-adm">
-                  <div class="data-user-details-items-adm">
-                    <p>'.$linha["nome"].' </p>
+        echo '<div id="data-user">';
+          $i = 0;     
+          while($linha = mysqli_fetch_assoc($resultadoSituacao2)){
+            echo '
+                  <div class="data-user-details-adm">
+                    <div class="data-user-details-items-adm">
+                      <p>'.$linha["nome"].' </p>
+                    </div>
+                    <div class="data-user-details-items-adm">
+                      <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>
+                    </div>
                   </div>
-                  <div class="data-user-details-items-adm">
-                    <button class="data-user-adm alterar" value="'.$linha["email_usuario"].'" data-toggle="modal" data-target="#alterarDadosPsicologo">Ver Dados</button>
-                  </div>
-                </div>
-          ';
-          $i++;
-        }
-        if($i == 0){
-          echo '<h2 id="emptySituacao1">Não há psicólogos cadastrados</h2>';
-        }
+            ';
+            $i++;
+          }
+          if($i == 0){
+            echo '<h2 id="emptySituacao1">Não há psicólogos cadastrados</h2>';
+          }
+        echo '</div>';
       } 
       else if($_SESSION["permissao"] == 3){
         if(($_SESSION["situacao"] == 2)||($_SESSION["situacao"] == 3)){
@@ -210,6 +210,7 @@
     include './inc/modal_psicologo.inc';
   ?>
 
+  <script src="./assets/bootstrap/bootstrap.min.js"></script>
   <script src="./assets/libs/sweetalert2.all.min.js"></script>
   <script src="./js/select_estados.js"></script>
   <script src="./assets/libs/jquery.mask.min.js"></script>

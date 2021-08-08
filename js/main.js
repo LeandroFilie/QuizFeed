@@ -19,7 +19,6 @@ $(function(){
     });
 
     $(".go-about").click(function(){
-        console.log('oi');
         $(this).removeClass('active');
         $(".menu").removeClass('active');
 
@@ -27,7 +26,6 @@ $(function(){
     });
 
     $(".go-faq").click(function(){
-        console.log('oi');
         $(this).removeClass('active');
         $(".menu").removeClass('active');
 

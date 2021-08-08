@@ -1,5 +1,4 @@
 function curtir(id){
-  console.log(id);
   dados = {
     'cod_postagem': id,
     'situacao': 1, //curtindo
@@ -7,29 +6,23 @@ function curtir(id){
   }
 
   $.post('interacoes_rede.php',dados,function(r){
-    console.log(r);
     if(r == 0){
-      dadosLike = {
-        id: id,
-        identificador: '3'
-      }
-      $.post('seleciona.php',dadosLike,function(r){
-        $(".info-interacoes[value='"+ id +"'] #likeCount").text(`${r.qtdLikes} Curtidas`);
-        $(".like[value='"+ id +"'] img").attr('src', '././assets/images/liked.svg');
-      }) 
+      numeroLikesAtual = parseInt($(".info-interacoes[value='"+ id +"'] #likeCount #numeroLikes").html());
+      numeroLikesNovo = numeroLikesAtual + 1;
+
+      $(".info-interacoes[value='"+ id +"'] #likeCount #numeroLikes").html(numeroLikesNovo);
+      $(".like[value='"+ id +"'] img").attr('src', '././assets/images/liked.svg');
     }
     else{
       dados.situacao = 2
       $.post('interacoes_rede.php',dados,function(r){
         if(r == 0){
-          dadosLike = {
-            id: id,
-            identificador: '3'
-          }
-          $.post('seleciona.php',dadosLike,function(r){
-            $(".info-interacoes[value='"+ id +"'] #likeCount").text(`${r.qtdLikes} Curtidas`);
-            $(".like[value='"+ id +"'] img").attr('src', '././assets/images/like.svg');
-          })
+          numeroLikesAtual = parseInt($(".info-interacoes[value='"+ id +"'] #likeCount #numeroLikes").html());
+          numeroLikesNovo = numeroLikesAtual - 1;
+          
+          $(".info-interacoes[value='"+ id +"'] #likeCount #numeroLikes").html(numeroLikesNovo);
+          $(".like[value='"+ id +"'] img").attr('src', '././assets/images/like.svg');
+
         }
       })
 
@@ -124,15 +117,24 @@ function abrirMenu(id){
 
 function ocultarPost(id, acao){
   elemento = $(`.post[value="${id}"]`);
+  $(`.msg-denuncia[value="${id}"]`).html('');
+  $(`.msg-denuncia[value="${id}"]`).removeClass('msg-denuncia');
   if(acao == 'remover'){
     elemento.toggleClass('post-removido');
     elemento.html('<p>Pronto! O post foi removido com sucesso</p>')
   
     elemento.removeClass('post');
+
   }
   else if(acao == 'denunciar'){
     elemento.toggleClass('post-denunciado');
     elemento.html('<p>Que pena que houve essa inconveniência. Obrigado por nos ajudar, vamos tomar providências</p>')
+  
+    elemento.removeClass('post');
+  }
+  else if(acao == 'tirarDenuncia'){
+    elemento.toggleClass('post-denunciado');
+    elemento.html('<p>Pronto! A denuncia foi retirada e o post voltará a aparecer para os usuários</p>')
   
     elemento.removeClass('post');
   }
@@ -145,6 +147,7 @@ function removerPost(id){
     id,
     coluna:'id_postagem',
   };
+  ocultarPost(id, 'remover');
 
   $.post('remover.php',p,function(r){
     if(r == 1){
@@ -170,14 +173,11 @@ function denunciarPost(id){
 }
 
 function tirarDenuncia(id){
-  console.log(id);
   dados = {
     'cod_postagem': id,
     'situacao': 1, //tirando denuncia
     'acao': 3
   }
-
-
 
   $.post('interacoes_rede.php',dados,function(r){
     if(r == 0){
@@ -188,21 +188,20 @@ function tirarDenuncia(id){
       $(`.msg-denuncia[value="${id}"]`).text('');
       $(`.msg-denuncia[value="${id}"]`).removeClass('msg-denuncia');
 
+      ocultarPost(id, 'tirarDenuncia');
+
     }
   })
 }
 
 $(document).ready(function(){
-//rede.php
   $('#postar').click(function(){
     var p = {
       'conteudo': $('#conteudo').val()
     }
 
-    console.log(p);
-
     $.post("insere_post.php",p,function(r){
-      console.log(r);
+      
       $('#erro_post').html('');
       $('#erro_post').removeClass('erro');
       if(r == 0){
@@ -213,46 +212,5 @@ $(document).ready(function(){
         $('#erro_post').addClass('erro');
       }
     })
-  })
-
-//home.php ==> usuário entrar na rede
-  function entrarRede(id){
-    $('.erro_entrar_rede').html('');
-    $('.erro_entrar_rede').removeClass('erro');
-    $('.erro_entrar_rede').css('display','none');
-
-    if(id.id!=""){
-      $.post("gerenciamento_rede.php",id,function(r){
-        console.log(r);
-        if(r==0){
-          location.href="rede.php";
-        }else{
-          $('.erro_entrar_rede').css('display','block');
-          $('.erro_entrar_rede').html('Erro ao entrar na rede. Por favor, contate o administrador.');
-          $('.erro_entrar_rede').addClass('erro');
-        }
-      })
-    }else{
-      $('.erro_entrar_rede').css('display','block')
-        $('.erro_entrar_rede').html('Selecione uma rede para entrar.');
-        $('.erro_entrar_rede').addClass('erro');
-    }
-
-  }
-
-  $('.btn-entrar-rede-option-1').click(function(){
-    var id = {
-      'id': $('.nome_rede_option-1').val()
-    }
-
-    entrarRede(id);
-  })
-
-  $('.btn-entrar-rede-option-2').click(function(){
-    var id = {
-      'id': $('.nome_rede_option-2').val()
-    }
-
-    entrarRede(id);
   })
 })

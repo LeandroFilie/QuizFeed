@@ -91,6 +91,20 @@
             })
         }
     });
+
+    maskTel();
+
+    function maskTel(){
+        $('#tel_modal').mask('(00) 0000-00009');
+
+        $('#tel_modal').keyup(function() {
+            if($(this).val().length == 15){ // Celular com 9 dígitos + 2 dígitos DDD e 4 da máscara
+                $('#tel_modal').mask('(00) 00000-0009');
+            } else {
+                $('#tel_modal').mask('(00) 0000-00009');
+            }
+        });
+    }
             
         
     })

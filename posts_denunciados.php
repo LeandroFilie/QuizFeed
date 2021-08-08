@@ -143,42 +143,36 @@
 
               echo '
               <div class="info-interacoes" value="'.$linha["id_postagem"].'">
-                <span id="likeCount">'.$qtdLikes.' Curtidas</span>
+                <span id="likeCount"><span id="numeroLikes">'.$qtdLikes.'</span> Curtidas</span>
                 <span id="comentarioCount">'.$qtdComentarios.' Comentários</span>
               </div>';
-
-                $selectInteracoes = "SELECT email_usuario FROM inscricao WHERE email_usuario = '".$_SESSION["email"]."' AND cod_rede = '".$linha['cod_rede']."'";
-                $resultadoInteracoes = mysqli_query($conexao,$selectInteracoes); 
 
                 $selectLikeUser = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida WHERE email_usuario = '".$_SESSION["email"]."' AND cod_postagem = '".$linha["id_postagem"]."'";
                 $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser);
 
-               if(mysqli_num_rows($resultadoInteracoes) > 0){
-                    echo '
-                      <div class="interacoes">
-                        <div class="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">
-                        ';
-                        echo '  
-                          <span >Curtir</span>
-                        ';      
-                          if(mysqli_num_rows($resultadoLikeUser) > 0){
-                            echo '<img src="./assets/images/liked.svg" alt="liked"  />';
-                          }
-                          else{
-                            echo '<img src="./assets/images/like.svg" alt="like"  />';
-                          }
-      
-                          echo '
-                        </div>
-      
-                        <div class="comentario" onclick="focusComentar('.$linha["id_postagem"].')">
-                          <span>Comentar</span>
-                        <img src="./assets/images/answer.svg" alt="comentar" class="comentar" />
-                      </div>
-                    </div>
+                echo '
+                  <div class="interacoes">
+                    <div class="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">
                     ';
-              }
-              echo '
+                    echo '  
+                      <span >Curtir</span>
+                    ';      
+                      if(mysqli_num_rows($resultadoLikeUser) > 0){
+                        echo '<img src="./assets/images/liked.svg" alt="liked"  />';
+                      }
+                      else{
+                        echo '<img src="./assets/images/like.svg" alt="like"  />';
+                      }
+  
+                      echo '
+                    </div>
+  
+                    <div class="comentario" onclick="focusComentar('.$linha["id_postagem"].')">
+                      <span>Comentar</span>
+                    <img src="./assets/images/answer.svg" alt="comentar" class="comentar" />
+                  </div>
+                </div>
+              
             </div>
             
             <div class="section-comentarios">';
@@ -239,18 +233,12 @@
 
               echo '
                 </div>
-              ';
 
-              if(mysqli_num_rows($resultadoInteracoes) > 0){
-                echo '
-                  <div class="enviar-comentario" value='.$linha["id_postagem"].'>
-                    <input type="text" name="'.$linha["id_postagem"].'" placeholder="Escreva seu comentário" maxlength="500" />
-                    <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario" onclick="comentar('.$linha["id_postagem"].')">
-                  </div>
-                ';
-              }
-                
-            echo '
+                <div class="enviar-comentario" value='.$linha["id_postagem"].'>
+                  <input type="text" name="'.$linha["id_postagem"].'" placeholder="Escreva seu comentário" maxlength="500" />
+                  <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario" onclick="comentar('.$linha["id_postagem"].')">
+                </div>
+
             </div>
 
           </div>

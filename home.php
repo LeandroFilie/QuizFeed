@@ -12,9 +12,7 @@
     <?php include './inc/head.inc' ?>
     <title>Home | TesteFeed</title>
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
-    <script src="./assets/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./style/home.css">
-    <script src="./js/home.js"></script>
 </head>
 <body>
     <?php 
@@ -298,6 +296,8 @@
         include './inc/modal_trocar_area.inc';
     ?>
 
+    <script src="./assets/bootstrap/bootstrap.min.js"></script>
+    <script src="./js/home.js"></script>
     <script src="./js/rede.js"></script>
 </body>
 </html>

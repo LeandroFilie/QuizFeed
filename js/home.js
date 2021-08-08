@@ -4,28 +4,24 @@ $(function(){
 
   maxStep = 0;
 
-  $('.select-option').click(function(){
-    option = parseInt($(this).val());
-    option == 1 ? maxStep = 2 : maxStep = 3;
+  // =============== DECLARAÇÃO DE FUNÇÕES ====================
 
-    if(maxStep == 2){
-      $('.steps-bar [data-step="3"]').css('display', 'none');
-      $('.steps-bar .divider').css('width', '60%');
+  function checkButtonState() {
+    if(activeStep == 1){
+      activeStep = 1;
+      maxStep = 0;
+
+      $('.buttons').css('display', 'none')
     }
+    else{
+      $('.buttons').css('display', 'flex')
+      $('.next-btn').css('visibility', 'visible')
 
-    $('.steps-options .step').css('display', 'none')
-    next()
-
-    checkButtonState();
-  })
-
-  $('.next-btn').click(function(){
-    next();
-  })
-
-  $('.prev-btn').click(function(){
-    prev();
-  })
+      if(activeStep == maxStep){
+        $('.next-btn').css('visibility', 'hidden')
+      }
+    }
+  }
 
   function next(){
     $(`.steps [data-step="${activeStep}"]`).removeClass('active');
@@ -62,72 +58,6 @@ $(function(){
     checkButtonState();
   }
 
-  function checkButtonState() {
-    if(activeStep == 1){
-      activeStep = 1;
-      maxStep = 0;
-
-      $('.buttons').css('display', 'none')
-    }
-    else{
-      $('.buttons').css('display', 'flex')
-      $('.next-btn').css('visibility', 'visible')
-
-      if(activeStep == maxStep){
-        $('.next-btn').css('visibility', 'hidden')
-      }
-    }
-  }
-
-  // Filtro de psicólogos
-
-  $('#filtrarPsicologos').click(function(){
-    estado = $('#estado_filtro').val();
-    cidade = $('#cidade').val();
-
-    select = "SELECT nome, email_usuario, uf, cidade FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = '2'"
-
-    if(estado != ''){
-      select += ` AND uf = '${estado}'`;
-    }
-    if(cidade != ''){
-      select += ` AND cidade like '%${cidade}%'`;
-    }
-
-    dadosFiltro = {
-      select,
-      identificador: '6'
-    }
-
-     $.post('seleciona.php',dadosFiltro,function(r){
-      t = '';
-      if(r == 0){
-        t+= '<h3 id="emptySituacao1">Não há psicólogos cadastrados</h3>';
-      }
-      else{
-        $.each(r, function(i, v){
-          t += `  
-          <span class="accordion">${v.nome}</span>
-          <div class="dados">
-              <p>Email: ${v.email_usuario}</p>
-              <p>${v.cidade} - ${v.uf}</p>
-          </div>
-          `;
-        })
-      }
-
-      $('#psicologos').html(t);
-
-      $('#estado_filtro').val('');
-      $('#cidade').val('');
-  
-      itemsAccordion();
-  
-    })
-  })
-
-  itemsAccordion();
-
   function itemsAccordion(){
     var items = $('.accordion');
 
@@ -154,6 +84,32 @@ $(function(){
     }
     
   }
+
+  // ================= AÇÕES =====================
+  itemsAccordion();
+
+  $('.select-option').click(function(){
+    option = parseInt($(this).val());
+    option == 1 ? maxStep = 2 : maxStep = 3;
+
+    if(maxStep == 2){
+      $('.steps-bar [data-step="3"]').css('display', 'none');
+      $('.steps-bar .divider').css('width', '60%');
+    }
+
+    $('.steps-options .step').css('display', 'none')
+    next()
+
+    checkButtonState();
+  })
+
+  $('.next-btn').click(function(){
+    next();
+  })
+
+  $('.prev-btn').click(function(){
+    prev();
+  })
 
   $('.detalhe-area').change(function(){    
     $('#areaDescricao').modal('show');
@@ -183,10 +139,11 @@ $(function(){
     area = $("#nome_rede").val();
     if(area != ''){
       p = {
-        area
+        area,
+        identificador: '2'
       };
 
-      $.post("atualizar_rede.php",p,function(r){
+      $.post("gerenciamento_rede.php",p,function(r){
         if(r == 0){
           $(".close").click();
           location.reload();
@@ -198,5 +155,93 @@ $(function(){
 
   });
 
+  // Filtro de psicólogos
 
+  $('#filtrarPsicologos').click(function(){
+    estado = $('#estado_filtro').val();
+    cidade = $('#cidade').val();
+
+    select = "SELECT nome, email_usuario, uf, cidade FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = '2'"
+
+    if(estado != ''){
+      select += ` AND uf = '${estado}'`;
+    }
+    if(cidade != ''){
+      select += ` AND cidade like '%${cidade}%'`;
+    }
+
+    dadosFiltro = {
+      select,
+      identificador: '6'
+    }
+
+      $.post('seleciona.php',dadosFiltro,function(r){
+      t = '';
+      if(r == 0){
+        t+= '<h3 id="emptySituacao1">Não há psicólogos cadastrados</h3>';
+      }
+      else{
+        $.each(r, function(i, v){
+          t += `  
+          <span class="accordion">${v.nome}</span>
+          <div class="dados">
+              <p>Email: ${v.email_usuario}</p>
+              <p>${v.cidade} - ${v.uf}</p>
+          </div>
+          `;
+        })
+      }
+
+      $('#psicologos').html(t);
+
+      $('#estado_filtro').val('');
+      $('#cidade').val('');
+  
+      itemsAccordion();
+  
+    })
+  })
+
+  // Entrada do usuário na rede
+  function entrarRede(id){
+    $('.erro_entrar_rede').html('');
+    $('.erro_entrar_rede').removeClass('erro');
+    $('.erro_entrar_rede').css('display','none');
+    
+    id.identificador = '1';
+
+    if(id.id!=""){
+      $.post("gerenciamento_rede.php",id,function(r){
+        
+        if(r==0){
+          location.href="rede.php";
+        }else{
+          $('.erro_entrar_rede').css('display','block');
+          $('.erro_entrar_rede').html('Erro ao entrar na rede. Por favor, contate o administrador.');
+          $('.erro_entrar_rede').addClass('erro');
+        }
+      })
+    }else{
+      $('.erro_entrar_rede').css('display','block')
+        $('.erro_entrar_rede').html('Selecione uma rede para entrar.');
+        $('.erro_entrar_rede').addClass('erro');
+    }
+
+  }
+
+  $('.btn-entrar-rede-option-1').click(function(){
+    var id = {
+      'id': $('.nome_rede_option-1').val()
+    }
+
+    entrarRede(id);
+  })
+
+  $('.btn-entrar-rede-option-2').click(function(){
+    var id = {
+      'id': $('.nome_rede_option-2').val()
+    }
+
+    entrarRede(id);
+  })
 }) 

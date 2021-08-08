@@ -10,7 +10,6 @@
 <head>
     <?php include './inc/head.inc' ?>    
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
-    <script src="./assets/bootstrap/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./style/dados.css">
     <title>Dados | TesteFeed</title>
 </head>
@@ -144,6 +143,7 @@
     include './inc/modal_trocar_area.inc';
   ?>
   
+  <script src="./assets/bootstrap/bootstrap.min.js"></script>
   <script src="./js/usuario.js"></script>
 
 </body>

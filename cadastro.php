@@ -113,6 +113,7 @@
 
     <?php include './inc/footer.inc' ?>
 
+    <script src="./assets/libs/md5.js"></script>
     <script src="./assets/libs/sweetalert2.all.min.js"></script>
     <script src="./assets/libs/jquery.mask.min.js"></script>
     <script src="./js/cadastro.js"></script>

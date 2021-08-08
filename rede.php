@@ -143,8 +143,6 @@
                         </div>';
                 }
 
-
-                  
                 echo '
                 </div>
                 
@@ -165,7 +163,7 @@
 
             echo ' 
               <div class="info-interacoes" value="'.$linha["id_postagem"].'">
-                <span id="likeCount">'.$qtdLikes.' Curtidas</span>
+                <span id="likeCount"><span id="numeroLikes">'.$qtdLikes.'</span> Curtidas</span>
                 <span id="comentarioCount">'.$qtdComentarios.' Comentários</span>
               </div>
 
@@ -213,14 +211,12 @@
     
                   $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
-
                   while(($linhaComentarios = mysqli_fetch_assoc($resultadoComentarioPost))){
                     $dataComentario = date('d/m/Y', strtotime($linhaComentarios["data"]));
                     $anoComentario = date('Y', strtotime($linhaComentarios["data"]));
             
                     $dataAtual = date('d/m/Y');
                     $anoAtual = date('Y');
-            
             
                     if($dataComentario == $dataAtual){
                       $dataFormatadaComentario = 'Hoje';

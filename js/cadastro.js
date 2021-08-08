@@ -76,10 +76,6 @@ $(document).ready(function(){
     function enviarDados(dados){
         $.post("insere_usuario.php",dados,function(r){
 
-            console.log(dados);
-
-            console.log(r);
-
             limparMensagensErro();
 
             if(r == 0){
@@ -277,7 +273,7 @@ $(document).ready(function(){
         }
     });
 
-// ========================= MÁSCARA INPUT DE REGISTRO ===========================
+// ========================= MÁSCARAS INPUTS ===========================
 
     $("#registro").keyup(function() {
         $("#registro").val(this.value.match(/[0-9]*/));

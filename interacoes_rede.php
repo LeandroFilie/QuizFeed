@@ -10,7 +10,7 @@
   $hora = date('H:i:s');
   $acao = $_POST["acao"];
 
-  if($acao == 1){
+  if($acao == 1){ // like
     $situacao = $_POST["situacao"];
     $email = $_SESSION["email"];
 
@@ -47,7 +47,7 @@
       
     }
   }
-  else if($acao == 2){  
+  else if($acao == 2){ //comentários 
     $conteudo = $_POST["conteudo"];
     $email = $_SESSION["email"];
 

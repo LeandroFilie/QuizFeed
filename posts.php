@@ -18,10 +18,7 @@
     echo "<script>location.href='home.php'</script>";
   }
 
-
   date_default_timezone_set('America/Sao_Paulo');
-
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -83,7 +80,6 @@
         $dataAtual = date('d/m/Y');
         $anoAtual = date('Y');
 
-
         if($dataPost == $dataAtual){
           $dataFormatada = 'Hoje';
         }
@@ -96,8 +92,6 @@
 
         $horaPost = date('H:i', strtotime($linha["hora"]));
 
-
-
         if($linha["situacao"] == 2){
           echo ' 
             <span class="msg-denuncia" value="'.$linha["id_postagem"].'">Seu Post foi denunciado e o administrador está tomando providências</span>
@@ -107,6 +101,7 @@
         else{
           echo ' <div class="post" value="'.$linha["id_postagem"].'">';
         }
+
         echo '
             <div class="rede-info">
                 <span>'.$linha["rede"].'</span>
@@ -152,47 +147,47 @@
 
               echo '
               <div class="info-interacoes" value="'.$linha["id_postagem"].'">
-                <span id="likeCount">'.$qtdLikes.' Curtidas</span>
+                <span id="likeCount"><span id="numeroLikes">'.$qtdLikes.'</span> Curtidas</span>
                 <span id="comentarioCount">'.$qtdComentarios.' Comentários</span>
               </div>';
 
-                $selectInteracoes = "SELECT email_usuario FROM inscricao WHERE email_usuario = '".$_SESSION["email"]."' AND cod_rede = '".$linha['cod_rede']."'";
-                $resultadoInteracoes = mysqli_query($conexao,$selectInteracoes); 
+              $selectInteracoes = "SELECT email_usuario FROM inscricao WHERE email_usuario = '".$_SESSION["email"]."' AND cod_rede = '".$linha['cod_rede']."'";
+              $resultadoInteracoes = mysqli_query($conexao,$selectInteracoes); 
 
-                $selectLikeUser = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida WHERE email_usuario = '".$_SESSION["email"]."' AND cod_postagem = '".$linha["id_postagem"]."'";
-                $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser);
+              $selectLikeUser = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida WHERE email_usuario = '".$_SESSION["email"]."' AND cod_postagem = '".$linha["id_postagem"]."'";
+              $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser);
 
-               if(mysqli_num_rows($resultadoInteracoes) > 0){
-                    echo '
-                      <div class="interacoes">
-                        <div class="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">
-                        ';
-                        echo '  
-                          <span >Curtir</span>
-                        ';      
-                          if(mysqli_num_rows($resultadoLikeUser) > 0){
-                            echo '<img src="./assets/images/liked.svg" alt="liked"  />';
-                          }
-                          else{
-                            echo '<img src="./assets/images/like.svg" alt="like"  />';
-                          }
-      
-                          echo '
-                        </div>
-      
-                        <div class="comentario" onclick="focusComentar('.$linha["id_postagem"].')">
-                          <span>Comentar</span>
-                        <img src="./assets/images/answer.svg" alt="comentar" class="comentar" />
-                      </div>
-                    </div>
+              if(mysqli_num_rows($resultadoInteracoes) > 0){
+                echo '
+                  <div class="interacoes">
+                    <div class="like" value="'.$linha["id_postagem"].'" onclick="curtir('.$linha["id_postagem"].')">
                     ';
-              }else{
-                  echo '
-                    <div class="not-interacoes">
-                     
+                    echo '  
+                      <span >Curtir</span>
+                    ';      
+                      if(mysqli_num_rows($resultadoLikeUser) > 0){
+                        echo '<img src="./assets/images/liked.svg" alt="liked"  />';
+                      }
+                      else{
+                        echo '<img src="./assets/images/like.svg" alt="like"  />';
+                      }
+  
+                      echo '
                     </div>
-                  ';
-                }
+  
+                    <div class="comentario" onclick="focusComentar('.$linha["id_postagem"].')">
+                      <span>Comentar</span>
+                    <img src="./assets/images/answer.svg" alt="comentar" class="comentar" />
+                  </div>
+                </div>
+                ';
+              }else{
+                echo '
+                  <div class="not-interacoes">
+                    
+                  </div>
+                ';
+              }
 
               echo '
             </div>
@@ -202,16 +197,16 @@
               echo '
                 <div id="'.$linha["id_postagem"].'">';
 
-                $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC";
-                
+                  $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC";
+                  
                   if($qtdComentarios > 3){
                     $initial = $qtdComentarios - 3;
-    
+
                     $selectComentarioPost .= " LIMIT $initial, 3";
 
                     echo '<span class="ver-mais" onclick="allComentarios('.$linha["id_postagem"].')">Ver comentários mais antigos</span>';
                   }
-    
+      
                   $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
 
@@ -253,9 +248,9 @@
                     ';
                   }
 
-              echo '
-                </div>
-              ';
+                echo '
+                  </div>
+                ';
 
               if(mysqli_num_rows($resultadoInteracoes) > 0){
                 echo '

@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $('#estado').change(function(){
         var uf = $(this).val();
-        console.log(uf);
+        
         if(uf == '0'){
             $('#cidade').attr("disabled", "disabled");
             t = '<option value="" label="Cidade"></option>';

@@ -12,10 +12,6 @@ $hora = date('H:i:s');
 $email = $_SESSION["email"];
 $codRede = $_SESSION["id_rede"];
 
-//SITUAÇÕES
-// 1 -> ACABOU DE POSTAR
-// 2 -> DENUNCIADO
-
 $insert = "INSERT INTO postagem(
             data,
             hora,

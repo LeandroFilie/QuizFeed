@@ -94,6 +94,7 @@
 
     <?php include './inc/footer.inc' ?>
 
+    <script src="./assets/libs/md5.js"></script>
     <script>
         $(document).ready(function(){
             $("#autenticar").click(function(){
