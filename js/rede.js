@@ -194,23 +194,21 @@ function tirarDenuncia(id){
   })
 }
 
-$(document).ready(function(){
-  $('#postar').click(function(){
-    var p = {
-      'conteudo': $('#conteudo').val()
-    }
+function readURL(input) {
 
-    $.post("insere_post.php",p,function(r){
-      
-      $('#erro_post').html('');
-      $('#erro_post').removeClass('erro');
-      if(r == 0){
-        location.reload();
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          $('#preview-image').attr('src', e.target.result);
       }
-      else if(r == 1){
-        $('#erro_post').html('Erro ao fazer post. Por favor, contate o admistrador');
-        $('#erro_post').addClass('erro');
-      }
-    })
-  })
-})
+
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imagem").change(function(){
+  $('#preview-image').toggleClass('show')
+  $('#preview-image').removeClass('hide')
+  readURL(this);
+});

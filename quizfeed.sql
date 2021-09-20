@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 09-Set-2021 às 14:41
--- Versão do servidor: 5.6.51
--- versão do PHP: 8.0.7
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 20-Set-2021 às 23:24
+-- Versão do servidor: 5.7.31
+-- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `quizfeed`
 --
+CREATE DATABASE IF NOT EXISTS `quizfeed` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `quizfeed`;
 
 -- --------------------------------------------------------
 
@@ -27,11 +29,13 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `area`
 --
 
-CREATE TABLE `area` (
-  `id_area` int(11) NOT NULL,
+DROP TABLE IF EXISTS `area`;
+CREATE TABLE IF NOT EXISTS `area` (
+  `id_area` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
-  `descricao` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `descricao` longtext NOT NULL,
+  PRIMARY KEY (`id_area`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `area`
@@ -53,12 +57,16 @@ INSERT INTO `area` (`id_area`, `nome`, `descricao`) VALUES
 -- Estrutura da tabela `comentario`
 --
 
-CREATE TABLE `comentario` (
+DROP TABLE IF EXISTS `comentario`;
+CREATE TABLE IF NOT EXISTS `comentario` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_postagem` int(11) NOT NULL,
   `conteudo` varchar(500) NOT NULL,
   `data` date NOT NULL,
-  `hora` time NOT NULL
+  `hora` time NOT NULL,
+  PRIMARY KEY (`data`,`hora`),
+  KEY `cod_postagem` (`cod_postagem`),
+  KEY `comentario_ibfk_1` (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -67,20 +75,14 @@ CREATE TABLE `comentario` (
 -- Estrutura da tabela `curso`
 --
 
-CREATE TABLE `curso` (
-  `id_curso` int(11) NOT NULL,
+DROP TABLE IF EXISTS `curso`;
+CREATE TABLE IF NOT EXISTS `curso` (
+  `id_curso` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
-  `cod_area` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `curso`
---
-
-INSERT INTO `curso` (`id_curso`, `nome`, `cod_area`) VALUES
-(1, 'Matemática', 1),
-(3, 'Probabilidade e Estatística', 1),
-(4, 'Ciência da Computação', 1);
+  `cod_area` int(11) NOT NULL,
+  PRIMARY KEY (`id_curso`),
+  KEY `cod_area` (`cod_area`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -88,11 +90,14 @@ INSERT INTO `curso` (`id_curso`, `nome`, `cod_area`) VALUES
 -- Estrutura da tabela `curtida`
 --
 
-CREATE TABLE `curtida` (
+DROP TABLE IF EXISTS `curtida`;
+CREATE TABLE IF NOT EXISTS `curtida` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_postagem` int(11) NOT NULL,
   `data` date NOT NULL,
-  `hora` time NOT NULL
+  `hora` time NOT NULL,
+  PRIMARY KEY (`email_usuario`,`cod_postagem`),
+  KEY `cod_postagem` (`cod_postagem`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -101,11 +106,14 @@ CREATE TABLE `curtida` (
 -- Estrutura da tabela `inscricao`
 --
 
-CREATE TABLE `inscricao` (
+DROP TABLE IF EXISTS `inscricao`;
+CREATE TABLE IF NOT EXISTS `inscricao` (
   `email_usuario` varchar(100) NOT NULL,
   `cod_rede` int(11) NOT NULL,
   `data` date NOT NULL,
-  `hora` time NOT NULL
+  `hora` time NOT NULL,
+  PRIMARY KEY (`email_usuario`,`cod_rede`),
+  KEY `cod_rede` (`cod_rede`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -114,15 +122,20 @@ CREATE TABLE `inscricao` (
 -- Estrutura da tabela `postagem`
 --
 
-CREATE TABLE `postagem` (
-  `id_postagem` int(11) NOT NULL,
+DROP TABLE IF EXISTS `postagem`;
+CREATE TABLE IF NOT EXISTS `postagem` (
+  `id_postagem` int(11) NOT NULL AUTO_INCREMENT,
   `data` date NOT NULL,
   `hora` time NOT NULL,
-  `conteudo` varchar(500) NOT NULL,
+  `conteudo` varchar(500) DEFAULT NULL,
+  `imagem` varchar(50) DEFAULT NULL,
   `situacao` int(11) NOT NULL,
   `email_usuario` varchar(100) NOT NULL,
-  `cod_rede` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `cod_rede` int(11) NOT NULL,
+  PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
+  KEY `email_usuario` (`email_usuario`),
+  KEY `cod_rede` (`cod_rede`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -130,11 +143,14 @@ CREATE TABLE `postagem` (
 -- Estrutura da tabela `rede`
 --
 
-CREATE TABLE `rede` (
-  `id_rede` int(11) NOT NULL,
+DROP TABLE IF EXISTS `rede`;
+CREATE TABLE IF NOT EXISTS `rede` (
+  `id_rede` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
-  `cod_area` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `cod_area` int(11) NOT NULL,
+  PRIMARY KEY (`id_rede`),
+  KEY `cod_area` (`cod_area`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `rede`
@@ -156,11 +172,13 @@ INSERT INTO `rede` (`id_rede`, `nome`, `cod_area`) VALUES
 -- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `usuario` (
+DROP TABLE IF EXISTS `usuario`;
+CREATE TABLE IF NOT EXISTS `usuario` (
   `email` varchar(100) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `senha` varchar(50) NOT NULL,
-  `permissao` int(1) NOT NULL
+  `permissao` int(1) NOT NULL,
+  PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -182,20 +200,23 @@ INSERT INTO `usuario` (`email`, `nome`, `senha`, `permissao`) VALUES
 -- Estrutura da tabela `usuario_comum`
 --
 
-CREATE TABLE `usuario_comum` (
+DROP TABLE IF EXISTS `usuario_comum`;
+CREATE TABLE IF NOT EXISTS `usuario_comum` (
   `email_usuario` varchar(100) NOT NULL,
-  `nome_usuario` varchar(100) NOT NULL
+  `nome_usuario` varchar(100) NOT NULL,
+  `avatar` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuario_comum`
 --
 
-INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`) VALUES
-('admin', 'admin'),
-('carol@email.com', 'CarolMotta'),
-('julia@email.com', 'JuliaCosta'),
-('leandro@email.com', 'LeandroFilie');
+INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`, `avatar`) VALUES
+('admin', 'admin', NULL),
+('carol@email.com', 'CarolMotta', NULL),
+('julia@email.com', 'JuliaCosta', NULL),
+('leandro@email.com', 'LeandroFilie', NULL);
 
 -- --------------------------------------------------------
 
@@ -203,13 +224,15 @@ INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`) VALUES
 -- Estrutura da tabela `usuario_psicologo`
 --
 
-CREATE TABLE `usuario_psicologo` (
+DROP TABLE IF EXISTS `usuario_psicologo`;
+CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
   `email_usuario` varchar(100) NOT NULL,
   `telefone` varchar(30) NOT NULL,
   `registro` varchar(11) NOT NULL,
   `cidade` varchar(50) NOT NULL,
   `uf` varchar(2) NOT NULL,
-  `situacao` int(1) NOT NULL
+  `situacao` int(1) NOT NULL,
+  PRIMARY KEY (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -220,106 +243,6 @@ INSERT INTO `usuario_psicologo` (`email_usuario`, `telefone`, `registro`, `cidad
 ('carol@psicologa.com', '(11) 1111-1111', '33333333333', 'Franca', 'SP', 2),
 ('julia@psicologa.com', '(22) 2222-2222', '11111111111', 'São Paulo', 'SP', 2),
 ('leandro@psicologo.com', '(33) 3333-3333', '22222222222', 'Ribeirão Preto', 'SP', 2);
-
---
--- Índices para tabelas despejadas
---
-
---
--- Índices para tabela `area`
---
-ALTER TABLE `area`
-  ADD PRIMARY KEY (`id_area`);
-
---
--- Índices para tabela `comentario`
---
-ALTER TABLE `comentario`
-  ADD PRIMARY KEY (`data`,`hora`),
-  ADD KEY `cod_postagem` (`cod_postagem`),
-  ADD KEY `comentario_ibfk_1` (`email_usuario`);
-
---
--- Índices para tabela `curso`
---
-ALTER TABLE `curso`
-  ADD PRIMARY KEY (`id_curso`),
-  ADD KEY `cod_area` (`cod_area`);
-
---
--- Índices para tabela `curtida`
---
-ALTER TABLE `curtida`
-  ADD PRIMARY KEY (`email_usuario`,`cod_postagem`),
-  ADD KEY `cod_postagem` (`cod_postagem`);
-
---
--- Índices para tabela `inscricao`
---
-ALTER TABLE `inscricao`
-  ADD PRIMARY KEY (`email_usuario`,`cod_rede`),
-  ADD KEY `cod_rede` (`cod_rede`);
-
---
--- Índices para tabela `postagem`
---
-ALTER TABLE `postagem`
-  ADD PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
-  ADD KEY `email_usuario` (`email_usuario`),
-  ADD KEY `cod_rede` (`cod_rede`);
-
---
--- Índices para tabela `rede`
---
-ALTER TABLE `rede`
-  ADD PRIMARY KEY (`id_rede`),
-  ADD KEY `cod_area` (`cod_area`);
-
---
--- Índices para tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`email`);
-
---
--- Índices para tabela `usuario_comum`
---
-ALTER TABLE `usuario_comum`
-  ADD PRIMARY KEY (`email_usuario`);
-
---
--- Índices para tabela `usuario_psicologo`
---
-ALTER TABLE `usuario_psicologo`
-  ADD PRIMARY KEY (`email_usuario`);
-
---
--- AUTO_INCREMENT de tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `area`
---
-ALTER TABLE `area`
-  MODIFY `id_area` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de tabela `curso`
---
-ALTER TABLE `curso`
-  MODIFY `id_curso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `postagem`
---
-ALTER TABLE `postagem`
-  MODIFY `id_postagem` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `rede`
---
-ALTER TABLE `rede`
-  MODIFY `id_rede` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restrições para despejos de tabelas
