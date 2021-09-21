@@ -194,21 +194,76 @@ function tirarDenuncia(id){
   })
 }
 
-function readURL(input) {
+function showPreviewImage(imagem){
+  if (imagem.files && imagem.files[0]) {
+    var reader = new FileReader();
 
-  if (input.files && input.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-          $('#preview-image').attr('src', e.target.result);
+    reader.onload = function(e){
+      if($('#preview-image').hasClass('hide')){
+        $('#preview-image').toggleClass('show')
+        $('#preview-image').removeClass('hide')
       }
+      $('#preview-image').attr('src', e.target.result);
+    }
 
-      reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(imagem.files[0]);
+}
+}
+
+function confereImagem(input) {
+  var imagem = input.files[0];
+  var tipoImagem = imagem.type;
+  var sizeImagem = imagem.size;
+  var tiposPermitidos = ['image/png', 'image/jpeg', 'image/gif'];
+  
+  if(tiposPermitidos.includes(tipoImagem)){
+    if(sizeImagem < 20971520){
+      showPreviewImage(input)
+    }
+    else{
+      $('.error-image').text('O tamanho máximo para fotos/vídeos é de 20MB');
+      $('.error-image').css('display', 'block');
+      $('.error-image').addClass('erro');
+    }
   }
+  else{
+    $('.error-image').text('Formato de arquivo inválido');
+    $('.error-image').css('display', 'block');
+    $('.error-image').addClass('erro');
+  }
+
+}
+
+function resetPreview(){
+  $('#preview-image').attr('src', '');
+
+  if($('#preview-image').hasClass('show')){
+    $('#preview-image').toggleClass('hide')
+    $('#preview-image').removeClass('show')
+  }
+
+  $('.error-image').text('');
+  $('.error-image').removeClass('erro');
 }
 
 $("#imagem").change(function(){
-  $('#preview-image').toggleClass('show')
-  $('#preview-image').removeClass('hide')
-  readURL(this);
+  resetPreview();
+  confereImagem(this);
 });
+
+$('form').submit(function(event){
+
+  conteudo = $('[name="conteudo"]').val() !== '';
+  imagem = $('[name="imagem"]').val() !== '';
+
+  if(!conteudo && !imagem){
+    event.preventDefault();
+    $('.form-vazio').text('Não há como fazer uma postagem vazia')
+    $('.form-vazio').addClass('erro')
+  }
+  else{
+    $('.form-vazio').text('')
+    $('.form-vazio').removeClass('erro')
+  }
+
+})

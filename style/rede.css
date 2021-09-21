@@ -77,6 +77,11 @@ form .input-content-image .input-image{
   cursor: pointer;
 }
 
+form .input-content-image .error-image{
+  margin: 8px;
+  display: none;
+}
+
 form .input-content-image .preview-image.hide{
   display: none;
 }
@@ -206,7 +211,11 @@ input[type="file"]{
 .posts .post .image-post{
   width: 70%;
   border-radius: 16px;
-  margin: 0 auto 24px;
+  margin: 24px auto 24px;
+}
+
+.posts .post p ~ .image-post{
+  margin-top: 0;
 }
 
 .post .rede-info{

@@ -238,8 +238,15 @@
                                                     <span>'.$linha["nome_usuario"].'</span>
                                                 </div>
                                 
-                                                <div class="conteudo">
-                                                    '.$linha["conteudo"].'
+                                                <div class="conteudo">';
+                                                if($linha["conteudo"] != ''){
+                                                    echo ''.$linha["conteudo"].'';
+                                                }
+                                                else{
+                                                    echo 'Imagem';
+                                                }
+                                                    
+                                                echo '
                                                 </div>
                                             </div>
                                         ';

@@ -49,17 +49,19 @@
     </div> 
   </div>
 
+  <div class="form-vazio"></div>
+
   <form enctype="multipart/form-data" action="insere_post.php" method="POST">
     <div id="erro_post"></div>
     <div class="input-content-image">
-      <textarea id="conteudo" name="conteudo" placeholder="O que você quer postar?" required></textarea>
-      <img id="preview-image" class="preview-image hide"/>
+      <textarea id="conteudo" name="conteudo" placeholder="O que você quer postar?"></textarea>
+      <img id="preview-image" class="preview-image hide" alt="Preview imagem post"/>
+      <div class="error-image"></div>
       <label class="input-image">
         <img src="./assets/images/image.svg" alt="Enviar Imagem" />
-        <input type="file" name="imagem" id="imagem">
+        <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg, image/gif">
         Foto/Vídeo
-      </label>
-      
+      </label>     
     </div>
 
     

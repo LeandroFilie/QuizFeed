@@ -17,7 +17,7 @@ echo '<div class="post-info">
     <div class="more-menu" value="'.$linha["id_postagem"].'">';
     if($linha["nome_usuario"] == $_SESSION["nome_usuario"] || $_SESSION["permissao"] == 1){
       echo '<div class="more-menu-item excluir" onclick=removerPost('.$linha["id_postagem"].')>
-              <img src="./assets/images/trash.svg" />
+              <img src="./assets/images/trash.svg" alt="Excluir"/>
               <p>Excluir</p>
             </div>';
     }
@@ -40,10 +40,12 @@ echo '<div class="post-info">
   </div>
 </div>';
 
-echo '<p>'.$linha["conteudo"].'</p>';
+if($linha["conteudo"] != ''){
+  echo '<p>'.$linha["conteudo"].'</p>';
+}
 
 if($linha["imagem"] != NULL){
-  echo '<img src="'.$linha["imagem"].'" class="image-post"/>';
+  echo '<img src="'.$linha["imagem"].'" class="image-post" alt="Imagem do Post" loading="lazy"/>';
 }
 
 echo '

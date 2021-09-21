@@ -1,10 +1,13 @@
 <?php
-
 session_start();
 
 date_default_timezone_set('America/Sao_Paulo');
 
-$setImage = $_FILES["imagem"]["error"];
+$setImage = false;
+
+if($_FILES["imagem"]["error"] == 0){
+  $setImage = true;
+}
 
 function uploadImage(){
   $client_id = '17a3fa29196028a';
@@ -55,8 +58,6 @@ function insert($campos, $variaveis){
             }
           $insert .= ")";
 
-          echo $insert;
-
   if(mysqli_query($conexao,$insert)){
     header('Location: rede.php');
   }        
@@ -65,29 +66,31 @@ function insert($campos, $variaveis){
   }
 }
 
-$data = date('Y-m-d');
-$hora = date('H:i:s');
 $email_usuario = $_SESSION["email"];
 $cod_rede = $_SESSION["id_rede"];
+
+$data = date('Y-m-d');
+$hora = date('H:i:s');
+
 $situacao = 1;
 $campos = ['data', 'hora', 'email_usuario', 'cod_rede', 'situacao'];
 $variaveis = [$data, $hora, $email_usuario, $cod_rede, $situacao];
 
-if(($_POST["conteudo"] != '') || ($setImage == 0)){
-  if($_POST["conteudo"] != ''){
-    $conteudo = $_POST["conteudo"];
-    array_push($campos, 'conteudo');
-    array_push($variaveis, $conteudo);
-  }
-  if($setImage == 0){
-    $imagem = uploadImage();
-    echo $imagem;
-    array_push($campos, 'imagem');
-    array_push($variaveis, $imagem);
-  }
-
-  
-  insert($campos, $variaveis);
+if(isset($_POST["conteudo"])){
+  $conteudo = $_POST["conteudo"];
+  array_push($campos, 'conteudo');
+  array_push($variaveis, $conteudo);
 }
-  
+
+if($setImage){
+  if($_FILES["imagem"]["error"] == 0){
+      $imagem = uploadImage();
+      array_push($campos, 'imagem');
+      array_push($variaveis, $imagem);
+      
+  }
+}
+
+insert($campos, $variaveis);
+
 ?>

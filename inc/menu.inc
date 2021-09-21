@@ -26,7 +26,7 @@
                 }
                 echo '
                     
-                    <li class="logout"><a href="logout.php" class="icon-logout"><img src="././assets/images/log-out.svg"/></a></li>
+                    <li class="logout"><a href="logout.php" class="icon-logout"><img src="././assets/images/log-out.svg" alt="Sair"/></a></li>
                 </ul>
             </nav>
         </header>
