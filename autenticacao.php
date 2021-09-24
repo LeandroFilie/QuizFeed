@@ -20,12 +20,13 @@
         if($_SESSION["permissao"] != 3){
 
 
-            $sql2 = "SELECT nome_usuario FROM usuario_comum INNER JOIN usuario ON usuario.email = usuario_comum.email_usuario WHERE usuario.email = '$email'";
+            $sql2 = "SELECT nome_usuario, avatar FROM usuario_comum INNER JOIN usuario ON usuario.email = usuario_comum.email_usuario WHERE usuario.email = '$email'";
             $resultado = mysqli_query($conexao,$sql2);
 
             $linha = mysqli_fetch_assoc($resultado);
 
             $_SESSION["nome_usuario"] = $linha["nome_usuario"];
+            $_SESSION["avatar"] = $linha["avatar"];
 
             
         }

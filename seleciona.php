@@ -63,7 +63,7 @@
     }
     else if($identificador == 4){
         $id_postagem = $_POST["id_postagem"];
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
         $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
         $selectCountComentarioPost = "SELECT conteudo FROM comentario WHERE cod_postagem = '$id_postagem'";
@@ -111,8 +111,7 @@
         $resultadoCountComentarioPost = mysqli_query($conexao,$selectCountComentarioPost); 
         $qtdComentarios = mysqli_num_rows($resultadoCountComentarioPost);
 
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
-
+        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
 
         if($qtdComentarios > 3){
             $initial = $qtdComentarios - 3;
@@ -120,8 +119,6 @@
             $selectComentarioPost .= " LIMIT $initial, 3";
         }
 
-
-        
         $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
         $resultado = mysqli_query($conexao,$selectComentarioPost)

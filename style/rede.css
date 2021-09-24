@@ -77,6 +77,10 @@ form .input-content-image .input-image{
   cursor: pointer;
 }
 
+input[type="file"]{
+  display: none;
+}
+
 form .input-content-image .error-image{
   margin: 8px;
   display: none;
@@ -202,10 +206,6 @@ form .form-footer button{
   font-size: 1.1rem;
   margin: 24px 0;
   line-height: 24px;
-}
-
-input[type="file"]{
-  display: none;
 }
 
 .posts .post .image-post{

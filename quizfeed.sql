@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 20-Set-2021 às 23:24
+-- Tempo de geração: 24-Set-2021 às 03:28
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`id_curso`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
   KEY `email_usuario` (`email_usuario`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -204,7 +204,7 @@ DROP TABLE IF EXISTS `usuario_comum`;
 CREATE TABLE IF NOT EXISTS `usuario_comum` (
   `email_usuario` varchar(100) NOT NULL,
   `nome_usuario` varchar(100) NOT NULL,
-  `avatar` varchar(100) DEFAULT NULL,
+  `avatar` varchar(100) NOT NULL DEFAULT './assets/images/avatar.svg',
   PRIMARY KEY (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -213,10 +213,10 @@ CREATE TABLE IF NOT EXISTS `usuario_comum` (
 --
 
 INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`, `avatar`) VALUES
-('admin', 'admin', NULL),
-('carol@email.com', 'CarolMotta', NULL),
-('julia@email.com', 'JuliaCosta', NULL),
-('leandro@email.com', 'LeandroFilie', NULL);
+('admin', 'admin', './assets/images/avatar.svg'),
+('carol@email.com', 'CarolMotta', './assets/images/avatar.svg'),
+('julia@email.com', 'JuliaCosta', './assets/images/avatar.svg'),
+('leandro@email.com', 'LeandroFilie', './assets/images/avatar.svg');
 
 -- --------------------------------------------------------
 

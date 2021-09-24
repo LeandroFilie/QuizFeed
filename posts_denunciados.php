@@ -46,7 +46,7 @@
   <section class="posts">
 
     <?php
-      $selectPosts = "SELECT cod_rede, rede.nome as rede, postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE postagem.situacao = 2 ";
+      $selectPosts = "SELECT cod_rede, rede.nome as rede, postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem  INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario INNER JOIN rede ON rede.id_rede = postagem.cod_rede WHERE postagem.situacao = 2 ";
 
       if(!empty($_POST)){
         if($_POST["areas_post"] != ""){
@@ -106,7 +106,7 @@
       if($i == 0){
         echo '
           <div class="empty-post">
-            <img src="./assets/images/empty_post.svg" alt="Icone de Mensagem">
+            <img src="./assets/images/empty_post.svg" alt="Icone de Mensagem" loading="lazy" />
             <p>Nenhum post denunciado por aqui!</p>
           </div>
         ';

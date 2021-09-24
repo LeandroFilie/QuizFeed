@@ -59,7 +59,7 @@
       <div class="error-image"></div>
       <label class="input-image">
         <img src="./assets/images/image.svg" alt="Enviar Imagem" />
-        <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg, image/gif">
+        <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg" />
         Foto/Vídeo
       </label>     
     </div>
@@ -67,7 +67,7 @@
     
     <div class="form-footer">
       <div class="user-info">
-        <img src="./assets/images/avatar.svg" alt="Avatar" />
+        <img src="<?php echo $_SESSION['avatar']; ?>" alt="Avatar" class="avatar" loading="lazy"/>
         <span><?php echo $_SESSION['nome_usuario']; ?></span>
       </div> 
       <button type='submit' id="postar">Postar</button>
@@ -77,7 +77,7 @@
   <section class="posts">
     
     <?php
-      $selectPosts = "SELECT postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ";
+      $selectPosts = "SELECT postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ";
       
       if($_SESSION["permissao"] != 1){
         $selectPosts .= "AND postagem.situacao = 1";
@@ -130,7 +130,7 @@
       if($i == 0){
         echo '
           <div class="empty-post">
-            <img src="./assets/images/empty_post.svg" alt="Icone de Mensagem">
+            <img src="./assets/images/empty_post.svg" alt="Icone de Mensagem" loading="lazy">
             <p>Nenhum post por aqui...</p>
             <span>Seja o primeiro a postar!</span>
           </div>

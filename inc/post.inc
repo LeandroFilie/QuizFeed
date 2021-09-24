@@ -2,7 +2,7 @@
 echo '<div class="post-info">
   <div class="post-info-details">
     <div class="user-info">
-      <img src="./assets/images/avatar.svg" alt="Avatar" />
+      <img src="'.$linha["avatar"].'" alt="Avatar" class="avatar" loading="lazy" />
       <span>'.$linha["nome_usuario"].'</span>
     </div> 
       
@@ -17,19 +17,19 @@ echo '<div class="post-info">
     <div class="more-menu" value="'.$linha["id_postagem"].'">';
     if($linha["nome_usuario"] == $_SESSION["nome_usuario"] || $_SESSION["permissao"] == 1){
       echo '<div class="more-menu-item excluir" onclick=removerPost('.$linha["id_postagem"].')>
-              <img src="./assets/images/trash.svg" alt="Excluir"/>
+              <img src="./assets/images/trash.svg" alt="Excluir" loading="lazy" />
               <p>Excluir</p>
             </div>';
     }
     else if($_SESSION["permissao"] != 1){
       echo '<div class="more-menu-item denunciar" onclick=denunciarPost('.$linha["id_postagem"].')>
-              <img src="./assets/images/alert-octagon.svg" />
+              <img src="./assets/images/alert-octagon.svg" loading="lazy" />
               <p>Denunciar</p>
             </div>';
     }
     if($_SESSION["permissao"] == 1 && $linha["situacao"] == 2){
       echo '<div class="more-menu-item tirar-denuncia" onclick=tirarDenuncia('.$linha["id_postagem"].')>
-              <img src="./assets/images/alert-octagon.svg" />
+              <img src="./assets/images/alert-octagon.svg" loading="lazy" />
               <p>Tirar Denuncia</p>
             </div>';
     }
@@ -75,10 +75,10 @@ echo '
         $resultadoLikeUser = mysqli_query($conexao,$selectLikeUser); 
 
         if(mysqli_num_rows($resultadoLikeUser) > 0){
-          echo '<img src="./assets/images/liked.svg" alt="liked"  />';
+          echo '<img src="./assets/images/liked.svg" alt="liked" loading="lazy"/>';
         }
         else{
-          echo '<img src="./assets/images/like.svg" alt="like"  />';
+          echo '<img src="./assets/images/like.svg" alt="like" loading="lazy" />';
         }
 
         echo '
@@ -86,7 +86,7 @@ echo '
 
       <div class="comentario" onclick="focusComentar('.$linha["id_postagem"].')">
         <span>Comentar</span>
-      <img src="./assets/images/answer.svg" alt="comentar" class="comentar" />
+      <img src="./assets/images/answer.svg" alt="comentar" class="comentar" loading="lazy"/>
     </div>
   </div>
 
@@ -97,7 +97,7 @@ echo '
   echo '
     <div id="'.$linha["id_postagem"].'">';
 
-    $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC";
+    $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC";
     
       if($qtdComentarios > 3){
         $initial = $qtdComentarios - 3;
@@ -131,7 +131,7 @@ echo '
         echo '
           <div class="comentario">
             <div class="avatar">
-              <img src="./assets/images/avatar.svg" alt="Avatar" />
+              <img src="'.$linhaComentarios["avatar"].'" alt="Avatar" class="avatar" loading="lazy"/>
             </div>
             <div class="comentario-content">
               <span>'.$linhaComentarios["nome_usuario"].'</span>
@@ -151,7 +151,7 @@ echo '
 
     <div class="enviar-comentario" value='.$linha["id_postagem"].'>
       <input type="text" name="'.$linha["id_postagem"].'" placeholder="Escreva seu comentário" maxlength="500" />
-      <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario" onclick="comentar('.$linha["id_postagem"].')">
+      <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario" onclick="comentar('.$linha["id_postagem"].')" loading="lazy">
     </div>
 
 </div>';

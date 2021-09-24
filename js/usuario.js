@@ -85,6 +85,7 @@ $(document).ready(function(){
 
     });
   }
+
    function atualizarDados(novo_email){
     dados = {
       email: novo_email,
@@ -117,6 +118,25 @@ $(document).ready(function(){
         $("#area-user").html(u.nome);
       });
     })    
+  }
+
+  function confereImagem(inputAvatar){
+    var avatar = inputAvatar.files[0];
+    var tipoImagem = avatar.type;
+    var sizeImagem = avatar.size;
+    var tiposPermitidos = ['image/png', 'image/jpeg'];
+    
+    if(tiposPermitidos.includes(tipoImagem)){
+      if(sizeImagem < 5242880){
+        $('#formAvatar').submit();
+      }
+      else{
+        alert('O tamanho máximo para sua foto de perfil é de 5MB')
+      }
+    }
+    else{
+      alert('Formato de arquivo inválido')
+    }
   }
 
   // =========================== SCRIPTS ===============================
@@ -162,8 +182,6 @@ $(document).ready(function(){
     });
   });
 
-
-
    $('.trocar-rede').click(function(){
     area = $("#nome_rede").val();
     if(area != ''){
@@ -188,5 +206,9 @@ $(document).ready(function(){
     }
 
   });
+
+  $('#editarAvatar').change(function(){
+    confereImagem(this);
+  })
 
 });

@@ -49,12 +49,11 @@ function atualizarComentarios(id_postagem, identificador){
       t += `<span class="ver-mais" onclick="allComentarios(${id_postagem})">Ver comentários mais antigos</span>`;
     }
     $.each(r, function(i, v){
-
       if(v.nome_usuario != undefined){
         t += `
           <div class="comentario">
             <div class="avatar">
-              <img src="./assets/images/avatar.svg" alt="Avatar" />
+              <img src="${v.avatar}" alt="Avatar" class="avatar"/>
             </div>
             <div class="comentario-content">
               <span>${v.nome_usuario}</span>
@@ -214,7 +213,7 @@ function confereImagem(input) {
   var imagem = input.files[0];
   var tipoImagem = imagem.type;
   var sizeImagem = imagem.size;
-  var tiposPermitidos = ['image/png', 'image/jpeg', 'image/gif'];
+  var tiposPermitidos = ['image/png', 'image/jpeg'];
   
   if(tiposPermitidos.includes(tipoImagem)){
     if(sizeImagem < 20971520){

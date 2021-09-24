@@ -75,62 +75,73 @@
         
       }
       else if($_SESSION["permissao"] == 2){
-        $selectUsuario = "SELECT nome, email, nome_usuario FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario WHERE email='".$_SESSION["email"]."'";
+        $selectUsuario = "SELECT nome, email, nome_usuario, avatar FROM usuario INNER JOIN usuario_comum ON usuario.email = usuario_comum.email_usuario WHERE email='".$_SESSION["email"]."'";
 
         $resultado = mysqli_query($conexao,$selectUsuario);
+
+        $linha = mysqli_fetch_assoc($resultado);
         echo '
             <div class="data-user-title">
-              
               <h1>Dados Pessoais</h1>
+              <div class="avatar">
+                <img src="'.$linha["avatar"].'" alt="avatar" id="avatarUser"/>
+                <form id="formAvatar" enctype="multipart/form-data" action="insere_avatar.php" method="POST" >
+                  <label class="edit-avatar">
+                    <img src="./assets/images/edit-1.svg" alt="editar" class="edit-avatar-icon">
+                    <input type="file" name="editar-avatar" id="editarAvatar" accept="image/png, image/jpeg" />
+                  </label>
+                </form>          
+              </div>
+
             </div>
             <div id="msg"></div>
             <div id="data-user">
         ';
-              while($linha = mysqli_fetch_assoc($resultado)){
-                echo '
-                  <div class="data-user-details">
-                    <div class="data-user-details-items">
-                      <h3>Nome</h3>
-                      <p id="nome-user">'.$linha["nome"].' </p>
-                    </div>
-
-                    <div class="data-user-details-items">
-                      <h3>Nome de Usuário</h3>
-                      <p id="nome-usuario-user">'.$linha["nome_usuario"].' </p>
-                      <div id="erro_nome"></div>
-                    </div>
-
-                    <div class="data-user-details-items">
-                      <h3>Endereço de E-mail</h3>
-                      <p id="email-user">'.$linha["email"].'</p>
-                      <div id="erro_email"></div>
-                    </div>';
-
-                    $selectNomeRede = "SELECT nome FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
-                    $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
-                    if(mysqli_num_rows($resultadoNomeRede) > 0){
-                      while($linhaNomeRede = mysqli_fetch_assoc($resultadoNomeRede)){
-                        echo '
-                          <div class="data-user-details-items-area">
-                            <div class="area">
-                              <h3>Sua Área</h3>
-                              <p id="area-user">'.$linhaNomeRede["nome"].'</p>
-                            </div>
-                            <div class="btn-area">
-                              <button class="data-user-action-rede " data-toggle="modal" data-target="#trocarArea">Mudar de Rede</button>
-                            </div>
-                          </div>
-                        ';
-                      }
-                    }
-                  echo '
-                  </div>  
-                  <div class="buttons-action">
-                      <button class="data-user-action alterar" value="'.$linha["email"].'" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
-                      <button class="data-user-delete delete" onclick="removerUser(\''.$linha['email'].'\')" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+              
+              echo '
+                <div class="data-user-details">
+                  <div class="data-user-details-items">
+                    <h3>Nome</h3>
+                    <p id="nome-user">'.$linha["nome"].' </p>
                   </div>
-                ';
-              }
+
+                  <div class="data-user-details-items">
+                    <h3>Nome de Usuário</h3>
+                    <p id="nome-usuario-user">'.$linha["nome_usuario"].' </p>
+                    <div id="erro_nome"></div>
+                  </div>
+
+                  <div class="data-user-details-items">
+                    <h3>Endereço de E-mail</h3>
+                    <p id="email-user">'.$linha["email"].'</p>
+                    <div id="erro_email"></div>
+                  </div>';
+
+                  $selectNomeRede = "SELECT nome FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
+                  $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
+                  if(mysqli_num_rows($resultadoNomeRede) > 0){
+                    $linhaNomeRede = mysqli_fetch_assoc($resultadoNomeRede);
+
+                    echo '
+                      <div class="data-user-details-items-area">
+                        <div class="area">
+                          <h3>Sua Área</h3>
+                          <p id="area-user">'.$linhaNomeRede["nome"].'</p>
+                        </div>
+                        <div class="btn-area">
+                          <button class="data-user-action-rede " data-toggle="modal" data-target="#trocarArea">Mudar de Rede</button>
+                        </div>
+                      </div>
+                    ';
+                  }
+                echo '
+                </div>  
+                <div class="buttons-action">
+                    <button class="data-user-action alterar" value="'.$linha["email"].'" data-toggle="modal" data-target="#alterarDados">Alterar Dados</button>
+                    <button class="data-user-delete delete" onclick="removerUser(\''.$linha['email'].'\')" data-toggle="modal" data-target="#excluirConta">Excluir Conta</button>
+                </div>
+              ';
+              
         echo '</div>';
       } 
     ?>

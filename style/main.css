@@ -84,6 +84,10 @@ main{
   height: 2.5rem;
 }
 
+.avatar{
+  border-radius: 50%;
+}
+
 ul {
   list-style: none;
 }

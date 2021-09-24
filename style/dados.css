@@ -219,14 +219,46 @@ main {
 /* =========== USER ================ */
 .data-user-title {
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   flex-wrap: wrap;
   align-items: flex-start;
-
+  gap: 16px;
   width: 100%;
   margin-top: 0;
   margin-bottom: 16px;
+}
+
+.data-user-title .avatar{
+  position: relative;
+}
+
+.data-user-title .avatar #avatarUser{
+  height: 5rem;
+  width: 5rem;
+
+  border-radius: 50%;
+}
+
+.data-user-title .avatar .edit-avatar{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.data-user-title .avatar .edit-avatar-icon{
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+
+
+}
+
+input[type="file"]{
+  display: none;
 }
 
 .data-user-title p {
