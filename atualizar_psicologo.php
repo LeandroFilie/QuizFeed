@@ -5,38 +5,22 @@ session_start();
 
 $identificador = $_POST["identificador"];
 
-
 if($identificador == 1){
   $email = $_POST["email"];
   $situacao = $_POST["situacao"];
-  if($situacao == 3){
-    $update = "UPDATE usuario_psicologo
-                      SET
-                      situacao = '$situacao'
-                      WHERE
-                      email_usuario = '$email'";
-  
-    if(mysqli_query($conexao,$update)){
-      $error = 0;
-    }   
-    else{
-    $error = 1;
-    }
-  }
-  else if($situacao == 2){
-    $update = "UPDATE usuario_psicologo
-                      SET
-                      situacao = '$situacao'
-                      WHERE
-                      email_usuario = '$email'";
+  $update = "UPDATE usuario_psicologo
+                    SET
+                    situacao = '$situacao'
+                    WHERE
+                    email_usuario = '$email'";
 
-    if(mysqli_query($conexao,$update)){
-      $error = 0;
-    }   
-    else{
-    $error = 1;
-    }
+  if(mysqli_query($conexao,$update)){
+    $error = 0;
+  }   
+  else{
+  $error = 1;
   }
+  
 }
 else{
   $email_sessao = $_SESSION["email"];
@@ -75,7 +59,12 @@ else{
   else{
     $update = "UPDATE usuario SET 
                         nome ='$nome',
-                        email = '$email'
+                        email = '$email'";
+                        if(isset($_POST["senha"])){
+                            $senha = $_POST["senha"];
+                            $update .= ", senha = '$senha'";
+                        }
+                        $update .= "
                         WHERE
                         email = '$email_sessao'";
     if($situacao == 3){

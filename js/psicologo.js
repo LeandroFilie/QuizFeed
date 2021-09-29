@@ -46,6 +46,30 @@ function removerUser(email){
 $(function(){   
   // ====================== DECLARAÇÃO DE FUNÇÕES =======================
 
+  function verificaSenhaAtual(senhaAtual){
+    $('#senha_atual_modal').keyup(function(){
+      novaSenha = $.md5($(this).val());
+      
+      if(novaSenha === senhaAtual){
+        $('#senha_atual_modal').removeClass('erro-input');
+
+        $('#senha_nova_modal').removeAttr('disabled');
+        $('#confere_senha_modal').removeAttr('disabled');
+      }
+      else{
+        $('#senha_atual_modal').addClass('erro-input');
+        $('#senha_nova_modal').attr('disabled','disabled');
+        $('#confere_senha_modal').attr('disabled','disabled');
+        $('#senha_nova_modal').val('');
+        $('#confere_senha_modal').val('');
+      }
+    })
+  }
+
+  function confereSenha(senha, confirmaSenha){
+    return senha === confirmaSenha ? true : false;
+  }
+
   function limparMensagensErro(){        
     $("#erro_email").removeClass("erro");
     $("#erro_email").html("");
@@ -200,8 +224,35 @@ $(function(){
         uf:$("#estado_modal").val(),
         cidade:$("#cidade_modal").val(),
         identificador:2
-    };    
-    enviarDados(p);
+    }; 
+    senhaNova = $('#senha_nova_modal').val();
+    senhaConfere = $('#confere_senha_modal').val();
+
+    if($('#alterarSenha:checked').val() === 'on'){
+      $('#erroConfereSenha').text('');
+      $('#erroConfereSenha').removeClass('erro');
+
+      if(senhaNova != '' && senhaConfere != ''){
+        if(!confereSenha(senhaNova, senhaConfere)){
+          $('#erroConfereSenha').text('As senhas são diferentes');
+          $('#erroConfereSenha').addClass('erro');
+        }
+        else{
+          p.senha = $.md5(senhaNova);
+          enviarDados(p);
+        }
+      }
+      else{
+        $('#erroConfereSenha').text('Preencha os campos restantes');
+        $('#erroConfereSenha').addClass('erro');
+      }
+
+    }
+    else{
+      $('#erroConfereSenha').text('');
+      $('#erroConfereSenha').removeClass('erro');
+      enviarDados(p);
+    }
   });
 
 
@@ -274,6 +325,34 @@ $(function(){
     }) 
   })
 
+  $('#alterarSenha').change(function(){
+    elemento = $('#alterarSenha:checked').val();
+
+    if(elemento === 'on'){
+      $('#camposAlterarSenha').css('display','flex');
+      $('#senha_atual_modal').focus();
+
+      $.post('seleciona.php',{identificador: '9'},function(r){
+        verificaSenhaAtual(r.senha);
+      })
+    }
+    else{
+      $('#camposAlterarSenha').css('display','none');
+
+      $('#senha_atual_modal').val('');
+      $('#senha_nova_modal').val('');
+      $('#confere_senha_modal').val('');
+
+      $('#senha_atual_modal').removeClass('erro-input');
+
+      $('#senha_nova_modal').attr('disabled','disabled');
+      $('#confere_senha_modal').attr('disabled','disabled');
+
+      $('#erroConfereSenha').text('');
+      $('#erroConfereSenha').removeClass('erro');
+    }
+  })
+
   // ====================== OPÇÕES =====================================
 
   function initOptions(){
@@ -297,6 +376,41 @@ $(function(){
 
     $('#option-1').removeClass('active');
     $('#option-2').toggleClass('active');
+  });
+
+    // ========================= MOSTRAR/OCULTAR SENHA ===========================
+
+  $('#mostrar_senha_atual').click(function(){
+      if($('#senha_atual_modal').attr('type') == 'password'){
+          $('#senha_atual_modal').attr('type', 'text');
+          $('#mostrar_senha_atual').attr('src', './assets/images/eye-off.svg');
+      }
+      else{
+          $('#senha_atual_modal').attr('type', 'password');
+          $('#mostrar_senha_atual').attr('src', './assets/images/eye.svg');
+      }
+  });
+
+  $('#mostrar_senha_nova').click(function(){
+    if($('#senha_nova_modal').attr('type') == 'password'){
+        $('#senha_nova_modal').attr('type', 'text');
+        $('#mostrar_senha_nova').attr('src', './assets/images/eye-off.svg');
+    }
+    else{
+        $('#senha_nova_modal').attr('type', 'password');
+        $('#mostrar_senha_nova').attr('src', './assets/images/eye.svg');
+    }
+  });
+
+  $('#mostrar_senha_confere').click(function(){
+  if($('#confere_senha_modal').attr('type') == 'password'){
+      $('#confere_senha_modal').attr('type', 'text');
+      $('#mostrar_senha_confere').attr('src', './assets/images/eye-off.svg');
+  }
+  else{
+      $('#confere_senha_modal').attr('type', 'password');
+      $('#mostrar_senha_confere').attr('src', './assets/images/eye.svg');
+  }
   });
 
 });

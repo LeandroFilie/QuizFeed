@@ -23,7 +23,7 @@
         
       if($_SESSION["permissao"] == 1){
         echo '
-          <div class="data-user-title">
+          <div class="data-user-title-psico">
             <h1>Psicólogos</h1>
             <div>
               <p><a href="https://cadastro.cfp.org.br/" target="_blank">Clique aqui</a> para consultar o registro do profissional</p>
@@ -211,6 +211,7 @@
     include './inc/modal_psicologo.inc';
   ?>
 
+  <script src="./assets/libs/md5.js"></script>
   <script src="./assets/bootstrap/bootstrap.min.js"></script>
   <script src="./assets/libs/sweetalert2.all.min.js"></script>
   <script src="./js/select_estados.js"></script>

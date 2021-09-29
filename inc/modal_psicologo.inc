@@ -29,7 +29,36 @@
                     <option value="" label="Cidade"></option>
                 </select>
             </div>
+
+            <?php
+                if($_SESSION["permissao"] == 3){
+                    echo '
+                        <label class="label-alterar-senha">
+                            <input type="checkbox" id="alterarSenha" class="check-alterar-senha"/>
+                            Mudar Senha
+                        </label>
+
+                        <div class="alterar-senha" id="camposAlterarSenha">
+                            <div class="campo-senha">
+                                <input type="password" name="senha_atual_modal" id="senha_atual_modal" placeholder="Senha Atual" />
+                                <img src="./assets/images/eye.svg" alt="" id="mostrar_senha_atual" class="button_mostrar_senha">
+                            </div>
+                            <div class="campo-senha">
+                                <input type="password" name="senha_nova_modal" id="senha_nova_modal" placeholder="Nova Senha" disabled/>
+                                <img src="./assets/images/eye.svg" alt="" id="mostrar_senha_nova" class="button_mostrar_senha">
+                            </div>
+                            <div class="campo-senha">
+                                <input type="password" name="confere_senha_modal" id="confere_senha_modal" placeholder="Confirme a Senha" disabled/>
+                                <img src="./assets/images/eye.svg" alt="" id="mostrar_senha_confere" class="button_mostrar_senha">
+                            </div>
+                            <div id="erroConfereSenha"></div>
+                        </div>
+                    ';
+                }
+            ?>
+
         </div>
+
         <div class="modal-footer">
             <button class="data-user-action-cancel" data-dismiss="modal">Cancelar</button>
             <?php
@@ -74,7 +103,6 @@
 
         $('#estado_modal').change(function(){
         var uf = $(this).val();
-        console.log(uf);
         if(uf == '0'){
             $('#cidade_modal').attr("disabled", "disabled");
             t = '<option value="" label="Cidade"></option>';

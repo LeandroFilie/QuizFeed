@@ -217,6 +217,18 @@ main {
 }
 
 /* =========== USER ================ */
+.data-user-title-psico{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
 .data-user-title {
   display: flex;
   justify-content: flex-start;
@@ -261,15 +273,15 @@ input[type="file"]{
   display: none;
 }
 
-.data-user-title p {
+.data-user-title-psico p {
   font-size: 1.1rem;
 }
 
-.data-user-title a {
+.data-user-title-psico a {
   text-decoration: underline;
 }
 
-.data-user-title h1 {
+.data-user-title-psico h1 {
   display: flex;
   justify-content: center;
   align-items: center;

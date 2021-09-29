@@ -102,7 +102,6 @@
                 var senha_md5 = $.md5($("#senha").val());
 
                 $.post("autenticacao.php",{"email":email,"senha":senha_md5},function(r){
-                    console.log(r);
                     if(r == 1){
                         location.href="home.php";
                     }
