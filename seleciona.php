@@ -196,4 +196,15 @@
         echo json_encode($permissao);
 
     }
+    else if($identificador == 9){
+        $email = $_SESSION["email"];
+        $selectSenha = "SELECT senha FROM usuario WHERE email = '$email'";
+        $resultadoSenha = mysqli_query($conexao,$selectSenha);
+
+        $senhaAtual = mysqli_fetch_assoc($resultadoSenha);
+
+        echo json_encode($senhaAtual);
+
+
+    }
 ?>

@@ -36,7 +36,12 @@ if((mysqli_num_rows($confereNomeusuario) > 0) || (mysqli_num_rows($confereEmail)
 else{
     $update = "UPDATE usuario SET 
                             nome ='$nome',
-                            email = '$email'
+                            email = '$email'";
+                            if(isset($_POST["senha"])){
+                                $senha = $_POST["senha"];
+                                $update .= ", senha = '$senha'";
+                            }
+                            $update .= "
                             WHERE
                             email = '$email_atual'";
     
@@ -46,7 +51,6 @@ else{
                             WHERE
                             email_usuario = '$email'";
 
-                        
     if(mysqli_query($conexao,$update) && mysqli_query($conexao,$update2)){
         $error = 0;
         $_SESSION['nome_usuario'] = $nome_usuario;

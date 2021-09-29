@@ -60,7 +60,7 @@
       <label class="input-image">
         <img src="./assets/images/image.svg" alt="Enviar Imagem" />
         <input type="file" name="imagem" id="imagem" accept="image/png, image/jpeg" />
-        Foto/Vídeo
+        Imagem
       </label>     
     </div>
 

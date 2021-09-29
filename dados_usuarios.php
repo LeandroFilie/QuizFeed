@@ -154,6 +154,7 @@
     include './inc/modal_trocar_area.inc';
   ?>
   
+  <script src="./assets/libs/md5.js"></script>
   <script src="./assets/bootstrap/bootstrap.min.js"></script>
   <script src="./js/usuario.js"></script>
 
