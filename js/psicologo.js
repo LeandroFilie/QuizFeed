@@ -159,6 +159,14 @@ $(function(){
       $("#msg").removeClass("erro");
       $("#msg").removeClass("sucesso");
 
+      if($('#alterarSenha:checked').val() === 'on'){
+        $('#alterarSenha:checked').prop('checked',false)
+        $('#senha_atual_modal').val('');
+        $('#senha_nova_modal').val('');
+        $('#confere_senha_modal').val('');
+        $('#camposAlterarSenha').css('display','none');
+      }
+
       limparMensagensErro();
 
       if(r == 0){

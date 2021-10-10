@@ -7,6 +7,10 @@
           </div>
           <div class="modal-body">
               <div id="descricao"></div>
+              <div class="cursos">
+                <span class="separadorCursos"></span>
+                <div id="cursos"></div>
+              </div>
           </div>
         </div>
     </div> 

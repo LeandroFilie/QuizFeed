@@ -120,16 +120,30 @@ $(function(){
     }
 
     $.post('seleciona.php',dadosArea,function(r){
-      t = '';
-      $.each(r, function(i, v){
-        nome = v.nome;
-        t += `
-          <div>${v.descricao}</div>
-        `;
+      nome = r.nome;
+      t = `
+        <div>${r.descricao}</div>
+      `;
+      cursos = {
+        idArea: r.id_area,
+        identificador: '10'
+      }
+
+      $.post('seleciona.php',cursos,function(c){
+        tCursos = '';
+        $.each(c, function(i, v){
+          tCursos += ` 
+            <p>${v.nome}</p>
+            <span class="separadorCursos"></span>
+          `
+        })
+
+        $('#cursos').html(tCursos);
       })
 
       $('.modal-title').html(nome);
       $('#descricao').html(t);
+      
 
     })
 

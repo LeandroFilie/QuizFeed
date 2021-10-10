@@ -15,8 +15,9 @@
                 </button>
                 <ul class="menu">
                     <li><a href="cadastro.php">Cadastre-se</a></li>
-                    <li class="go-about"><a href="#about">Sobre</a></li>
-                    <li class="go-faq"><a href="#faq">Faq</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#faq">Faq</a></li>
+                    <li><a href="areas.php">Áreas</a></li>
                 </ul>
             </nav>   
         </div> 

@@ -123,10 +123,24 @@ $(document).ready(function(){
     })    
   }
 
+  $('#alterarSenha').change(function(){
+    console.log($(this).val());
+
+    console.log('foi');
+  })
+
   function enviarDados(dados){
     $.post("atualizar_usuario.php",dados,function(r){
       $("#msg").removeClass("erro");
       $("#msg").removeClass("sucesso");
+
+      if($('#alterarSenha:checked').val() === 'on'){
+        $('#alterarSenha:checked').prop('checked',false)
+        $('#senha_atual_modal').val('');
+        $('#senha_nova_modal').val('');
+        $('#confere_senha_modal').val('');
+        $('#camposAlterarSenha').css('display','none');
+      }
 
       limparMensagensErro();
 

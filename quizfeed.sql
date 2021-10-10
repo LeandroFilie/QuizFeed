@@ -45,10 +45,10 @@ INSERT INTO `area` (`id_area`, `nome`, `descricao`) VALUES
 (1, 'Ciências Exatas e da Terra', 'Primeiramente, você precisa ter em mente que a matemática e os números são a base dessa área! Ela pode englobar cursos muito diferentes, mas como característica em comum, são cursos baseados em cálculos físico-matemáticos. Engloba a matemática, física, computação, astromia, química, mecânica e vertentes que esses cursos podem ter.'),
 (2, 'Ciências Biológicas', 'Essa é a área da biologia. Tudo nela vai se relacionar com a natureza, e vai englobar estudos aprofundados sobre toda vida existente no planeta Terra. Você precisa estar preparado pra aprender tudo nos mínimos detalhes, desde quando tudo surgiu até hoje!'),
 (3, 'Engenharias', 'Na área das engenharias, a ciência é aplicada e utilizada na prática, atuando muito na economia. Atualmente, existem 34 tipos de engenharia pra você decidir em qual se encaixa melhor. Vale lembrar que envolve cálculos e a habilidade que você tem com a criação, já que na prática vão ter muitos processos, inclusive o de criação!'),
-(4, 'Ciências da Saúde', 'Como o próprio nome diz, trata de tudo relacionado a saúde, seja atendendo diretamente o público ou atuando na área da pesquisa. O curso vai envolver muita biologia e conhecimento do corpo humano. Vale ressaltar que a saúde não envolve somente a medicina, mas também outros cursos, como a psicologia, fisioterapia, fonoaudiologia, dentre tantos outros.'),
-(5, 'Ciências Agrárias', 'Bom, essa área se envolve de uma maneira única com a natureza, principalmente em sua aplicação. Possui diversos cursos, que buscam melhorar a questão da preservação do meio ambiente, utilizando a tecnologia e o conhecimento como base e auxílio. Envolve de A até Z: desde agronomia até a zootecnia! Sua área de atuação irá depender muito do lugar em que você estará situado.\n\nBom, essa área se envolve de uma maneira única com a natureza, principalmente em sua aplicação. Possui diversos cursos, que buscam melhorar a questão da preservação do meio ambiente, utilizando a tecnologia e o conhecimento como base e auxílio. Envolve de A até Z: desde agronomia até a zootecnia! Sua área de atuação irá depender muito do lugar em que você estará situado.\n\n'),
-(6, 'Ciências Sociais Aplicadas', 'Possui diversos cursos em sua área, mas todos estão conectados com um propósito: entender a sociedade, suas necessidades e a convivência nela, principalmente as consequências dessa convivência. As ciências sociais envolvem desde a administração, audiovisual (cinema, vídeo, rádio, TV e internet), e comunicação, até o próprio curso de ciências sociais. É necessário estudar o indivíduo e suas atitudes, o que elas refletem na sociedade. Para isso, é necessário saber de todas as teorias que são usadas para entender tantas coisas!'),
-(7, 'Ciências Humanas', 'Nessa área, será estudo o ser humano, mas não como na saúde ou a biologia, que estuda o corpo, mas será estudado seus ideais, suas diferentes histórias e culturas, acontecimentos marcantes. Podemos citar a história, artes, filosofia e todas as suas vertentes, até mesmo a geografia em sua parte social, com o estudo da globalização e das mudanças causadas pelo ser humano até hoje.'),
+(4, 'Ciências da Saúde', 'Como o próprio nome diz, trata de tudo relacionado a saúde, seja atendendo diretamente o público ou atuando na área da pesquisa. Os cursos vão envolver muita biologia e conhecimento do corpo humano. Vale ressaltar que a saúde não envolve somente a medicina, mas também outros cursos, como a psicologia, fisioterapia, fonoaudiologia, dentre tantos outros.'),
+(5, 'Ciências Agrárias', 'Essa área se envolve de uma maneira única com a natureza, principalmente em sua aplicação. Possui diversos cursos, que buscam melhorar a questão da preservação do meio ambiente, utilizando a tecnologia e o conhecimento como base e auxílio. Envolve de A até Z: desde agronomia até a zootecnia! Sua área de atuação irá depender muito do lugar em que você estará situado.\r\n\r\n'),
+(6, 'Ciências Sociais Aplicadas', 'Possui diversos cursos em sua área, mas todos estão conectados com um propósito: entender a sociedade, suas necessidades e a convivência nela, principalmente as consequências dessa convivência. As ciências sociais envolvem desde a administração, audiovisual, e comunicação, até o próprio curso de ciências sociais. É necessário estudar o indivíduo e suas atitudes, o que elas refletem na sociedade.'),
+(7, 'Ciências Humanas', 'Nessa área, será estudado o ser humano, seus ideais, suas diferentes histórias e culturas, acontecimentos marcantes. Podemos citar a história, artes, filosofia e todas as suas vertentes e até mesmo a geografia em sua parte social.'),
 (8, 'Linguística, Letras e Artes', 'Trata da comunicação! Seja ela através de palavras, numa língua, ou seja ela expressada através da arte. Além de poder estudar línguas e estrutura linguística, também pode trazer todas as formas de arte, sejam no cinema, obras, teatro ou músicas!');
 
 -- --------------------------------------------------------
@@ -82,7 +82,49 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`id_curso`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+
+INSERT INTO `curso` (`id_curso`, `nome`, `cod_area`) VALUES
+(1, 'Matemática', 1),
+(3, 'Probabilidade e Estatística', 1),
+(4, 'Ciência da Computação', 1),
+(5, 'Probabilidade e Estatística', 1),
+(6, 'Ciência da Computação', 1),
+(7, 'Astronomia', 1),
+(8, 'Física', 1),
+(9, 'Biologia Geral', 2),
+(10, 'Zoologia', 2),
+(11, 'Bioquímica', 2),
+(12, 'Farmacologia', 2),
+(13, 'Imunologia', 2),
+(14, 'Engenharia Civil', 3),
+(15, 'Engenharia Elétrica', 3),
+(16, 'Engenharia Mecânica', 3),
+(17, 'Engenharia Química', 3),
+(18, 'Engenharia de Produção', 3),
+(19, 'Medicina', 4),
+(20, 'Odontologia', 4),
+(21, 'Farmácia', 4),
+(22, 'Enfermagem', 4),
+(23, 'Nutrição', 4),
+(24, 'Agronomia', 5),
+(25, 'Medicina Veterinária', 5),
+(26, 'Engenharia de Pesca', 5),
+(27, 'Ciência e Tecnologia de Alimentos', 5),
+(28, 'Engenharia Agrícola', 5),
+(29, 'Direito', 6),
+(30, 'Administração', 6),
+(31, 'Economia', 6),
+(32, 'Arquitetura e Urbanismo', 6),
+(33, 'Serviço Social', 6),
+(34, 'Filosofia', 7),
+(35, 'Sociologia', 7),
+(36, 'História', 7),
+(37, 'Geografia', 7),
+(38, 'Teologia', 7),
+(39, 'Linguística', 8),
+(40, 'Letras', 8),
+(41, 'Artes', 8);
 
 -- --------------------------------------------------------
 

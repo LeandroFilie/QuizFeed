@@ -180,11 +180,13 @@
         $selectArea = "SELECT * FROM area WHERE id_area = $id_area";
         $resultadoArea = mysqli_query($conexao,$selectArea);
 
-        while($linha = mysqli_fetch_assoc($resultadoArea)){
-            $matriz[] = $linha;
-        }
+        $linha = mysqli_fetch_assoc($resultadoArea);
 
-        echo json_encode($matriz);
+        /* while($linha = mysqli_fetch_assoc($resultadoArea)){
+            $matriz[] = $linha;
+        } */
+
+        echo json_encode($linha);
     }
     else if($identificador == 8){
         $email = $_SESSION["email"];
@@ -206,5 +208,17 @@
         echo json_encode($senhaAtual);
 
 
+    }
+    else if($identificador == 10){
+        $id_area = $_POST["idArea"];
+
+        $selectAreaCursos = "SELECT nome FROM curso WHERE cod_area = $id_area";
+        $resultadoAreaCursos = mysqli_query($conexao,$selectAreaCursos);
+
+        while($linha = mysqli_fetch_assoc($resultadoAreaCursos)){
+            $matriz[] = $linha;
+        }
+
+        echo json_encode($matriz);
     }
 ?>
