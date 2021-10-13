@@ -1,8 +1,8 @@
 <?php
-    $host = "us-cdbr-east-04.cleardb.com";
-    $db = "heroku_08b8e4264878aac";
-    $user = "bd8c6fd9e7fc2e";
-    $senha = "a57d5260";
+    $host = "localhost";
+    $db = "quizfeed";
+    $user = "tcc";
+    $senha = "12345";
 
     $conexao = mysqli_connect($host,$user,$senha,$db) 
         or die("Erro ao abrir a conexão com o banco de dados.");
