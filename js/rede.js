@@ -155,10 +155,10 @@ function removerPost(id){
   })
 }
 
-function removerPostDenunciado(id){
-  qtdPosts = Number($("#qtdPosts").html().slice(11));
+function removerPostAdm(id){
+  qtdPosts = Number($("#qtdPosts").html());
 
-  $("#qtdPosts").text(`Pendentes: ${--qtdPosts}`);
+  $("#qtdPosts").text(--qtdPosts);
 
   p = {
     tabela:'postagem',

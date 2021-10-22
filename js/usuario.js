@@ -1,5 +1,4 @@
 function removerUser(email){
-  
   $(".remover").click(function(){
     c = "email";
     t = "usuario";
@@ -18,6 +17,8 @@ function removerUser(email){
                 $("#msg").css('margin-bottom  ', '24px');        
                 $("#msg").html("Usuário removido com sucesso");
                 $("button[value='"+ email +"']").closest(".data-user-details-adm").remove();
+                qtdUsers = Number($("#qtdUser").html());
+                $("#qtdUser").text(--qtdUsers);
             }
             else{
                 $("#msg").addClass("erro");            

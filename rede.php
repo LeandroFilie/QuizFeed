@@ -43,12 +43,44 @@
   <?php include './inc/menu.inc'; ?>
   
 <main>
+  <?php
+    $selectPosts = "SELECT postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ";
+
+    if($_SESSION["permissao"] != 1){
+      $selectPosts .= "AND postagem.situacao = 1";
+    }
+
+    $selectPosts .= " ORDER BY postagem.id_postagem DESC";
+    
+    $resultadoPosts = mysqli_query($conexao,$selectPosts); 
+
+    if($_SESSION["permissao"] == 1){
+      $qtdPosts = mysqli_num_rows($resultadoPosts);
+
+      $selectUsuarios = "select * from inscricao where cod_rede = $idRede";
+      $resultadoUsuarios = mysqli_query($conexao,$selectUsuarios); 
+      $qtdUsuarios = mysqli_num_rows($resultadoUsuarios);
+    }
+  ?>
   <div class="header-rede">
     <div class="rede-title">
       <h1>
         <?php echo $nomeRede; ?>
       </h1>
-    </div> 
+    </div>
+    <?php
+      if($_SESSION["permissao"] == 1){
+        echo "
+          <div class='info-rede'>
+          <h3>Informações sobre a rede</h3>
+            <p class='qtd-info-rede'>Quantidade de Posts: <span id='qtdPosts'>$qtdPosts</span></p> 
+            <p class='qtd-info-rede'>Quantidade de Usuários: <span id='qtdUsuarios'>$qtdUsuarios</span></p>
+        </div>
+      ";
+      }
+    ?>
+
+
   </div>
 
   <div class="form-vazio"></div>
@@ -83,17 +115,7 @@
 
   <section class="posts">
     
-    <?php
-      $selectPosts = "SELECT postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ";
-      
-      if($_SESSION["permissao"] != 1){
-        $selectPosts .= "AND postagem.situacao = 1";
-      }
-
-      $selectPosts .= " ORDER BY postagem.id_postagem DESC";
-      
-      $resultadoPosts = mysqli_query($conexao,$selectPosts); 
-  
+    <?php  
       $i = 0;
       while($linha = mysqli_fetch_assoc($resultadoPosts)){
         $selectLikes = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida";

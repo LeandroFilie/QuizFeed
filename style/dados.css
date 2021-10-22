@@ -17,6 +17,40 @@ main {
 }
 
 /* =========== ADM ================ */
+.qtd-user{
+  background-color: #fff;
+  padding: 4px 16px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+
+  font-size: 1.2rem;
+}
+
+.qtd-user > p{
+  color: var(--azul);
+  font-family: "Mont-SemiBold";
+}
+
+.qtd-user.psico{
+  margin-bottom: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.qtd-user.psico p{
+  font-size: 1.1rem;
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  font-family: "Mont";
+}
+
 .filtro {
   display: flex;
   flex-direction: column;

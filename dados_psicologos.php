@@ -27,8 +27,23 @@
   ?>
   <main>
     <?php
-        
       if($_SESSION["permissao"] == 1){
+
+        $select = 'SELECT * FROM usuario_psicologo';
+        $resultadoQtdUsuarios = mysqli_query($conexao,$select);
+        $qtdUsuarios = mysqli_num_rows($resultadoQtdUsuarios);
+
+        $selectSituacao1 = 'SELECT nome, email_usuario, situacao FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "1"'; 
+        $resultadoSituacao1 = mysqli_query($conexao,$selectSituacao1);
+        $qtdAguardando = mysqli_num_rows($resultadoSituacao1);
+
+        
+        $selectSituacao2 = 'SELECT nome, email_usuario FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2 "';
+        $resultadoSituacao2 = mysqli_query($conexao,$selectSituacao2);
+        $qtdAprovados = mysqli_num_rows($resultadoSituacao2);
+
+        $qtdReprovados = $qtdUsuarios - $qtdAprovados - $qtdAguardando;
+
         echo '
           <div class="data-user-title-psico">
             <h1>Psicólogos</h1>
@@ -36,6 +51,15 @@
               <p><a href="https://cadastro.cfp.org.br/" target="_blank">Clique aqui</a> para consultar o registro do profissional</p>
             </div>
           </div>
+
+          
+          <div class="qtd-user psico">
+            <p>Quantidade de Usuários Aguardando Aprovação: <span>'.$qtdAguardando.'</span></p>
+            <p>Quantidade de Usuários Aprovados: <span>'.$qtdAprovados.'</span></p>
+            <p>Quantidade de Usuários Reprovados: <span>'.$qtdReprovados.'</span></p>
+            <p>Quantidade Total de Usuários: <span>'.$qtdUsuarios.'</span></p>
+            </div>
+          
           <div id="msg"></div>
           <section id="tabs">
             <div class="tab-links">
@@ -47,10 +71,6 @@
               <section id="option-1-content">
                 
         ';
-                  $selectSituacao1 = 'SELECT nome, email_usuario, situacao FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "1"';
-                  
-                  $resultadoSituacao1 = mysqli_query($conexao,$selectSituacao1);
-
                   $i = 0;     
                   while($linha = mysqli_fetch_assoc($resultadoSituacao1)){
                     echo '
@@ -69,10 +89,6 @@
                     echo '<h4 id="emptySituacao1">Não há pedidos pendentes</h4>';
                   }
         echo '</section>';
-
-              $selectSituacao2 = 'SELECT nome, email_usuario FROM usuario_psicologo INNER JOIN usuario ON usuario.email = usuario_psicologo.email_usuario WHERE usuario_psicologo.situacao = "2 "';
-                                
-              $resultadoSituacao2 = mysqli_query($conexao,$selectSituacao2);
 
             echo '<section id="option-2-content">';
 

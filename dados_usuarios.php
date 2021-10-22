@@ -27,6 +27,13 @@
       if($_SESSION["permissao"] == 1){
 
         $select = 'SELECT nome_usuario, email_usuario FROM usuario_comum';
+        $resultadoQtdUsuarios = mysqli_query($conexao,$select);
+        $qtdUsuarios = mysqli_num_rows($resultadoQtdUsuarios) - 1;
+        echo "
+          <div class='qtd-user'>
+            <p>Quantidade de Usuários: </p><span id='qtdUser'>$qtdUsuarios</span>
+          </div>
+        ";
 
         echo '
           <div class="filtro">
