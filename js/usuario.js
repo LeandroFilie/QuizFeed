@@ -178,6 +178,7 @@ $(document).ready(function(){
   }
 
   function atualizarRede(nova_area){
+    console.log(nova_area);
     dados = {
       id: nova_area,
       identificador: '7'
@@ -185,6 +186,7 @@ $(document).ready(function(){
     
     $.post("seleciona.php",dados,function(d){
       $("#area-user").html(d.nome);
+
     })    
   }
 

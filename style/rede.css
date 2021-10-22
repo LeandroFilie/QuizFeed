@@ -28,6 +28,11 @@ main {
   font-family: "Mont-SemiBold";
 }
 
+.header-rede p{
+  font-size: 1.2rem;
+  text-align: left;
+}
+
 .form_footer .user-info, .posts .user-info{
   display: flex;
   align-items: center;

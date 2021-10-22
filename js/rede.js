@@ -155,6 +155,25 @@ function removerPost(id){
   })
 }
 
+function removerPostDenunciado(id){
+  qtdPosts = Number($("#qtdPosts").html().slice(11));
+
+  $("#qtdPosts").text(`Pendentes: ${--qtdPosts}`);
+
+  p = {
+    tabela:'postagem',
+    id,
+    coluna:'id_postagem',
+  };
+  ocultarPost(id, 'remover');
+
+  $.post('remover.php',p,function(r){
+    if(r == 1){
+        ocultarPost(id, 'remover');
+    }
+  })
+}
+
 function denunciarPost(id){
   dados = {
     'cod_postagem': id,
@@ -186,6 +205,10 @@ function tirarDenuncia(id){
       $(`.post-denunciado-adm[value="${id}"]`).removeClass('post-denunciado-adm');
       $(`.msg-denuncia[value="${id}"]`).text('');
       $(`.msg-denuncia[value="${id}"]`).removeClass('msg-denuncia');
+
+      qtdPosts = Number($("#qtdPosts").html().slice(11));
+
+      $("#qtdPosts").text(`Pendentes: ${--qtdPosts}`);
 
       ocultarPost(id, 'tirarDenuncia');
 
