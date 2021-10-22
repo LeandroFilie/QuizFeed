@@ -228,7 +228,7 @@ $(function(){
       $.post("gerenciamento_rede.php",id,function(r){
         
         if(r==0){
-          location.href="rede.php";
+          location.href="home.php";
         }else{
           $('.erro_entrar_rede').css('display','block');
           $('.erro_entrar_rede').html('Erro ao entrar na rede. Por favor, contate o administrador.');

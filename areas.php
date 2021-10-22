@@ -7,19 +7,33 @@
     <title>Explicação das Áreas | TesteFeed</title>
 </head>
 <body>
-    <header class="header">
-        <nav>
-            <div><a href="index.php"><img src="./assets/images/logo.svg" alt="logo" class="logo"></a></div>
-            <button id="js-open-menu" class="menu-button">
-                <i class="menu-icon"></i>
-            </button>
-            <ul class="menu">
-                <li><a href="index.php">Home</a></li>
-            </ul>
-        </nav>
-    </header>
+    <?php 
+        session_start(); 
+
+        if(!empty($_SESSION)){
+            include './inc/menu.inc';
+        }
+        else{
+            echo '
+                <header class="header">
+                    <nav>
+                        <div><a href="index.php"><img src="./assets/images/logo.svg" alt="logo" class="logo"></a></div>
+                        <button id="js-open-menu" class="menu-button">
+                            <i class="menu-icon"></i>
+                        </button>
+                        <ul class="menu">
+                            <li><a href="index.php">Login</a></li>
+                        </ul>
+                    </nav>
+                </header>
+            ';
+        }
+
+        
+    ?>
 
     <main>
+        <h1>Áreas de Conhecimento</h1>
         <div class="areas">
             <?php
 			include "inc/conexao.php";

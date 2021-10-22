@@ -26,14 +26,14 @@
             <div class="card-login">
                 <h1>Login</h1>   
                 <div id="erro_aut"></div>
-                <div class="form">
+                <form method="post" class="form" id="form">
                     <input type="text" name="email" id="email" placeholder="E-mail" />
                     <div id="campo_senha" class="campo_senha">
                         <input type="password" name="senha" id="senha" placeholder="Senha" required />
                         <img src="./assets/images/eye.svg" alt="mostrar_ocultar_senha" id="mostrar_senha">
                     </div>
-                    <button id="autenticar">Entrar</button>
-                </div>
+                    <button type="submit" id="autenticar">Entrar</button>
+                </form>
             </div>
         </div>
     </header>
@@ -98,7 +98,8 @@
     <script src="./assets/libs/md5.js"></script>
     <script>
         $(document).ready(function(){
-            $("#autenticar").click(function(){
+            $('#form').submit(function(event){
+                event.preventDefault();
                 var email = $("#email").val();
                 var senha_md5 = $.md5($("#senha").val());
 
@@ -111,7 +112,21 @@
                         $("#erro_aut").html("Erro na autentificação");
                     }
                 });
-            });
+            })
+/*             $("#autenticar").click(function(){
+                var email = $("#email").val();
+                var senha_md5 = $.md5($("#senha").val());
+
+                $.post("autenticacao.php",{"email":email,"senha":senha_md5},function(r){
+                    if(r == 1){
+                        location.href="home.php";
+                    }
+                    else if(r == 2){
+                        $("#erro_aut").addClass("erro_aut");
+                        $("#erro_aut").html("Erro na autentificação");
+                    }
+                });
+            }); */
 
             $('#mostrar_senha').click(function(){
                 if($('#senha').attr('type') == 'password'){

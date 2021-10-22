@@ -11,6 +11,13 @@
     <?php include './inc/head.inc' ?>    
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="./style/dados.css">
+
+  <script src="./assets/libs/md5.js" defer></script>
+  <script src="./assets/bootstrap/bootstrap.min.js" defer></script>
+  <script src="./assets/libs/sweetalert2.all.min.js" defer></script>
+  <script src="./js/select_estados.js" defer></script>
+  <script src="./assets/libs/jquery.mask.min.js" defer></script>
+  <script src="./js/psicologo.js" defer></script>
     <title>Dados | TesteFeed</title> 
 </head>
 <body>
@@ -210,13 +217,5 @@
 
     include './inc/modal_psicologo.inc';
   ?>
-
-  <script src="./assets/libs/md5.js"></script>
-  <script src="./assets/bootstrap/bootstrap.min.js"></script>
-  <script src="./assets/libs/sweetalert2.all.min.js"></script>
-  <script src="./js/select_estados.js"></script>
-  <script src="./assets/libs/jquery.mask.min.js"></script>
-  <script src="./js/psicologo.js"></script>
-
 </body>
 </html>

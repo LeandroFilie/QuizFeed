@@ -16,6 +16,15 @@ main {
 
 }
 
+h1{
+  text-align: center;
+  font-size: 2rem;
+
+  color: var(--azul);
+  margin: 30px auto;
+  font-family: 'Mont-SemiBold';
+}
+
 .areas{
   display: flex;
   justify-content: center;

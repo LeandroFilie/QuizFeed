@@ -13,6 +13,9 @@
     <title>Home | TesteFeed</title>
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="./style/home.css">
+    <script src="./assets/bootstrap/bootstrap.min.js" defer></script>
+    <script src="js/home.js" defer></script>
+    <script src="js/rede.js" defer></script>
 </head>
 <body>
     <?php 
@@ -58,7 +61,7 @@
                         <section class="card-adm">
                             <div class="card-title">Gerenciamento das Redes</div>
                             <div class="item">
-                                <form action="rede.php" method="post">
+                                <form action="rede.php" method="get">
                                     <select id="nome_rede" name="nome_rede">
                                         <option value="">Selecione uma Rede</option>
                                     ';
@@ -302,9 +305,5 @@
         include './inc/modal_area.inc';
         include './inc/modal_trocar_area.inc';
     ?>
-
-    <script src="./assets/bootstrap/bootstrap.min.js"></script>
-    <script src="./js/home.js"></script>
-    <script src="./js/rede.js"></script>
 </body>
 </html>

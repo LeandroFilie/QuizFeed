@@ -59,7 +59,14 @@ function insert($campos, $variaveis){
           $insert .= ")";
 
   if(mysqli_query($conexao,$insert)){
-    header('Location: rede.php');
+    if($_SESSION["permissao"] == 1){
+      header('Location: rede.php?nome_rede='.$_POST["area-admin"].'');
+    }
+    else{
+      header('Location: rede.php');
+    }
+    
+
   }        
   else{
     echo '<h1>Ocorreu um erro. Por favor, contate os administradores</h1>';
@@ -67,7 +74,12 @@ function insert($campos, $variaveis){
 }
 
 $email_usuario = $_SESSION["email"];
-$cod_rede = $_SESSION["id_rede"];
+if($_SESSION["permissao"] == 1){
+  $cod_rede = $_POST["area-admin"];
+}
+else{
+  $cod_rede = $_SESSION["id_rede"];
+}
 
 $data = date('Y-m-d');
 $hora = date('H:i:s');

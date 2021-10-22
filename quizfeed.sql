@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `area` (
 --
 
 INSERT INTO `area` (`id_area`, `nome`, `descricao`) VALUES
-(1, 'Ciências Exatas e da Terra', 'Primeiramente, você precisa ter em mente que a matemática e os números são a base dessa área! Ela pode englobar cursos muito diferentes, mas como característica em comum, são cursos baseados em cálculos físico-matemáticos. Engloba a matemática, física, computação, astromia, química, mecânica e vertentes que esses cursos podem ter.'),
+(1, 'Ciências Exatas e da Terra', 'Primeiramente, você precisa ter em mente que a matemática e os números são a base dessa área! Ela pode englobar cursos muito diferentes, mas como característica em comum, são cursos baseados em cálculos físico-matemáticos.'),
 (2, 'Ciências Biológicas', 'Essa é a área da biologia. Tudo nela vai se relacionar com a natureza, e vai englobar estudos aprofundados sobre toda vida existente no planeta Terra. Você precisa estar preparado pra aprender tudo nos mínimos detalhes, desde quando tudo surgiu até hoje!'),
 (3, 'Engenharias', 'Na área das engenharias, a ciência é aplicada e utilizada na prática, atuando muito na economia. Atualmente, existem 34 tipos de engenharia pra você decidir em qual se encaixa melhor. Vale lembrar que envolve cálculos e a habilidade que você tem com a criação, já que na prática vão ter muitos processos, inclusive o de criação!'),
 (4, 'Ciências da Saúde', 'Como o próprio nome diz, trata de tudo relacionado a saúde, seja atendendo diretamente o público ou atuando na área da pesquisa. Os cursos vão envolver muita biologia e conhecimento do corpo humano. Vale ressaltar que a saúde não envolve somente a medicina, mas também outros cursos, como a psicologia, fisioterapia, fonoaudiologia, dentre tantos outros.'),
@@ -86,10 +86,8 @@ CREATE TABLE IF NOT EXISTS `curso` (
 
 INSERT INTO `curso` (`id_curso`, `nome`, `cod_area`) VALUES
 (1, 'Matemática', 1),
-(3, 'Probabilidade e Estatística', 1),
 (4, 'Ciência da Computação', 1),
 (5, 'Probabilidade e Estatística', 1),
-(6, 'Ciência da Computação', 1),
 (7, 'Astronomia', 1),
 (8, 'Física', 1),
 (9, 'Biologia Geral', 2),

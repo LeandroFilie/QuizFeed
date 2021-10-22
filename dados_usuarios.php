@@ -8,9 +8,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <?php include './inc/head.inc' ?>    
-    <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="./style/dados.css">
+  <?php include './inc/head.inc' ?>    
+  <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="./style/dados.css">
+  <script src="./assets/libs/md5.js" defer></script>
+  <script src="./assets/bootstrap/bootstrap.min.js" defer></script>
+  <script src="./js/usuario.js" defer></script>
+
     <title>Dados | TesteFeed</title>
 </head>
 <body>
@@ -153,10 +157,6 @@
     include './inc/modal_usuario.inc';
     include './inc/modal_trocar_area.inc';
   ?>
-  
-  <script src="./assets/libs/md5.js"></script>
-  <script src="./assets/bootstrap/bootstrap.min.js"></script>
-  <script src="./js/usuario.js"></script>
 
 </body>
 </html>

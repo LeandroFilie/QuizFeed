@@ -7,7 +7,7 @@
   
   include './inc/conexao.php';
 
-  if(empty($_POST)){
+  if(empty($_GET)){
     $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede INNER JOIN inscricao ON inscricao.email_usuario = '".$_SESSION["email"]."' AND inscricao.cod_rede = rede.id_rede";
     $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
     while($linha = mysqli_fetch_assoc($resultadoNomeRede)){
@@ -19,8 +19,9 @@
     if(mysqli_num_rows($resultadoNomeRede) == 0){
       echo "<script>location.href='home.php'</script>";
     }
-  }else{
-    $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede WHERE id_rede = '".$_POST["nome_rede"]."'";
+  }
+  else{
+    $selectNomeRede = "SELECT rede.nome as nome, rede.id_rede as id_rede FROM rede WHERE id_rede = '".$_GET["nome_rede"]."'";
     $resultadoNomeRede = mysqli_query($conexao,$selectNomeRede); 
     while($linha = mysqli_fetch_assoc($resultadoNomeRede)){
       $nomeRede = $linha['nome'];
@@ -36,6 +37,7 @@
   <?php include './inc/head.inc' ?>
   <title><?php echo $nomeRede?> | TesteFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
+  <script src="./js/rede.js" defer></script>
 </head>
 <body>
   <?php include './inc/menu.inc'; ?>
@@ -70,6 +72,11 @@
         <img src="<?php echo $_SESSION['avatar']; ?>" alt="Avatar" class="avatar" loading="lazy"/>
         <span><?php echo $_SESSION['nome_usuario']; ?></span>
       </div> 
+      <?php
+        if($_SESSION["permissao"] == 1){
+          echo '<input type="hidden" name="area-admin" value="'.$_GET["nome_rede"].'" />';
+        }
+      ?>
       <button type='submit' id="postar">Postar</button>
     </div>
   </form>
@@ -142,8 +149,6 @@
 </main>
 
 <?php include './inc/footer.inc' ?>
-
-<script src="./js/rede.js" ></script>
 
 </body>
 </html>

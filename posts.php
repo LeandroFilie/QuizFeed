@@ -26,6 +26,7 @@
   <?php include './inc/head.inc' ?>
   <title>Meus Posts | TesteFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
+  <script src="./js/rede.js" defer></script>
 </head>
 <body>
   <?php include './inc/menu.inc'; ?>
@@ -127,8 +128,6 @@
 </main>
 
 <?php include './inc/footer.inc' ?>
-
-<script src="./js/rede.js" ></script>
 
 </body>
 </html>

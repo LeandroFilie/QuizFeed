@@ -3,6 +3,11 @@
 <head>
     <?php include './inc/head.inc' ?>
     <link rel="stylesheet" href="./style/cadastro.css">
+    <script src="./assets/libs/md5.js" defer></script>
+    <script src="./assets/libs/sweetalert2.all.min.js" defer></script>
+    <script src="./assets/libs/jquery.mask.min.js" defer></script>
+    <script src="./js/cadastro.js" defer></script>
+    <script src="./js/select_estados.js" defer></script>
     
     <title>Cadastro | TesteFeed</title>
 </head>
@@ -112,11 +117,5 @@
     </main>
 
     <?php include './inc/footer.inc' ?>
-
-    <script src="./assets/libs/md5.js"></script>
-    <script src="./assets/libs/sweetalert2.all.min.js"></script>
-    <script src="./assets/libs/jquery.mask.min.js"></script>
-    <script src="./js/cadastro.js"></script>
-    <script src="./js/select_estados.js"></script>
 </body>
 </html>

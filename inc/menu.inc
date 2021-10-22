@@ -8,6 +8,7 @@
                     <i class="menu-icon"></i>
                 </button>
                 <ul class="menu">
+                    <li><a href="home.php">Home</a></li>
                 ';
                 if($_SESSION["permissao"] == 2){
                     echo '<li><a href="dados_usuarios.php">Meus Dados</a></li>';
@@ -19,6 +20,7 @@
                             <li><a href="posts.php">Meus Posts</a></li>
                         ';
                     }
+                    echo '<li><a href="areas.php">Áreas</a></li>';
                 }
                 if($_SESSION["permissao"] == 3){
                     if($_SESSION["situacao"] != 1)

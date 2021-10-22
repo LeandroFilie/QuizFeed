@@ -184,9 +184,7 @@ $(document).ready(function(){
     }
     
     $.post("seleciona.php",dados,function(d){
-      $.each(d,function(i,u){
-        $("#area-user").html(u.nome);
-      });
+      $("#area-user").html(d.nome);
     })    
   }
 

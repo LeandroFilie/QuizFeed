@@ -31,6 +31,10 @@ body {
   color: #29292e;
 }
 
+img{
+  object-fit: cover;
+}
+
 .header {
   width: 100%;
   top: 0;
@@ -80,8 +84,10 @@ main{
 }
 
 .logo {
+  display: flex;
   width: 13rem;
   height: 2.5rem;
+  object-fit: contain;
 }
 
 .avatar{
