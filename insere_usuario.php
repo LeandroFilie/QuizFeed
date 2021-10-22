@@ -7,6 +7,7 @@
 
     $email = $_POST["email"];
     $_SESSION["email"] = $email;
+    $_SESSION["avatar"] = './assets/images/avatar.svg';
 
     $senha = $_POST["senha"];
 
