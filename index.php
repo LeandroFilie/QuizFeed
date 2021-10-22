@@ -73,21 +73,21 @@
             <div class="faq-item">
                 <button class="accordion">O que é Orientação Vocacional?</button>
                 <div class="panel">
-                    <p>Conteúdo 1...</p>
+                    <p>Orientação Vocacional é uma especialidade que psicólogos podem escolher seguir. Eles irão utilizar de métodos comprovados e autorizados cientificamente, que apenas eles podem ter acesso, juntamente com todos os conhecimentos adquiridos pelos mesmos em suas experiências acadêmicas. Então, após um período de terapia vocacional, você poderá estar no caminho mais certo para seguir de acordo com o seu perfil, gostos e escolhas.</p>
                 </div>
             </div>
             
             <div class="faq-item">
-                <button class="accordion">Qual a diferença entre a Orientação Vocacional e o Teste Vocacional?</button>
+                <button class="accordion">A Orientação Vocacional é apenas um teste rápido?</button>
                 <div class="panel">
-                    <p>Conteúdo 2...</p>
+                    <p>Não! A Orientação Vocacional possui sim os testes devidamente autorizados para auxiliar o profissional a entender seu paciente, mas não é somente isso. O atendimento é personalizado, já que você pode ter suas próprias dúvidas, medos e curiosidades, principalmente relacionados a sua vida pessoal!</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <button class="accordion">E se eu estiver muito perdida (o)?</button>
                 <div class="panel">
-                    <p>Conteúdo 3...</p>
+                    <p>Tudo bem estar perdido! O profissional está preparado para receber você de qualquer forma, você pode tirar todas as suas dúvidas e compartilhar seus pensamentos a respeito disso também, já que não deixa de ser uma terapia. Além de tudo, é um processo de auto conhecimento, onde você vai conhecer e entender o seu próprio perfil e personalidade</p>
                 </div>
             </div>
         </div>
