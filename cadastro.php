@@ -19,7 +19,7 @@
                 <i class="menu-icon"></i>
             </button>
             <ul class="menu">
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index.php">Login</a></li>
             </ul>
         </nav>
     </header>

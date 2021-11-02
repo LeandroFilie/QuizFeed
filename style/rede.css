@@ -123,8 +123,8 @@ form .input-content-image .preview-image.hide{
 
 form .input-content-image .preview-image.show{
   width: 50%;
-  padding: 8px;
-  border-radius: 16px;
+  margin: 8px;
+  border-radius: 4px;
 }
 
 form .form-footer{
@@ -241,7 +241,7 @@ form .form-footer button{
 
 .posts .post .image-post{
   width: 50%;
-  border-radius: 16px;
+  border-radius: 4px;
   margin: 24px auto 24px;
 }
 

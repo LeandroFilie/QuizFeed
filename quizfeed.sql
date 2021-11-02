@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 24-Set-2021 às 03:28
+-- Tempo de geração: 02-Nov-2021 às 20:54
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -82,7 +82,11 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `cod_area` int(11) NOT NULL,
   PRIMARY KEY (`id_curso`),
   KEY `cod_area` (`cod_area`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `curso`
+--
 
 INSERT INTO `curso` (`id_curso`, `nome`, `cod_area`) VALUES
 (1, 'Matemática', 1),
@@ -156,6 +160,13 @@ CREATE TABLE IF NOT EXISTS `inscricao` (
   KEY `cod_rede` (`cod_rede`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `inscricao`
+--
+
+INSERT INTO `inscricao` (`email_usuario`, `cod_rede`, `data`, `hora`) VALUES
+('leandro@email.com', 1, '2021-11-02', '17:38:00');
+
 -- --------------------------------------------------------
 
 --
@@ -175,7 +186,23 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
   KEY `email_usuario` (`email_usuario`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `postagem`
+--
+
+INSERT INTO `postagem` (`id_postagem`, `data`, `hora`, `conteudo`, `imagem`, `situacao`, `email_usuario`, `cod_rede`) VALUES
+(1, '2021-11-02', '17:32:10', 'Licenciatura em Química, pela professora Elaine Muniz\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/_7cru4_WFD4\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 1),
+(2, '2021-11-02', '17:33:18', 'Licenciatura em Matemática, pela professora Larissa Gehrinh\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/QxhaytSA8Fo\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 1),
+(3, '2021-11-02', '17:36:39', 'Licenciatura em Física, pelo professor Marcos Ribeiro\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/5y0ib9hl7Pw\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 1),
+(4, '2021-11-02', '17:39:40', 'Bacharelado em Engenharia Civil, por Diego Almeida\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/AR0CLi39rdg\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 3),
+(5, '2021-11-02', '17:40:51', 'Bacharelado em Medicina Veterinária, por Aline Chechi\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/IISz0CxXA3w\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 5),
+(6, '2021-11-02', '17:43:40', 'Técnologo em Logística e bacharelado em Administração, por Thiago Camargo\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/uq1XardkBLE\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 6),
+(7, '2021-11-02', '17:44:58', 'Gestão de Recursos Humanos, por Daiane\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/OL_OB5vU1Vc\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 6),
+(8, '2021-11-02', '17:49:37', 'Letras, por Rafaella Goffredo\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/4pihuUkEChk\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 8),
+(9, '2021-11-02', '17:50:31', 'Bacharelado em Psicologia, por Paloma\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/Bk19_DTz6_Y\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 7),
+(10, '2021-11-02', '17:51:20', 'Licenciatura em Ciências Biológicas, pela professora Carla Lorenzi\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/HheoHKYX_ls\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 2);
 
 -- --------------------------------------------------------
 

@@ -95,14 +95,19 @@ if(isset($_POST["conteudo"])){
 }
 
 if($setImage){
-  if($_FILES["imagem"]["error"] == 0){
-      $imagem = uploadImage();
-      array_push($campos, 'imagem');
-      array_push($variaveis, $imagem);
-      
-  }
+  $imagem = uploadImage();
+  array_push($campos, 'imagem');
+  array_push($variaveis, $imagem);
 }
 
-insert($campos, $variaveis);
+if(!$setImage && empty($_POST["conteudo"])){
+  echo '
+    <h1>Ocorreu um erro. Por favor, contate os administradores</h1>
+    <span><a href="rede.php">Clique aqui para voltar a rede</a></span>
+  ';
+}
+else{
+  insert($campos, $variaveis);
+}
 
 ?>

@@ -44,7 +44,7 @@
   
 <main>
   <?php
-    $selectPosts = "SELECT postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede ";
+    $selectPosts = "SELECT postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede AND postagem.email_usuario <> 'admin'";
 
     if($_SESSION["permissao"] != 1){
       $selectPosts .= "AND postagem.situacao = 1";
@@ -54,8 +54,11 @@
     
     $resultadoPosts = mysqli_query($conexao,$selectPosts); 
 
+    $selectPostsAdmin = "SELECT postagem.conteudo as conteudo, postagem.imagem as imagem, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, postagem.id_postagem as id_postagem, postagem.data as data, postagem.hora as hora, postagem.situacao as situacao FROM postagem INNER JOIN usuario_comum ON usuario_comum.email_usuario = postagem.email_usuario WHERE postagem.cod_rede = $idRede AND postagem.email_usuario = 'admin'";
+    $resultadoPostsAdmin = mysqli_query($conexao,$selectPostsAdmin); 
+
     if($_SESSION["permissao"] == 1){
-      $qtdPosts = mysqli_num_rows($resultadoPosts);
+      $qtdPosts = mysqli_num_rows($resultadoPosts) + mysqli_num_rows($resultadoPostsAdmin);
 
       $selectUsuarios = "select * from inscricao where cod_rede = $idRede";
       $resultadoUsuarios = mysqli_query($conexao,$selectUsuarios); 
@@ -116,6 +119,47 @@
   <section class="posts">
     
     <?php  
+      $j = 0;
+      while($linha = mysqli_fetch_assoc($resultadoPostsAdmin)){
+        $selectLikes = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida";
+
+        $dataPost = date('d/m/Y', strtotime($linha["data"]));
+        $anoPost = date('Y', strtotime($linha["data"]));
+
+        $dataAtual = date('d/m/Y');
+        $anoAtual = date('Y');
+
+        if($dataPost == $dataAtual){
+          $dataFormatada = 'Hoje';
+        }
+        else if($anoPost == $anoAtual){
+          $dataFormatada = date('d/m', strtotime($linha["data"]));
+        }
+        else{
+          $dataFormatada = $dataPost;
+        }
+
+        $horaPost = date('H:i', strtotime($linha["hora"]));
+
+          if($linha["situacao"] == 2){
+            echo ' 
+              <span class="msg-denuncia" value="'.$linha["id_postagem"].'">Post Denunciado. Tome alguma providência</span>
+              <div class="post post-denunciado-adm" value="'.$linha["id_postagem"].'">
+                  
+            ';
+          }
+          else{
+            echo ' <div class="post" value="'.$linha["id_postagem"].'">';
+          }
+
+          include "./inc/post.inc";
+          
+          echo ' </div>
+        ';
+        $j++;
+      }
+
+
       $i = 0;
       while($linha = mysqli_fetch_assoc($resultadoPosts)){
         $selectLikes = "SELECT email_usuario as email_curtida, cod_postagem as postagem_like FROM curtida";
@@ -156,7 +200,7 @@
         $i++;
       }
 
-      if($i == 0){
+      if($i == 0 && $j == 0){
         echo '
           <div class="empty-post">
             <img src="./assets/images/empty_post.svg" alt="Icone de Mensagem" loading="lazy">
