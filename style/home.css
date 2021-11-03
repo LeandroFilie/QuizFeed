@@ -559,6 +559,10 @@ main {
   -webkit-box-orient: vertical;
 }
 
+.post .conteudo iframe{
+  display: none;
+}
+
 .card-rede h2{
   margin: 0;
   font-size: 2rem;
