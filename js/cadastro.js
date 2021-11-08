@@ -79,7 +79,7 @@ $(document).ready(function(){
             limparMensagensErro();
 
             if(r == 0){
-                location.href="home.php";
+                location.href="index.php";
             }
             else if(r == 1){
                 mensagemErroEmail(dados.identificador);

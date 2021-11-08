@@ -6,8 +6,8 @@
     $nome = $_POST["nome_completo"];
 
     $email = $_POST["email"];
-    $_SESSION["email"] = $email;
-    $_SESSION["avatar"] = './assets/images/avatar.svg';
+    /* $_SESSION["email"] = $email;
+    $_SESSION["avatar"] = './assets/images/avatar.svg'; */
 
     $senha = $_POST["senha"];
 
@@ -30,8 +30,8 @@
 
     if($identificador == 1){ //usuario comum
         $nome_usuario = $_POST["nome_usuario"];
-        $_SESSION["nome_usuario"] = $nome_usuario;
-        $_SESSION["permissao"] = 2;
+/*         $_SESSION["nome_usuario"] = $nome_usuario;
+        $_SESSION["permissao"] = 2; */
 
         $select = "SELECT nome_usuario FROM usuario_comum WHERE nome_usuario = '$nome_usuario'";
         $confereNomeusuario = mysqli_query($conexao,$select);
@@ -77,8 +77,8 @@
         $cidade = $_POST["cidade"];
         $uf = $_POST["uf"];
         $tel = $_POST["tel"];
-        $_SESSION["permissao"] = 3;
-        $_SESSION["situacao"] = 1;
+       /*  $_SESSION["permissao"] = 3;
+        $_SESSION["situacao"] = 1; */
 
         $select = "SELECT registro FROM usuario_psicologo WHERE registro = '$registro'";
         $confereregistro = mysqli_query($conexao,$select);
