@@ -15,7 +15,7 @@
   <script src="./assets/bootstrap/bootstrap.min.js" defer></script>
   <script src="./js/usuario.js" defer></script>
 
-    <title>Dados | TesteFeed</title>
+    <title>Dados | QuizFeed</title>
 </head>
 <body>
   <?php

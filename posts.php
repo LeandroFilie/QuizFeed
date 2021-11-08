@@ -24,7 +24,7 @@
 <html lang="pt-br">
 <head>
   <?php include './inc/head.inc' ?>
-  <title>Meus Posts | TesteFeed</title>
+  <title>Meus Posts | QuizFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
   <script src="./js/rede.js" defer></script>
 </head>

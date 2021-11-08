@@ -4,7 +4,7 @@
     <?php include './inc/head.inc'; ?>
     
     <link rel="stylesheet" href="./style/areas.css">
-    <title>Explicação das Áreas | TesteFeed</title>
+    <title>Explicação das Áreas | QuizFeed</title>
 </head>
 <body>
     <?php 

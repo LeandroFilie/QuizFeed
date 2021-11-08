@@ -3,7 +3,7 @@
 <head>
     <?php include './inc/head.inc' ?>
     <link rel="stylesheet" href="./style/index.css">
-    <title>Home | TesteFeed</title>
+    <title>Home | QuizFeed</title>
 </head>
 <body>
     <header class="header-index">   

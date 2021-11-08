@@ -35,7 +35,7 @@
 <html lang="pt-br">
 <head>
   <?php include './inc/head.inc' ?>
-  <title><?php echo $nomeRede?> | TesteFeed</title>
+  <title><?php echo $nomeRede?> | QuizFeed</title>
   <link rel="stylesheet" href="./style/rede.css">
   <script src="./js/rede.js" defer></script>
 </head>

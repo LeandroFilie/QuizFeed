@@ -10,7 +10,7 @@
 <html lang="pt-br">
 <head>
     <?php include './inc/head.inc' ?>
-    <title>Home | TesteFeed</title>
+    <title>Home | QuizFeed</title>
     <link rel="stylesheet" href="./assets/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="./style/home.css">
     <script src="./assets/bootstrap/bootstrap.min.js" defer></script>

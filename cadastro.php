@@ -9,7 +9,7 @@
     <script src="./js/cadastro.js" defer></script>
     <script src="./js/select_estados.js" defer></script>
     
-    <title>Cadastro | TesteFeed</title>
+    <title>Cadastro | QuizFeed</title>
 </head>
 <body>
     <header class="header">

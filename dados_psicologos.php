@@ -18,7 +18,7 @@
   <script src="./js/select_estados.js" defer></script>
   <script src="./assets/libs/jquery.mask.min.js" defer></script>
   <script src="./js/psicologo.js" defer></script>
-    <title>Dados | TesteFeed</title> 
+    <title>Dados | QuizFeed</title> 
 </head>
 <body>
   <?php
