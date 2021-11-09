@@ -2,9 +2,9 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: us-cdbr-east-04.cleardb.com
--- Tempo de geração: 08-Nov-2021 às 21:52
--- Versão do servidor: 5.6.50-log
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 09-Nov-2021 às 22:59
+-- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `heroku_08b8e4264878aac`
+-- Banco de dados: `quizfeed`
 --
 
 -- --------------------------------------------------------
@@ -66,16 +66,6 @@ CREATE TABLE IF NOT EXISTS `comentario` (
   KEY `cod_postagem` (`cod_postagem`),
   KEY `comentario_ibfk_1` (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `comentario`
---
-
-INSERT INTO `comentario` (`email_usuario`, `cod_postagem`, `conteudo`, `data`, `hora`) VALUES
-('mottascaroline@gmail.com', 9, 'amei!!!', '2021-11-03', '16:14:34'),
-('jessica@gmail.com', 35, 'Boa sorte nessa', '2021-11-03', '16:22:50'),
-('jessica@gmail.com', 10, 'Amei o vídeo, muito legal saber mais sobre essa área!!!!', '2021-11-03', '16:24:27'),
-('mottascaroline@gmail.com', 8, 'que tudooo', '2021-11-03', '16:49:15');
 
 -- --------------------------------------------------------
 
@@ -158,8 +148,8 @@ CREATE TABLE IF NOT EXISTS `curtida` (
 
 INSERT INTO `curtida` (`email_usuario`, `cod_postagem`, `data`, `hora`) VALUES
 ('jessica@gmail.com', 10, '2021-11-03', '16:23:55'),
-('jessica@gmail.com', 35, '2021-11-03', '16:22:38'),
-('juliamacosta3@gmail.com', 45, '2021-11-03', '16:46:10'),
+('jessica@gmail.com', 11, '2021-11-03', '16:22:38'),
+('juliamacosta3@gmail.com', 12, '2021-11-03', '16:46:10'),
 ('mottascaroline@gmail.com', 5, '2021-11-03', '16:46:59'),
 ('mottascaroline@gmail.com', 8, '2021-11-03', '16:48:58'),
 ('mottascaroline@gmail.com', 9, '2021-11-03', '16:14:26');
@@ -209,7 +199,7 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
   KEY `email_usuario` (`email_usuario`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `postagem`
@@ -226,10 +216,10 @@ INSERT INTO `postagem` (`id_postagem`, `data`, `hora`, `conteudo`, `imagem`, `si
 (8, '2021-11-02', '17:49:37', 'Letras, por Rafaella Goffredo\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/4pihuUkEChk\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 8),
 (9, '2021-11-02', '17:50:31', 'Bacharelado em Psicologia, por Paloma\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/Bk19_DTz6_Y\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 7),
 (10, '2021-11-02', '17:51:20', 'Licenciatura em Ciências Biológicas, pela professora Carla Lorenzi\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/HheoHKYX_ls\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 2),
-(35, '2021-11-03', '16:19:24', 'futura facul!!!', 'https://i.imgur.com/XoRsbrB.jpg', 1, 'mottascaroline@gmail.com', 7),
-(45, '2021-11-03', '16:24:26', 'oii povo, bem vindos!!!\r\n\r\no que vocês querem cursar em humanas?\r\n\r\nme: história <3', NULL, 1, 'mottascaroline@gmail.com', 7),
-(55, '2021-11-03', '16:48:21', 'Oi galera, meu primeiro post aqui!! Quais faculdades vcs mais gostam dentro dessa área??? ', NULL, 1, 'juliamacosta3@gmail.com', 5),
-(65, '2021-11-03', '16:49:56', 'oi genteeee! to em dúvida de carreira, quero dar uma passada aqui também :)', NULL, 1, 'mottascaroline@gmail.com', 8);
+(11, '2021-11-03', '16:19:24', 'futura facul!!!', 'https://i.imgur.com/XoRsbrB.jpg', 1, 'mottascaroline@gmail.com', 7),
+(12, '2021-11-03', '16:24:26', 'oii povo, bem vindos!!!\r\n\r\no que vocês querem cursar em humanas?\r\n\r\nme: história <3', NULL, 1, 'mottascaroline@gmail.com', 7),
+(13, '2021-11-03', '16:48:21', 'Oi galera, meu primeiro post aqui!! Quais faculdades vcs mais gostam dentro dessa área??? ', NULL, 1, 'juliamacosta3@gmail.com', 5),
+(14, '2021-11-03', '16:49:56', 'oi genteeee! to em dúvida de carreira, quero dar uma passada aqui também :)', NULL, 1, 'mottascaroline@gmail.com', 8);
 
 -- --------------------------------------------------------
 
@@ -282,14 +272,15 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 INSERT INTO `usuario` (`email`, `nome`, `senha`, `permissao`) VALUES
 ('admin', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 1),
 ('carol@email.com', 'Caroline Motta', '827ccb0eea8a706c4c34a16891f84e7b', 2),
-('carol@psicologa.com', 'Carol Psicologa', '827ccb0eea8a706c4c34a16891f84e7b', 3),
 ('jessica@gmail.com', 'Jessica Roberta', 'e10adc3949ba59abbe56e057f20f883e', 2),
+('joao_gabriel_mattos@email.com', 'João Gabriel Mattos', '827ccb0eea8a706c4c34a16891f84e7b', 3),
 ('julia@email.com', 'Julia Costa', '827ccb0eea8a706c4c34a16891f84e7b', 2),
-('julia@psicologa.com', 'Julia Psicologa', '827ccb0eea8a706c4c34a16891f84e7b', 3),
 ('juliamacosta3@gmail.com', 'Julia Maria ', '882f6311323bb629e3ff2ecdfe0eb49a', 2),
 ('leandro@email.com', 'Leandro Filié', '827ccb0eea8a706c4c34a16891f84e7b', 2),
-('leandro@psicologo.com', 'Leandro Psicologo', '827ccb0eea8a706c4c34a16891f84e7b', 3),
-('mottascaroline@gmail.com', 'Caroline da Silva Motta', 'ac8c6b4cc3d8ee9edca698f177147e3a', 2);
+('luiza_souza@email.com', 'Luiza Souza', '827ccb0eea8a706c4c34a16891f84e7b', 3),
+('mariana_menezes@email.com', 'Mariana Menezes', '827ccb0eea8a706c4c34a16891f84e7b', 3),
+('mottascaroline@gmail.com', 'Caroline da Silva Motta', 'ac8c6b4cc3d8ee9edca698f177147e3a', 2),
+('ricardo_lima@email.com', 'Ricardo Lima', '827ccb0eea8a706c4c34a16891f84e7b', 3);
 
 -- --------------------------------------------------------
 
@@ -340,9 +331,10 @@ CREATE TABLE IF NOT EXISTS `usuario_psicologo` (
 --
 
 INSERT INTO `usuario_psicologo` (`email_usuario`, `telefone`, `registro`, `cidade`, `uf`, `situacao`) VALUES
-('carol@psicologa.com', '(11) 1111-1111', '33333333333', 'Franca', 'SP', 2),
-('julia@psicologa.com', '(22) 2222-2222', '11111111111', 'São Paulo', 'SP', 2),
-('leandro@psicologo.com', '(33) 3333-3333', '22222222222', 'Ribeirão Preto', 'SP', 2);
+('joao_gabriel_mattos@email.com', '(44) 4444-4444', '55555555555', 'Araraquara', 'SP', 1),
+('luiza_souza@email.com', '(22) 2222-2222', '11111111111', 'São Paulo', 'SP', 2),
+('mariana_menezes@email.com', '(11) 1111-1111', '33333333333', 'Franca', 'SP', 3),
+('ricardo_lima@email.com', '(33) 3333-3333', '44444444444', 'São Carlos', 'SP', 1);
 
 --
 -- Restrições para despejos de tabelas
