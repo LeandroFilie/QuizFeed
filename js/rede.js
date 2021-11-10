@@ -268,11 +268,11 @@ function confereImagem(input) {
   var tiposPermitidos = ['image/png', 'image/jpeg'];
   
   if(tiposPermitidos.includes(tipoImagem)){
-    if(sizeImagem < 20971520){
+    if(sizeImagem < 2097152){
       showPreviewImage(input)
     }
     else{
-      $('.error-image').text('O tamanho máximo para fotos/vídeos é de 20MB');
+      $('.error-image').text('O tamanho máximo para fotos/vídeos é de 2MB');
       $('.error-image').css('display', 'block');
       $('.error-image').addClass('erro');
     }

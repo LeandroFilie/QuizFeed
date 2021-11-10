@@ -198,7 +198,7 @@ $(document).ready(function(){
     var tiposPermitidos = ['image/png', 'image/jpeg'];
     
     if(tiposPermitidos.includes(tipoImagem)){
-      if(sizeImagem < 5242880){
+      if(sizeImagem < 2097152){
         $('#formAvatar').submit();
       }
       else{

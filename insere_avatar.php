@@ -44,6 +44,4 @@ else{
   echo '<h1>Ocorreu um erro. Por favor, contate os administradores</h1>';
 }
 
- 
-
 ?>
