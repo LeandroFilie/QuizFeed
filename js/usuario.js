@@ -198,11 +198,11 @@ $(document).ready(function(){
     var tiposPermitidos = ['image/png', 'image/jpeg'];
     
     if(tiposPermitidos.includes(tipoImagem)){
-      if(sizeImagem < 5242880){
+      if(sizeImagem < 20971520){
         $('#formAvatar').submit();
       }
       else{
-        alert('O tamanho máximo para sua foto de perfil é de 5MB')
+        alert('O tamanho máximo para sua foto de perfil é de 20MB')
       }
     }
     else{
