@@ -141,17 +141,20 @@ echo '
             </div>
             <div class="comentario-content">
               <div class="comentario-header">
-                <span>'.$linhaComentarios["nome_usuario"].'</span>
-                <div class="more-menu-comentario" onclick=\'abrirMenuComentarios("'.$linhaComentarios["data"].'", "'.$linhaComentarios["hora"].'", "'.$linhaComentarios["email_usuario"].'")\'>
-                  <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></div>
-                  <div class="menu" data-user="'.$linhaComentarios["email_usuario"].'" data-time="'.$linhaComentarios["hora"].'" data-date="'.$linhaComentarios["data"].'">
-                    <div class="more-menu-comentario excluir" onclick=\'removerComentario("'.$linhaComentarios["data"].'", "'.$linhaComentarios["hora"].'", "'.$linhaComentarios["email_usuario"].'", "'.$linha["id_postagem"].'")\'>
-                      <img src="./assets/images/trash.svg" alt="Excluir" loading="lazy" />
-                      <p>Excluir</p>
+                <span>'.$linhaComentarios["nome_usuario"].'</span>';
+                if($linhaComentarios["nome_usuario"] == $_SESSION["nome_usuario"] || $_SESSION["permissao"] == 1){
+                    echo '
+                    <div class="more-menu-comentario" onclick=\'abrirMenuComentarios("'.$linhaComentarios["data"].'", "'.$linhaComentarios["hora"].'", "'.$linhaComentarios["email_usuario"].'")\'>
+                    <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></div>
+                    <div class="menu" data-user="'.$linhaComentarios["email_usuario"].'" data-time="'.$linhaComentarios["hora"].'" data-date="'.$linhaComentarios["data"].'">
+                      <div class="more-menu-comentario excluir" onclick=\'removerComentario("'.$linhaComentarios["data"].'", "'.$linhaComentarios["hora"].'", "'.$linhaComentarios["email_usuario"].'", "'.$linha["id_postagem"].'")\'>
+                        <img src="./assets/images/trash.svg" alt="Excluir" loading="lazy" />
+                        <p>Excluir</p>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </div>
+                  </div>';
+                } 
+              echo '</div>
               
               <p>'.$linhaComentarios["conteudo"].'</p>
               <div class="comentario-info">
