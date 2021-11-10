@@ -2,9 +2,9 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Tempo de geração: 09-Nov-2021 às 22:59
--- Versão do servidor: 5.7.31
+-- Host: us-cdbr-east-04.cleardb.com
+-- Tempo de geração: 10-Nov-2021 às 17:50
+-- Versão do servidor: 5.6.50-log
 -- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `quizfeed`
+-- Banco de dados: `heroku_4ad42e2e115496d`
 --
 
 -- --------------------------------------------------------
@@ -66,6 +66,20 @@ CREATE TABLE IF NOT EXISTS `comentario` (
   KEY `cod_postagem` (`cod_postagem`),
   KEY `comentario_ibfk_1` (`email_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `comentario`
+--
+
+INSERT INTO `comentario` (`email_usuario`, `cod_postagem`, `conteudo`, `data`, `hora`) VALUES
+('pietro_luis@email.com', 1, 'Que faculdade legal, me fez repensar minha escolha!', '2021-11-10', '13:45:43'),
+('gustavo_silva@email.com', 4, 'Que atuação bacana, ajudou a me decidir', '2021-11-10', '13:51:08'),
+('henrique_carvalho@email.com', 15, 'Oii, está em dúvida em qual mais área?', '2021-11-10', '13:54:28'),
+('henrique_carvalho@email.com', 10, 'Parece uma área super legal!', '2021-11-10', '14:16:49'),
+('leticiasales@email.com', 1, 'teste', '2021-11-10', '14:19:49'),
+('leticiasales@email.com', 1, 'pode excluir esse', '2021-11-10', '14:20:03'),
+('leticiasales@email.com', 2, 'Que fofaa! Amei muito a faculdade, tô torcendo pra eu passar ', '2021-11-10', '14:21:00'),
+('leticiasales@email.com', 13, 'eu também!!! Quais vestibulares vc vai fazer ???', '2021-11-10', '14:34:45');
 
 -- --------------------------------------------------------
 
@@ -147,12 +161,33 @@ CREATE TABLE IF NOT EXISTS `curtida` (
 --
 
 INSERT INTO `curtida` (`email_usuario`, `cod_postagem`, `data`, `hora`) VALUES
+('gustavo_silva@email.com', 4, '2021-11-10', '13:50:49'),
+('henrique_carvalho@email.com', 1, '2021-11-10', '14:17:06'),
+('henrique_carvalho@email.com', 2, '2021-11-10', '14:17:07'),
+('henrique_carvalho@email.com', 3, '2021-11-10', '14:17:09'),
+('henrique_carvalho@email.com', 4, '2021-11-10', '14:17:26'),
+('henrique_carvalho@email.com', 5, '2021-11-10', '14:17:53'),
+('henrique_carvalho@email.com', 6, '2021-11-10', '14:18:16'),
+('henrique_carvalho@email.com', 7, '2021-11-10', '14:18:17'),
+('henrique_carvalho@email.com', 8, '2021-11-10', '14:21:27'),
+('henrique_carvalho@email.com', 9, '2021-11-10', '13:52:20'),
+('henrique_carvalho@email.com', 10, '2021-11-10', '13:50:25'),
+('henrique_carvalho@email.com', 15, '2021-11-10', '13:54:31'),
+('henrique_carvalho@email.com', 11, '2021-11-10', '14:18:29'),
 ('jessica@gmail.com', 10, '2021-11-03', '16:23:55'),
-('jessica@gmail.com', 11, '2021-11-03', '16:22:38'),
-('juliamacosta3@gmail.com', 12, '2021-11-03', '16:46:10'),
+('jessica@gmail.com', 12, '2021-11-03', '16:22:38'),
+('juliamacosta3@gmail.com', 13, '2021-11-03', '16:46:10'),
+('leticiasales@email.com', 2, '2021-11-10', '14:21:11'),
+('leticiasales@email.com', 3, '2021-11-10', '14:21:09'),
+('leticiasales@email.com', 6, '2021-11-10', '14:28:05'),
+('leticiasales@email.com', 7, '2021-11-10', '14:28:03'),
+('leticiasales@email.com', 12, '2021-11-10', '14:34:03'),
 ('mottascaroline@gmail.com', 5, '2021-11-03', '16:46:59'),
 ('mottascaroline@gmail.com', 8, '2021-11-03', '16:48:58'),
-('mottascaroline@gmail.com', 9, '2021-11-03', '16:14:26');
+('mottascaroline@gmail.com', 9, '2021-11-03', '16:14:26'),
+('pietro_luis@email.com', 1, '2021-11-10', '13:45:06'),
+('pietro_luis@email.com', 2, '2021-11-10', '13:45:08'),
+('pietro_luis@email.com', 3, '2021-11-10', '13:45:10');
 
 -- --------------------------------------------------------
 
@@ -175,10 +210,14 @@ CREATE TABLE IF NOT EXISTS `inscricao` (
 --
 
 INSERT INTO `inscricao` (`email_usuario`, `cod_rede`, `data`, `hora`) VALUES
+('gustavo_silva@email.com', 3, '2021-11-10', '13:50:44'),
+('henrique_carvalho@email.com', 8, '2021-11-10', '13:47:28'),
 ('jessica@gmail.com', 2, '2021-11-03', '16:22:17'),
 ('juliamacosta3@gmail.com', 5, '2021-11-03', '16:45:36'),
 ('leandro@email.com', 5, '2021-11-02', '17:38:00'),
-('mottascaroline@gmail.com', 2, '2021-11-03', '16:13:35');
+('leticiasales@email.com', 7, '2021-11-09', '21:30:03'),
+('mottascaroline@gmail.com', 2, '2021-11-03', '16:13:35'),
+('pietro_luis@email.com', 3, '2021-11-10', '13:44:56');
 
 -- --------------------------------------------------------
 
@@ -199,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `postagem` (
   PRIMARY KEY (`id_postagem`,`email_usuario`,`cod_rede`),
   KEY `email_usuario` (`email_usuario`),
   KEY `cod_rede` (`cod_rede`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `postagem`
@@ -216,10 +255,15 @@ INSERT INTO `postagem` (`id_postagem`, `data`, `hora`, `conteudo`, `imagem`, `si
 (8, '2021-11-02', '17:49:37', 'Letras, por Rafaella Goffredo\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/4pihuUkEChk\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 8),
 (9, '2021-11-02', '17:50:31', 'Bacharelado em Psicologia, por Paloma\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/Bk19_DTz6_Y\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 7),
 (10, '2021-11-02', '17:51:20', 'Licenciatura em Ciências Biológicas, pela professora Carla Lorenzi\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/HheoHKYX_ls\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 2),
-(11, '2021-11-03', '16:19:24', 'futura facul!!!', 'https://i.imgur.com/XoRsbrB.jpg', 1, 'mottascaroline@gmail.com', 7),
-(12, '2021-11-03', '16:24:26', 'oii povo, bem vindos!!!\r\n\r\no que vocês querem cursar em humanas?\r\n\r\nme: história <3', NULL, 1, 'mottascaroline@gmail.com', 7),
-(13, '2021-11-03', '16:48:21', 'Oi galera, meu primeiro post aqui!! Quais faculdades vcs mais gostam dentro dessa área??? ', NULL, 1, 'juliamacosta3@gmail.com', 5),
-(14, '2021-11-03', '16:49:56', 'oi genteeee! to em dúvida de carreira, quero dar uma passada aqui também :)', NULL, 1, 'mottascaroline@gmail.com', 8);
+(11, '2021-11-10', '13:58:18', 'Licenciatura em História, por Guilherme de Lima\r\n<div>\r\n<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/EiF5XcTzvQ0\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen loading=\"lazy\"></iframe>\r\n</div>', NULL, 1, 'admin', 7),
+(12, '2021-11-03', '16:19:24', 'futura facul!!!', 'https://i.imgur.com/XoRsbrB.jpg', 1, 'mottascaroline@gmail.com', 7),
+(13, '2021-11-03', '16:24:26', 'oii povo, bem vindos!!!\r\n\r\no que vocês querem cursar em humanas?\r\n\r\nme: história <3', NULL, 1, 'mottascaroline@gmail.com', 7),
+(14, '2021-11-03', '16:48:21', 'Oi galera, meu primeiro post aqui!! Quais faculdades vcs mais gostam dentro dessa área??? ', NULL, 1, 'juliamacosta3@gmail.com', 5),
+(15, '2021-11-03', '16:49:56', 'oi genteeee! to em dúvida de carreira, quero dar uma passada aqui também :)', NULL, 1, 'mottascaroline@gmail.com', 8),
+(16, '2021-11-10', '13:46:22', 'Oi pessoal, estou muito em dúvida entre química e alguma faculdade de TI, alguem nessa também?', NULL, 1, 'pietro_luis@email.com', 1),
+(17, '2021-11-10', '13:50:21', 'Olá pessoal, vocês sabem a diferença entre farmácia e bioquímica? Quando pesquiso parecem que são muito semelhantes', NULL, 1, 'henrique_carvalho@email.com', 2),
+(18, '2021-11-10', '14:09:26', 'Oi pessoal, olhem que legal o primeiro período de engenharia civil na usp. Foco na fuvest agora, e vocês?', 'https://i.imgur.com/LbWNq7s.png', 1, 'gustavo_silva@email.com', 3),
+(19, '2021-11-10', '14:11:47', 'Fala pessoal, mais alguem em dúvida entre engenharia da computação e engenharia da computação?', NULL, 1, 'pietro_luis@email.com', 3);
 
 -- --------------------------------------------------------
 
@@ -272,14 +316,18 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 INSERT INTO `usuario` (`email`, `nome`, `senha`, `permissao`) VALUES
 ('admin', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 1),
 ('carol@email.com', 'Caroline Motta', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('gustavo_silva@email.com', 'Gustavo Silva', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('henrique_carvalho@email.com', 'Henrique Carvalho', '827ccb0eea8a706c4c34a16891f84e7b', 2),
 ('jessica@gmail.com', 'Jessica Roberta', 'e10adc3949ba59abbe56e057f20f883e', 2),
 ('joao_gabriel_mattos@email.com', 'João Gabriel Mattos', '827ccb0eea8a706c4c34a16891f84e7b', 3),
 ('julia@email.com', 'Julia Costa', '827ccb0eea8a706c4c34a16891f84e7b', 2),
 ('juliamacosta3@gmail.com', 'Julia Maria ', '882f6311323bb629e3ff2ecdfe0eb49a', 2),
 ('leandro@email.com', 'Leandro Filié', '827ccb0eea8a706c4c34a16891f84e7b', 2),
+('leticiasales@email.com', 'Leticia Helena Sales', 'bb6ada2d608bb88ebfa1c6dec4add5f3', 2),
 ('luiza_souza@email.com', 'Luiza Souza', '827ccb0eea8a706c4c34a16891f84e7b', 3),
 ('mariana_menezes@email.com', 'Mariana Menezes', '827ccb0eea8a706c4c34a16891f84e7b', 3),
 ('mottascaroline@gmail.com', 'Caroline da Silva Motta', 'ac8c6b4cc3d8ee9edca698f177147e3a', 2),
+('pietro_luis@email.com', 'Pietro Luis', '827ccb0eea8a706c4c34a16891f84e7b', 2),
 ('ricardo_lima@email.com', 'Ricardo Lima', '827ccb0eea8a706c4c34a16891f84e7b', 3);
 
 -- --------------------------------------------------------
@@ -303,11 +351,15 @@ CREATE TABLE IF NOT EXISTS `usuario_comum` (
 INSERT INTO `usuario_comum` (`email_usuario`, `nome_usuario`, `avatar`) VALUES
 ('admin', 'admin', './assets/images/avatar.svg'),
 ('carol@email.com', 'CarolMotta', './assets/images/avatar.svg'),
+('gustavo_silva@email.com', 'GustavoSilva', './assets/images/avatar.svg'),
+('henrique_carvalho@email.com', 'HenriqueCarvalho', './assets/images/avatar.svg'),
 ('jessica@gmail.com', 'je_roberta ', './assets/images/avatar.svg'),
 ('julia@email.com', 'JuliaCosta', './assets/images/avatar.svg'),
 ('juliamacosta3@gmail.com', 'juliamaria', './assets/images/avatar.svg'),
 ('leandro@email.com', 'LeandroFilie', './assets/images/avatar.svg'),
-('mottascaroline@gmail.com', 'mottacarol', 'https://i.imgur.com/2s1QiMJ.jpg');
+('leticiasales@email.com', 'let-sales', './assets/images/avatar.svg'),
+('mottascaroline@gmail.com', 'mottacarol', 'https://i.imgur.com/2s1QiMJ.jpg'),
+('pietro_luis@email.com', 'PietroLuis', './assets/images/avatar.svg');
 
 -- --------------------------------------------------------
 

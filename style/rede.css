@@ -284,21 +284,15 @@ form .form-footer button{
   color: #29292ea8;
 }
 
-.post-info .more-menu-post{
+.post-info .more-menu-post, .comentario .more-menu-comentario{
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.post-info .more-menu-post .icon{
+.post-info .more-menu-post .icon, .comentario .more-menu-comentario .icon{
   cursor:pointer;
-}
 
-.post-info .more-menu-post .icon svg{
-  stroke: #29292ea8;
-}
-
-.post-info .more-menu-post .icon{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -307,35 +301,47 @@ form .form-footer button{
   height: 25px;
 }
 
-.post-info .more-menu-post .icon:hover{
+.post-info .more-menu-post .icon svg, .comentario .more-menu-comentario .icon svg{
+  stroke: #29292ea8;
+}
+
+.post-info .more-menu-post .icon:hover, .comentario .more-menu-comentario .icon:hover{
   background: #e5e5e579;
 }
 
-.post-info .more-menu-post .more-menu{
+.post-info .more-menu-post .more-menu, .comentario .more-menu-comentario .menu{
   position: absolute;
-  bottom: 30px;
-  right: 0px;
   background: var(--border-color);
-  padding: 16px;
   border-radius: 8px;
   display: none;
   flex-direction: column;
   gap: 16px;
 }
 
-.post-info .more-menu-post .more-menu .more-menu-item{
+.post-info .more-menu-post .more-menu{
+  bottom: 30px;
+  right: 0px;
+  padding: 16px;
+}
+
+.comentario .more-menu-comentario .menu{
+  bottom: 25px;
+  padding: 8px;
+}
+
+.post-info .more-menu-post .more-menu .more-menu-item, .comentario .more-menu-comentario .menu .more-menu-comentario{
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
 }
 
-.post-info .more-menu-post .more-menu .more-menu-item img{
+.post-info .more-menu-post .more-menu .more-menu-item img, .comentario .more-menu-comentario .menu img{
   height: 1rem;
   width: 1rem;
 }
 
-.post-info .more-menu-post .more-menu .more-menu-item p{
+.post-info .more-menu-post .more-menu .more-menu-item p, .comentario .more-menu-comentario .menu p{
   display: inline;
   font-size: 1rem;
   margin: 0;
@@ -458,6 +464,13 @@ form .form-footer button{
   padding: 5px 10px;
   width: fit-content;
 
+}
+
+.section-comentarios .comentario-content .comentario-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .section-comentarios .comentario-content > span{

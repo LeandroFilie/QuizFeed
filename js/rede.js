@@ -114,6 +114,35 @@ function abrirMenu(id){
   }
 }
 
+function abrirMenuComentarios(data, hora, email){
+  elemento = $(`.menu[data-user='${email}']`).filter(`[data-time='${hora}']`).filter(`[data-date='${data}']`);
+  if(elemento.css('display') == 'none'){
+    elemento.css('display', 'flex');
+  }
+  else{
+    elemento.css('display', 'none');
+  }
+}
+
+function removerComentario(data, hora, email, id){
+  p = {
+    data,
+    hora,
+    email
+  };
+
+  $.post('remover_comentario.php',p,function(r){
+    if(r == 1){
+      elemento = $(`.comentario[data-user='${email}']`).filter(`[data-time='${hora}']`).filter(`[data-date='${data}']`);
+      elemento.css('display', 'none');
+
+      countComentarios = $(".info-interacoes[value='"+ id +"'] #comentarioCount #numeroComentarios");
+      qtdComentarios = Number(countComentarios.text());
+      countComentarios.text(--qtdComentarios);
+    }
+  })
+}
+
 function ocultarPost(id, acao){
   elemento = $(`.post[value="${id}"]`);
   $(`.msg-denuncia[value="${id}"]`).html('');

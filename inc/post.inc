@@ -68,7 +68,7 @@ echo '
 echo ' 
   <div class="info-interacoes" value="'.$linha["id_postagem"].'">
     <span id="likeCount"><span id="numeroLikes">'.$qtdLikes.'</span> Curtidas</span>
-    <span id="comentarioCount">'.$qtdComentarios.' Comentários</span>
+    <span id="comentarioCount"><span id="numeroComentarios">'.$qtdComentarios.'</span> Comentários</span>
   </div>
 
   <div class="interacoes">
@@ -103,7 +103,7 @@ echo '
   echo '
     <div id="'.$linha["id_postagem"].'">';
 
-    $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC";
+    $selectComentarioPost = "SELECT comentario.email_usuario as email_usuario, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '".$linha["id_postagem"]."' ORDER BY comentario.data ASC, comentario.hora ASC";
     
       if($qtdComentarios > 3){
         $initial = $qtdComentarios - 3;
@@ -135,12 +135,24 @@ echo '
         $horaComentario = date('H:i', strtotime($linhaComentarios["hora"]));
 
         echo '
-          <div class="comentario">
+          <div class="comentario" data-user="'.$linhaComentarios["email_usuario"].'" data-time="'.$linhaComentarios["hora"].'" data-date="'.$linhaComentarios["data"].'">
             <div class="avatar">
               <img src="'.$linhaComentarios["avatar"].'" alt="Avatar" class="avatar" loading="lazy"/>
             </div>
             <div class="comentario-content">
-              <span>'.$linhaComentarios["nome_usuario"].'</span>
+              <div class="comentario-header">
+                <span>'.$linhaComentarios["nome_usuario"].'</span>
+                <div class="more-menu-comentario" onclick=\'abrirMenuComentarios("'.$linhaComentarios["data"].'", "'.$linhaComentarios["hora"].'", "'.$linhaComentarios["email_usuario"].'")\'>
+                  <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></div>
+                  <div class="menu" data-user="'.$linhaComentarios["email_usuario"].'" data-time="'.$linhaComentarios["hora"].'" data-date="'.$linhaComentarios["data"].'">
+                    <div class="more-menu-comentario excluir" onclick=\'removerComentario("'.$linhaComentarios["data"].'", "'.$linhaComentarios["hora"].'", "'.$linhaComentarios["email_usuario"].'", "'.$linha["id_postagem"].'")\'>
+                      <img src="./assets/images/trash.svg" alt="Excluir" loading="lazy" />
+                      <p>Excluir</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               <p>'.$linhaComentarios["conteudo"].'</p>
               <div class="comentario-info">
                 <span>'.$dataFormatadaComentario.'</span>
