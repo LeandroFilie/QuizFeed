@@ -175,6 +175,11 @@ echo '
       <img src="./assets/images/send.svg" alt="" class="button_enviar_comentario" onclick="comentar('.$linha["id_postagem"].')" loading="lazy">
     </div>
 
-</div>';
+</div>
+
+<input type="hidden" id="nome_usuario" value="'.$_SESSION["nome_usuario"].'" />
+<input type="hidden" id="permissao" value="'.$_SESSION["permissao"].'" />
+
+';
 
 ?>

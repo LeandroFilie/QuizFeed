@@ -63,7 +63,7 @@
     }
     else if($identificador == 4){
         $id_postagem = $_POST["id_postagem"];
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
+        $selectComentarioPost = "SELECT comentario.email_usuario as email_usuario, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
         $resultadoComentarioPost = mysqli_query($conexao,$selectComentarioPost); 
 
         $selectCountComentarioPost = "SELECT conteudo FROM comentario WHERE cod_postagem = '$id_postagem'";
@@ -71,6 +71,8 @@
 
         $j = 0;
         while($linha = mysqli_fetch_assoc($resultadoComentarioPost)){
+            $linha['data_default'] = $linha["data"];
+            $linha['hora_default'] = $linha["hora"];
             $dataComentario = date('d/m/Y', strtotime($linha["data"]));
             $anoComentario = date('Y', strtotime($linha["data"]));
     
@@ -111,7 +113,7 @@
         $resultadoCountComentarioPost = mysqli_query($conexao,$selectCountComentarioPost); 
         $qtdComentarios = mysqli_num_rows($resultadoCountComentarioPost);
 
-        $selectComentarioPost = "SELECT usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
+        $selectComentarioPost = "SELECT comentario.email_usuario as email_usuario, usuario_comum.nome_usuario as nome_usuario, usuario_comum.avatar as avatar, comentario.conteudo as conteudo, comentario.data as data, comentario.hora as hora FROM comentario INNER JOIN usuario_comum ON comentario.email_usuario = usuario_comum.email_usuario WHERE cod_postagem = '$id_postagem' ORDER BY comentario.data ASC, comentario.hora ASC";
 
         if($qtdComentarios > 3){
             $initial = $qtdComentarios - 3;
@@ -126,6 +128,9 @@
 
         $j = 0;
         while($linha = mysqli_fetch_assoc($resultadoComentarioPost)){
+            $linha['data_default'] = $linha["data"];
+            $linha['hora_default'] = $linha["hora"];
+
             $dataComentario = date('d/m/Y', strtotime($linha["data"]));
             $anoComentario = date('Y', strtotime($linha["data"]));
     
@@ -147,6 +152,8 @@
 
             $linha['data'] = $dataFormatadaComentario;
             $linha['hora'] = $horaComentario;
+
+
 
             $matriz[]=$linha;    
 

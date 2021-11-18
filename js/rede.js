@@ -44,26 +44,43 @@ function atualizarComentarios(id_postagem, identificador){
   $.post('seleciona.php',dadosPost,function(r){
     t = '';
     j = 0;
-    $(`.info-interacoes[value="${id_postagem}"] #comentarioCount`).text(`${r.qtdComentarios} Comentários`)
+    $(`.info-interacoes[value="${id_postagem}"] #comentarioCount`).html(`<span id="numeroComentarios">${r.qtdComentarios}</span> Comentários`)
     if(r.qtdComentarios > 3 && identificador == 5){
       t += `<span class="ver-mais" onclick="allComentarios(${id_postagem})">Ver comentários mais antigos</span>`;
     }
+    nome_usuario = $('#nome_usuario').val();
+    permissao = $('#permissao').val();
     $.each(r, function(i, v){
       if(v.nome_usuario != undefined){
         t += `
-          <div class="comentario">
-            <div class="avatar">
-              <img src="${v.avatar}" alt="Avatar" class="avatar"/>
+          <div class="comentario" data-user="${v.email_usuario}" data-time="${v.hora_default}" data-date="${v.data_default}">
+          <div class="avatar">
+            <img src="${v.avatar}" alt="Avatar" class="avatar" loading="lazy"/>
+          </div>
+          <div class="comentario-content">
+            <div class="comentario-header">
+              <span>${v.nome_usuario}</span>`;
+              if(v.nome_usuario ==  nome_usuario || permissao == 1){
+                  t += `
+                  <div class="more-menu-comentario" onclick='abrirMenuComentarios("${v.data_default}", "${v.hora_default}", "${v.email_usuario}")'>
+                  <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></div>
+                  <div class="menu" data-user="${v.email_usuario}" data-time="${v.hora_default}" data-date="${v.data_default}">
+                    <div class="more-menu-comentario excluir" onclick='removerComentario("${v.data_default}", "${v.hora_default}", "${v.email_usuario}", "${id_postagem}")'>
+                      <img src="./assets/images/trash.svg" alt="Excluir" loading="lazy" />
+                      <p>Excluir</p>
+                    </div>
+                  </div>
+                </div>`;
+              } 
+            t += `</div>
+            
+            <p>${v.conteudo}</p>
+            <div class="comentario-info">
+              <span>${v.data}</span>
+              <span>${v.hora}</span>
             </div>
-            <div class="comentario-content">
-              <span>${v.nome_usuario}</span>
-              <p>${v.conteudo}</p>
-              <div class="comentario-info">
-                <span>${v.data}</span>
-                <span>${v.hora}</span>
-              </div>
-            </div>
-          </div> 
+          </div>
+        </div>
         `;
         j++;
       }
