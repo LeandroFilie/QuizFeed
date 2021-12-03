@@ -252,9 +252,9 @@ function tirarDenuncia(id){
       $(`.msg-denuncia[value="${id}"]`).text('');
       $(`.msg-denuncia[value="${id}"]`).removeClass('msg-denuncia');
 
-      qtdPosts = Number($("#qtdPosts").html().slice(11));
+      qtdPosts = Number($("#qtdPosts").html());
 
-      $("#qtdPosts").text(`Pendentes: ${--qtdPosts}`);
+      $("#qtdPosts").text(`${--qtdPosts}`);
 
       ocultarPost(id, 'tirarDenuncia');
 
