@@ -93,7 +93,7 @@ else{
       $error = 0;
       $_SESSION['email'] = $email;
       if($_SESSION['registro']!= $registro){
-        $_SESSION['situação'] = 1;
+        $_SESSION['situacao'] = 1;
         $_SESSION['registro'] = $registro;
       }
     }   

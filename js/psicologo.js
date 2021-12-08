@@ -87,7 +87,7 @@ $(function(){
 
   function mensagemErroRegistro(){
     $("#erro_registro").addClass("erro");
-    $("#erro_registro").html("CFP já está vinculado a uma conta.");
+    $("#erro_registro").html("CRP já está vinculado a uma conta.");
   }
   
   function define_alterar_remover(){ 
